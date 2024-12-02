@@ -8,9 +8,21 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      container: {
+        center: true,
+        padding: "1rem",
+        screens: {
+          "2xl": "1440px",
+        },
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        customGreen: "#3DA229",
+      },
+      boxShadow: {
+        customNavbarShadow: '0px 4px 22.1px 3px #00000026',
+        customHeroShadow:  '0px 4px 22.1px 3px #00000026',
       },
     },
   },
