@@ -2,7 +2,12 @@
 
 import React, { useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { EffectCoverflow, Pagination, Navigation } from "swiper/modules";
+import {
+  EffectCoverflow,
+  Pagination,
+  Navigation,
+  Autoplay,
+} from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/effect-coverflow";
@@ -15,16 +20,6 @@ const Slider = () => {
   console.log(slideIndex);
 
   const swiperRef = useRef(null);
-  //   const goNext = () => {
-  //     if (swiperRef.current && swiperRef.current.swiper) {
-  //       swiperRef.current.swiper.slideNext();
-  //     }
-  //   };
-  //   const goPrev = () => {
-  //     if (swiperRef.current && swiperRef.current.swiper) {
-  //       swiperRef.current.swiper.slidePrev();
-  //     }
-  //   };
 
   const SlidesData = [
     { img: "/image 7.png" },
@@ -35,57 +30,41 @@ const Slider = () => {
   ];
 
   return (
-    <div className=" w-[95%] md:w-[70%] lg:w-[60%] mx-auto mt-28">
-      {/* <div onClick={goPrev}>
-        <div />
-      </div> */}
+    <div className="flex justify-center mx-auto mt-20 md:mt-28">
       <Swiper
         ref={swiperRef}
         effect={"coverflow"}
         grabCursor={true}
         centeredSlides={true}
-        slidesPerView={4}
+        slidesPerView={3} // Adjust to suit your needs
         initialSlide={1}
-        // spaceBetween= {100}
-
-        // loop={true}
+        spaceBetween={30} // Adjust to add spacing between slides
+        loop={true}
         coverflowEffect={{
           rotate: 0,
           stretch: 0,
           depth: 100,
           modifier: 3,
-          // scale: 4,
           slideShadows: false,
         }}
         pagination={false}
-        navigation={{
-          nextEl: ".review-swiper-button-next",
-          prevEl: ".review-swiper-button-prev",
+        navigation={true}
+        autoplay={{
+          delay: 3000,
+          disableOnInteraction: false,
         }}
-        modules={[EffectCoverflow, Navigation]}
-        className="mySwiper"
+        modules={[EffectCoverflow, Navigation, Autoplay]}
         onSlideChange={(swiper) => setSlideIndex(swiper.activeIndex)}
+        className="w-full max-w-[90%]" // Ensure it adapts to screen size
       >
-     
-          <div>
-            {SlidesData.map((e, index) => (
-              <SwiperSlide>
-                <div key={index} className="w-[230px] md:w-[350px] rounded-2xl overflow-hidden">
-                  <Image
-                    src={e.img}
-                    alt="slideimages"
-                    width={450}
-                    height={700}
-                  />
-                </div>
-              </SwiperSlide>
-            ))}
-          </div>
-    
+        {SlidesData.map((e, index) => (
+          <SwiperSlide key={index}>
+            <div className="relative w-[230px] md:w-[350px] rounded-2xl overflow-hidden">
+              <Image src={e.img} alt="slideimages" width={450} height={700} />
+            </div>
+          </SwiperSlide>
+        ))}
       </Swiper>
-      {/* <div onClick={goNext}>
-      
-      </div> */}
     </div>
   );
 };

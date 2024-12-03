@@ -41,7 +41,8 @@ const Footer = () => {
             <ul className=" space-y-4">
               {navList?.map((e, i) => (
                 <li
-                  key={e.label + i}
+                
+                  key={i}
                   className=" hover:text-customGreen text-base"
                 >
                   <Link href={e.link}>{e.label}</Link>

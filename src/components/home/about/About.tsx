@@ -50,7 +50,7 @@ const About = () => {
       <div className=" grid grid-cols-1  sm:grid-cols-2 lg:grid-cols-3 gap-x-[70px] lg:gap-x-[110px] mt-28">
         {aboutCardData?.map((e, i) => (
           <div
-            key={e.heading + i}
+            key={i}
             className=" text-center  flex flex-col  items-center gap-4 border-b border-dashed border-b-black py-8"
           >
             <h3 className="text-2xl text-[#232A20] font-semibold">

@@ -3,7 +3,7 @@ import React from "react";
 
 const Hero = () => {
   return (
-    <div className=" relative rounded-[50px]  h-[75vh] overflow-hidden mt-14 shadow-customHeroShadow mx-4 ">
+    <div className=" relative  rounded-xl md:rounded-[50px]  h-[75vh] overflow-hidden mt-14 shadow-customHeroShadow mx-4 ">
       <div>
         <video
           controlsList="nodownload"
@@ -23,12 +23,12 @@ const Hero = () => {
       </div>
       <div className=" container absolute bottom-6 right-0 p-4 left-1/2 transform -translate-x-1/2 w-[90%]">
         <div>
-          <h5 className=" text-[38px] md:text-[70px] font-[700] text-[#222720]">
+          <h2 className=" text-[38px] md:text-[70px] font-[700] text-[#222720]">
             Featuring over 
-          </h5>
-          <h5 className="text-[38px] md:text-[70px] font-[700] text-customGreen">
+          </h2>
+          <h2 className="text-[38px] md:text-[70px] font-[700] text-customGreen">
             50 modules
-          </h5>
+          </h2>
         </div>
         <div className=" flex flex-col sm:flex-row sm:items-end justify-between gap-4 mt-8">
           <p className=" text-[#232A20] text-2xl">What services do we offer</p>{" "}
