@@ -19,7 +19,7 @@ const LetestBlogs = () => {
         {letestBlogData?.map((e, i) => (
           <div
             key={i}
-            className=" text-center  flex flex-col  items-center gap-4  py-8"
+            className=" text-center  flex flex-col  items-center  md:gap-4  py-8 "
           >
             <div className="w-full rounded-[20px] overflow-hidden ">
               <Image
@@ -31,7 +31,7 @@ const LetestBlogs = () => {
             </div>
 
             <div className="flex items-center justify-between  w-full  px-2 mt-7 md:mt-10 gap-4">
-              <h3 className=" text-black text-2xl text-start  font-semibold w-[70%] ">{e.title}</h3>
+              <h3 className=" text-black text-xl md:text-2xl text-start  font-semibold w-[70%] ">{e.title}</h3>
               <button className=" rounded-full text-sm md:text-base w-[102px] py-1.5 md:py-2 bg-customGreen text-white font-semibold">
                 View more
               </button>

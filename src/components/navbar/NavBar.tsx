@@ -14,12 +14,12 @@ const NavBar = () => {
   };
   return (
     <>
-      <div className="flex items-center justify-between rounded-[20px] shadow-customNavbarShadow px-10 py-6 sticky top-0 mx-4 mt-4 z-40 bg-white gap-4">
-        <div className="w-[191px] h-auto ">
+      <div className="flex items-center  justify-between rounded-xl md:rounded-2xl lg:rounded-[20px] shadow-customNavbarShadow px-10 py-3 md:py-5 lg:py-6 sticky top-0 mx-4 mt-4 z-30 bg-white gap-4">
+        <div className="w-[130px] md:w-[191px] h-auto ">
           <Image src={"/logo/main-logo.png"} alt="" width={200} height={70} />
         </div>
 
-        <ul className=" w-[80%] hidden md:flex items-center gap-3  justify-between  ">
+        <ul className=" w-[80%] max-w-[1440px]  hidden md:flex items-center gap-3  justify-between  ">
           {navList?.map((e, i) => (
             <li
               key={i}
@@ -68,6 +68,13 @@ const NavBar = () => {
           })}
         </ul>
       </div>
+      {isSidebarOpen && (
+        <div
+          onClick={() => setIsSidebarOpen(false)}
+          className="fixed w-full h-full bg-gray-800   bg-opacity-25 left-0 top-0   "
+          style={{ zIndex: 40 }}
+        ></div>
+      )}
     </>
   );
 };

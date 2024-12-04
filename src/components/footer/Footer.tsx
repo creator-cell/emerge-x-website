@@ -7,9 +7,9 @@ import FooterSubscribeForm from "./FooterSubscribeForm";
 
 const Footer = () => {
   return (
-    <footer className=" border-t-2 border-t-customGreen mt-32 pb-14">
-      <SectionWrapper>
-        <div className=" grid grid-cols-1  lg:grid-cols-3 gap-x-8 gap-y-14 px-4 ">
+    <footer className=" border-t-2 border-t-customGreen mt-32 pb-20">
+      <SectionWrapper className=" mt-20 md:mt-32">
+        <div className=" grid grid-cols-1  lg:grid-cols-3 gap-x-8 gap-y-14 px-4  ">
           <div className=" space-y-5">
             <div className="w-[172px] h-auto">
               <Image
@@ -35,24 +35,20 @@ const Footer = () => {
               </div>
             </div>
           </div>
-          <div className="flex justify-start lg:justify-center"> 
+          <div className="flex justify-start lg:justify-center">
             <div>
-            <h2 className=" font-semibold text-base mb-5">Useful links</h2>
-            <ul className=" space-y-4">
-              {navList?.map((e, i) => (
-                <li
-                
-                  key={i}
-                  className=" hover:text-customGreen text-base"
-                >
-                  <Link href={e.link}>{e.label}</Link>
-                </li>
-              ))}
-            </ul>
+              <h2 className=" font-semibold text-base mb-5">Useful links</h2>
+              <ul className=" space-y-4">
+                {navList?.map((e, i) => (
+                  <li key={i} className=" hover:text-customGreen text-base">
+                    <Link href={e.link}>{e.label}</Link>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
-          <div className=" ">
-            <h2 className=" font-semibold text-base mb-5">
+          <div >
+            <h2 className=" font-semibold text-base text-center mb-5">
               Subscribe for our newsletter
             </h2>
             <FooterSubscribeForm />
