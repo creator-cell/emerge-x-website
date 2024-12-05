@@ -13,12 +13,13 @@ const BookDemoButton: React.FC<BookDemoButtonTpes> = ({
   className,
 }) => {
   const [openModal, setOpenModal] = useState<boolean>(false);
+  const [isModalVisible, setModalVisible] = useState<boolean>(false);
   return (
     <>
       <button
         onClick={() => setOpenModal(true)}
         className={cn(
-          ` bg-[#222720] text-white rounded-full flex items-center   `,
+          ` bg-[#222720] text-white rounded-full flex items-center`,
           className
         )}
       >
@@ -31,7 +32,7 @@ const BookDemoButton: React.FC<BookDemoButtonTpes> = ({
         )}
       </button>
 
-      {openModal && <ModalAnimation isVisible={openModal}/>}
+      {openModal && <ModalAnimation isVisible={openModal} onClose={() => {setModalVisible(false); setOpenModal(false)}}/>}
     </>
   );
 };

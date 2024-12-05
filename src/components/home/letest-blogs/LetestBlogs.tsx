@@ -22,6 +22,9 @@ const LetestBlogs = () => {
             className=" text-center  flex flex-col  items-center  md:gap-4  py-8 "
           >
             <div className="w-full rounded-[20px] overflow-hidden ">
+              <div><button>test</button></div>
+              <div></div>
+              <div></div>
               <Image
                 src={e.img}
                 alt="services_images"

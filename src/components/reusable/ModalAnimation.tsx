@@ -1,72 +1,91 @@
 import React from "react";
-interface ModalAnimationTypes{
-    isVisible:boolean
+
+interface ModalAnimationTypes {
+  isVisible: boolean;
+  onClose: () => void;
 }
-const ModalAnimation:React.FC<ModalAnimationTypes> = ({isVisible}) => {
+
+const ModalAnimation: React.FC<ModalAnimationTypes> = ({ isVisible, onClose }) => {
   return (
-    <div className=" fixed left-0 top-0 bg-[#010101] z-50 w-[100vw] h-screen">
-      <div className="  w-full flex items-center justify-center h-full">
-        <div className={`popup-message fixed bottom-0 left-1/2 transform -translate-x-1/2 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'} p-6 bg-white rounded-lg shadow-lg border-4 border-transparent bg-clip-border transition-all duration-500 z-50`}>
-          <div className="p-4 flex flex-col gap-3 ">
-            <h2 className="text-center text-[36px]">Join the Demo!</h2>
-            <p className="text-center text-[20px]">
-              Be the first to know about the demo! Login for early access.
-            </p>
-            <form action="" className=" space-y-8">
-              <div className="w-full flex flex-col gap-1 border-b border-b-white">
-                <label htmlFor="" className=" text-base">
-                  Name
-                </label>
-                <input
-                  type="text"
-                  name=""
-                  id=""
-                  className=" border-none outline-none bg-[#222720] px-3 py-1.5"
-                />
-              </div>
-              <div className="w-full flex flex-col gap-1 border-b border-b-white">
-                <label htmlFor="" className=" text-base">
-                  E-mail Id
-                </label>
-                <input
-                  type="text"
-                  name=""
-                  id=""
-                  className=" border-none outline-none bg-[#222720] px-3 py-1.5"
-                />
-              </div>
-              <div className="w-full flex flex-col gap-1 border-b border-b-white">
-                <label htmlFor="" className=" text-base">
-                  Contact No
-                </label>
-                <input
-                  type="text"
-                  name=""
-                  id=""
-                  className=" border-none outline-none bg-[#222720] px-3 py-1.5"
-                />
-              </div>
-              <div className="w-full flex flex-col gap-1 border-b border-b-white">
-                <label htmlFor="" className=" text-base">
-                  Country (Optional)
-                </label>
-                <input
-                  type="text"
-                  name=""
-                  id=""
-                  className=" border-none outline-none bg-[#222720] px-3 py-1.5"
-                />
-              </div>
-              <div className="flex items-center justify-center">
-                <button
-                  type="submit"
-                  className=" px-[15px] text-base py-[8px] bg-white rounded-full text-black "
-                >
-                  Submit
-                </button>
-              </div>
-            </form>
-          </div>
+    <div className="fixed inset-0 bg-[#010101] z-50 flex items-center justify-center">
+      <div
+        className={`popup-message ${isVisible ? "opacity-100 scale-100" : "opacity-0 scale-90"
+          } max-h-[719px] max-w-[540px] p-6 bg-black rounded-[50px] shadow-lg border-4 border-green-500 bg-clip-border transition-all duration-500 max-w-lg w-full px-4 sm:px-6 relative`}
+      >
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-5 text-white bg-black  rounded-full p-2 transition font-bold"
+          aria-label="Close Modal"
+        >
+          ✕
+        </button>
+
+        {/* Modal Content */}
+        <div className="p-4 flex flex-col gap-6">
+          <h2 className="text-center text-[24px] sm:text-[28px] font-bold text-white">
+            Join the Demo!
+          </h2>
+          <p className="text-center text-[16px] sm:text-[18px] text-white">
+            Be the first to know about the demo! Login for early access.
+          </p>
+          <form className="space-y-6">
+            <div className="w-full flex flex-col gap-1 border-b border-b-white pb-2">
+              <label htmlFor="name" className="text-sm sm:text-base text-white">
+                Name
+              </label>
+              <input
+                type="text"
+                name="name"
+                id="name"
+                className="border-none outline-none bg-black px-3 text-white"
+                required
+              />
+            </div>
+            <div className="w-full flex flex-col gap-1 border-b border-b-white pb-2">
+              <label htmlFor="email" className="text-sm sm:text-base text-white">
+                E-mail Id
+              </label>
+              <input
+                type="email"
+                name="email"
+                id="email"
+                className="border-none outline-none bg-black px-3 text-white"
+                required
+              />
+            </div>
+            <div className="w-full flex flex-col gap-1 border-b border-b-white pb-2">
+              <label htmlFor="contact" className="text-sm sm:text-base text-white">
+                Contact No
+              </label>
+              <input
+                type="text"
+                name="contact"
+                id="contact"
+                className="border-none outline-none bg-black px-3 text-white"
+                required
+              />
+            </div>
+            <div className="w-full flex flex-col gap-1 border-b border-b-white pb-2">
+              <label htmlFor="country" className="text-sm sm:text-base text-white">
+                Country (Optional)
+              </label>
+              <input
+                type="text"
+                name="country"
+                id="country"
+                className="border-none outline-none bg-black px-3 text-white"
+              />
+            </div>
+            <div className="flex items-center justify-center">
+              <button
+                type="submit"
+                className="px-[20px] py-[8px] text-sm sm:text-base bg-white rounded-full text-black hover:bg-[#3DA229] transition-all duration-300 ease-in-out"
+              >
+                Submit
+              </button>
+
+            </div>
+          </form>
         </div>
       </div>
     </div>

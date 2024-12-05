@@ -6,12 +6,12 @@ import News from "@/components/home/news/News";
 
 export default function Home() {
   return (
-    <div className="">
+    <div >
       <Hero />
-      <About/>
-      <AllServices/>
-      <LetestBlogs/>
-      <News/>
+      <About />
+      <AllServices />
+      <LetestBlogs />
+      <News />
     </div>
   );
 }
