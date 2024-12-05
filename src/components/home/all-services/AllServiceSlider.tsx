@@ -89,7 +89,7 @@ const AllServiceSlider: React.FC = () => {
   //   };
   return (
     <div className="w-full flex md:items-end md:py-10 gap-20 md:gap-5 flex-col md:flex-row md:justify-between ">
-      <div className="w-full md:w-[48%] flex  items-center justify-center gap-4  md:py-10 ">
+      <div className="w-full md:w-[48%] flex  items-center justify-center gap-4  md:pb-10 ">
         <div className="w-[75%] flex flex-col gap-4 md:gap-20 ">
           <div className="w-full">
             <div className="w-full md:p-4 ">
@@ -137,7 +137,7 @@ const AllServiceSlider: React.FC = () => {
             </div>
           </div>
 
-          <button className=" bg-customGreen px-3 py-1.5 md:px-6 md:py-2 text-white w-fit rounded-2xl text-base md:text-2xl">
+          <button className=" bg-customGreen px-4 py-1.5 md:px-6 md:py-2 text-white w-fit rounded-[60px] text-base md:text-2xl">
             Explore Now
           </button>
         </div>

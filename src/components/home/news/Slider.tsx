@@ -35,8 +35,10 @@ const Slider = () => {
     const updateSlidesPerView = () => {
       if (window.innerWidth >= 768) {
         setSlidesPerView(4); // Desktop/Tablet
-      } else {
-        setSlidesPerView(2); // Mobile
+      } else if (window.innerWidth >= 400) {
+        setSlidesPerView(3); // Mobile
+      }else{
+        setSlidesPerView(2)
       }
     };
 
@@ -49,13 +51,15 @@ const Slider = () => {
   }, []);
 
   return (
-    <div className="flex w-full justify-center  mx-auto  mt-20 md:mt-28 ">
+    <div className="flex w-full justify-center  mx-auto  mt-10 md:mt-20 ">
       <Swiper
         effect={"coverflow"}
         grabCursor={true}
         centeredSlides={true}
         slidesPerView={slidesPerView} 
+
         initialSlide={1}
+        centeredSlidesBounds={true}
         spaceBetween={0} // Adjust to add spacing between slides
         loop={true}
         coverflowEffect={{
@@ -76,8 +80,8 @@ const Slider = () => {
       >
         {SlidesData.map((e, index) => (
           <SwiperSlide key={index}>
-            <div className="relative w-[200px] md:w-[350px] rounded-2xl overflow-hidden">
-              <Image src={e.img} alt="slideimages" width={450} height={700} />
+            <div className="relative w-[200px] md:w-[350px] rounded-[75px] overflow-hidden">
+              <Image src={e.img} alt="slideimages" width={450} height={720} />
             </div>
           </SwiperSlide>
         ))}

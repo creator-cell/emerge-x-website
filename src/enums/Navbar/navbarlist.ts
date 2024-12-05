@@ -4,5 +4,5 @@ export const navList = [
   { label: "Services", link: "#" },
   { label: "Blogs", link: "#" },
   { label: "News", link: "#" },
-  // { label: "Contact Us", link: "#" },
+  { label: "Contact Us", link: "#" },
 ];

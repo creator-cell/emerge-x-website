@@ -7,7 +7,7 @@ import FooterSubscribeForm from "./FooterSubscribeForm";
 
 const Footer = () => {
   return (
-    <footer className=" border-t-2 border-t-customGreen mt-32 pb-20">
+    <footer className="pt-32 pb-20 bg-white">
       <SectionWrapper className=" mt-20 md:mt-32">
         <div className=" grid grid-cols-1  lg:grid-cols-3 gap-x-8 gap-y-14 px-4  ">
           <div className=" space-y-5">
@@ -37,7 +37,7 @@ const Footer = () => {
           </div>
           <div className="flex justify-start lg:justify-center">
             <div>
-              <h2 className=" font-semibold text-base mb-5">Useful links</h2>
+              {/* <h2 className=" font-semibold text-base mb-5">Useful links</h2> */}
               <ul className=" space-y-4">
                 {navList?.map((e, i) => (
                   <li key={i} className=" hover:text-customGreen text-base">
@@ -48,7 +48,7 @@ const Footer = () => {
             </div>
           </div>
           <div >
-            <h2 className=" font-semibold text-base text-center mb-5">
+            <h2 className=" font-semibold text-base text-start mb-5">
               Subscribe for our newsletter
             </h2>
             <FooterSubscribeForm />

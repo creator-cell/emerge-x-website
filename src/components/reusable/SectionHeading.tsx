@@ -9,7 +9,7 @@ const SectionHeading: React.FC<SectionHeadingtypes> = ({ className, text }) => {
     <h2
    
       className={cn(
-        ` text-black  font-[700] text-[28px] md:text-[39px] lg:text-[57px] text-center  `,
+        ` text-black  font-[700] text-[28px] md:text-[39px] lg:text-[36px] text-center  `,
         className
       )}
     >

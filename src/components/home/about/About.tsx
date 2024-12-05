@@ -38,19 +38,19 @@ const About = () => {
     // },
   ];
   return (
-    <div className="bg-[#222720] rounded-tl-[280px] rounded-tr-[280px]">
+    <div className="bg-[#222720] rounded-tl-[280px] rounded-tr-[280px] mt-32">
 
-      <SectionWrapper  >
+      <SectionWrapper className="pt-10"  >
         <div className="text-center flex flex-col items-center rounded-tl-3xl ">
           <SectionHeading text="About us" className="mt-20 text-white" />
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10 pb-16">
           <div>
 
-            <p className="text-white text-justify w-full   leading-[44px]  text-[#222720] font-[400] text-[32px] mt-10 md:mt-20 lg:mt-20 px-4">
+            <p className="text-white text-justify w-full   leading-[44px]  font-[400] text-[32px] mt-10 md:mt-20 lg:mt-20 px-4">
               At EmergeX, we aim higher and strive harder to make workplace safety
             </p>
-            <p className="text-justify text-white w-full   leading-[44px]  text-[#222720] font-[400] text-[18px] mt-8 md:mt-20 lg:mt-16 px-4">
+            <p className="text-justify text-white w-full   leading-[44px]   font-[400] text-[18px] mt-8 md:mt-20 lg:mt-16 px-4">
               EmergeX will assist you to better understand and manage workplace safety by integrating hazards and incident reporting with investigations, actions and metrics reporting.EmergeX will assist you to better understand and manage workplace safety by integrating hazards and incident reporting with investigations, actions and metrics reporting.EmergeX will assist you to better understand and manage workplace safety by integrating hazards and incident reporting with investigations, actions and metrics reporting.
             </p>
             <div className="flex items-start justify-start mt-20 px-4">
@@ -63,7 +63,7 @@ const About = () => {
             </div>
           </div>
 
-          <div className="flex items-center flex-col flex-wrap gap-[60px] gap-x-[70px] lg:gap-x-[110px] mt-16 ">
+          <div className="flex items-center flex-col flex-wrap gap-[60px] gap-x-[70px] lg:gap-x-[110px] mt-8 ">
             {aboutCardData?.map((e, i) => (
               <div
                 key={i}
