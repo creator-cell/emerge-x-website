@@ -21,7 +21,31 @@ body {
 }
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  .popup-message {
+    animation: ledRunningGlow 3s linear infinite;
+  }
+
+  @keyframes ledRunningGlow {
+    0% {
+      border-color: rgba(255, 0, 0, 0.8); /* Red light */
+      box-shadow: 0 0 10px rgba(255, 0, 0, 1), 0 0 20px rgba(255, 0, 0, 0.8);
+    }
+    25% {
+      border-color: rgba(0, 255, 0, 0.8); /* Green light */
+      box-shadow: 0 0 10px rgba(0, 255, 0, 1), 0 0 20px rgba(0, 255, 0, 0.8);
+    }
+    50% {
+      border-color: rgba(0, 0, 255, 0.8); /* Blue light */
+      box-shadow: 0 0 10px rgba(0, 0, 255, 1), 0 0 20px rgba(0, 0, 255, 0.8);
+    }
+    75% {
+      border-color: rgba(255, 255, 0, 0.8); /* Yellow light */
+      box-shadow: 0 0 10px rgba(255, 255, 0, 1), 0 0 20px rgba(255, 255, 0, 0.8);
+    }
+    100% {
+      border-color: rgba(255, 0, 0, 0.8); /* Back to Red */
+      box-shadow: 0 0 10px rgba(255, 0, 0, 1), 0 0 20px rgba(255, 0, 0, 0.8);
+    }
   }
 }
+
