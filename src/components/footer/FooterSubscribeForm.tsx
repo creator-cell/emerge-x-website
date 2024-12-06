@@ -2,7 +2,7 @@ import React from "react";
 
 const FooterSubscribeForm = () => {
   return (
-    <div  className="relative h-[81%]">
+    <div  className="lg:relative h-[81%]">
       <form action="">
         <div className="flex flex-col sm:flex-row items-center gap-3  h-[40px]">
           <input
@@ -17,7 +17,7 @@ const FooterSubscribeForm = () => {
           </button>
         </div>
       </form>
-      <div className="flex lg:justify-between lg:gap-0 gap-[10px] absolute  bottom-0 w-100">
+      <div className="flex lg:justify-between lg:gap-[15px] gap-[10px] lg:absolute  mt-[16px]  bottom-0 w-100">
         <div className="text-[16px]">
           <p className="font-semibold">Phone</p>
           <p>+1 (800) 555-1234</p>
