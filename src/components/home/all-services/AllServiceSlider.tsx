@@ -1,13 +1,72 @@
 "use client";
 
+// import gsap from "gsap";
+// import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+// import { useEffect, useRef } from "react";
+
+
+// const AllServiceSlider = () => {
+//   const sectionRef = useRef(null);
+//   const triggerRef = useRef(null);
+//   gsap.registerPlugin(ScrollTrigger);
+
+//   useEffect(() => {
+//     const pin = gsap.fromTo(sectionRef.current, {
+//       translateX: 0,
+//     }, {
+//       translateX: "-300vw",
+//       ease: 'none',
+//       duration: 1,
+//       scrollTrigger: {
+//         trigger: triggerRef.current,
+//         start: "top top",
+//         end: "2000 top",
+//         scrub: 0.6,
+//         pin: true
+//       }
+//     })
+
+//     return()=>{
+//       pin.kill()
+//     }
+
+
+//   }, [])
+
+
+//   return (
+//     <>
+//       <section className="scroll-section-outer">
+//         <div ref={triggerRef}>
+//           <div ref={sectionRef} className="scroll-section-inner">
+//             <div className="scroll-section">
+//               <h3 className="bg-red text-[60px]">section 1</h3>
+//             </div>
+//             <div className="scroll-section">
+//               <h3 className="bg-red text-[60px]">section 2</h3>
+//             </div>
+//             <div className="scroll-section">
+//               <h3 className="bg-red text-[60px]">section 3</h3>
+//             </div>
+//             <div className="scroll-section">
+//               <h3 className="bg-red text-[60px]">section 4</h3>
+//             </div>
+
+//           </div>
+//         </div>
+//       </section>
+//     </>
+//   )
+// }
+// export default AllServiceSlider
+
+
 import React, { useEffect, useRef, useState } from "react";
-import { Virtual, Pagination } from "swiper/modules";
+import { Virtual } from "swiper/modules";
 import { Swiper as SwiperComponent, SwiperSlide } from "swiper/react";
 import "swiper/css/pagination";
 import "swiper/css";
 import "swiper/css/virtual";
-import { Autoplay } from "swiper/modules";
-
 import Image from "next/image";
 
 const sliderData = [
@@ -40,63 +99,43 @@ const sliderData = [
 const AllServiceSlider: React.FC = () => {
   const swiperRef = useRef<any>(null);
   const swiperRefText = useRef<any>(null);
-  const [activeIndex, setActiveIndex] = useState<number>(0);
-  const [activeIndexText, setActiveText] = useState<number>(0);
 
-  useEffect(() => {
-    const swiperInstance = swiperRef.current?.swiper;
-
-    if (swiperInstance) {
-      const updateIndex = () => setActiveIndex(swiperInstance.activeIndex);
-
-      swiperInstance.on("slideChange", updateIndex);
-      updateIndex(); // Set initial active index
-
-      return () => {
-        swiperInstance.off("slideChange", updateIndex);
-      };
+  const handleScroll = (e: WheelEvent) => {
+    if (swiperRef.current) {
+      const swiperInstance = swiperRef.current.swiper;
+      if (e.deltaY > 0) {
+        swiperInstance.slideNext();
+      } else if (e.deltaY < 0) {
+        swiperInstance.slidePrev();
+      }
     }
-  }, []);
-  useEffect(() => {
-    const swiperInstance = swiperRefText.current?.swiper;
-
-    if (swiperInstance) {
-      const updateIndex = () => setActiveText(swiperInstance.activeIndexText);
-
-      swiperInstance.on("slideChange", updateIndex);
-      updateIndex(); // Set initial active index
-
-      return () => {
-        swiperInstance.off("slideChange", updateIndex);
-      };
-    }
-  }, []);
-
-  useEffect(() => {
-    goToSlideText(activeIndex);
-  }, [activeIndex]);
-
-  const goToSlideText = (index: number) => {
     if (swiperRefText.current) {
-      swiperRefText.current.swiper.slideTo(index);
+      const swiperInstance = swiperRefText.current.swiper;
+      if (e.deltaY > 0) {
+        swiperInstance.slideNext();
+      } else if (e.deltaY < 0) {
+        swiperInstance.slidePrev();
+      }
     }
   };
 
-  //   const goToSlide = (index: number) => {
-  //     if (swiperRef.current) {
-  //       swiperRef.current.swiper.slideTo(index);
-  //     }
-  //   };
+  useEffect(() => {
+    window.addEventListener("wheel", handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("wheel", handleScroll);
+    };
+  }, []);
+
   return (
     <div className="w-full flex md:items-end md:py-10 gap-20 md:gap-5 flex-col md:flex-row md:justify-between ">
-      <div className="w-full md:w-[48%] flex  items-center justify-center gap-4  md:pb-10 ">
+      <div className="w-full md:w-[48%] flex items-center justify-center gap-4 md:pb-10 ">
         <div className="w-[75%] flex flex-col gap-4 md:gap-20 ">
           <div className="w-full">
             <div className="w-full md:p-4 ">
               <SwiperComponent
                 ref={swiperRefText}
-                modules={[Virtual, Autoplay]}
-                autoplay={{ delay: 9000 }}
+                modules={[Virtual]}
                 breakpoints={{
                   640: {
                     slidesPerView: 1,
@@ -116,18 +155,17 @@ const AllServiceSlider: React.FC = () => {
               >
                 {sliderData?.map((e, i) => (
                   <SwiperSlide key={i}>
-                    <div className=" md:py-3 ">
+                    <div className="md:py-3">
                       <p
-                        className="  text-base md:text-lg lg:text-[60px] text-white md:mt-10  "
+                        className="text-base md:text-lg lg:text-[60px] text-white md:mt-10"
                         style={{ lineHeight: "70px" }}
                       >
-                        Mitigation / Prevention
+                        {e.text}
                       </p>
-                      {/* text-white text-xl md:text-xl lg:text-[60px]  */}
-                      <p className=" text-base md:text-lg lg:text-xl text-white md:mt-10 ">
+                      <p className="text-base md:text-lg lg:text-xl text-white md:mt-10">
                         EmergeX will assist you to better understand and manage
                         workplace safety by integrating hazards and incident
-                        reporting with investigations, actions and metrics
+                        reporting with investigations, actions, and metrics
                         reporting.
                       </p>
                     </div>
@@ -137,17 +175,16 @@ const AllServiceSlider: React.FC = () => {
             </div>
           </div>
 
-          <button className=" bg-customGreen px-4 py-1.5 md:px-6 md:py-2 text-white w-fit rounded-[60px] text-base md:text-2xl">
+          <button className="bg-customGreen px-4 py-1.5 md:px-6 md:py-2 text-white w-fit rounded-[60px] text-base md:text-2xl">
             Explore Now
           </button>
         </div>
       </div>
-      <div className="w-full md:w-[50%] ">
-        <div className="w-full flex items-end mx-auto   ">
+      <div className="w-full md:w-[50%]">
+        <div className="w-full flex items-end mx-auto">
           <SwiperComponent
             ref={swiperRef}
-            modules={[Virtual, Autoplay]}
-            autoplay={{ delay: 3000 }}
+            modules={[Virtual]}
             breakpoints={{
               300: {
                 slidesPerView: 2,
@@ -170,10 +207,10 @@ const AllServiceSlider: React.FC = () => {
           >
             {sliderData?.map((e, i) => (
               <SwiperSlide key={i}>
-                <div className="md:h-[420px] flex items-end  ">
+                <div className="md:h-[420px] flex items-end">
                   <div
-                    className={`  rounded-2xl overflow-hidden transition-all  ${
-                      activeIndex === i
+                    className={`rounded-2xl overflow-hidden transition-all ${
+                      swiperRef.current?.swiper?.activeIndex === i
                         ? "w-full md:w-[270px] "
                         : "w-full md:w-[240px]"
                     }`}
@@ -191,3 +228,5 @@ const AllServiceSlider: React.FC = () => {
 };
 
 export default AllServiceSlider;
+
+
