@@ -4,7 +4,7 @@ import BookDemoButton from "./BookDemoButton";
 
 const Hero = () => {
   return (
-    <div className=" relative h-[100vh] overflow-hidden  shadow-customHeroShadow  ">
+    <div className=" relative h-[100vh] overflow-hidden   ">
       <div>
         <video
           controlsList="nodownload"

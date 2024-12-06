@@ -12,7 +12,7 @@ const config: Config = {
         center: true,
         padding: "1rem",
         screens: {
-          "2xl": "1440px",
+          "2xl": "1280px",
         },
       },
       colors: {
@@ -23,6 +23,9 @@ const config: Config = {
       boxShadow: {
         customNavbarShadow: '0px 4px 22.1px 3px #00000026',
         customHeroShadow:  '0px 4px 22.1px 3px #00000026',
+      },
+      backgroundImage: {
+        'hero-blog': "url('/blogs/hero-blog.png')",
       },
     },
   },
