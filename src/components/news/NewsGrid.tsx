@@ -14,7 +14,7 @@ interface NewsGridProps {
 
 export const NewsGrid: React.FC<NewsGridProps> = ({ news }) => {
   return (
-    <div className="grid gap-12 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3">
+    <div className="grid gap-12 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 mt-8">
       {news.map((item, index) => (
         <div key={index} className="overflow-hidden mx-auto items-center max-w-[315px]">
           <Link href={`/news/${item.slug}`}>

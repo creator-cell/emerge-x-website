@@ -13,14 +13,14 @@ interface BreadCrumbPropsTypes {
 }
 const BreadCrumb: React.FC<BreadCrumbPropsTypes> = ({ navTrainData }) => {
   return (
-    <div className="flex items-center">
+    <div className="flex items-center flex-wrap">
       {" "}
       {navTrainData?.map((e, i) => (
         <div key={e.id} className="flex items-center">
           <Link href={e.link}>
             {" "}
             <span
-              className={` text-xs md:text-base hover:text-customGreen ${
+              className={` text-xs md:text-base hover:text-customGreen text-nowrap ${
                 i + 1 == navTrainData.length
                   ? " text-customGreen"
                   : "text-black"

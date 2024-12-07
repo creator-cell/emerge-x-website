@@ -1,6 +1,7 @@
 import CardBlog from "@/components/blogs/CardBlog";
 import HeroBlog from "@/components/blogs/HeroBlog";
 import BreadCrumb from "@/components/reusable/BreadCrumb";
+import { HeroResusable } from "@/components/reusable/HeroReusable";
 
 import SectionWrapper from "@/components/reusable/SectionWrapper";
 
@@ -16,7 +17,14 @@ const page = () => {
   const viewAllBlogsData = [0, 2, 3, 4, 5, 6, 7, 8, 1];
   return (
     <div className=" min-h-screen">
-      <HeroBlog />
+      <HeroResusable
+        title="What's New?"
+        description="Stay up-to-date with Everyting 
+about EmergeX related."
+        image="/blogs/hero-blog.png"
+        className="bg-gradient-to-r from-black/0 to-black/90"
+        textColor="white"
+      />
       <SectionWrapper>
         <div className=" flex justify-between gap-5 ">
           <div className="   w-full md:w-[60%] ">

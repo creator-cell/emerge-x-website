@@ -1,6 +1,7 @@
 import CardBlog from "@/components/blogs/CardBlog";
 import HeroBlog from "@/components/blogs/HeroBlog";
 import BreadCrumb from "@/components/reusable/BreadCrumb";
+import { HeroResusable } from "@/components/reusable/HeroReusable";
 
 import SectionWrapper from "@/components/reusable/SectionWrapper";
 import Image from "next/image";
@@ -20,10 +21,17 @@ const page = () => {
   const youMayLikeData = [0, 1, 2, 3];
   return (
     <div className=" min-h-screen">
-      <HeroBlog />
+      <HeroResusable
+        title="What's New?"
+        description="Stay up-to-date with Everyting 
+about EmergeX related."
+        image="/blogs/hero-blog-details.png"
+        className="bg-gradient-to-r from-black/0 to-black/90"
+        textColor="white"
+      />
       <SectionWrapper>
         <BreadCrumb navTrainData={navTrain} />
-        <div className=" flex justify-between gap-5 mt-10 ">
+        <div className=" flex flex-col md:flex-row md:justify-between gap-5 mt-10 ">
           <div className=" w-full md:w-[58%] max-w-[611px] ">
             <p className="text-base md:text-[18px] leading-[32px]">
               EmergeX will assist you to better understand and manage workplace
@@ -39,7 +47,7 @@ const page = () => {
               with investigations, actions and metrics reporting.
             </p>
           </div>
-          <div className=" hidden md:block  w-[45%] max-w-[516px]">
+          <div className="w-full md:w-[45%] max-w-[516px]">
             <div>
               <Image
                 src={"/image-blogs-details.png"}

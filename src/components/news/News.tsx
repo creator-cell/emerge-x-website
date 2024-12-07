@@ -3,6 +3,7 @@ import Link from "next/link";
 import { HeroResusable } from "../reusable/HeroReusable";
 import { NewsGrid } from "./NewsGrid";
 import SectionWrapper from "../reusable/SectionWrapper";
+import BreadCrumb from "../reusable/BreadCrumb";
 
 interface NewsItem {
   title: string
@@ -27,34 +28,29 @@ const newsItems: NewsItem[] = Array(3).fill({
 })
   
 export const NewsPage = () => {
+  const navTrain = [
+    { link: "/", label: "Home", id: "a1" },
+    { link: "/", label: "News", id: "a2" },
+    { link: "/News", label: "View All", id: "a3" },
+    {
+      link: "/News/N1fe24w",
+      label: "Hidden Danger: Old Gas Pipes in Hobart and Launceston",
+      id: "a3",
+    },
+  ];
   return (
     <div className="min-h-screen w-full bg-white">
       {/* Hero Section */}
       <HeroResusable image={image.image} title={image.title} date={image.date} />
 
       {/* Breadcrumb */}
-      <div className="max-w-7xl mx-auto px-4 py-4 my-6">
-        <nav className="flex flex-wrap gap-2 text-sm text-gray-500">
-          <Link href="/" className="hover:text-gray-900">
-            Home
-          </Link>
-          <span>/</span>
-          <Link href="/news" className="hover:text-gray-900">
-            News
-          </Link>
-          <span>/</span>
-          <Link href="/news/view-all" className="hover:text-gray-900">
-            View All
-          </Link>
-          <span>/</span>
-          <span className="text-gray-900">Hidden Danger: Old Gas Pipes In Hobart And Launceston</span>
-        </nav>
-      </div>
+     
 
       {/* Main Content */}
       <div>
         <SectionWrapper>
-            <div className="grid gap-2 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
+        <BreadCrumb navTrainData={navTrain} />
+            <div className="grid gap-2 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 mt-8">
               <div></div>
               <div className="prose max-w-none">
                 <p className="text-4xl text-bold text-gray-800">
