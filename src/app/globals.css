@@ -8,23 +8,7 @@
 }
 
 /* new */
-.scroll-section-outer{
-  overflow: hidden;
-}
-.scroll-section-inner{
-  height: 100vh;
-  width: 400vw;
-  display: flex;
-  flex-direction: row;
-  position: relative;
-}
-.scroll-section{
-  height: 100vh;
-  width: 100vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
@@ -36,7 +20,7 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
-  /* background-color: black; */
+  background-color: black;
 }
 
 @layer utilities {
@@ -44,29 +28,29 @@ body {
     animation: ledRunningGlow 3s linear infinite;
   }
   .contact_us:hover {
-    animation: contactus 6s linear infinite;
+    animation: contactus 1s linear infinite;
   }
 
   @keyframes contactus {
     0% {
       border-color: rgba(255, 0, 0, 0.8); /* Red light */
-      box-shadow: 0 0 5px 10px rgba(255, 0, 0, 1), 0 0  5px 10px rgba(255, 0, 0, 0.8);
+      box-shadow: 0 0 3px 6px rgba(255, 0, 0, 1), 0 0  3px 6px rgba(255, 0, 0, 0.8);
     }
     25% {
       border-color: rgba(0, 255, 0, 0.8); /* Green light */
-      box-shadow: 0  0 5px 10px rgba(0, 255, 0, 1), 0 0  5px 10px rgba(0, 255, 0, 0.8);
+      box-shadow: 0  0 3px 6px rgba(0, 255, 0, 1), 0 0  3px 6px rgba(0, 255, 0, 0.8);
     }
     50% {
       border-color: rgba(0, 0, 255, 0.8); /* Blue light */
-      box-shadow: 0  0 5px 10px rgba(0, 0, 255, 1), 0 0  5px 10px rgba(0, 0, 255, 0.8);
+      box-shadow: 0  0 3px 6px rgba(0, 0, 255, 1), 0 0  3px 6px rgba(0, 0, 255, 0.8);
     }
     75% {
       border-color: rgba(255, 255, 0, 0.8); /* Yellow light */
-      box-shadow: 0  0 5px 10px rgba(255, 255, 0, 1), 0 0  5px 10px rgba(255, 255, 0, 0.8);
+      box-shadow: 0  0 3px 6px rgba(255, 255, 0, 1), 0 0  3px 6px rgba(255, 255, 0, 0.8);
     }
     100% {
       border-color: rgba(255, 0, 0, 0.8); /* Back to Red */
-      box-shadow: 0 0 5px 10px rgba(255, 0, 0, 1), 0 0  5px 10px rgba(255, 0, 0, 0.8);
+      box-shadow: 0 0 3px 6px rgba(255, 0, 0, 1), 0 0  3px 6px rgba(255, 0, 0, 0.8);
     }
   }
   @keyframes ledRunningGlow {
