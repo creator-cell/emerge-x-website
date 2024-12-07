@@ -32,7 +32,7 @@ const About = () => {
   // Handle the scroll event to adjust width and border-radius
   useEffect(() => {
     const handleScroll = () => {
-      console.log(window.innerWidth)
+      //console.log(window.innerWidth)
       if (window.innerWidth <= 600) {
         setMainWidth(100);
         setBorderRadius(200);
@@ -48,7 +48,7 @@ const About = () => {
 
         // Calculate the visibility of the section
         const visibility = Math.min(1, (windowHeight - sectionTop) / sectionHeight);
-        console.log(visibility);
+        //console.log(visibility);
 
         let newWidth;
         let newRadius;

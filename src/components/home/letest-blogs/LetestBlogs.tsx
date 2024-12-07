@@ -42,7 +42,7 @@ const LetestBlogs: React.FC = () => {
 
         // Calculate the visibility of the section
         const visibility = Math.min(1, (windowHeight - sectionTop) / sectionHeight);
-        console.log(visibility);
+        //console.log(visibility);
 
         let newWidth;
         let newRadius;
@@ -50,13 +50,13 @@ const LetestBlogs: React.FC = () => {
         if (visibility >= 0.4580812267690844) {
           // When visibility is above 45%, set width to 100% and border-radius to 0
           newWidth = 100;
-          console.log(visibility * 50)
+          //console.log(visibility * 50)
           newRadius = Math.max(0, 10 - visibility * 50)
           if (visibility >= 0.530812267690844) {
             newRadius = 0;
           }
         } else if (visibility >= 0.33403659666684005 && visibility <= 0.44) {
-          console.log('call1');
+          //console.log('call1');
           newWidth = 96; // Width starts at 20%, increases to 100%
           newRadius = Math.max(0, 70 - visibility * 50);
         } else if (visibility >= 0.28403659666684005) {
