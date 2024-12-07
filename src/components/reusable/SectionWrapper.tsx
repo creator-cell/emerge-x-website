@@ -5,7 +5,9 @@ interface SectionWrappertypes {
   className?:string;
 }
 const SectionWrapper: React.FC<SectionWrappertypes> = ({ children,className }) => {
-  return <div className= {cn(`container pt-32`,className)}>{children}</div>;
+  
+  return <section className= {cn(`container mt-10 md:mt-28 lg:mt-32`,className)}>{children}</section>;
+
 };
 
 export default SectionWrapper;

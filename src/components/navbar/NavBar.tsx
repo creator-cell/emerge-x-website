@@ -13,6 +13,8 @@ const NavBar = () => {
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
+
+  console.log('pathName',pathName)
   return (
     <>
       <div className="w-full fixed top-4 left-0 z-30">
@@ -23,14 +25,18 @@ const NavBar = () => {
           </div>
 
           <ul className=" sm:w-[80%] lg:w-[60%] max-w-[900px]  hidden md:flex items-center   justify-between ">
-            {navList?.map((e, i) => (
-              <li
+            {navList?.map((e, i) => 
+              {
+                const active=pathName==e.link
+               return (<li
                 key={i}
-                className=" hover:text-customGreen text-md lg:text-xl"
+                className= {`hover:text-customGreen text-md lg:text-xl ${active?'text-customGreen':'text-[#767676]'}`}
               >
                 <Link href={e.link}>{e.label}</Link>
-              </li>
-            ))}
+              </li>)
+              }
+             
+            )}
             <li>
               <BookDemoButton
                 rightArrow={false}
@@ -64,7 +70,7 @@ const NavBar = () => {
                 <Link
                   href={e.link}
                   className={`flex items-center gap-[16px] ${
-                    isActive ? "text-[#3DA229]" : "text-[#303030]"
+                    isActive ? "text-[#3DA229]" : "text-[#767676]"
                   }`}
                 >
                   {e.label}

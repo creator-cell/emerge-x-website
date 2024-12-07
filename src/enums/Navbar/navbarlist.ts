@@ -1,8 +1,7 @@
 export const navList = [
-  { label: "Home", link: "#" },
-  { label: "About us", link: "#" },
-  { label: "Services", link: "#" },
-  { label: "Blogs", link: "#" },
-  { label: "News", link: "#" },
-  { label: "Contact Us", link: "#" },
+  { label: "Home", link: "/" },
+  { label: "About us", link: "/about-us" },
+  { label: "Services", link: "/services" },
+  { label: "Blogs", link: "/blogs" },
+  { label: "News", link: "/news" },
 ];

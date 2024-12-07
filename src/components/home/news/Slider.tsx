@@ -1,5 +1,9 @@
 "use client";
 
+// import gsap from "gsap"
+// import { ScrollSmoother } from "gsap/ScrollSmoother";
+// import { ScrollTrigger } from "gsap/ScrollTrigger";
+
 import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import {
@@ -27,7 +31,6 @@ const Slider = () => {
     { img: "/image 7.png" },
   ];
 
-
   const [slidesPerView, setSlidesPerView] = useState(4);
 
   // Update slidesPerView based on screen width
@@ -37,8 +40,8 @@ const Slider = () => {
         setSlidesPerView(4); // Desktop/Tablet
       } else if (window.innerWidth >= 400) {
         setSlidesPerView(3); // Mobile
-      }else{
-        setSlidesPerView(2)
+      } else {
+        setSlidesPerView(2);
       }
     };
 
@@ -56,8 +59,7 @@ const Slider = () => {
         effect={"coverflow"}
         grabCursor={true}
         centeredSlides={true}
-        slidesPerView={slidesPerView} 
-
+        slidesPerView={slidesPerView}
         initialSlide={1}
         centeredSlidesBounds={true}
         spaceBetween={0} // Adjust to add spacing between slides
@@ -80,7 +82,7 @@ const Slider = () => {
       >
         {SlidesData.map((e, index) => (
           <SwiperSlide key={index}>
-            <div className="relative w-[200px] md:w-[350px] rounded-[75px] overflow-hidden">
+            <div className="relative w-[200px] md:w-[350px] rounded-[30px] lg:rounded-[75px] overflow-hidden">
               <Image src={e.img} alt="slideimages" width={450} height={720} />
             </div>
           </SwiperSlide>
@@ -91,3 +93,60 @@ const Slider = () => {
 };
 
 export default Slider;
+
+//   gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+//   let smoother =  ScrollSmoother.create({
+//     content:"#smooth-content",
+//     smooth:2,
+//     effects:true
+//   })
+//   let container = document.querySelector('.container');
+//   let sections = container?.querySelectorAll('.panel')  || []
+//   gsap.to(sections,{
+//     xPercent:-100*(sections?.length-1),
+//     ease : "none",
+//     scrollTrigger:{
+//       trigger:".container",
+//       pin:true,
+//       scrub:true,
+//       end:"+=3500"
+//     }
+
+//   })
+//   return (
+//     <>
+//       <div id="smooth-wrapper">
+//         <div id="smooth-content">
+//           <div className="description panel blue">
+//             <h1>test</h1>
+//           </div>
+//           <div className="container">
+//             <section className="panel red">
+//               1
+//             </section>
+//             <section className="panel red">
+//               2
+//             </section>
+//             <section className="panel red">
+//               3
+//             </section>
+//             <section className="panel red">
+//               4
+//             </section>
+//             <section className="panel red">
+//               5
+//             </section>
+//             <section className="panel red">
+//               6
+//             </section>
+
+//           </div>
+
+//         </div>
+
+//       </div>
+//     </>
+//   )
+// }
+
+// export default Slider
