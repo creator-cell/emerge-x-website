@@ -28,6 +28,11 @@ const LetestBlogs: React.FC = () => {
   // Handle the scroll event to adjust width and border-radius
   useEffect(() => {
     const handleScroll = () => {
+      if (window.innerWidth <= 900) {
+        setWidth("100%");
+        setBorderRadius("0%");
+        return;
+      }
       const section = document.getElementById("latest-blogs-section");
       if (section) {
         const rect = section.getBoundingClientRect();

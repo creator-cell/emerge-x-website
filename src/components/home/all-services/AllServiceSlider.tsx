@@ -1,66 +1,5 @@
 "use client";
 
-// import gsap from "gsap";
-// import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-// import { useEffect, useRef } from "react";
-
-
-// const AllServiceSlider = () => {
-//   const sectionRef = useRef(null);
-//   const triggerRef = useRef(null);
-//   gsap.registerPlugin(ScrollTrigger);
-
-//   useEffect(() => {
-//     const pin = gsap.fromTo(sectionRef.current, {
-//       translateX: 0,
-//     }, {
-//       translateX: "-300vw",
-//       ease: 'none',
-//       duration: 1,
-//       scrollTrigger: {
-//         trigger: triggerRef.current,
-//         start: "top top",
-//         end: "2000 top",
-//         scrub: 0.6,
-//         pin: true
-//       }
-//     })
-
-//     return()=>{
-//       pin.kill()
-//     }
-
-
-//   }, [])
-
-
-//   return (
-//     <>
-//       <section className="scroll-section-outer">
-//         <div ref={triggerRef}>
-//           <div ref={sectionRef} className="scroll-section-inner">
-//             <div className="scroll-section">
-//               <h3 className="bg-red text-[60px]">section 1</h3>
-//             </div>
-//             <div className="scroll-section">
-//               <h3 className="bg-red text-[60px]">section 2</h3>
-//             </div>
-//             <div className="scroll-section">
-//               <h3 className="bg-red text-[60px]">section 3</h3>
-//             </div>
-//             <div className="scroll-section">
-//               <h3 className="bg-red text-[60px]">section 4</h3>
-//             </div>
-
-//           </div>
-//         </div>
-//       </section>
-//     </>
-//   )
-// }
-// export default AllServiceSlider
-
-
 import React, { useEffect, useRef, useState } from "react";
 import { Virtual } from "swiper/modules";
 import { Swiper as SwiperComponent, SwiperSlide } from "swiper/react";
@@ -100,29 +39,36 @@ const AllServiceSlider: React.FC = () => {
   const swiperRef = useRef<any>(null);
   const swiperRefText = useRef<any>(null);
 
+  // Handle scroll event to change slides based on scroll direction
   const handleScroll = (e: WheelEvent) => {
     if (swiperRef.current) {
       const swiperInstance = swiperRef.current.swiper;
       if (e.deltaY > 0) {
+        // Scrolling down (next slide)
         swiperInstance.slideNext();
       } else if (e.deltaY < 0) {
+        // Scrolling up (previous slide)
         swiperInstance.slidePrev();
       }
     }
     if (swiperRefText.current) {
       const swiperInstance = swiperRefText.current.swiper;
       if (e.deltaY > 0) {
+        // Scrolling down (next slide)
         swiperInstance.slideNext();
       } else if (e.deltaY < 0) {
+        // Scrolling up (previous slide)
         swiperInstance.slidePrev();
       }
     }
   };
 
   useEffect(() => {
+    // Add scroll event listener
     window.addEventListener("wheel", handleScroll, { passive: true });
 
     return () => {
+      // Clean up the event listener when the component is unmounted
       window.removeEventListener("wheel", handleScroll);
     };
   }, []);
@@ -184,7 +130,7 @@ const AllServiceSlider: React.FC = () => {
         <div className="w-full flex items-end mx-auto">
           <SwiperComponent
             ref={swiperRef}
-            modules={[Virtual]}
+            modules={[Virtual]} // Removed Autoplay module
             breakpoints={{
               300: {
                 slidesPerView: 2,
@@ -228,5 +174,3 @@ const AllServiceSlider: React.FC = () => {
 };
 
 export default AllServiceSlider;
-
-

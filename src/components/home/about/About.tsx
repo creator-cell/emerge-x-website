@@ -32,6 +32,13 @@ const About = () => {
   // Handle the scroll event to adjust width and border-radius
   useEffect(() => {
     const handleScroll = () => {
+      console.log(window.innerWidth)
+      if (window.innerWidth <= 600) {
+        setMainWidth(100);
+        setBorderRadius(200);
+        return;
+      }
+
       const section = document.getElementById("about-section");
       if (section) {
         const rect = section.getBoundingClientRect();
@@ -57,18 +64,15 @@ const About = () => {
           newRadius = 200
         }
         else {
-          // On scrolling up, keep increasing the width and decreasing the radius
-          newWidth = 50 + visibility * 70; // Width starts at 30%, increases to 100%
+          newWidth = 50 + visibility * 70;
           newRadius = 100;
         }
 
-        // Adjust width and border-radius based on section visibility
         setMainWidth(newWidth);
         setBorderRadius(`${newRadius}`);
       }
     };
 
-    // Add the scroll event listener
     window.addEventListener("scroll", handleScroll);
 
     // Cleanup on component unmount
@@ -87,9 +91,9 @@ const About = () => {
         transition: "width 0.6s ease-out, border-radius 0.6s ease-out", // Smoother and slower transition
       }}>
         <SectionWrapper className="pt-16">
-          <div  className="text-center flex flex-col items-center rounded-tl-3xl">
+          <div className="text-center flex flex-col items-center rounded-tl-3xl">
 
-            <SectionHeading text="About us"  className={` ${mainwidth <= 78 ? "mt-24" : "mt-20"}  text-white`} />
+            <SectionHeading text="About us" className={` ${mainwidth <= 78 ? "mt-24" : "mt-20"}  text-white`} />
 
           </div>
 
@@ -101,7 +105,7 @@ const About = () => {
 
           >
             <div>
-              <p  className="text-white text-justify w-full leading-[44px] font-[400] text-[32px] mt-10 md:mt-20 lg:mt-20 px-4">
+              <p className="text-white text-justify w-full leading-[44px] font-[400] text-[32px] mt-10 md:mt-20 lg:mt-20 px-4">
                 At EmergeX, we aim higher and strive harder to make workplace safety
               </p>
               <p className="text-justify text-white w-full leading-[44px] font-[400] text-[18px] mt-8 md:mt-20 lg:mt-16 px-4">
