@@ -95,7 +95,7 @@ const LetestBlogs: React.FC = () => {
         }}
       >
         <SectionWrapper>
-          <SectionHeading text="Latest Blogs" className="text-black mt-64" />
+          <SectionHeading text="Latest Blogs" className="text-black " />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-[70px] gap-y-10 lg:gap-x-[110px] mt-8 md:mt-14 lg:mt-16">
             {letestBlogData.map((e, i) => (
               <div key={i} className="text-center flex flex-col items-center md:gap-4 py-8">

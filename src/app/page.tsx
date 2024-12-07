@@ -7,7 +7,7 @@ import News from "@/components/home/news/News";
 
 export default function Home() {
   return (
-    <div >
+    <div  className=" space-y-20 md:space-y-0">
       <Hero />
       <About />
       <AllServices />

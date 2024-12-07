@@ -2,31 +2,21 @@ import React from "react";
 
 const FooterSubscribeForm = () => {
   return (
-    <div  className="lg:relative h-[81%]">
+    <div className=" ">
       <form action="">
-        <div className="flex flex-col sm:flex-row items-center gap-3  h-[40px]">
+        <div className="flex flex-col sm:flex-row items-center gap-3 ">
           <input
             type="text"
             name=""
             id=""
             placeholder="Your Email"
-            className=" border outline-none px-4 py-2 h-full rounded-[20px] "
+            className=" border outline-none px-4 py-2  h-[40px] rounded-[20px] "
           />
           <button className=" bg-customGreen text-white h-full py-2 px-4 rounded-[20px]">
             Subscribe
           </button>
         </div>
       </form>
-      <div className="flex lg:justify-between lg:gap-[15px] gap-[10px] lg:absolute  mt-[16px]  bottom-0 w-100">
-        <div className="text-[16px]">
-          <p className="font-semibold">Phone</p>
-          <p>+1 (800) 555-1234</p>
-        </div>
-        <div className="text-[16px]">
-          <p className="font-semibold">Email</p>
-          <p>info@emergex.com</p>
-        </div>
-      </div>
     </div>
   );
 };

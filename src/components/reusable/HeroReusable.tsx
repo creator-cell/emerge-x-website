@@ -48,7 +48,7 @@ export const HeroResusable: React.FC<HeroResusableProps> = ({
       >
         {/* <div className="p-10 absolute bottom-10 sm:bottom-10 md:bottom-5 md:right-5 lg:bottom-20 lg:right-10 max-w-2xl"> */}
         <h1
-          className={`text-5xl leading-[58px] lg:leading-[58px] text-center lg:text-5xl md:text-5xl sm:text-4xl font-semibold md:text-end md:justify-end text-${
+          className={`text-2xl  sm:text-5xl text-center  font-semibold md:text-end md:justify-end text-${
             textColor || "black"
           } mb-4`}
         >

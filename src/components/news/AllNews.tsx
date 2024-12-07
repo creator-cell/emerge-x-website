@@ -33,7 +33,7 @@ export const AllNewsPage = () => {
         image="/news/hero.png"
         description="Stay up-to-date with Everything about EmergeX related"
         textColor="white"
-        className="absolute inset-0 bg-gradient-to-r from-white/0 to-white/0"
+        className="absolute inset-0 bg-gradient-to-r from-white/0 to-black/90"
       />
 
       {/* Breadcrumb */}

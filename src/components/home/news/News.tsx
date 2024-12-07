@@ -6,15 +6,14 @@ import Slider from "./Slider";
 const News = () => {
   return (
     <div className="bg-white">
-
       <SectionWrapper>
-        <SectionHeading text="News" className="pt-16"/>
+        <SectionHeading text="News"  />
         <Slider />
-        <div className="text-center md:text-[26px] text-[20px] mt-5 xl:ml-0 lg:ml-20 md:ml-28 ml-10">Work Strategy</div>
+        <div className="text-center md:text-[26px] text-[20px] mt-10">
+          Work Strategy
+        </div>
         <div className="text-center">
-          <button
-            className="px-[20px] py-[8px] text-[16px] bg-[#222720] text-white rounded-full text-black mt-10 xl:ml-0 lg:ml-20 md:ml-28 ml-10"
-          >
+          <button className="px-[20px] py-[8px] text-base bg-[#222720] text-white rounded-full  mt-10   ">
             View All
           </button>
         </div>

@@ -31,7 +31,6 @@ const Slider = () => {
     { img: "/image 7.png" },
   ];
 
-
   const [slidesPerView, setSlidesPerView] = useState(4);
 
   // Update slidesPerView based on screen width
@@ -41,8 +40,8 @@ const Slider = () => {
         setSlidesPerView(4); // Desktop/Tablet
       } else if (window.innerWidth >= 400) {
         setSlidesPerView(3); // Mobile
-      }else{
-        setSlidesPerView(2)
+      } else {
+        setSlidesPerView(2);
       }
     };
 
@@ -60,8 +59,7 @@ const Slider = () => {
         effect={"coverflow"}
         grabCursor={true}
         centeredSlides={true}
-        slidesPerView={slidesPerView} 
-
+        slidesPerView={slidesPerView}
         initialSlide={1}
         centeredSlidesBounds={true}
         spaceBetween={0} // Adjust to add spacing between slides
@@ -84,7 +82,7 @@ const Slider = () => {
       >
         {SlidesData.map((e, index) => (
           <SwiperSlide key={index}>
-            <div className="relative w-[200px] md:w-[350px] rounded-[75px] overflow-hidden">
+            <div className="relative w-[200px] md:w-[350px] rounded-[30px] lg:rounded-[75px] overflow-hidden">
               <Image src={e.img} alt="slideimages" width={450} height={720} />
             </div>
           </SwiperSlide>
@@ -95,7 +93,6 @@ const Slider = () => {
 };
 
 export default Slider;
-
 
 //   gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 //   let smoother =  ScrollSmoother.create({
@@ -144,7 +141,6 @@ export default Slider;
 //             </section>
 
 //           </div>
-
 
 //         </div>
 

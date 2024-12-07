@@ -7,7 +7,7 @@ import FooterSubscribeForm from "./FooterSubscribeForm";
 
 const Footer = () => {
   return (
-    <footer className="pt-32 pb-20 bg-white">
+    <footer className=" pb-20 bg-white">
       <SectionWrapper className=" mt-20 md:mt-32">
         <div className=" grid grid-cols-1  lg:grid-cols-3 gap-x-8 gap-y-14 px-4  ">
           <div className=" space-y-5">
@@ -47,11 +47,21 @@ const Footer = () => {
               </ul>
             </div>
           </div>
-          <div >
+          <div className=" space-y-10" >
             <h2 className=" font-semibold text-base text-start mb-5">
               Subscribe for our newsletter
             </h2>
             <FooterSubscribeForm />
+            <div className="flex flex-col md:flex-row gap-8  lg:justify-between mt-8">
+        <div className="text-[16px]">
+          <p className="font-semibold">Phone</p>
+          <p>+1 (800) 555-1234</p>
+        </div>
+        <div className="text-[16px]">
+          <p className="font-semibold">Email</p>
+          <p>info@emergex.com</p>
+        </div>
+      </div>
           </div>
         </div>
       </SectionWrapper>
