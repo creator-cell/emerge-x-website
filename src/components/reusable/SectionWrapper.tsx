@@ -6,7 +6,7 @@ interface SectionWrappertypes {
 }
 const SectionWrapper: React.FC<SectionWrappertypes> = ({ children,className }) => {
   
-  return <section className= {cn(`container mt-32`,className)}>{children}</section>;
+  return <section className= {cn(`container pt-32`,className)}>{children}</section>;
 
 };
 

@@ -13,7 +13,7 @@ type BlogData = {
 };
 
 const LetestBlogs: React.FC = () => {
-  const [width, setWidth] = useState<string>("10%");  // Initial width
+  const [width, setWidth] = useState<string>("40%");  // Initial width
   const [borderRadius, setBorderRadius] = useState<string>("50%"); // Initial border-radius
 
   const letestBlogData: BlogData[] = [
@@ -50,7 +50,8 @@ const LetestBlogs: React.FC = () => {
         if (visibility >= 0.4580812267690844) {
           // When visibility is above 45%, set width to 100% and border-radius to 0
           newWidth = 100;
-          newRadius = Math.max(0, 70 - visibility * 50)
+          console.log(visibility * 50)
+          newRadius = Math.max(0, 10 - visibility * 50)
           if (visibility >= 0.530812267690844) {
             newRadius = 0;
           }
@@ -58,6 +59,14 @@ const LetestBlogs: React.FC = () => {
           console.log('call1');
           newWidth = 96; // Width starts at 20%, increases to 100%
           newRadius = Math.max(0, 70 - visibility * 50);
+        } else if (visibility >= 0.28403659666684005) {
+          newWidth = 75;
+        }else if (visibility >= 0.21403659666684005) {
+          newWidth = 60;
+        }else if (visibility >= 0.16403659666684005) {
+          newWidth = 62;
+        }else if (visibility >= 0.12403659666684005) {
+          newWidth = 50;
         }
 
 
@@ -85,7 +94,7 @@ const LetestBlogs: React.FC = () => {
   return (
     <div className="flex justify-center ">
       <div
-        className="bg-white"
+        className="bg-white border-transparent"
         id="latest-blogs-section"
         style={{
           width: width,
