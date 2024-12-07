@@ -30,7 +30,7 @@ const About = () => {
   // Handle the scroll event to adjust width and border-radius
   useEffect(() => {
     const handleScroll = () => {
-      console.log(window.innerWidth);
+      //console.log(window.innerWidth)
       if (window.innerWidth <= 600) {
         setMainWidth(100);
         setBorderRadius(200);
@@ -45,11 +45,8 @@ const About = () => {
         const windowHeight = window.innerHeight;
 
         // Calculate the visibility of the section
-        const visibility = Math.min(
-          1,
-          (windowHeight - sectionTop) / sectionHeight
-        );
-        console.log(visibility);
+        const visibility = Math.min(1, (windowHeight - sectionTop) / sectionHeight);
+        //console.log(visibility);
 
         let newWidth;
         let newRadius;
@@ -139,10 +136,10 @@ const About = () => {
                   <div className="text-[40px]">
                     <MdVerifiedUser color="#517741" />
                   </div>
-                  <h3 className="text-[20px] text-start text-[#232A20] font-semibold text-[#517741]">
+                  <h3 className="text-[20px] text-start  font-semibold text-[#517741]">
                     {e.heading}
                   </h3>
-                  <p className="text-justify text-base text-[#232A20] font-[400] text-[#517741]">
+                  <p className="text-justify text-base  font-[400] text-[#517741]">
                     {e.discription}
                   </p>
                 </div>

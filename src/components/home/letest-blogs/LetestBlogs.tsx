@@ -13,7 +13,7 @@ type BlogData = {
 };
 
 const LetestBlogs: React.FC = () => {
-  const [width, setWidth] = useState<string>("10%");  // Initial width
+  const [width, setWidth] = useState<string>("40%");  // Initial width
   const [borderRadius, setBorderRadius] = useState<string>("50%"); // Initial border-radius
 
   const letestBlogData: BlogData[] = [
@@ -42,7 +42,7 @@ const LetestBlogs: React.FC = () => {
 
         // Calculate the visibility of the section
         const visibility = Math.min(1, (windowHeight - sectionTop) / sectionHeight);
-        console.log(visibility);
+        //console.log(visibility);
 
         let newWidth;
         let newRadius;
@@ -50,14 +50,23 @@ const LetestBlogs: React.FC = () => {
         if (visibility >= 0.4580812267690844) {
           // When visibility is above 45%, set width to 100% and border-radius to 0
           newWidth = 100;
-          newRadius = Math.max(0, 70 - visibility * 50)
+          //console.log(visibility * 50)
+          newRadius = Math.max(0, 10 - visibility * 50)
           if (visibility >= 0.530812267690844) {
             newRadius = 0;
           }
         } else if (visibility >= 0.33403659666684005 && visibility <= 0.44) {
-          console.log('call1');
+          //console.log('call1');
           newWidth = 96; // Width starts at 20%, increases to 100%
           newRadius = Math.max(0, 70 - visibility * 50);
+        } else if (visibility >= 0.28403659666684005) {
+          newWidth = 80;
+        } else if (visibility >= 0.21403659666684005) {
+          newWidth = 70;
+        } else if (visibility >= 0.16403659666684005) {
+          newWidth = 62;
+        } else if (visibility >= 0.12403659666684005) {
+          newWidth = 50;
         }
 
 
@@ -83,45 +92,50 @@ const LetestBlogs: React.FC = () => {
   }, []);
 
   return (
-    <div className="flex justify-center ">
-      <div
-        className="bg-white"
-        id="latest-blogs-section"
-        style={{
-          width: width,
-          borderTopLeftRadius: borderRadius,
-          borderTopRightRadius: borderRadius,
-          transition: "width 0.6s ease-out, border-radius 0.6s ease-out", // Smoother and slower transition
-        }}
-      >
-        <SectionWrapper>
-          <SectionHeading text="Latest Blogs" className="text-black " />
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-[70px] gap-y-10 lg:gap-x-[110px] mt-8 md:mt-14 lg:mt-16">
-            {letestBlogData.map((e, i) => (
-              <div key={i} className="text-center flex flex-col items-center md:gap-4 py-8">
-                <div className="w-full rounded-[20px] overflow-hidden">
-                  <Image
-                    src={e.img}
-                    alt="services_images"
-                    height={600}
-                    width={600}
-                  />
-                </div>
+    <>
+      <div>
 
-                <div className="flex items-center justify-between w-full px-2 mt-7 md:mt-10 gap-4">
-                  <h3 className="text-black text-xl md:text-2xl text-start font-semibold w-[70%]">
-                    {e.title}
-                  </h3>
-                  <button className="rounded-full text-sm md:text-base w-[102px] py-1.5 md:py-2 bg-customGreen text-white font-semibold">
-                    View more
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-        </SectionWrapper>
       </div>
-    </div>
+      <div className="flex justify-center ">
+        <div
+          className="bg-white border-transparent"
+          id="latest-blogs-section"
+          style={{
+            width: width,
+            borderTopLeftRadius: borderRadius,
+            borderTopRightRadius: borderRadius,
+            transition: "width 0.6s ease-out, border-radius 0.6s ease-out", // Smoother and slower transition
+          }}
+        >
+          <SectionWrapper>
+            <SectionHeading text="Latest Blogs" className="text-black mt-48" />
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-[70px] gap-y-10 lg:gap-x-[110px] mt-8 md:mt-14 lg:mt-16">
+              {letestBlogData.map((e, i) => (
+                <div key={i} className="text-center flex flex-col items-center md:gap-4 py-8">
+                  <div className="w-full rounded-[20px] overflow-hidden">
+                    <Image
+                      src={e.img}
+                      alt="services_images"
+                      height={600}
+                      width={600}
+                    />
+                  </div>
+
+                  <div className="flex items-center justify-between w-full px-2 mt-7 md:mt-10 gap-4">
+                    <h3 className="text-black text-xl md:text-2xl text-start font-semibold w-[70%]">
+                      {e.title}
+                    </h3>
+                    <button className="rounded-full text-sm md:text-base w-[102px] py-1.5 md:py-2 bg-customGreen text-white font-semibold">
+                      View more
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </SectionWrapper>
+        </div>
+      </div>
+    </>
   );
 };
 
