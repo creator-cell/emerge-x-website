@@ -7,7 +7,7 @@ import { MdVerifiedUser } from "react-icons/md";
 
 const About = () => {
   const [mainwidth, setMainWidth] = useState<any>(60); // Initial width
-  const [borderRadius, setBorderRadius] = useState<any>(50); // Initial border-radius
+  const [borderRadius, setBorderRadius] = useState<any>(50); // Initial border-radius for circular effect
 
   const aboutCardData = [
     {
@@ -30,13 +30,6 @@ const About = () => {
   // Handle the scroll event to adjust width and border-radius
   useEffect(() => {
     const handleScroll = () => {
-      //console.log(window.innerWidth)
-      if (window.innerWidth <= 600) {
-        setMainWidth(100);
-        setBorderRadius(200);
-        return;
-      }
-
       const section = document.getElementById("about-section");
       if (section) {
         const rect = section.getBoundingClientRect();
@@ -44,27 +37,29 @@ const About = () => {
         const sectionHeight = rect.height;
         const windowHeight = window.innerHeight;
 
-        // Calculate the visibility of the section
+        // Calculate visibility of the section
         const visibility = Math.min(1, (windowHeight - sectionTop) / sectionHeight);
-        //console.log(visibility);
 
-        let newWidth;
-        let newRadius;
+        let newWidth = mainwidth; // Default width
+        let newRadius = borderRadius; // Default radius
 
-        if (visibility >= 0.16) {
-          // When visibility is above 45%, set width to 100% and border-radius to 0
-          newWidth = 100;
-          newRadius = 300;
-        } else if (visibility >= 0.11) {
-          newWidth = 80;
-          newRadius = 200;
+        // When section is in view, start turning it circular
+        if (visibility >= 0.1) {
+          newWidth = 100; // Set to full width
+          newRadius = "50%"; // Make the section a circle
+        } else if (visibility > 0) {
+          // Gradually transition from circle to rounded rectangle as you scroll
+          newWidth = 50 + visibility * 50;
+          newRadius = "20%"; // Rounded corners when it's not fully visible
         } else {
-          newWidth = 50 + visibility * 70;
-          newRadius = 100;
+          // Reset to initial state before scrolling
+          newWidth = 60;
+          newRadius = "50%";
         }
 
+        // Update the state to adjust the shape dynamically
         setMainWidth(newWidth);
-        setBorderRadius(`${newRadius}`);
+        setBorderRadius(newRadius);
       }
     };
 
@@ -74,24 +69,24 @@ const About = () => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [mainwidth, borderRadius]); // Ensure the effect updates properly when mainwidth or borderRadius change
 
   return (
-    <div className="flex justify-center ">
+    <div className="flex justify-center">
       <div
         className="bg-[#222720] rounded-tl-[280px] rounded-tr-[280px] md:mt-32"
         style={{
           width: `${mainwidth}%`,
-          borderTopLeftRadius: `${borderRadius}px`,
-          borderTopRightRadius: `${borderRadius}px`,
-          transition: "width 0.6s ease-out, border-radius 0.6s ease-out", // Smoother and slower transition
+          borderTopLeftRadius: `${borderRadius}`,
+          borderTopRightRadius: `${borderRadius}`,
+          transition: "width 0.6s ease-out, border-radius 0.6s ease-out", // Smooth transition
         }}
       >
         <SectionWrapper className="pt-16">
           <div className="text-center flex flex-col items-center rounded-tl-3xl">
             <SectionHeading
               text="About us"
-              className={` ${mainwidth <= 78 ? "mt-24" : "mt-20"}  text-white`}
+              className={` ${mainwidth <= 78 ? "mt-24" : "mt-20"} text-white`}
             />
           </div>
 
@@ -127,7 +122,6 @@ const About = () => {
             <div className="flex items-center flex-col flex-wrap gap-[60px] gap-x-[70px] lg:gap-x-[110px] mt-8">
               {aboutCardData?.map((e, i) => (
                 <div
-                  // data-aos="fade-left"
                   key={i}
                   className={`${
                     i % 2 === 0 ? "rotate-[355deg]" : "rotate-[5deg]"

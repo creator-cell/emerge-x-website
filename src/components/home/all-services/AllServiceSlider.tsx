@@ -1,17 +1,10 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import { Virtual } from "swiper/modules";
-import { Swiper as SwiperComponent, SwiperSlide } from "swiper/react";
-import "swiper/css/pagination";
-import "swiper/css";
-import "swiper/css/virtual";
-import Image from "next/image";
-
-
 import { motion, useScroll, useTransform } from "framer-motion";
 import SectionWrapper from "@/components/reusable/SectionWrapper";
 import SectionHeading from "@/components/reusable/SectionHeading";
+import Image from "next/image";
 
 const sliderData = [
   {
@@ -41,7 +34,6 @@ const sliderData = [
 ];
 
 const AllServiceSlider: React.FC = () => {
-
   const targetRef = useRef<HTMLDivElement | null>(null);
   const sliderWrapperRef = useRef<HTMLDivElement | null>(null);
   const cardRef = useRef<HTMLDivElement | null>(null);
@@ -51,56 +43,43 @@ const AllServiceSlider: React.FC = () => {
   const { scrollYProgress } = useScroll({
     target: targetRef,
   });
-  const x = useTransform(scrollYProgress, [0, 1], ["1%", "-200%"]);
+  
+  // Interpolating scrollYProgress to calculate X position for sliding
+  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-200%"]);
 
   useEffect(() => {
     const unsubscribe = x.onChange((currentValue) => {
-      console.log("Updated x value:", currentValue);
-
       const xValue = Math.round(-Number(currentValue.split("%")[0]));
-      console.log("🚀 ~ unsubscribe ~ xValue:", xValue)
 
+      // Logic for active card selection based on x position
       if (sliderWrapperRef.current && cardRef.current) {
-        console.log("Slider Wrapper Offset Width:", sliderWrapperRef.current.offsetWidth);
-        console.log("One Card Offset Width:", cardRef.current.offsetWidth);
-        console.log("Slider Wrapper Scroll Width (Overflowed Content):", sliderWrapperRef.current.scrollWidth);
-        let activeIndex = (xValue) / 35;
+        let activeIndex = xValue / 35;
         if (activeIndex > sliderData.length - 1) {
           activeIndex = sliderData.length - 1;
         }
-        console.log("🚀 ~ unsubscribe ~ activeIndex:", Math.round(activeIndex))
         setActiveCard(sliderData[Math.round(activeIndex)]);
       }
     });
 
-    // Cleanup the subscription on unmount
     return () => unsubscribe();
   }, [x]);
 
-
-
   return (
-
-    <section
-      className="container  relative pt-32 h-[500vh]"
-      ref={targetRef}
-    >
+    <section className="container relative pt-32 h-[500vh]" ref={targetRef}>
       <div
         style={{
-          backgroundImage: `url('${activeCard?.image}')`, // Dynamically setting background image
+          backgroundImage: `url('${activeCard?.image}')`,
         }}
-        className={`  sticky top-8  bg-cover bg-center  md:mx-4 rounded-xl md:rounded-[56px] overflow-hidden  h-[700px] md:h-[800px] `}>
-        <div className="w-full h-full bg-gray-800 bg-opacity-70 absolute top-0 right-0  ">
-          <div className="w-full relative ">
-            <SectionHeading
-              text="All Services "
-              className="text-white mt-10   "
-            />
-            <div className="w-full  flex md:items-end md:py-10 gap-20 md:gap-5 flex-col md:flex-row md:justify-between ">
-              <div className="w-full md:w-[48%] flex items-center justify-center gap-4 md:pb-10 ">
-                <div className="w-[75%] flex flex-col gap-4 md:gap-20 ">
+        className="sticky top-8 bg-cover bg-center md:mx-4 rounded-xl md:rounded-[56px] overflow-hidden h-[700px] md:h-[800px]"
+      >
+        <div className="w-full h-full bg-gray-800 bg-opacity-70 absolute top-0 right-0">
+          <div className="w-full relative">
+            <SectionHeading text="All Services" className="text-white mt-10" />
+            <div className="w-full flex md:items-end md:py-10 gap-20 md:gap-5 flex-col md:flex-row md:justify-between">
+              <div className="w-full md:w-[48%] flex items-center justify-center gap-4 md:pb-10">
+                <div className="w-[75%] flex flex-col gap-4 md:gap-20">
                   <div className="w-full">
-                    <div className="w-full md:p-4 ">
+                    <div className="w-full md:p-4">
                       <div className="md:py-3">
                         <p
                           className="text-base md:text-lg lg:text-[60px] text-white md:mt-10"
@@ -123,21 +102,20 @@ const AllServiceSlider: React.FC = () => {
                   </button>
                 </div>
               </div>
-              <div
-                ref={sliderWrapperRef}
-                className="w-full md:w-[50%] overflow-hidden ">
+
+              <div ref={sliderWrapperRef} className="w-full md:w-[50%] overflow-hidden">
                 <motion.div
                   style={{
-                    x
+                    x,
                   }}
-
-                  className="w-full flex mt-32 items-end  mx-auto">
-
+                  className="w-full flex mt-32 items-end mx-auto gap-6"
+                >
                   {sliderData?.map((e, i) => (
                     <ServiceCard
                       key={i}
                       image={e.image}
                       text={e.text}
+                      isActive={activeCard.text === e.text} // Pass active state to each card
                       ref={i === 0 ? cardRef : undefined}
                     />
                   ))}
@@ -151,21 +129,24 @@ const AllServiceSlider: React.FC = () => {
   );
 };
 
-
-
-
-
-const ServiceCard = React.forwardRef<HTMLDivElement, { image: string; text: string }>(
-  ({ image, text }, ref) => (
-    <div ref={ref} className="md:h-[420px] flex items-end">
+const ServiceCard = React.forwardRef<HTMLDivElement, { image: string; text: string; isActive: boolean }>(
+  ({ image, text, isActive }, ref) => (
+    <motion.div
+      ref={ref}
+      className="md:h-[420px] flex items-end"
+      style={{
+        scale: isActive ? 1.2 : 1, // Increase size of active card
+        marginRight: "1rem", // Add margin between the cards
+        transition: "scale 0.3s ease-in-out, margin 0.3s ease-in-out", // Smooth transition
+      }}
+    >
       <div className="rounded-2xl overflow-hidden w-full md:w-[240px]">
         <Image src={image} alt={text} height={800} width={400} />
       </div>
-    </div>
+    </motion.div>
   )
-)
+);
 
 ServiceCard.displayName = "ServiceCard";
-
 
 export default AllServiceSlider;
