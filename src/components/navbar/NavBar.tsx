@@ -14,42 +14,47 @@ const NavBar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
-  console.log('pathName',pathName)
+  console.log("pathName", pathName);
   return (
     <>
       <div className="w-full fixed top-4 left-0 z-30">
         <div className="w-full relative flex items-center justify-center">
-        <div className="flex items-center justify-between rounded-xl md:rounded-2xl lg:rounded-full shadow-customNavbarShadow px-10 py-3 md:py-5 lg:py-4  mx-6  bg-white gap-4 w-full  lg:w-[90%]">
-          <div className="w-[130px] md:w-[192px] h-auto ">
-            <Image src={"/logo/main-logo.png"} alt="" width={200} height={70} />
-          </div>
-
-          <ul className=" sm:w-[80%] lg:w-[60%] max-w-[900px]  hidden md:flex items-center   justify-between ">
-            {navList?.map((e, i) => 
-              {
-                const active=pathName==e.link
-               return (<li
-                key={i}
-                className= {`hover:text-customGreen text-md lg:text-xl ${active?'text-customGreen':'text-[#767676]'}`}
-              >
-                <Link href={e.link}>{e.label}</Link>
-              </li>)
-              }
-             
-            )}
-            <li>
-              <BookDemoButton
-                rightArrow={false}
-                className=" bg-customGreen text-white text-md lg:text-xl rounded-2xl md:py-[12px] sm:w-auto px-[8px]  md:w-[167px] text-md justify-center"
+          <div className="flex items-center justify-between rounded-xl md:rounded-2xl lg:rounded-full shadow-customNavbarShadow px-10 py-3 md:py-5 lg:py-4  mx-6   backdrop-blur-lg gap-4 w-full  lg:w-[90%]">
+            <div className="w-[130px] md:w-[192px] h-auto ">
+              <Image
+                src={"/logo/main-logo.png"}
+                alt=""
+                width={200}
+                height={70}
               />
-            </li>
-          </ul>
-          <button onClick={toggleSidebar} className=" md:hidden text-[33px]">
-            <GiHamburgerMenu />
-          </button>
+            </div>
+
+            <ul className=" sm:w-[80%] lg:w-[60%] max-w-[900px]  hidden md:flex items-center   justify-between ">
+              {navList?.map((e, i) => {
+                const active = pathName == e.link;
+                return (
+                  <li
+                    key={i}
+                    className={`hover:text-customGreen text-md lg:text-xl ${
+                      active ? "text-customGreen" : "text-[#767676]"
+                    }`}
+                  >
+                    <Link href={e.link}>{e.label}</Link>
+                  </li>
+                );
+              })}
+              <li>
+                <BookDemoButton
+                  rightArrow={false}
+                  className=" bg-customGreen text-white text-md lg:text-xl rounded-2xl md:py-[12px] sm:w-auto px-[8px]  md:w-[167px] text-md justify-center"
+                />
+              </li>
+            </ul>
+            <button onClick={toggleSidebar} className=" md:hidden text-[33px]">
+              <GiHamburgerMenu />
+            </button>
+          </div>
         </div>
-        </div>
-      
       </div>
 
       <div

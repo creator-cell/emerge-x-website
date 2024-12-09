@@ -1,6 +1,10 @@
 import BreadCrumb from "@/components/reusable/BreadCrumb";
 import { HeroResusable } from "@/components/reusable/HeroReusable";
 import SectionWrapper from "@/components/reusable/SectionWrapper";
+import FrequentlyaskedQuestions from "@/components/services/FrequentlyaskedQuestions";
+import ImageHoverEffect from "@/components/services/ImageHoverEffect";
+import SingleServiceSliderSection from "@/components/services/SingleServiceSliderSection";
+import Image from "next/image";
 import React from "react";
 
 const page = () => {
@@ -14,6 +18,7 @@ const page = () => {
       id: "a3",
     },
   ];
+
   return (
     <div className=" min-h-screen">
       <HeroResusable
@@ -50,11 +55,17 @@ const page = () => {
         </div>
       </SectionWrapper>
 
+      <div>
+        <SectionWrapper>
+          <SingleServiceSliderSection />
+        </SectionWrapper>
+      </div>
+
       <SectionWrapper>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-4 mt-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-4 mt-8 ">
           <div className=" flex ">
-            <div className="w-full  md:w-[50%]">
-              <h2 className="text-2xl font-semibold mb-6 max-w-sm">
+            <div className="w-full  md:w-[50%] ">
+              <h2 className="text-2xl font-semibold mb-6 max-w-sm ">
                 Innovative Cyber Threats: The Evolution of Attack Techniques
               </h2>
             </div>
@@ -89,6 +100,13 @@ const page = () => {
             </p>
           </div>
         </div>
+      </SectionWrapper>
+
+      <SectionWrapper>
+        <ImageHoverEffect />
+      </SectionWrapper>
+      <SectionWrapper>
+        <FrequentlyaskedQuestions />
       </SectionWrapper>
     </div>
   );

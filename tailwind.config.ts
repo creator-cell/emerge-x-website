@@ -18,7 +18,8 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-        customGreen: "#3DA229",
+        customGreen: "var(--customGreen)",
+        greyishblack:"var(--greyishblack)",
       },
       boxShadow: {
         customNavbarShadow: '0px 4px 22.1px 3px #00000026',
