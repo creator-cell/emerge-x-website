@@ -1,8 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
-import SectionWrapper from "@/components/reusable/SectionWrapper";
+import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
 import SectionHeading from "@/components/reusable/SectionHeading";
 import Image from "next/image";
 
@@ -23,55 +22,82 @@ const sliderData = [
     image: "/services-slider2.png",
     text: "Recovery",
   },
-  {
-    image: "/services-slider1.png",
-    text: "Slide 5 Text",
-  },
-  {
-    image: "/services-slider2.png",
-    text: "Slide 6 Text",
-  },
 ];
 
 const AllServiceSlider: React.FC = () => {
   const targetRef = useRef<HTMLDivElement | null>(null);
-  const sliderWrapperRef = useRef<HTMLDivElement | null>(null);
   const cardRef = useRef<HTMLDivElement | null>(null);
-
-  const [activeCard, setActiveCard] = useState(sliderData[0]);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [cardWidth, setCardWidth] = useState(270);
 
   const { scrollYProgress } = useScroll({
     target: targetRef,
   });
-  
-  // Interpolating scrollYProgress to calculate X position for sliding
-  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-200%"]);
 
   useEffect(() => {
-    const unsubscribe = x.onChange((currentValue) => {
-      const xValue = Math.round(-Number(currentValue.split("%")[0]));
+    if (cardRef.current) {
+      setCardWidth(cardRef.current.offsetWidth); // Dynamically calculate card width
+    }
+  }, [cardRef.current]);
 
-      // Logic for active card selection based on x position
-      if (sliderWrapperRef.current && cardRef.current) {
-        let activeIndex = xValue / 35;
-        if (activeIndex > sliderData.length - 1) {
-          activeIndex = sliderData.length - 1;
-        }
-        setActiveCard(sliderData[Math.round(activeIndex)]);
-      }
+  const x = useTransform(
+    scrollYProgress,
+    [0, 1],
+    ["0%", "-150%"]
+    // [0, -((cardWidth * (sliderData.length - 1)) + 60)]
+  );
+
+  useEffect(() => {
+    const unsubscribe = scrollYProgress.onChange((progress) => {
+      // Calculate the current X offset
+      const offset = progress * (sliderData.length - 1) * cardWidth;
+      console.log("🚀 ~ unsubscribe ~ offset:", offset);
+
+      // Calculate the new index without rounding values > 0.5 up
+      const newIndex = Math.round(offset / cardWidth);
+      // const roundedIndex = newIndex < 0.5 ? 0 : Math.floor(newIndex);
+      console.log("🚀 ~ unsubscribe ~ cardWidth:", newIndex);
+      // console.log("🚀 ~ unsubscribe ~ roundedIndex:", roundedIndex);
+
+      // Ensure the index doesn't exceed bounds
+      setActiveIndex(Math.min(newIndex, sliderData.length - 1));
     });
 
     return () => unsubscribe();
-  }, [x]);
+  }, [scrollYProgress]);
 
   return (
     <section className="container relative pt-32 h-[500vh]" ref={targetRef}>
-      <div
-        style={{
-          backgroundImage: `url('${activeCard?.image}')`,
-        }}
+      <motion.div
         className="sticky top-8 bg-cover bg-center md:mx-4 rounded-xl md:rounded-[56px] overflow-hidden h-[700px] md:h-[800px]"
       >
+        {/* Image Transition */}
+        <div className="w-full h-full absolute top-0 left-0">
+          {/* Current Image */}
+          <motion.img
+            key={activeIndex} // Trigger animation every time activeIndex changes
+            src={sliderData[activeIndex]?.image}
+            alt={sliderData[activeIndex]?.text}
+            className="w-full h-full object-cover object-center absolute top-0 left-0"
+            initial={{
+              opacity: 0, // Start invisible
+              filter: "blur(10px)", // Start with blur
+            }}
+            animate={{
+              opacity: 1, // Fade in
+              filter: "blur(0px)", // Remove blur
+            }}
+            exit={{
+              opacity: 0, // Fade out
+              filter: "blur(10px)", // Apply blur
+            }}
+            transition={{
+              duration: 0.6, // Duration of the image fade
+              ease: "easeOut", // Smooth easing
+            }}
+          />
+        </div>
+
         <div className="w-full h-full bg-gray-800 bg-opacity-70 absolute top-0 right-0">
           <div className="w-full relative">
             <SectionHeading text="All Services" className="text-white mt-10" />
@@ -81,12 +107,32 @@ const AllServiceSlider: React.FC = () => {
                   <div className="w-full">
                     <div className="w-full md:p-4">
                       <div className="md:py-3">
-                        <p
-                          className="text-base md:text-lg lg:text-[60px] text-white md:mt-10"
-                          style={{ lineHeight: "70px" }}
-                        >
-                          {activeCard?.text}
-                        </p>
+                        <AnimatePresence mode="wait">
+                          <motion.p
+                            className="text-base md:text-lg lg:text-[60px] text-white md:mt-10"
+                            style={{ lineHeight: "70px" }}
+                            key={`current-placeholder-${activeIndex}`}
+                            initial={{
+                              opacity: 0,
+                              y: 50, // Start above the normal position
+                            }}
+                            animate={{
+                              opacity: 1,
+                              y: 0, // Move to the normal position
+                            }}
+                            exit={{
+                              opacity: 0,
+                              y: -50, // Exit to above the normal position
+                            }}
+                            transition={{
+                              duration: 0.5, // Control the speed of the animation
+                              ease: "easeOut", // Smooth easing
+                            }}
+                          >
+                            {sliderData[activeIndex]?.text}
+                          </motion.p>
+                        </AnimatePresence>
+
                         <p className="text-base md:text-lg lg:text-xl text-white md:mt-10">
                           EmergeX will assist you to better understand and manage
                           workplace safety by integrating hazards and incident
@@ -103,20 +149,21 @@ const AllServiceSlider: React.FC = () => {
                 </div>
               </div>
 
-              <div ref={sliderWrapperRef} className="w-full md:w-[50%] overflow-hidden">
+              <div className="w-full md:w-[50%] overflow-hidden pl-8  pb-6">
                 <motion.div
                   style={{
                     x,
                   }}
                   className="w-full flex mt-32 items-end mx-auto gap-6"
                 >
-                  {sliderData?.map((e, i) => (
+                  {sliderData.map((e, i) => (
                     <ServiceCard
                       key={i}
+                      ref={i === 0 ? cardRef : undefined}
                       image={e.image}
                       text={e.text}
-                      isActive={activeCard.text === e.text} // Pass active state to each card
-                      ref={i === 0 ? cardRef : undefined}
+                      isActive={activeIndex === i} // Highlight active card
+                      isLastIndex={i === sliderData.length - 1} // Check if it's the last card
                     />
                   ))}
                 </motion.div>
@@ -124,26 +171,46 @@ const AllServiceSlider: React.FC = () => {
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };
 
-const ServiceCard = React.forwardRef<HTMLDivElement, { image: string; text: string; isActive: boolean }>(
-  ({ image, text, isActive }, ref) => (
-    <motion.div
-      ref={ref}
-      className="md:h-[420px] flex items-end"
-      style={{
-        scale: isActive ? 1.2 : 1, // Increase size of active card
-        marginRight: "1rem", // Add margin between the cards
-        transition: "scale 0.3s ease-in-out, margin 0.3s ease-in-out", // Smooth transition
-      }}
-    >
-      <div className="rounded-2xl overflow-hidden w-full md:w-[240px]">
-        <Image src={image} alt={text} height={800} width={400} />
-      </div>
-    </motion.div>
+const ServiceCard = React.forwardRef<HTMLDivElement, { image: string; text: string; isActive: boolean, isLastIndex: boolean }>(
+  ({ image, text, isActive, isLastIndex }, ref) => (
+    <AnimatePresence>
+      <motion.div
+        className="md:h-[420px] flex items-end"
+        ref={ref}
+        initial={{
+          scale: 1,
+          translateY: 0,
+          // translateX: 0,
+          padding: "0 0",
+        }}
+        animate={{
+          scale: isActive ? 1.2 : 1,
+          translateY: isActive ? -30 : 0,
+          // translateX: (isActive && isLastIndex) ? 0 : -0,
+          // ...(isActive ? { translateX: 80 } : { translateX: 70 }),
+          padding: isActive ? "0 20px" : "0 10px",
+        }}
+        exit={{
+          scale: 1,
+          translateY: 0,
+          // translateX: 0,
+          padding: "0 10px",
+        }}
+        transition={{
+          duration: 0.6,
+          ease: "easeIn",
+        }}
+      >
+        <div className="rounded-2xl overflow-visible w-full md:w-[240px]">
+          <Image src={image} alt={text} height={800} width={400} />
+        </div>
+      </motion.div>
+    </AnimatePresence>
   )
 );
 
