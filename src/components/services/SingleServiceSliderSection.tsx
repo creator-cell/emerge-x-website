@@ -65,7 +65,7 @@ const SingleServiceSliderSection: React.FC = () => {
 
       <div className=" w-full flex flex-col md:flex-row md:justify-between gap-5 md:pl-[50px] ">
         <div className="w-full  md:w-[30%] flex items-end">
-          <div>
+          <div className="px-4 md:px-0">
             <h2 className="text-2xl font-semibold mb-6 max-w-sm">
               What&apos;s New?
             </h2>
