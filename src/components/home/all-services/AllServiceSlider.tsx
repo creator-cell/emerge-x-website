@@ -30,7 +30,7 @@ const AllServiceSlider: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [cardWidth, setCardWidth] = useState(270);
 
-  const { scrollYProgress } = useScroll({
+  const { scrollYProgress, scrollY } = useScroll({
     target: targetRef,
   });
 
@@ -51,13 +51,11 @@ const AllServiceSlider: React.FC = () => {
     const unsubscribe = scrollYProgress.onChange((progress) => {
       // Calculate the current X offset
       const offset = progress * (sliderData.length - 1) * cardWidth;
-      console.log("🚀 ~ unsubscribe ~ offset:", offset);
+      console.log("🚀 ~ scrollY:", scrollY)
+
 
       // Calculate the new index without rounding values > 0.5 up
       const newIndex = Math.round(offset / cardWidth);
-      // const roundedIndex = newIndex < 0.5 ? 0 : Math.floor(newIndex);
-      console.log("🚀 ~ unsubscribe ~ cardWidth:", newIndex);
-      // console.log("🚀 ~ unsubscribe ~ roundedIndex:", roundedIndex);
 
       // Ensure the index doesn't exceed bounds
       setActiveIndex(Math.min(newIndex, sliderData.length - 1));

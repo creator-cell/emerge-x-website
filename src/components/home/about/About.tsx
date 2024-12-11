@@ -44,23 +44,23 @@ const About = ({ scrollYProgress }: AboutProps) => {
       }}
       className="flex justify-center items-center relative z-30 bg-[#222720] rounded-lg transition-transform duration-500 ease-in-out"
     >
-      <SectionWrapper className="pt-16 w-full">
+      <SectionWrapper className="mt-8 md:mt-12 lg:mt-12 w-full">
         <div className="text-center flex flex-col items-center">
           <SectionHeading
             text="About us"
-            className="mt-10 text-white"
+            className=" text-white"
           />
         </div>
         <div
           className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10 pb-16 w-full"
           id="about-section"
         >
-          <div>
-            <p className="text-white text-justify leading-[44px] font-[400] text-[32px] mt-10 px-4">
+          <div className="w-[70%]">
+            <p className="text-white text-justify leading-[44px] font-[400] text-[20px] sm:text-[24px] md:text-[32px] mt-10 px-4">
               At EmergeX, we aim higher and strive harder to make workplace safety
             </p>
-            <p className="text-justify text-white leading-[44px] font-[400] text-[18px] mt-8 px-4">
-              EmergeX will assist you to better understand and manage workplace safety by integrating hazards and incident reporting with investigations, actions, and metrics reporting.
+            <p className="text-justify text-white  opacity-45 leading-8  font-[400] text-[18px] mt-8 px-4">
+              EmergeX will assist you to better understand and manage workplace safety by integrating hazards and incident reporting with investigations, actions and metrics reporting.EmergeX will assist you to better understand and manage workplace safety by integrating hazards and incident reporting with investigations, actions and metrics reporting..
             </p>
             <div className="flex items-start justify-start mt-20 px-4">
               <button
@@ -76,7 +76,7 @@ const About = ({ scrollYProgress }: AboutProps) => {
               <div
                 key={i}
                 className={`${i % 2 === 0 ? "rotate-[355deg]" : "rotate-[5deg]"
-                  } border border-solid border-[#517741] rounded-[24px] p-[16px] flex flex-col gap-6 py-8 w-full sm:w-1/2 lg:w-1/3`}
+                  } border border-solid border-[#517741] rounded-[24px] p-[16px] flex flex-col gap-6 py-8 w-full sm:w-1/2 lg:w-[40%]`}
               >
                 <div className="text-[40px]">
                   <MdVerifiedUser color="#517741" />

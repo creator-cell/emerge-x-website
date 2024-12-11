@@ -23,13 +23,11 @@ const LetestBlogs: React.FC = () => {
     const circle = gsap.timeline({
       scrollTrigger: {
         trigger: "#container",
-        start: "top 60%",
+        start: "top bottom",
         end: "bottom center",
         scrub: 1,
       },
     });
-
-
 
 
     const card = gsap.timeline({
@@ -65,7 +63,7 @@ const LetestBlogs: React.FC = () => {
   ];
 
   return (
-    <div className="relative overflow-hidden h-[200vh]" id="container">
+    <div className="relative overflow-hidden  h-[200vh]" id="container">
       <div
         id="latest-blogs-section"
         className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 aspect-square bg-black rounded-full -z-10"
@@ -75,7 +73,7 @@ const LetestBlogs: React.FC = () => {
         <div className="bg-transparent">
           <SectionWrapper>
             <SectionHeading text="Latest Blogs" className="text-white mt-48" />
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-[70px] gap-y-10 lg:gap-x-[110px] mt-8 md:mt-14 lg:mt-16">
+            <div className="grid grid-cols-1  sm:grid-cols-2 lg:grid-cols-3 gap-x-[70px] gap-y-10 lg:gap-x-[110px] mt-8 md:mt-14 lg:mt-16">
               {letestBlogData.map((e, i) => (
                 <div key={e.slugid} className="blog-card">
                   <BlogCard img={e.img} title={e.title} slugid={e.slugid} />

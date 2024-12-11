@@ -7,7 +7,9 @@ import Hero from "@/components/home/hero/Hero";
 import LetestBlogs from "@/components/home/letest-blogs/LetestBlogs";
 import News from "@/components/home/news/News";
 import { useScroll } from "framer-motion";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
+
+import Lenis from 'lenis'
 
 export default function Home() {
 
@@ -16,6 +18,16 @@ export default function Home() {
   const { scrollYProgress } = useScroll({
     target: targetRef,
   })
+
+  useEffect(() => {
+    const lenis = new Lenis({
+      autoRaf: true,
+    });
+
+    lenis.on('scroll', (e) => {
+      console.log(e);
+    });
+  }, [])
 
   return (
     <div className=" space-y-20 md:space-y-0">
