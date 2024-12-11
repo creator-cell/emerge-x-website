@@ -2,19 +2,21 @@ import CardBlog from "@/components/blogs/CardBlog";
 import HeroBlog from "@/components/blogs/HeroBlog";
 import BreadCrumb from "@/components/reusable/BreadCrumb";
 import { HeroResusable } from "@/components/reusable/HeroReusable";
-
 import SectionWrapper from "@/components/reusable/SectionWrapper";
-
+import Link from "next/link";
 import React from "react";
+import { ReadonlyURLSearchParams } from "next/navigation";
+const navTrain = [
+  { link: "/", label: "Home", id: "a1" },
+  { link: "/", label: "Blogs", id: "a2" },
+  { link: "/blogs", label: "View All", id: "a3" },
+];
+const page = ({ searchParams }: { searchParams: ReadonlyURLSearchParams }) => {
+  const tab = searchParams ? new URLSearchParams(searchParams).toString() : "";
 
-const page = () => {
-  const navTrain = [
-    { link: "/", label: "Home", id: "a1" },
-    { link: "/", label: "Blogs", id: "a2" },
-    { link: "/blogs", label: "View All", id: "a3" },
-  ];
   const trandingData = [0, 2, 3, 4];
   const viewAllBlogsData = [0, 2, 3, 4, 5, 6, 7, 8, 1];
+
   return (
     <div className=" min-h-screen">
       <HeroResusable
@@ -26,7 +28,7 @@ about EmergeX related."
         textColor="white"
       />
       <SectionWrapper>
-        <div className=" flex justify-between gap-5 ">
+        <div className=" flex flex-col md:flex-row md:justify-between gap-5 ">
           <div className="   w-full md:w-[60%] ">
             <BreadCrumb navTrainData={navTrain} />
 
@@ -38,19 +40,51 @@ about EmergeX related."
               />
             </div>
           </div>
-          <div className=" hidden md:block  w-[35%] ">
+
+          <div className="w-full   md:w-[35%] ">
             <div className="flex items-center gap-5 text-[20px]">
-              <button className=" text-customGreen">Trending</button>
-              <button>Recommended</button>
+              <Link
+                href={"/blogs/?tab=trending"}
+                scroll={false}
+                className={` ${
+                  tab == "tab=trending"
+                    ? "text-customGreen"
+                    : tab == ""
+                    ? "text-customGreen"
+                    : ""
+                } `}
+              >
+                Trending
+              </Link>
+              <Link
+                href={"/blogs/?tab=recomended"}
+                scroll={false}
+                className={` ${
+                  tab == "tab=recomended" ? "text-customGreen" : ""
+                } `}
+              >
+                Recommended
+              </Link>
             </div>
-            <div className=" flex flex-col gap-4 mt-8">
+            <div className=" hidden md:flex flex-col gap-4 mt-8">
               {trandingData?.map((e, i) => (
                 <CardBlog
                   key={i}
                   list={true}
-                  styleHeading="text-[14px] lg:text-base"
+                  styleHeading="text-[14px] font-[400] md:font-semibold lg:text-base"
                   styleBox="aspect-square max-w-[150px]"
                 />
+              ))}
+            </div>
+            <div className="  md:hidden grid grid-cols-3 gap-y-8 gap-x-3 mt-8">
+              {trandingData?.map((e, i) => (
+                <div key={i} className="">
+                  <CardBlog
+                    list={false}
+                    styleHeading="text-[14px] lg:text-base"
+                    styleBox="aspect-square max-w-full"
+                  />
+                </div>
               ))}
             </div>
           </div>
