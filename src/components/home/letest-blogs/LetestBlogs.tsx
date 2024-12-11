@@ -26,17 +26,17 @@ const LetestBlogs: React.FC = () => {
         start: "top 60%",
         end: "bottom center",
         scrub: 1,
-        markers: true,
+        // markers: true,
       },
     });
 
     const card = gsap.timeline({
       scrollTrigger: {
-        trigger: "#latest-blogs-section",
-        start: "top 70%",
+        trigger: "#card-container",
+        start: "top 10%",
         end: "bottom center",
         scrub: 1,
-        markers: true,
+        // markers: true,
       },
     });
 
@@ -70,7 +70,7 @@ const LetestBlogs: React.FC = () => {
         className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 aspect-square bg-black rounded-full -z-10"
       />
 
-      <div className="flex justify-center">
+      <div className="flex justify-center" id="card-container">
         <div className="bg-transparent">
           <SectionWrapper>
             <SectionHeading text="Latest Blogs" className="text-white mt-48" />
