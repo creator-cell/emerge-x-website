@@ -1,11 +1,23 @@
 import React from "react";
 import { FaArrowRight } from "react-icons/fa6";
 import BookDemoButton from "./BookDemoButton";
+import { MotionValue, useMotionTemplate, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 
-const Hero = () => {
+interface HeroProps {
+  scrollYProgress: MotionValue<number>;
+}
+
+
+const Hero = ({ scrollYProgress }: HeroProps) => {
+
+  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.9]);
+  const scaleValue = useMotionTemplate`scale(${scale})`;
+
+
   return (
-    <div className=" relative h-[100vh] overflow-hidden   ">
-      <div>
+    <motion.div className=" sticky top-0 h-[100vh] overflow-hidden   " >
+      <div >
         <video
           controlsList="nodownload"
           // Prevents right-click context menu
@@ -37,28 +49,30 @@ const Hero = () => {
         </video>
       </div>
       <div className=" absolute left-0 bottom-0 w-full">
-      <div className=" container  p-4 pb-10 w-[90%] ">
-        <div>
-          
-          <h2 className=" text-[38px] md:text-[70px] font-[700] text-[#222720] leading-[105px]">
-            Featuring over 
-          </h2>
-          <h2 className="text-[38px] md:text-[70px] font-[700] text-customGreen">
-            50 modules
-          </h2>
-        </div>
-        <div className=" flex flex-col sm:flex-row sm:items-end justify-between gap-4 mt-12">
-          <p className=" text-[#232A20] text-xl md:text-[28px]">
-            What services do we offer
-          </p>{" "}
-        </div>
-        <div className="flex items-center justify-center mt-8">
-          <BookDemoButton rightArrow={true} className=" text-2xl pl-[40px] gap-4" />
+        <div className=" container  p-4 pb-10 w-[90%] ">
+          <div>
+            <motion.h2
+              style={{ transform: scaleValue }}
+              className=" text-[38px] md:text-[70px] font-[700] text-[#222720] leading-[105px]">
+              Featuring over
+            </motion.h2>
+            <motion.h2 style={{ transform: scaleValue }} className="text-[38px] md:text-[70px] font-[700] text-customGreen">
+              50 modules
+            </motion.h2>
+          </div>
+          <div className=" flex flex-col sm:flex-row sm:items-end justify-between gap-4 mt-12">
+            <motion.p
+              style={{ transform: scaleValue }}
+              className=" text-[#232A20] text-xl md:text-[28px]">
+              What services do we offer
+            </motion.p>{" "}
+          </div>
+          <motion.div style={{ transform: scaleValue }} className="flex items-center justify-center mt-8">
+            <BookDemoButton rightArrow={true} className=" text-2xl pl-[40px] gap-4" />
+          </motion.div>
         </div>
       </div>
-      </div>
-    
-    </div>
+    </motion.div>
   );
 };
 
