@@ -26,7 +26,6 @@ const LetestBlogs: React.FC = () => {
         start: "top 60%",
         end: "bottom center",
         scrub: 1,
-        // markers: true,
       },
     });
 
