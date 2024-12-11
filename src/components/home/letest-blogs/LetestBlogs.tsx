@@ -29,6 +29,9 @@ const LetestBlogs: React.FC = () => {
       },
     });
 
+
+
+
     const card = gsap.timeline({
       scrollTrigger: {
         trigger: "#card-container",
