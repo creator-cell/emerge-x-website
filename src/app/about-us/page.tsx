@@ -40,6 +40,9 @@ const page = () => {
             </div>
           </div>
 
+
+
+
           <div>
             <Headings
               label="Our Mission"
