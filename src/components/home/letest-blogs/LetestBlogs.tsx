@@ -8,6 +8,7 @@ import React from "react";
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
+import { useMediaQuery } from "usehooks-ts";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
@@ -19,6 +20,13 @@ type BlogData = {
 };
 
 const LetestBlogs: React.FC = () => {
+
+
+  const isMobile = useMediaQuery('(max-width: 768px)'); // For screens up to 768px
+
+
+
+
   useGSAP(() => {
     const circle = gsap.timeline({
       scrollTrigger: {
@@ -26,6 +34,7 @@ const LetestBlogs: React.FC = () => {
         start: "top bottom",
         end: "bottom center",
         scrub: 1,
+        markers: true,
       },
     });
 
@@ -33,14 +42,14 @@ const LetestBlogs: React.FC = () => {
     const card = gsap.timeline({
       scrollTrigger: {
         trigger: "#card-container",
-        start: "top 10%",
+        start: isMobile ? "top -30%" : "top 10%",
         end: "bottom center",
         scrub: 1,
       },
     });
 
     circle.to("#latest-blogs-section", {
-      width: "200vw",
+      width: "500vw",
       ease: "power1.out",
     });
 
@@ -63,7 +72,7 @@ const LetestBlogs: React.FC = () => {
   ];
 
   return (
-    <div className="relative overflow-hidden  h-[200vh]" id="container">
+    <div className="relative overflow-hidden h-[250vh]  md:h-[200vh]" id="container">
       <div
         id="latest-blogs-section"
         className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 aspect-square bg-black rounded-full -z-10"
@@ -73,7 +82,7 @@ const LetestBlogs: React.FC = () => {
         <div className="bg-transparent">
           <SectionWrapper>
             <SectionHeading text="Latest Blogs" className="text-white mt-48" />
-            <div className="grid grid-cols-1  sm:grid-cols-2 lg:grid-cols-3 gap-x-[70px] gap-y-10 lg:gap-x-[110px] mt-8 md:mt-14 lg:mt-16">
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-[10px] gap-y-10 lg:gap-x-[110px] mt-8 md:mt-14 lg:mt-16">
               {letestBlogData.map((e, i) => (
                 <div key={e.slugid} className="blog-card">
                   <BlogCard img={e.img} title={e.title} slugid={e.slugid} />
@@ -90,14 +99,14 @@ const LetestBlogs: React.FC = () => {
 const BlogCard: React.FC<BlogData> = ({ img, title, slugid }) => {
   return (
     <div className="text-center flex flex-col items-center md:gap-4 py-8">
-      <div className="w-full rounded-[20px] overflow-hidden">
+      <div className="w-full rounded-md sm:rounded-[20px] overflow-hidden">
         <Image src={img} alt="services_images" height={600} width={600} />
       </div>
       <div className="flex items-center justify-between w-full px-2 mt-7 md:mt-10 gap-4">
-        <h3 className="text-black text-xl md:text-2xl text-start font-semibold w-[70%]">
+        <h3 className="text-white text-base  sm:text-xl md:text-2xl text-start font-semibold w-[70%]">
           {title}
         </h3>
-        <button className="rounded-full text-sm md:text-base w-[102px] py-1.5 md:py-2 bg-customGreen text-white font-semibold">
+        <button className="rounded-full text-[8px] sm:text-sm md:text-base w-fit sm:w-[102px] py-1.5 md:py-2 bg-customGreen text-white font-semibold">
           View more
         </button>
       </div>

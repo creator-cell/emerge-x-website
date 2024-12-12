@@ -63,7 +63,7 @@ export const FloatingNav = ({
     });
 
     return (
-        <>
+        <div className="w-full container">
             {!isFloatingNav ? (
                 <AnimatePresence>
                     <motion.div
@@ -102,7 +102,7 @@ export const FloatingNav = ({
                             duration: 0.2,
                         }}
                         className={cn(
-                            "flex w-full fixed top-10 inset-x-0 mx-auto rounded-full z-[5000] pr-2 pl-8 py-2 items-center justify-center space-x-4",
+                            "flex w-full fixed top-3 inset-x-0 mx-auto rounded-full z-[5000]  py-2 items-center justify-center space-x-4",
                             className
                         )}
                     >
@@ -110,6 +110,6 @@ export const FloatingNav = ({
                     </motion.div>
                 </AnimatePresence>
             )}
-        </>
+        </div>
     );
 };
