@@ -2,7 +2,6 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import React from "react";
 
-import SubtractIcon from "@";
 import Image from "next/image";
 
 
@@ -34,14 +33,14 @@ const CardBlog: React.FC<CardBlogTypes> = ({
           styleBox
         )}
       >
-           <Image
-  src="/blogs/Subtract.svg"
-  alt="Subtract Icon"
-  width={100} // Set the actual width in pixels
-  height={100} // Set the actual height in pixels
-  className="absolute top-0 left-0"
-/>
-<Image
+        <Image
+          src="/blogs/Subtract.svg"
+          alt="Subtract Icon"
+          width={100} // Set the actual width in pixels
+          height={100} // Set the actual height in pixels
+          className="absolute top-0 left-0"
+        />
+        <Image
           src="/blogs/button.png"
           width={80}
           height={80}

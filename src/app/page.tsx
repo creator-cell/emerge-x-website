@@ -8,19 +8,13 @@ import LetestBlogs from "@/components/home/letest-blogs/LetestBlogs";
 import News from "@/components/home/news/News";
 import { useScroll } from "framer-motion";
 import { useEffect, useRef } from "react";
-import Lenis from "lenis";
+import Lenis from 'lenis'
 
 export default function Home() {
   const targetRef = useRef<HTMLDivElement | null>(null);
-  const serviceBlogRef = useRef<HTMLDivElement | null>(null);
-
   const { scrollYProgress } = useScroll({
     target: targetRef,
   });
-  const { scrollYProgress: serviceBlogScrollYProgress } = useScroll({
-    target: serviceBlogRef,
-  });
-
 
 
   return (
