@@ -58,63 +58,6 @@ const AllServices = ({ }: Props) => {
 
 
 
-  // useEffect(() => {
-
-
-  //   const slider = sliderRef.current;
-  //   if (!slider) return;
-  //   console.log("🚀 ~ useEffect ~ slider:", slider)
-
-
-  //   const handleScroll = (e: WheelEvent) => {
-  //     e.preventDefault(); // Prevent default scrolling behavior
-
-  //     if (isAnimating) return;  // Prevent triggering while animating
-
-  //     const direction = e.deltaY > 0 ? 1 : -1;
-  //     updateSlide(direction);
-  //   };
-
-  //   const updateSlide = (direction: number) => {
-  //     if (isAnimating) return;
-
-  //     const nextIndex = Math.max(0, Math.min(sliderData.length - 1, activeIndex + direction));
-  //     if (nextIndex === activeIndex) return;
-
-  //     setIsAnimating(true);  // Start animation
-  //     setActiveIndex(nextIndex); // Update active index
-  //     // setIsAnimating(false);  // End animation
-  //     console.log("🚀 ~ updateSlide ~ nextIndex * cardWidth:", nextIndex, cardWidth, direction)
-
-
-  //     gsap.to(slideRef.current, {
-  //       x: -(nextIndex * cardWidth),
-  //       duration: 1,
-  //       ease: "power2.out",
-  //       scrub: 1,
-  //       onComplete: () => setIsAnimating(false),  // Ensure that animation flag is reset after animation
-  //     });
-
-
-  //   };
-
-
-  //   // Attach event listener
-  //   if (isInView) {
-  //     console.log("Attaching scroll listener");
-  //     window.addEventListener("wheel", handleScroll, { passive: false });
-  //   } else {
-  //     console.log("Removing scroll listener");
-  //     window.removeEventListener("wheel", handleScroll);
-  //   }
-
-  //   // Cleanup on component unmount
-  //   return () => {
-  //     window.removeEventListener("wheel", handleScroll);
-  //   };
-  // }, [activeIndex, isAnimating, isInView]);
-
-
   useEffect(() => {
     const slider = sliderRef.current;
     if (!slider) return;
@@ -182,8 +125,8 @@ const AllServices = ({ }: Props) => {
 
 
   return (
-    <div className="bg-white py-20 relative z-30" id="services">
-      <section className=" relative pt-32 h-[200vh] " ref={targetRef}>
+    <div className="bg-white  relative z-30" id="services">
+      <section className=" relative  h-[200vh] " ref={targetRef}>
         <motion.div
           ref={containerRef}
           className={cn(`sticky  top-[2.5vh] transform  bg-cover bg-center md:mx-8 rounded-xl md:rounded-[56px] overflow-hidden h-[95vh]`,

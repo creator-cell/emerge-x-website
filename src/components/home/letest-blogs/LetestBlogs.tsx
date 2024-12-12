@@ -133,6 +133,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import { useScroll } from "framer-motion";
 import { useMediaQuery } from "usehooks-ts";
+import { cn } from "@/lib/utils";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
@@ -149,67 +150,67 @@ const LetestBlogs: React.FC = () => {
   const isMobile = useMediaQuery('(max-width: 500px)'); // For screens up to 768px
 
 
-  useGSAP(() => {
-    const mm = gsap.matchMedia();
+  // useGSAP(() => {
+  //   const mm = gsap.matchMedia();
 
-    mm.add("(min-width: 1024px)", () => {
-      // For screens wider than 1024px
-      const circle = gsap.timeline({
-        scrollTrigger: {
-          trigger: "#container",
-          start: "top bottom",
-          end: "bottom center",
-          scrub: 1,
-        },
-      });
+  //   mm.add("(min-width: 1024px)", () => {
+  //     // For screens wider than 1024px
+  //     const circle = gsap.timeline({
+  //       scrollTrigger: {
+  //         trigger: "#container",
+  //         start: "top bottom",
+  //         end: "bottom center",
+  //         scrub: 1,
+  //       },
+  //     });
 
-      circle.to("#latest-blogs-section", {
-        width: "250vw",
-        ease: "power1.out",
-        borderRadius: "6px",
-      });
-    });
+  //     circle.to("#latest-blogs-section", {
+  //       width: "250vw",
+  //       ease: "power1.out",
+  //       borderRadius: "6px",
+  //     });
+  //   });
 
-    mm.add("(max-width: 768px)", () => {
-      // For screens smaller than 1024px
-      const circle = gsap.timeline({
-        scrollTrigger: {
-          trigger: "#container",
-          start: "top 80%",
-          end: "bottom center",
-          scrub: 1,
-        },
-      });
+  //   mm.add("(max-width: 768px)", () => {
+  //     // For screens smaller than 1024px
+  //     const circle = gsap.timeline({
+  //       scrollTrigger: {
+  //         trigger: "#container",
+  //         start: "top 80%",
+  //         end: "bottom center",
+  //         scrub: 1,
+  //       },
+  //     });
 
-      circle.to("#latest-blogs-section", {
-        width: "550vw",
-        ease: "power1.out",
-        borderRadius: "6px",
-      });
-    });
+  //     circle.to("#latest-blogs-section", {
+  //       width: "550vw",
+  //       ease: "power1.out",
+  //       borderRadius: "6px",
+  //     });
+  //   });
 
-    const card = gsap.timeline({
-      scrollTrigger: {
-        trigger: "#card-container",
-        start: "-40% top",
-        end: "bottom center",
-        scrub: 1,
-      },
-    });
+  //   const card = gsap.timeline({
+  //     scrollTrigger: {
+  //       trigger: "#card-container",
+  //       start: "-40% top",
+  //       end: "bottom center",
+  //       scrub: 1,
+  //     },
+  //   });
 
-    card.from(".blog-card", {
-      opacity: 0,
-      y: 50,
-      delay: 0.5,
-      stagger: 0.2,
-      duration: 0.8,
-      ease: "power1.out",
-    });
+  //   card.from(".blog-card", {
+  //     opacity: 0,
+  //     y: 50,
+  //     delay: 0.5,
+  //     stagger: 0.2,
+  //     duration: 0.8,
+  //     ease: "power1.out",
+  //   });
 
-    return () => {
-      mm.revert(); // Clean up matchMedia listeners on component unmount
-    };
-  }, []);
+  //   return () => {
+  //     mm.revert(); // Clean up matchMedia listeners on component unmount
+  //   };
+  // }, []);
 
   const letestBlogData: BlogData[] = [
     { img: "/image 1.png", title: "Frontline Workers", slugid: "#" },
@@ -221,16 +222,24 @@ const LetestBlogs: React.FC = () => {
   ];
 
   return (
-    <div className=" overflow-hidden h-auto  lg:h-[200vh]" id="container">
+    <div className="relative overflow-hidden  h-auto  lg:h-[200vh]" id="container">
       <div
         id="latest-blogs-section"
-        className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 aspect-square bg-black rounded-full -z-10"
+        className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 aspect-square bg-white rounded-full -z-10"
       />
 
       <div className="flex justify-center" id="card-container">
         <div className="bg-transparent">
           <SectionWrapper>
-            <SectionHeading text="Latest Blogs" className="text-white mt-48" />
+            {/* <SectionHeading id="sectionHeading" text="Latest Blogs" className="text-black mt-48 " /> */}
+
+            <h2
+              id="sectionHeading"
+              className="opacity-0 translate-y-[50px] transition-all duration-300 ease-in-out"
+            >
+              Latest Blogs
+            </h2>
+
             {
               isMobile ?
                 <div className=" flex items-center gap-6 mt-8 md:mt-14 lg:mt-16 overflow-hidden">
