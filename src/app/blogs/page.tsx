@@ -51,7 +51,7 @@ about EmergeX related."
                 className={`${
                   tab === "tab=trending" || tab === ""
                     ? "text-customGreen"
-                    : ""
+                    : "text-greyishblack"
                 }`}
               >
                 Trending
@@ -60,7 +60,7 @@ about EmergeX related."
                 href={"/blogs/?tab=recomended"}
                 scroll={false}
                 className={`${
-                  tab === "tab=recomended" ? "text-customGreen" : ""
+                  tab === "tab=recomended" ? "text-customGreen" : "text-greyishblack"
                 }`}
               >
                 Recommended
