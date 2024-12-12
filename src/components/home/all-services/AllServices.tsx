@@ -9,6 +9,10 @@ import SectionHeading from "@/components/reusable/SectionHeading";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { useMediaQuery } from "usehooks-ts";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const sliderData = [
   {
@@ -37,24 +41,135 @@ const AllServices = ({ }: Props) => {
 
 
   const targetRef = useRef<HTMLDivElement | null>(null);
+  const slideRef = useRef<HTMLDivElement | null>(null);
   const cardRef = useRef<HTMLDivElement | null>(null);
   const sliderRef = useRef<HTMLDivElement | null>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [cardWidth, setCardWidth] = useState(270);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [scrollEnd, setScrollEnd] = useState(false)
 
-  const { scrollYProgress, scrollY } = useScroll({
-    target: targetRef,
+
+
+  const isInView = useInView(containerRef, {
+    amount: "all",
   });
 
 
-  const [scrollX, setscrollX] = useState(cardWidth)
-  console.log("🚀 ~ scrollX:", scrollX)
+
+  // useEffect(() => {
+
+
+  //   const slider = sliderRef.current;
+  //   if (!slider) return;
+  //   console.log("🚀 ~ useEffect ~ slider:", slider)
+
+
+  //   const handleScroll = (e: WheelEvent) => {
+  //     e.preventDefault(); // Prevent default scrolling behavior
+
+  //     if (isAnimating) return;  // Prevent triggering while animating
+
+  //     const direction = e.deltaY > 0 ? 1 : -1;
+  //     updateSlide(direction);
+  //   };
+
+  //   const updateSlide = (direction: number) => {
+  //     if (isAnimating) return;
+
+  //     const nextIndex = Math.max(0, Math.min(sliderData.length - 1, activeIndex + direction));
+  //     if (nextIndex === activeIndex) return;
+
+  //     setIsAnimating(true);  // Start animation
+  //     setActiveIndex(nextIndex); // Update active index
+  //     // setIsAnimating(false);  // End animation
+  //     console.log("🚀 ~ updateSlide ~ nextIndex * cardWidth:", nextIndex, cardWidth, direction)
+
+
+  //     gsap.to(slideRef.current, {
+  //       x: -(nextIndex * cardWidth),
+  //       duration: 1,
+  //       ease: "power2.out",
+  //       scrub: 1,
+  //       onComplete: () => setIsAnimating(false),  // Ensure that animation flag is reset after animation
+  //     });
+
+
+  //   };
+
+
+  //   // Attach event listener
+  //   if (isInView) {
+  //     console.log("Attaching scroll listener");
+  //     window.addEventListener("wheel", handleScroll, { passive: false });
+  //   } else {
+  //     console.log("Removing scroll listener");
+  //     window.removeEventListener("wheel", handleScroll);
+  //   }
+
+  //   // Cleanup on component unmount
+  //   return () => {
+  //     window.removeEventListener("wheel", handleScroll);
+  //   };
+  // }, [activeIndex, isAnimating, isInView]);
+
 
   useEffect(() => {
-    console.log("🚀 ~ activeIndex:", activeIndex)
-    setscrollX(cardWidth * activeIndex)
+    const slider = sliderRef.current;
+    if (!slider) return;
 
-  }, [activeIndex])
+    const handleScroll = (e: WheelEvent) => {
+      // Prevent default scrolling only when the slider is active
+      if (isAnimating) {
+        e.preventDefault();
+        return;
+      }
+
+      const direction = e.deltaY > 0 ? 1 : -1;
+
+      // Check if we are at the start or end of the slider
+      const isAtStart = activeIndex === 0 && direction === -1;
+      const isAtEnd = activeIndex === sliderData.length - 1 && direction === 1;
+
+      if (isAtStart || isAtEnd) {
+        // Allow scrolling outside the slider if at the bounds
+        return;
+      }
+
+      // Prevent scrolling and update the slide
+      e.preventDefault();
+      updateSlide(direction);
+    };
+
+    const updateSlide = (direction: number) => {
+      const nextIndex = Math.max(0, Math.min(sliderData.length - 1, activeIndex + direction));
+      if (nextIndex === activeIndex) return;
+
+      setIsAnimating(true);
+      setActiveIndex(nextIndex);
+
+      gsap.to(slideRef.current, {
+        x: -(nextIndex * cardWidth),
+        duration: 1,
+        ease: "power2.out",
+        onComplete: () => setIsAnimating(false),
+      });
+    };
+
+    // Attach and detach the event listener based on whether the slider is in view
+    if (isInView) {
+      window.addEventListener("wheel", handleScroll, { passive: false });
+    } else {
+      window.removeEventListener("wheel", handleScroll);
+    }
+
+    // Cleanup listener on component unmount
+    return () => {
+      window.removeEventListener("wheel", handleScroll);
+    };
+  }, [activeIndex, isAnimating, isInView]);
+
 
 
   useEffect(() => {
@@ -63,84 +178,30 @@ const AllServices = ({ }: Props) => {
     }
   }, [cardRef.current]);
 
-  const x = useTransform(
-    scrollYProgress,
-    [0, 1],
-    ["0%", "-100%"]
-    // [0, -((cardWidth * (sliderData.length - 1)))]
-  );
 
-  const isInView = useInView(targetRef, {
-    amount: 0.3,
-  });
-
-
-  const isMobile = useMediaQuery('(max-width: 768px)'); // For screens up to 768px
-
-
-  useEffect(() => {
-
-    console.log("🚀 ~ AllServices ~ isInView:", isInView)
-  }, [isInView])
-
-  useEffect(() => {
-    const unsubscribe = scrollYProgress.onChange((progress) => {
-      // Calculate the current X offset
-      const offset = progress * (sliderData.length - 1) * cardWidth;
-
-      // Calculate the raw index (without rounding)
-      const rawIndex = offset / cardWidth;
-
-
-      // console.log("🚀 ~ unsubscribe ~ rawIndex:", rawIndex);
-
-      // Determine the new index based on the threshold
-      let newIndex = 0;
-      if (rawIndex > 0.3) {
-        newIndex = Math.floor(rawIndex);  // Rounding to the nearest lower integer after 0.3
-      }
-
-      // Ensure the index doesn't exceed bounds
-      newIndex = Math.min(Math.floor(rawIndex), sliderData.length - 1);
-
-      // console.log("🚀 ~ unsubscribe ~ rounded newIndex:", newIndex);
-
-      // Scroll the container to the current active card
-      if (sliderRef.current) {
-        sliderRef.current.scrollTo({
-          top: cardWidth * newIndex,
-          behavior: 'smooth', // Optional for smooth scrolling
-        });
-      }
-
-      // Update the active index in the state
-      setActiveIndex(newIndex);
-    });
-
-    return () => unsubscribe();
-  }, [scrollYProgress]);
-
-
-  const isAnimateInView = !isMobile && isInView;
 
 
   return (
-    <div className="bg-white py-20" id="services">
-      <section className="container relative pt-32 h-[200vh] " ref={targetRef}>
+    <div className="bg-white py-20 relative z-30" id="services">
+      <section className=" relative pt-32 h-[200vh] " ref={targetRef}>
         <motion.div
-          className={cn(`sticky  ${isMobile && " top-8"} transform  bg-cover bg-center md:mx-4 rounded-xl md:rounded-[56px] overflow-hidden h-[700px] md:h-[800px]`,
-            isAnimateInView ? "-translate-y-1/2 top-1/2 " : "translate-y-0 top-8"
+          ref={containerRef}
+          className={cn(`sticky  top-[2.5vh] transform  bg-cover bg-center md:mx-8 rounded-xl md:rounded-[56px] overflow-hidden h-[95vh]`,
           )}
+        // <motion.div
+        //   className={cn(`sticky  ${isMobile && " top-8"} transform  bg-cover bg-center md:mx-4 rounded-xl md:rounded-[56px] overflow-hidden h-[700px] md:h-[800px]`,
+        //     isAnimateInView ? "-translate-y-1/2 top-1/2 " : "translate-y-0 top-8"
+        //   )}
 
-          initial={{ top: "8%", transform: "translateY(0)" }} // Initial state (before it comes into view)
-          animate={{
-            top: isAnimateInView ? "50%" : "8%", // Adjust top when in view
-            transform: isAnimateInView ? "translateY(-50%)" : "translateY(0)", // Adjust transform when in view
-          }}
-          transition={{
-            top: { duration: 0.6, ease: "easeOut" }, // Smooth transition for 'top'
-            transform: { duration: 0.6, ease: "easeOut" }, // Smooth transition for 'transform'
-          }}
+        // initial={{ top: "8%", transform: "translateY(0)" }} // Initial state (before it comes into view)
+        // animate={{
+        //   top: isAnimateInView ? "50%" : "8%", // Adjust top when in view
+        //   transform: isAnimateInView ? "translateY(-50%)" : "translateY(0)", // Adjust transform when in view
+        // }}
+        // transition={{
+        //   top: { duration: 0.6, ease: "easeOut" }, // Smooth transition for 'top'
+        //   transform: { duration: 0.6, ease: "easeOut" }, // Smooth transition for 'transform'
+        // }}
         >
           {/* Image Transition */}
           <div className="w-full h-full absolute top-0 left-0">
@@ -174,7 +235,7 @@ const AllServices = ({ }: Props) => {
               <SectionHeading text="All Services" className="text-white mt-10" />
               <div className="w-full flex md:items-end md:py-10 gap-20 md:gap-5 flex-col md:flex-row md:justify-between">
                 <div className="w-full md:w-[48%] flex items-center justify-center gap-4 md:pb-10">
-                  <div className="w-[75%] flex flex-col gap-4 md:gap-20">
+                  <div className="w-[75%] flex flex-col gap-4 md:gap-12">
                     <div className="w-full">
                       <div className="w-full md:p-4">
                         <div className="md:py-3">
@@ -220,15 +281,10 @@ const AllServices = ({ }: Props) => {
                   </div>
                 </div>
 
-                <div className="w-full md:w-[50%] overflow-visible pl-20 pb-6" ref={sliderRef}>
+                <div className="w-full  md:w-[50%] overflow-visible pl-20 pb-6" ref={sliderRef}>
                   <motion.div
-                    // style={{
-                    //   x,
-                    // }}
-                    animate={{
-                      x: -scrollX,
-                    }}
-                    className="w-full flex -mt-32 sm:mt-32 items-end mx-auto gap-6"
+                    ref={slideRef}
+                    className="w-full flex max-md:-mt-24 md:mt-32 items-end mx-auto gap-6"
                   >
                     {sliderData.map((card, index) => (
                       <ServiceCard
