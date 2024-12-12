@@ -26,7 +26,7 @@ const page = () => {
       <SectionWrapper>
         <BreadCrumb navTrainData={navTrain} />
 
-        <div className="mt-8 space-y-28">
+        <div className="mt-8 space-y-20 md:space-y-28">
           <div>
             <Headings
               label="Our Vision"
@@ -66,7 +66,7 @@ const page = () => {
               heading="Together we combine outstanding team"
             />
 
-            <div className=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 ">
+            <div className=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  gap-12 md:gap-8 ">
               {visioncards?.map((e, i) => (
                 <OurteamCard key={i} />
               ))}
@@ -78,13 +78,16 @@ const page = () => {
 
             <div className="flex flex-wrap justify-center gap-16 mt-10">
               {trustedCompanis?.map((e, i) => (
-                <div key={i}>
+                <div key={i} >
+                  <div className="w-[120px] sm:w-[140px] ">
                   <Image
                     src={"/logo/main-logo.png"}
                     alt=""
                     width={150}
                     height={70}
                   />
+                  </div>
+                
                 </div>
               ))}
             </div>
