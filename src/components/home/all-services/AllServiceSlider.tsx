@@ -27,12 +27,24 @@ const sliderData = [
 const AllServiceSlider: React.FC = () => {
   const targetRef = useRef<HTMLDivElement | null>(null);
   const cardRef = useRef<HTMLDivElement | null>(null);
+  const sliderRef = useRef<HTMLDivElement | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [cardWidth, setCardWidth] = useState(270);
 
   const { scrollYProgress, scrollY } = useScroll({
     target: targetRef,
   });
+
+
+  const [scrollX, setscrollX] = useState(cardWidth)
+  console.log("🚀 ~ scrollX:", scrollX)
+
+  useEffect(() => {
+    console.log("🚀 ~ activeIndex:", activeIndex)
+    setscrollX(cardWidth * activeIndex)
+
+  }, [activeIndex])
+
 
   useEffect(() => {
     if (cardRef.current) {
@@ -43,26 +55,46 @@ const AllServiceSlider: React.FC = () => {
   const x = useTransform(
     scrollYProgress,
     [0, 1],
-    ["0%", "-150%"]
-    // [0, -((cardWidth * (sliderData.length - 1)) + 60)]
+    ["0%", "-100%"]
+    // [0, -((cardWidth * (sliderData.length - 1)))]
   );
 
   useEffect(() => {
     const unsubscribe = scrollYProgress.onChange((progress) => {
       // Calculate the current X offset
       const offset = progress * (sliderData.length - 1) * cardWidth;
-      console.log("🚀 ~ scrollY:", scrollY)
 
+      // Calculate the raw index (without rounding)
+      const rawIndex = offset / cardWidth;
 
-      // Calculate the new index without rounding values > 0.5 up
-      const newIndex = Math.round(offset / cardWidth);
+      // console.log("🚀 ~ unsubscribe ~ rawIndex:", rawIndex);
+
+      // Determine the new index based on the threshold
+      let newIndex = 0;
+      if (rawIndex > 0.3) {
+        newIndex = Math.floor(rawIndex);  // Rounding to the nearest lower integer after 0.3
+      }
 
       // Ensure the index doesn't exceed bounds
-      setActiveIndex(Math.min(newIndex, sliderData.length - 1));
+      newIndex = Math.min(Math.floor(rawIndex), sliderData.length - 1);
+
+      // console.log("🚀 ~ unsubscribe ~ rounded newIndex:", newIndex);
+
+      // Scroll the container to the current active card
+      if (sliderRef.current) {
+        sliderRef.current.scrollTo({
+          top: cardWidth * newIndex,
+          behavior: 'smooth', // Optional for smooth scrolling
+        });
+      }
+
+      // Update the active index in the state
+      setActiveIndex(newIndex);
     });
 
     return () => unsubscribe();
   }, [scrollYProgress]);
+
 
   return (
     <section className="container relative pt-32 h-[500vh]" ref={targetRef}>
@@ -147,21 +179,25 @@ const AllServiceSlider: React.FC = () => {
                 </div>
               </div>
 
-              <div className="w-full md:w-[50%] overflow-hidden pl-8  pb-6">
+              <div className="w-full md:w-[50%] overflow-visible pl-20 pb-6" ref={sliderRef}>
                 <motion.div
-                  style={{
-                    x,
+                  // style={{
+                  //   x,
+                  // }}
+                  animate={{
+                    x: -scrollX,
                   }}
                   className="w-full flex mt-32 items-end mx-auto gap-6"
                 >
-                  {sliderData.map((e, i) => (
+                  {sliderData.map((card, index) => (
                     <ServiceCard
-                      key={i}
-                      ref={i === 0 ? cardRef : undefined}
-                      image={e.image}
-                      text={e.text}
-                      isActive={activeIndex === i} // Highlight active card
-                      isLastIndex={i === sliderData.length - 1} // Check if it's the last card
+                      key={index}
+                      image={card.image}
+                      text={card.text}
+                      isActive={activeIndex === index}
+                      isLastIndex={index === sliderData.length - 1}
+                      index={index}
+                      activeIndex={activeIndex}
                     />
                   ))}
                 </motion.div>
@@ -174,8 +210,8 @@ const AllServiceSlider: React.FC = () => {
   );
 };
 
-const ServiceCard = React.forwardRef<HTMLDivElement, { image: string; text: string; isActive: boolean, isLastIndex: boolean }>(
-  ({ image, text, isActive, isLastIndex }, ref) => (
+const ServiceCard = React.forwardRef<HTMLDivElement, { image: string; text: string; isActive: boolean; isLastIndex: boolean; index: number; activeIndex: number }>(
+  ({ image, text, isActive, isLastIndex, index, activeIndex }, ref) => (
     <AnimatePresence>
       <motion.div
         className="md:h-[420px] flex items-end"
@@ -183,21 +219,19 @@ const ServiceCard = React.forwardRef<HTMLDivElement, { image: string; text: stri
         initial={{
           scale: 1,
           translateY: 0,
-          // translateX: 0,
           padding: "0 0",
         }}
         animate={{
           scale: isActive ? 1.2 : 1,
           translateY: isActive ? -30 : 0,
-          // translateX: (isActive && isLastIndex) ? 0 : -0,
-          // ...(isActive ? { translateX: 80 } : { translateX: 70 }),
           padding: isActive ? "0 20px" : "0 10px",
+          opacity: index < activeIndex ? 0 : 1,  // Set opacity to 0 if index is less than activeIndex
         }}
         exit={{
           scale: 1,
           translateY: 0,
-          // translateX: 0,
           padding: "0 10px",
+          opacity: 0,  // Ensure exit transition has opacity 0
         }}
         transition={{
           duration: 0.6,
@@ -212,6 +246,9 @@ const ServiceCard = React.forwardRef<HTMLDivElement, { image: string; text: stri
   )
 );
 
+
 ServiceCard.displayName = "ServiceCard";
 
 export default AllServiceSlider;
+
+
