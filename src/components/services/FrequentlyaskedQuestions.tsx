@@ -51,7 +51,7 @@ const FrequentlyaskedQuestions = () => {
 
         <div className="mt-5 space-y-5">
           {faqData.map((faq, index) => (
-            <div key={index} className="border-b-2 border-dotted border-black flex flex-col pb-4">
+            <div key={index} className="border-b-2  border-gray-500 flex flex-col pb-4">
               <div
                 className="flex justify-between items-center cursor-pointer py-2"
                 onClick={() => handleToggle(index)}
