@@ -31,7 +31,7 @@ about EmergeX related."
       />
       <SectionWrapper>
         <BreadCrumb navTrainData={navTrain} />
-        <div className=" flex flex-col md:flex-row md:justify-between gap-5 mt-10 ">
+        <div className=" flex flex-col md:flex-row md:justify-between gap-5 mt-10 text-greyishblack">
           <div className=" w-full md:w-[58%] max-w-[611px] ">
             <p className="text-base md:text-[18px] leading-[32px]">
               EmergeX will assist you to better understand and manage workplace
