@@ -5,9 +5,9 @@ import Slider from "./Slider";
 
 const News = () => {
   return (
-    <div className="bg-white">
+    <div className="bg-white" id="news">
       <SectionWrapper>
-        <SectionHeading text="News"  />
+        <SectionHeading text="News" />
         <Slider />
         <div className="text-center md:text-[26px] text-[20px] mt-10">
           Work Strategy

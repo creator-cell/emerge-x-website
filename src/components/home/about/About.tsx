@@ -6,18 +6,24 @@ import { MotionValue, useMotionTemplate, useTransform } from "framer-motion";
 import React from "react";
 import { MdVerifiedUser } from "react-icons/md";
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 interface AboutProps {
   scrollYProgress: MotionValue<number>;
 }
 
 const About = ({ scrollYProgress }: AboutProps) => {
+
+
+  const router = useRouter()
+
   // Initial dimensions and scroll-based transformations
   const width = useTransform(scrollYProgress, [0, 0.5], [60, 100]);
   const widthValue = useMotionTemplate`${width}vw`;
 
-  const borderRadious = useTransform(scrollYProgress, [0, 0.5], [8, 0]);
-  const borderRadiousValue = useMotionTemplate`${borderRadious}%`;
+  const borderRadious = useTransform(scrollYProgress, [0, 0.5], [20, 0]);
+  const borderRadiousValue = useMotionTemplate`${borderRadious}px`;
+
 
 
   const aboutCardData = [
@@ -52,19 +58,20 @@ const About = ({ scrollYProgress }: AboutProps) => {
           />
         </div>
         <div
-          className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10 pb-16 w-full"
+          className="grid grid-cols-1 md:grid-cols-2 items-center gap-6 mt-10 pb-16 w-full"
           id="about-section"
         >
           <div className="w-[70%]">
-            <p className="text-white text-justify leading-[44px] font-[400] text-[20px] sm:text-[24px] md:text-[32px] mt-10 px-4">
+            <p className="text-white text-justify leading-6 sm:leading-9 md:leading-[44px] font-[400] text-[15px] sm:text-[24px] md:text-[32px] mt-10 px-4">
               At EmergeX, we aim higher and strive harder to make workplace safety
             </p>
-            <p className="text-justify text-white  opacity-45 leading-8  font-[400] text-[18px] mt-8 px-4">
+            <p className="text-justify text-white  opacity-45 leading-6 whitespace-pre-line  sm:leading-8  font-[400] text-xs sm:text-[18px] mt-8 px-4">
               EmergeX will assist you to better understand and manage workplace safety by integrating hazards and incident reporting with investigations, actions and metrics reporting.EmergeX will assist you to better understand and manage workplace safety by integrating hazards and incident reporting with investigations, actions and metrics reporting..
             </p>
-            <div className="flex items-start justify-start mt-20 px-4">
+            <div className="flex items-start justify-start mt-12 px-4">
               <button
                 type="submit"
+                onClick={() => router.push('/about-us')}
                 className="px-[20px] py-[8px] text-[16px] sm:text-base bg-[#3DA229] rounded-full text-white hover:bg-[#3DA229] transition-all duration-300 ease-in-out"
               >
                 Explore Now

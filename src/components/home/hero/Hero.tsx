@@ -16,7 +16,7 @@ const Hero = ({ scrollYProgress }: HeroProps) => {
 
 
   return (
-    <motion.div className=" sticky top-0 h-[100vh] overflow-hidden   " >
+    <motion.div className=" sticky top-0 h-[100vh] overflow-hidden  " >
       <div >
         <video
           controlsList="nodownload"
@@ -49,7 +49,7 @@ const Hero = ({ scrollYProgress }: HeroProps) => {
         </video>
       </div>
       <div className=" absolute left-0 bottom-0 w-full">
-        <div className=" container  p-4 pb-10 w-[90%] ">
+        <div className="  p-8 pb-10 w-[90%] ">
           <div>
             <motion.h2
               style={{ transform: scaleValue }}
