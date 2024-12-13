@@ -60,14 +60,14 @@ const NavBar = () => {
     <>
       <div className="w-full relative flex items-center justify-center">
         <div className="bg-white flex items-center justify-between rounded-xl md:rounded-2xl lg:rounded-full shadow-customNavbarShadow px-10 py-3 md:py-5 lg:py-4  mx-6  gap-4 w-full  lg:w-[90%]">
-          <div className="w-[130px] md:w-[192px] h-auto ">
+          <Link href={"/"} className="w-[130px] md:w-[192px] h-auto ">
             <Image
               src={"/logo/main-logo.png"}
               alt=""
               width={200}
               height={70}
             />
-          </div>
+          </Link>
 
           <ul className=" sm:w-[80%] lg:w-[60%] max-w-[900px]  hidden md:flex items-center   justify-between ">
             {navList?.map((e, i) => {

@@ -83,7 +83,7 @@ const About = ({ scrollYProgress }: AboutProps) => {
               <div
                 key={i}
                 className={`${i % 2 === 0 ? "rotate-[355deg]" : "rotate-[5deg]"
-                  } border border-solid border-[#517741] rounded-[24px] p-[16px] flex flex-col gap-6 py-8 w-full sm:w-1/2 lg:w-[40%]`}
+                  } border border-solid border-[#517741] rounded-[24px] p-[16px] flex flex-col gap-6 py-8 w-full sm:w-1/2 md:w-[60%] lg:w-[40%]`}
               >
                 <div className="text-[40px]">
                   <MdVerifiedUser color="#517741" />

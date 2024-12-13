@@ -80,14 +80,14 @@ const page = () => {
               {trustedCompanis?.map((e, i) => (
                 <div key={i} >
                   <div className="w-[120px] sm:w-[140px] ">
-                  <Image
-                    src={"/logo/main-logo.png"}
-                    alt=""
-                    width={150}
-                    height={70}
-                  />
+                    <Image
+                      src={"/logo/main-logo.png"}
+                      alt=""
+                      width={150}
+                      height={70}
+                    />
                   </div>
-                
+
                 </div>
               ))}
             </div>
