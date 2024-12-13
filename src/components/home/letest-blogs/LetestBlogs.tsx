@@ -34,9 +34,10 @@ const LetestBlogs: React.FC = () => {
     { img: "/image 6.png", title: "Critical Control Management", slugid: "#" },
   ];
 
+
   return (
     <div
-      className="relative overflow-visible  h-auto p-9  lg:h-[225vh]"
+      className="relative overflow-visible  h-auto p-9  "
       id="container"
     >
       <div
