@@ -78,11 +78,14 @@ const Slider = () => {
       }}
       modules={[EffectCoverflow, Navigation, Autoplay]}
       className="w-full mt-12" // Ensure it adapts to screen size
+      style={{position:'relative'}}
     >
       {SlidesData.map((e, index) => (
         <SwiperSlide key={index}>
-          <div className="rounded-[37px]  lg:rounded-[75px] overflow-hidden">
-            <Image src={e.img} alt="slideimages" width={450} height={720} />
+          <div className="rounded-[37px]  lg:rounded-[75px] overflow-hidden  w-fit  mx-auto">
+            <div>
+              <Image src={e.img} alt="slideimages" width={450} height={720} />
+            </div>
           </div>
         </SwiperSlide>
       ))}
