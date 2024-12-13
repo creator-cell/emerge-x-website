@@ -129,7 +129,7 @@ const AllServices = ({ }: Props) => {
       <section className=" relative  h-[200vh] " ref={targetRef}>
         <motion.div
           ref={containerRef}
-          className={cn(`sticky  top-[2.5vh] transform  bg-cover bg-center md:mx-8 rounded-0 md:rounded-[56px] overflow-hidden h-[95vh]`,
+          className={cn(`sticky  top-[2.5vh] transform  bg-cover bg-center md:mx-8 rounded-0 md:rounded-[56px] overflow-hidden h-[90vh] sm:h-[95vh]`,
           )}
         >
           {/* Image Transition */}
