@@ -326,7 +326,7 @@ export default function Home() {
         </div>
       )}
       <News />
-      <Contact />
+      {/* <Contact /> */}
     </div>
   );
 }
