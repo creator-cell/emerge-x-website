@@ -15,36 +15,18 @@ const Hero = ({ scrollYProgress }: HeroProps) => {
   return (
     <motion.div className=" sticky top-0 h-screen overflow-hidden  ">
       <div>
-        <video
-          controlsList="nodownload"
-          // Prevents right-click context menu
-          loop
-          muted
-          autoPlay
-          playsInline
-          className="w-full hidden md:block absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 min-w-full min-h-full object-cover z-[-1]"
-        >
-          <source
-            src="https://www.softbankrobotics.com/wp-content/uploads/asset/movie/hero_v2.mp4"
-            type="video/mp4"
-          />
-          Your browser does not support the video tag.
-        </video>
-        <video
-          controlsList="nodownload"
-          loop
-          muted
-          autoPlay
-          playsInline
-          className="w-full md:hidden absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 min-w-full min-h-full object-cover z-[-1]"
-        >
-          <source
-            src="https://www.softbankrobotics.com/wp-content/uploads/asset/movie/hero_sp_v2.mp4"
-            type="video/mp4"
-          />
-          Your browser does not support the video tag.
-        </video>
-      </div>
+  <img
+    src={'/news/intro.png'}
+    alt="Hero desktop"
+    className="w-full hidden md:block absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 min-w-full min-h-full object-cover z-[-1]"
+  />
+  <img
+        src={'/news/intro.png'}
+    alt="Hero mobile"
+    className="w-full md:hidden absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 min-w-full min-h-full object-cover z-[-1]"
+  />
+</div>
+
       <div className=" absolute left-0 bottom-8 sm:bottom-0 w-full">
         <div className="  p-12 pb-10 w-full  ">
           <div>
