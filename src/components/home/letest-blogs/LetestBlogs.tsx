@@ -59,7 +59,7 @@ const LetestBlogs: React.FC = () => {
               {letestBlogData.map((e, i) => (
                 <div
                   key={e.slugid}
-                  className="blog-card md:opacity-0 md:scale-50"
+                  className="blog-card lg:opacity-0 lg:scale-50"
                   id="blogCard"
                 >
                   <BlogCard img={e.img} title={e.title} slugid={e.slugid} />
