@@ -6,10 +6,10 @@ import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import BookDemoButton from "../home/hero/BookDemoButton";
-import { useGSAP } from "@gsap/react";
+
 import gsap from "gsap";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
-import { div } from "framer-motion/client";
+
 import { MdOutlineClose } from "react-icons/md";
 
 gsap.registerPlugin(ScrollToPlugin);
@@ -17,7 +17,7 @@ gsap.registerPlugin(ScrollToPlugin);
 const NavBar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
   const [activeSection, setActiveSection] = useState<string>("#home");
-// a 
+  // a
   const pathName = usePathname();
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -36,7 +36,6 @@ const NavBar = () => {
   // Update active section based on scroll position
   useEffect(() => {
     const handleScroll = () => {
-     
       const sections = navList.map((item) => ({
         id: item.link,
         element: document.querySelector(item.link),
@@ -57,14 +56,13 @@ const NavBar = () => {
   }, []);
 
   return (
-    <div className="w-full px-4">
+    <div className="w-full sm:px-14 ">
       <div
         className={` w-full
-        relative rounded-t-xl md:rounded-t-2xl bg-white lg:rounded-t-full flex items-center justify-between  px-10 py-3 md:py-5 lg:py-4    gap-4 transition-all duration-300 ${
-          isSidebarOpen
+        relative rounded-t-xl md:rounded-t-2xl bg-white lg:rounded-t-full flex items-center justify-between  px-10 py-3 md:py-5 lg:py-4    gap-4 transition-all duration-300 ${isSidebarOpen
             ? " rounded-b-none   "
             : "rounded-b-xl  md:rounded-b-2xl lg:rounded-b-full "
-        }`}
+          }`}
       >
         <Link href={"/"} className="w-[130px] md:w-[192px] h-auto ">
           <Image src={"/logo/main-logo.png"} alt="" width={200} height={70} />
@@ -77,9 +75,8 @@ const NavBar = () => {
               return (
                 <li
                   key={i}
-                  className={`hover:text-customGreen cursor-pointer text-md lg:text-xl ${
-                    active ? "text-customGreen" : "text-[#767676]"
-                  }`}
+                  className={`hover:text-customGreen cursor-pointer text-md lg:text-xl ${active ? "text-customGreen" : "text-[#767676]"
+                    }`}
                 >
                   <div onClick={() => scrollToSection(e.link)}>{e.label}</div>
                 </li>
@@ -87,6 +84,7 @@ const NavBar = () => {
             })}
             <li>
               <BookDemoButton
+                hideNavbar={false}
                 rightArrow={false}
                 className={`bg-customGreen text-white text-md lg:text-xl rounded-2xl md:py-[12px] sm:w-auto px-[8px]  md:w-[167px] text-md justify-center`}
               />
@@ -99,9 +97,8 @@ const NavBar = () => {
               return (
                 <li
                   key={i}
-                  className={`hover:text-customGreen cursor-pointer text-md lg:text-xl ${
-                    active ? "text-customGreen" : "text-[#767676]"
-                  }`}
+                  className={`hover:text-customGreen cursor-pointer text-md lg:text-xl ${active ? "text-customGreen" : "text-[#767676]"
+                    }`}
                 >
                   <Link href={e.page}>{e.label}</Link>
                 </li>
@@ -109,6 +106,7 @@ const NavBar = () => {
             })}
             <li>
               <BookDemoButton
+                hideNavbar={false}
                 rightArrow={false}
                 className={`bg-customGreen text-white text-md lg:text-xl rounded-2xl md:py-[12px] sm:w-auto px-[8px]  md:w-[167px] text-md justify-center`}
               />
@@ -117,9 +115,8 @@ const NavBar = () => {
         )}
 
         <div
-          className={`block md:hidden transition-all duration-300  ${
-            isSidebarOpen ? " rotate-180" : " rotate-0"
-          }`}
+          className={`block md:hidden transition-all duration-300  ${isSidebarOpen ? " rotate-180" : " rotate-0"
+            }`}
         >
           {isSidebarOpen ? (
             <button
@@ -139,11 +136,10 @@ const NavBar = () => {
         </div>
 
         <div
-          className={` absolute bg-white block md:hidden   w-full  ${
-            isSidebarOpen
-              ? "h-[300px] rounded-b-3xl  "
-              : "   h-0 rounded-b-none"
-          } overflow-hidden transition-all left-0 top-[50px]   duration-300 `}
+          className={` absolute bg-white block md:hidden   w-full  ${isSidebarOpen
+            ? "h-[300px] rounded-b-3xl  "
+            : "   h-0 rounded-b-none"
+            } overflow-hidden transition-all left-0 top-[50px]   duration-300 `}
           style={{ zIndex: 3000 }}
         >
           {pathName === "/" ? (
@@ -161,9 +157,8 @@ const NavBar = () => {
                     {" "}
                     <div
                       onClick={() => scrollToSection(e.link)}
-                      className={`flex items-center justify-center gap-[16px]   ${
-                        isActive ? "text-[#3DA229]" : "text-[#767676]"
-                      }`}
+                      className={`flex items-center justify-center gap-[16px]   ${isActive ? "text-[#3DA229]" : "text-[#767676]"
+                        }`}
                     >
                       {e.label}
                     </div>
@@ -185,9 +180,8 @@ const NavBar = () => {
                   >
                     <Link
                       href={e.page}
-                      className={`flex items-center justify-center gap-[16px]    ${
-                        isActive ? "text-[#3DA229]" : "text-[#767676]"
-                      }`}
+                      className={`flex items-center justify-center gap-[16px]    ${isActive ? "text-[#3DA229]" : "text-[#767676]"
+                        }`}
                     >
                       {e.label}
                     </Link>

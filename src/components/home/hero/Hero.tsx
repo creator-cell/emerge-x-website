@@ -8,16 +8,13 @@ interface HeroProps {
   scrollYProgress: MotionValue<number>;
 }
 
-
 const Hero = ({ scrollYProgress }: HeroProps) => {
-
   const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.9]);
   const scaleValue = useMotionTemplate`scale(${scale})`;
 
-
   return (
-    <motion.div className=" sticky top-0 h-screen overflow-hidden  " >
-      <div >
+    <motion.div className=" sticky top-0 h-screen overflow-hidden  ">
+      <div>
         <video
           controlsList="nodownload"
           // Prevents right-click context menu
@@ -49,11 +46,12 @@ const Hero = ({ scrollYProgress }: HeroProps) => {
         </video>
       </div>
       <div className=" absolute left-0 bottom-8 sm:bottom-0 w-full">
-        <div className="  p-8 pb-10 w-[90%] ">
+        <div className="  p-12 pb-10 w-full  ">
           <div>
             <motion.h2
               style={{ transform: scaleValue }}
-              className="text-[38px] md:text-[70px] font-[700] text-[#222720] leading-[60px] md:leading-[105px] whitespace-nowrap">
+              className="text-[38px] md:text-[70px] font-[700] text-[#222720] leading-[60px] md:leading-[105px] whitespace-nowrap"
+            >
               Featuring over
               <br />
               <span className="text-customGreen">50 modules</span>
@@ -63,16 +61,21 @@ const Hero = ({ scrollYProgress }: HeroProps) => {
               50 modules
             </motion.h2> */}
           </div>
-          <div className=" flex flex-col sm:flex-row sm:items-end justify-between gap-4 mt-12">
+          <div className=" flex flex-col sm:flex-row sm:items-end justify-between gap-4 mt-4">
             <motion.p
               style={{ transform: scaleValue }}
-              className=" text-[#232A20] text-xl md:text-[28px]">
+              className=" text-[#232A20] text-xl md:text-[28px]"
+            >
               What services do we offer
             </motion.p>{" "}
           </div>
-          <motion.div style={{ transform: scaleValue }} className="flex items-center justify-center mt-8">
-            <BookDemoButton rightArrow={true} className=" text-2xl pl-[40px] gap-4" />
-          </motion.div>
+          <div className="  flex items-center justify-center mt-16 mb-10 ">
+            <BookDemoButton
+              hideNavbar={true}
+              rightArrow={true}
+              className=" text-2xl pl-[40px] gap-4 z-50"
+            />
+          </div>
         </div>
       </div>
     </motion.div>

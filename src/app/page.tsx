@@ -9,10 +9,9 @@ import News from "@/components/home/news/News";
 import { useScroll } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
-
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useGSAP } from '@gsap/react';
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 import { useMediaQuery } from "usehooks-ts";
 import { cn } from "@/lib/utils";
 
@@ -25,7 +24,7 @@ export default function Home() {
     target: targetRef,
   });
 
-  const [latestBlogSectionHeight, setlatestBlogSectionHeight] = useState(0)
+  const [latestBlogSectionHeight, setlatestBlogSectionHeight] = useState(0);
 
   // useEffect(() => {
   //   if (latestBlogRef?.current) {
@@ -35,25 +34,59 @@ export default function Home() {
 
   // }, [latestBlogRef])
 
+
+  useEffect(() => {
+    const preventZoom = (event: any) => {
+      if (event.ctrlKey || event.metaKey || event.key === '0') {
+        event.preventDefault();
+      }
+    };
+
+    const preventWheelZoom = (event: any) => {
+      if (event.ctrlKey) {
+        event.preventDefault();
+      }
+    };
+
+    document.addEventListener('keydown', preventZoom);
+    document.addEventListener('wheel', preventWheelZoom, { passive: false });
+
+    return () => {
+      document.removeEventListener('keydown', preventZoom);
+      document.removeEventListener('wheel', preventWheelZoom);
+    };
+  }, []);
+
+
+  const serviceBlogRefScope = useRef<HTMLDivElement | null>(null);
+
   useGSAP(() => {
     const mm = gsap.matchMedia();
 
     // Common animations
     const commonAnimations = (timeline: any) => {
       // 1. Move the service card upwards
-      timeline.to("#serviceId", {
-        translateY: -300,
-        duration: 1,
-        css: {
-          display: "none"
-        }
-      }, "a");
+      timeline.to(
+        "#serviceId",
+        {
+          translateY: -300,
+          duration: 1,
+          css: {
+            display: "none",
+          },
+        },
+        "a"
+      );
 
-      timeline.to("#sectionHeading", {
-        opacity: 1,
-        duration: 0.5,
-        ease: "power1.out",
-      }, "a");
+      timeline.to(
+        "#sectionHeading",
+        {
+          opacity: 1,
+          duration: 0.5,
+          ease: "power1.out",
+        },
+        "a"
+      );
 
       // 2. Expand the circle
       // timeline.to("#latest-blogs-section", {
@@ -72,7 +105,7 @@ export default function Home() {
     };
 
     // Breakpoint-specific animations
-    mm.add("(min-width: 1280px)", () => {
+    mm.add("(min-width: 1024px)", () => {
       // For extra-large screens (XL)
       const xlTimeline = gsap.timeline({
         scrollTrigger: {
@@ -80,16 +113,13 @@ export default function Home() {
           start: "top bottom",
           end: "bottom center",
           scrub: 1,
-          markers: true, // Debug markers for XL
+          // markers: true,
         },
       });
       xlTimeline.to("#serviceId", {
         translateY: -300,
         duration: 1,
         opacity: 0,
-        // css: {
-        //   display: "none"
-        // }
       }, "b");
 
       xlTimeline.to("#latest-blogs-section", {
@@ -97,28 +127,19 @@ export default function Home() {
         height: "100vw",
         ease: "power1.out",
         borderRadius: "0",
-        duration: .81,
-      }, "b+=0.1");
-
+        duration: 0.81,
+      }, "b");
 
       xlTimeline.to("#sectionHeading", {
         opacity: 1,
-      }, "b");
+        duration: 0.5,
+        ease: "power1.out",
+      }, "b").from("#sectionHeading", {
+        css: {
+          fontSize: "2rem",
+        }
+      })
 
-
-
-
-
-      // xlTimeline.to("#serviceId", {
-      //   opacity: 0,
-      //   duration: 0.2,
-      // })
-
-
-      // Run common animations
-      commonAnimations(xlTimeline);
-
-      // Blog card animation
       xlTimeline.to(".blog-card", {
         opacity: 1,
         y: 0,
@@ -126,102 +147,49 @@ export default function Home() {
         duration: 0.8,
         scale: 1,
         ease: "power1.out",
-        scrollTrigger: {
-          trigger: ".blog-card",
-          start: "top 75%",
-          end: "top 25%",
-          scrub: true,
-          // markers: true
-        },
-      });
+      }, "b+=0.5");
+
+
     });
 
-    mm.add("(min-width: 1024px) and (max-width: 1279px)", () => {
-      // For large screens (LG)
-      const lgTimeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: "#container",
-          start: "top bottom",
-          end: "center bottom",
-          scrub: 1,
-          markers: false, // Debug markers for LG
-        },
-      });
 
-      // Adjust circle width for medium screens
-      lgTimeline.to("#latest-blogs-section", {
-        width: "100vw",
-        height: "100%",
-        ease: "power1.out",
-        borderRadius: "0",
-        duration: 1,
-      },);
 
-      lgTimeline.to("#serviceId", {
-        translateY: -300,
-        duration: 0.2,
-        opacity: 0,
-        // css: {
-        //   display: "none"
-        // }
-      }, "b");
-
-      // Run common animations
-      commonAnimations(lgTimeline);
-
-      // Blog card animation for LG
-      lgTimeline.to("#blogCard", {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        stagger: 0.2,
-        duration: 0.8,
-        ease: "power1.out",
-        scrollTrigger: {
-          trigger: ".blog-card",
-          start: "top 75%",
-          end: "top 25%",
-          scrub: true,
-        },
-      });
-    });
-
-    mm.add("(min-width: 768px) and (max-width: 1023px)", () => {
+    mm.add("(min-width: 765px) and (max-width: 1023px)", () => {
       // For medium screens (MD)
       const mdTimeline = gsap.timeline({
         scrollTrigger: {
           trigger: "#container",
-          start: "top 90%",
+          start: "top bottom",
           end: "bottom center",
           scrub: 1,
+          markers: false,
         },
       });
 
-      // / // Adjust circle width for medium screens
-      mdTimeline.to("#latest-blogs-section", {
-        width: "100vw",
-        height: "100%",
-        ease: "power1.out",
-        borderRadius: "0",
-        duration: 1,
-      },);
 
       mdTimeline.to("#serviceId", {
         translateY: -300,
-        duration: 0.2,
+        duration: 1,
         opacity: 0,
-        // css: {
-        //   display: "none"
-        // }
-      }, "b");
+      }, "d");
 
-      // mdTimeline.to("#serviceId", {
-      //   opacity: 0,
-      //   duration: 0.2,
-      // })
+      mdTimeline.to("#latest-blogs-section", {
+        width: "100vw",
+        height: "100vw",
+        ease: "power1.out",
+        borderRadius: "0",
+        duration: 0.81,
+      }, "d");
 
-      // Run common animations for MD
-      commonAnimations(mdTimeline);
+      mdTimeline.to("#sectionHeading", {
+        opacity: 1,
+        duration: 0.5,
+        ease: "power1.out",
+      }, "d").from("#sectionHeading", {
+        css: {
+          fontSize: "2rem",
+        }
+      })
 
       mdTimeline.to(".blog-card", {
         opacity: 1,
@@ -230,25 +198,19 @@ export default function Home() {
         duration: 0.8,
         scale: 1,
         ease: "power1.out",
-        scrollTrigger: {
-          trigger: ".blog-card",
-          start: "top bottom",
-          end: "top 25%",
-          scrub: true,
-          markers: true
-        },
-      });
+      }, "d+=0.5");
+
     });
 
     // Cleanup on unmount
     return () => {
       mm.revert();
     };
-  }, []);
+  }, {
+    scope: serviceBlogRefScope
+  });
 
-  const isMobile = useMediaQuery('(max-width: 768px)'); // For screens up to 768px
-  const isTablet = useMediaQuery('(min-width: 768px) and (max-width: 1023px)'); // For screens between 768px and 1023px
-
+  const isMobile = useMediaQuery("(max-width: 768px)"); // For screens up to 768px
 
   useEffect(() => {
     const updateHeight = () => {
@@ -256,9 +218,12 @@ export default function Home() {
         const blogSectionHeight = latestBlogRef.current.clientHeight || 0;
         const viewportHeight = window.innerHeight * 2;
 
-        console.log("🚀 ~ updateHeight ~ viewportHeight:", viewportHeight)
+        console.log("🚀 ~ updateHeight ~ viewportHeight:", viewportHeight);
         // Adjust height dynamically, with optional limits for larger screens
-        const calculatedHeight = Math.min(viewportHeight + blogSectionHeight, 2 * viewportHeight);
+        const calculatedHeight = Math.min(
+          viewportHeight + blogSectionHeight,
+          2 * viewportHeight
+        );
         setlatestBlogSectionHeight(calculatedHeight);
       }
     };
@@ -270,38 +235,45 @@ export default function Home() {
     window.addEventListener("resize", updateHeight);
     return () => window.removeEventListener("resize", updateHeight);
   }, [latestBlogRef, latestBlogSectionHeight]);
-  console.log("🚀 ~ Home ~ latestBlogSectionHeight:", latestBlogSectionHeight)
+  console.log("🚀 ~ Home ~ latestBlogSectionHeight:", latestBlogSectionHeight);
+
+
 
 
   return (
     <div className="space-y-4 relative " id="home">
       <div ref={targetRef} className="relative">
         <Hero scrollYProgress={scrollYProgress} />
-        <div className="w-screen flex justify-center" id="about-us">
+
+        <div className="w-full flex justify-center" id="about-us">
           <About scrollYProgress={scrollYProgress} />
         </div>
       </div>
-      {
-        isMobile ? (
-          <>
+      {isMobile ? (
+        <>
+          <AllServices />
+          <LetestBlogs />
+        </>
+      ) : (
+        <div
+          ref={serviceBlogRefScope}
+          className={cn("relative ")}
+          style={{
+            height: `${latestBlogSectionHeight}px`, // Dynamically calculated height
+          }}
+        >
+          {/* <div className={cn("relative h-[400vh] md:h-[455vh] lg:h-[355vh] xl:h-[400vh]")}> */}
+          <div
+            id="serviceId"
+            className="opacity-100 sticky top-0 mt-6 z-0 h-[200vh] "
+          >
             <AllServices />
-            <LetestBlogs />
-          </>
-        ) :
-          <div className={cn("relative ")}
-
-            style={{
-              height: isTablet ? `${latestBlogSectionHeight + 400}px` : `${latestBlogSectionHeight}px`, // Dynamically calculated height
-            }}>
-            {/* <div className={cn("relative h-[400vh] md:h-[455vh] lg:h-[355vh] xl:h-[400vh]")}> */}
-            <div id="serviceId" className="opacity-100 sticky top-0 mt-6 z-0 h-[200vh] ">
-              <AllServices />
-            </div>
-            <div ref={latestBlogRef} className="relative z-10">
-              <LetestBlogs />
-            </div>
           </div>
-      }
+          <div ref={latestBlogRef} className="relative z-10">
+            <LetestBlogs />
+          </div>
+        </div>
+      )}
       <News />
       <Contact />
     </div>
