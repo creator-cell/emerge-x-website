@@ -6,7 +6,7 @@ import Link from "next/link";
 
 const News = () => {
   return (
-    <div className="bg-white text-greyishblack flex flex-col items-center justify-center" id="news">
+    <div className="bg-white text-greyishblack flex flex-col items-center justify-center pt-14" id="news">
       <SectionHeading text="News" />
       <Slider />
       <div className="text-center md:text-[26px] text-[20px] mt-10">

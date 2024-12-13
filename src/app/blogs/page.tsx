@@ -6,6 +6,8 @@ import SectionWrapper from "@/components/reusable/SectionWrapper";
 import Link from "next/link";
 import React from "react";
 import { ReadonlyURLSearchParams } from "next/navigation";
+import { blogs } from "@/components/blogs/blogData";
+
 
 const navTrain = [
   { link: "/", label: "Home", id: "a1" },
@@ -25,7 +27,7 @@ const page = ({ searchParams }: { searchParams: ReadonlyURLSearchParams }) => {
         title="What's New?"
         description="Stay up-to-date with Everything 
 about EmergeX related."
-        image="/blogs/hero-blog.png"
+        image="/news/intro.png"
         className="bg-gradient-to-r from-black/0 to-black/90"
         textColor="white"
       />
@@ -36,6 +38,7 @@ about EmergeX related."
 
             <div className="w-full mt-8">
               <CardBlog
+                data={blogs[1]}
                 list={false}
                 styleBox="rounded-[26px] aspect-video"
                 styleHeading="text-[16px] md:text-[36px]"
@@ -48,22 +51,20 @@ about EmergeX related."
               <Link
                 href={"/blogs/?tab=trending"}
                 scroll={false}
-                className={`${
-                  tab === "tab=trending" || tab === ""
+                className={`${tab === "tab=trending" || tab === ""
                     ? "text-customGreen"
                     : "text-greyishblack"
-                }`}
+                  }`}
               >
                 Trending
               </Link>
               <Link
                 href={"/blogs/?tab=recomended"}
                 scroll={false}
-                className={`${
-                  tab === "tab=recomended"
+                className={`${tab === "tab=recomended"
                     ? "text-customGreen"
                     : "text-greyishblack"
-                }`}
+                  }`}
               >
                 Recommended
               </Link>
@@ -71,8 +72,9 @@ about EmergeX related."
 
             {/* Trending Section */}
             <div className="hidden md:flex flex-col gap-4 mt-8">
-              {trandingData.map((e, i) => (
+              {blogs.slice(0, 4).map((e, i) => (
                 <CardBlog
+                  data={e}
                   key={i}
                   list={true}
                   styleHeading="text-[14px] font-[400] md:font-semibold lg:text-base"
@@ -81,9 +83,10 @@ about EmergeX related."
               ))}
             </div>
             <div className="md:hidden flex flex-col gap-4 mt-8">
-              {trandingData.map((e, i) => (
+              {blogs.slice(0, 4).map((e, i) => (
                 <CardBlog
                   key={i}
+                  data={e}
                   list={false}
                   styleHeading="text-[14px] lg:text-base"
                   styleBox="aspect-square max-w-full"
@@ -96,9 +99,10 @@ about EmergeX related."
 
       <SectionWrapper>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[0] md:gap-x-[20px] lg:gap-x-[34px] gap-y-[100px]">
-          {viewAllBlogsData.map((e, i) => (
+          {blogs.map((e, i) => (
             <CardBlog
               key={i}
+              data={e}
               list={false}
               styleHeading="text-[14px] lg:text-[16px]"
               styleBox="aspect-square max-w-[270px]"

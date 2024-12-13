@@ -3,9 +3,9 @@ import Image from "next/image";
 import React, { useState } from "react";
 
 const imageData = [
-  { img: "/image-blogs-details.png" },
-  { img: "/image-blogs-details.png" },
-  { img: "/image-blogs-details.png" },
+  { img: "/services/About US.jpg" },
+  { img: "/services/Preparedness.jpg" },
+  { img: "/services/Recovery.jpg" },
 ];
 
 const ImageHoverEffect = () => {
