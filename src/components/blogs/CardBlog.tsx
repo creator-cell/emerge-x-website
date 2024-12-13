@@ -2,7 +2,6 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import React from "react";
 
-import SubtractIcon from "@";
 import Image from "next/image";
 
 interface CardBlogTypes {
