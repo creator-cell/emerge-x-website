@@ -231,7 +231,6 @@ const LetestBlogs: React.FC = () => {
       <div className="flex justify-center" id="card-container">
         <div className="bg-transparent">
           <SectionWrapper>
-            {/* <SectionHeading id="sectionHeading" text="Latest Blogs" className="text-black mt-48 " /> */}
 
             <h2
               id="sectionHeading"
