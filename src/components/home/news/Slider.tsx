@@ -37,7 +37,7 @@ const Slider = () => {
   useEffect(() => {
     const updateSlidesPerView = () => {
       if (window.innerWidth >= 768) {
-        setSlidesPerView(3); // Desktop/Tablet                      n
+        setSlidesPerView(4); // Desktop/Tablet
       } else if (window.innerWidth >= 400) {
         setSlidesPerView(3); // Mobile
       } else {
@@ -54,9 +54,7 @@ const Slider = () => {
   }, []);
 
   return (
-    <div className=" border w-full flex items-center justify-center mx-auto">
-
-   
+    <div className="w-[90%] md:w-[70%]">
     <Swiper
       effect={"coverflow"}
       grabCursor={true}
@@ -66,14 +64,13 @@ const Slider = () => {
       centeredSlidesBounds={true}
       spaceBetween={0} // Adjust to add spacing between slides
       loop={true}
-      coverflowEffect= {{
+      coverflowEffect={{
         rotate: 0,
-        stretch: 80,
-        depth: 200,
-        modifier: 1,
+        stretch: 0,
+        depth: 100,
+        modifier: 3,
         slideShadows: false,
-    }}
-      
+      }}
       pagination={false}
       navigation={false}
       autoplay={{
@@ -82,7 +79,7 @@ const Slider = () => {
       }}
       modules={[EffectCoverflow, Navigation, Autoplay]}
       className="w-full mt-12" // Ensure it adapts to screen size
-      style={{ position: 'relative' }}
+      style={{position:'relative'}}
     >
       {SlidesData.map((e, index) => (
         <SwiperSlide key={index}>

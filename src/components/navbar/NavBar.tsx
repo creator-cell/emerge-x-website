@@ -56,27 +56,29 @@ const NavBar = () => {
   }, []);
 
   return (
-    <div className="w-full sm:px-14 ">
+    <div className="w-full px-4 lg:px-14 ">
       <div
         className={` w-full
-        relative rounded-t-xl md:rounded-t-2xl bg-white lg:rounded-t-full flex items-center justify-between  px-10 py-3 md:py-5 lg:py-4    gap-4 transition-all duration-300 ${isSidebarOpen
+        relative rounded-t-xl md:rounded-t-2xl bg-white lg:rounded-t-full flex items-center justify-between  px-10 py-3 md:py-5 lg:py-4    gap-4 transition-all duration-300 ${
+          isSidebarOpen
             ? " rounded-b-none   "
             : "rounded-b-xl  md:rounded-b-2xl lg:rounded-b-full "
-          }`}
+        }`}
       >
         <Link href={"/"} className="w-[130px] md:w-[192px] h-auto ">
           <Image src={"/logo/main-logo.png"} alt="" width={200} height={70} />
         </Link>
 
         {pathName === "/" ? (
-          <ul className=" sm:w-[80%] lg:w-[60%] max-w-[900px]  hidden md:flex items-center   justify-between ">
+          <ul className=" sm:w-[82%] lg:w-[65%] max-w-[900px]  hidden md:flex items-center gap-1   justify-between ">
             {navList?.map((e, i) => {
               const active = activeSection == e.link;
               return (
                 <li
                   key={i}
-                  className={`hover:text-customGreen cursor-pointer text-md lg:text-xl ${active ? "text-customGreen" : "text-[#767676]"
-                    }`}
+                  className={`hover:text-customGreen cursor-pointer text-md lg:text-xl ${
+                    active ? "text-customGreen" : "text-[#767676]"
+                  }`}
                 >
                   <div onClick={() => scrollToSection(e.link)}>{e.label}</div>
                 </li>
@@ -86,19 +88,20 @@ const NavBar = () => {
               <BookDemoButton
                 hideNavbar={false}
                 rightArrow={false}
-                className={`bg-customGreen text-white text-md lg:text-xl rounded-2xl md:py-[12px] sm:w-auto px-[8px]  md:w-[167px] text-md justify-center`}
+                className={`bg-customGreen text-white text-md lg:text-xl rounded-2xl md:py-[8px] sm:w-auto px-[4px]  md:w-[167px] text-md justify-center`}
               />
             </li>
           </ul>
         ) : (
-          <ul className=" sm:w-[80%] lg:w-[60%] max-w-[900px]  hidden md:flex items-center   justify-between ">
+          <ul className=" sm:w-[82%] lg:w-[65%] max-w-[900px]  hidden md:flex items-center  gap-1   justify-between ">
             {navList?.map((e, i) => {
               const active = pathName == e.page;
               return (
                 <li
                   key={i}
-                  className={`hover:text-customGreen cursor-pointer text-md lg:text-xl ${active ? "text-customGreen" : "text-[#767676]"
-                    }`}
+                  className={`hover:text-customGreen cursor-pointer text-md lg:text-xl ${
+                    active ? "text-customGreen" : "text-[#767676]"
+                  }`}
                 >
                   <Link href={e.page}>{e.label}</Link>
                 </li>
@@ -108,15 +111,16 @@ const NavBar = () => {
               <BookDemoButton
                 hideNavbar={false}
                 rightArrow={false}
-                className={`bg-customGreen text-white text-md lg:text-xl rounded-2xl md:py-[12px] sm:w-auto px-[8px]  md:w-[167px] text-md justify-center`}
+                className={`bg-customGreen text-white text-md lg:text-xl rounded-2xl md:py-[8px] sm:w-auto px-[8px]  md:w-[167px] text-md justify-center`}
               />
             </li>
           </ul>
         )}
 
         <div
-          className={`block md:hidden transition-all duration-300  ${isSidebarOpen ? " rotate-180" : " rotate-0"
-            }`}
+          className={`block md:hidden transition-all duration-300  ${
+            isSidebarOpen ? " rotate-180" : " rotate-0"
+          }`}
         >
           {isSidebarOpen ? (
             <button
@@ -136,10 +140,11 @@ const NavBar = () => {
         </div>
 
         <div
-          className={` absolute bg-white block md:hidden   w-full  ${isSidebarOpen
-            ? "h-[300px] rounded-b-3xl  "
-            : "   h-0 rounded-b-none"
-            } overflow-hidden transition-all left-0 top-[50px]   duration-300 `}
+          className={` absolute bg-white block md:hidden   w-full  ${
+            isSidebarOpen
+              ? "h-[300px] rounded-b-3xl  "
+              : "   h-0 rounded-b-none"
+          } overflow-hidden transition-all left-0 top-[50px] duration-300 `}
           style={{ zIndex: 3000 }}
         >
           {pathName === "/" ? (
@@ -157,8 +162,9 @@ const NavBar = () => {
                     {" "}
                     <div
                       onClick={() => scrollToSection(e.link)}
-                      className={`flex items-center justify-center gap-[16px]   ${isActive ? "text-[#3DA229]" : "text-[#767676]"
-                        }`}
+                      className={`flex items-center justify-center gap-[16px]   ${
+                        isActive ? "text-[#3DA229]" : "text-[#767676]"
+                      }`}
                     >
                       {e.label}
                     </div>
@@ -180,8 +186,9 @@ const NavBar = () => {
                   >
                     <Link
                       href={e.page}
-                      className={`flex items-center justify-center gap-[16px]    ${isActive ? "text-[#3DA229]" : "text-[#767676]"
-                        }`}
+                      className={`flex items-center justify-center gap-[16px]    ${
+                        isActive ? "text-[#3DA229]" : "text-[#767676]"
+                      }`}
                     >
                       {e.label}
                     </Link>
