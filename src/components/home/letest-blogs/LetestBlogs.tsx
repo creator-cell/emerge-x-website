@@ -22,16 +22,16 @@ const LetestBlogs: React.FC = () => {
   const isMobile = useMediaQuery("(max-width: 500px)"); // For screens up to 768px
 
   const letestBlogData: BlogData[] = [
-    { img: "/image 1.png", title: "Frontline Workers", slugid: "#" },
-    { img: "/image 2.png", title: "Safety Management System", slugid: "#" },
-    { img: "/image 3.png", title: "biological hazard", slugid: "#" },
+    { img: "/services/About US.jpg", title: "Frontline Workers", slugid: "#" },
+    { img: "/services/Preparedness.jpg", title: "Safety Management System", slugid: "#" },
+    { img: "/services/Prevention.jpg", title: "biological hazard", slugid: "#" },
     {
-      img: "/image 4.png",
+      img: "/services/Recovery.jpg",
       title: "Difference between hazard and risk",
       slugid: "#",
     },
-    { img: "/image 5.png", title: "Safety Management Tools", slugid: "#" },
-    { img: "/image 6.png", title: "Critical Control Management", slugid: "#" },
+    { img: "/services/Response.jpg", title: "Safety Management Tools", slugid: "#" },
+    { img: "/services/About US.jpg", title: "Critical Control Management", slugid: "#" },
   ];
 
 

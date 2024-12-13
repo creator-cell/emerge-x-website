@@ -113,7 +113,7 @@ export default function Home() {
           start: "top bottom",
           end: "bottom center",
           scrub: 1,
-          // markers: true,
+          markers: false, // Debug markers for XL
         },
       });
       xlTimeline.to("#serviceId", {
