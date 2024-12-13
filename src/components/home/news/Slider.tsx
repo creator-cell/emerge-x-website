@@ -77,7 +77,7 @@ const Slider = () => {
           delay: 3000,
           disableOnInteraction: false,
         }}
-        modules={[EffectCoverflow, Navigation, Autoplay]}
+        modules={[EffectCoverflow, Navigation]}
         className="w-full mt-12" // Ensure it adapts to screen size
         style={{ position: "relative" }}
       >
