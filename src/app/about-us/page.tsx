@@ -12,14 +12,44 @@ const page = () => {
     { link: "/", label: "Home", id: "a1" },
     { link: "/about-us", label: "About Us", id: "a2" },
   ];
-  const visioncards = [0, 1, 2];
+  const visioncards = [0,1,2]
+  const visionCardsData = [
+    {
+      title: "Experience",
+      description:
+        "Leveraging years of expertise to innovate and enhance personal safety.",
+    },
+    {
+      title: "Innovation",
+      description:
+        "A skilled team working relentlessly to advance wearable safety systems.",
+    },
+    {
+      title: "Commitment",
+      description:
+        "Striving to develop wearable technology that ensures swift emergency response.",
+    },
+    {
+      title: "Protection",
+      description:
+        "Bringing peace of mind by monitoring health and ensuring fast intervention.",
+    },
+    {
+      title: "Empowerment",
+      description: "Developing wearable tech solutions to enhance personal health safety globally.",
+    },
+    {
+      title: "Safety",
+      description: "Dedicated to creating technologies that safeguard health in real-time.",
+    },
+  ];
   const trustedCompanis = [0, 1, 2, 3, 4, 5];
   return (
     <div className=" min-h-screen">
       <HeroResusable
         title="Journey of Innovation and excellence"
         description="From humble beginnings to industry leadership, we have continuously pushed boundaries to deliver innovative solutions"
-        image="/about-us/hero-about-us.png"
+        image="/services/About US.jpg"
         className="bg-gradient-to-r from-black/10 to-black/90"
         textColor="white"
       />
@@ -30,12 +60,16 @@ const page = () => {
           <div>
             <Headings
               label="Our Vision"
-              heading="The ultimate of our success over the years"
+              heading="Pioneering the future of wearable technology for a safer tomorrow."
             />
 
-            <div className=" grid grid-cols-1 sm:grid-cols-3  gap-x-4 gap-y-6 ">
-              {visioncards?.map((e, i) => (
-                <OurVisionCards key={i} />
+            <div className=" grid grid-cols-1 sm:grid-cols-3  gap-x-4 gap-y-10 ">
+              {visionCardsData?.map((e, i) => (
+                <OurVisionCards
+                  title={e.title}
+                  description={e.description}
+                  key={i}
+                />
               ))}
             </div>
           </div>
@@ -43,12 +77,12 @@ const page = () => {
           <div>
             <Headings
               label="Our Mission"
-              heading="The ultimate of our success over the years"
+              heading="Focused on delivering real-time health monitoring and emergency response solutions."
             />
             <div className="flex items-center justify-center">
               <div className="  w-full">
                 <Image
-                  src={"/about-us/ourmission-banner.png"}
+                  src={"/services/About US.jpg"}
                   alt="banner"
                   width={1800}
                   height={1600}
@@ -69,7 +103,7 @@ const page = () => {
               ))}
             </div>
           </div>
-
+          {/* 
           <div>
             <h2 className=" text-greyishblack text-xl text-center">
               Trusted top companies
@@ -89,7 +123,7 @@ const page = () => {
                 </div>
               ))}
             </div>
-          </div>
+          </div> */}
         </div>
       </SectionWrapper>
     </div>

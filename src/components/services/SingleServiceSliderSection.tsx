@@ -47,6 +47,18 @@ const SingleServiceSliderSection: React.FC = () => {
       swiperRef.current.swiper.slidePrev();
     }
   };
+
+  const images = [
+    { src: "/services/Prevention.jpg", alt: "Image 1" },
+    { src: "/services/Preparedness.jpg", alt: "Image 2" },
+    { src: "/services/Recovery.jpg", alt: "Image 3" },
+    { src: "/services/Response.jpg", alt: "Image 5"},
+    { src: "/services/Prevention.jpg", alt: "Image 1" },
+    { src: "/services/Preparedness.jpg", alt: "Image 2" },
+    { src: "/services/Recovery.jpg", alt: "Image 3" },
+    { src: "/services/Response.jpg", alt: "Image 5"},
+  ]
+
   return (
     <div className=" bg-greyishblack text-white pt-[70px] md:pt-[150px] pb-10   rounded-t-[40px] md:rounded-t-[90px] lg:rounded-t-[110px]">
       <div className=" mx-4 flex flex-col  md:flex-row md:justify-between  md:px-[50px]">
@@ -102,12 +114,12 @@ const SingleServiceSliderSection: React.FC = () => {
             virtual
             style={{ position: "relative" }}
           >
-            {Array.from({ length: 12 }).map((_, index) => (
-              <SwiperSlide key={index}>
+            {images.map((item,i) => (
+              <SwiperSlide key={i}>
                 <div className="w-full ">
                   <div className="w-full px-4">
                     <Image
-                      src={"/image-blogs-details.png"}
+                      src={item.src}
                       alt="slideimg"
                       width={800}
                       height={400}

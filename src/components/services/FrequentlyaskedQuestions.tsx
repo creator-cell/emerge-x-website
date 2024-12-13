@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"; // Importing arrow icons
 
-const FrequentlyaskedQuestions = () => {
+const FrequentlyaskedQuestions = ({faq , title}:{faq:any,title:any}) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const handleToggle = (index: number) => {
@@ -41,7 +41,7 @@ const FrequentlyaskedQuestions = () => {
 
           <div className="w-full md:w-[47%] space-y-5">
             <p>
-              Got questions? Here are answers to the ones we get asked most often.
+              {title}
             </p>
             <button className="bg-customGreen text-white text-base rounded-full px-6 py-3">
               Ask a Question
@@ -50,7 +50,7 @@ const FrequentlyaskedQuestions = () => {
         </div>
 
         <div className="mt-5 space-y-5">
-          {faqData.map((faq, index) => (
+          {faq?.map((faq:any, index:number) => (
             <div key={index} className=" flex flex-col pb-2">
               <div
                 className="flex justify-between items-center cursor-pointer py-2 text-greyishblack"

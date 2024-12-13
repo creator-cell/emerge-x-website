@@ -28,14 +28,14 @@ const About = ({ scrollYProgress }: AboutProps) => {
 
   const aboutCardData = [
     {
-      heading: "Action Management",
+      heading: "Vision",
       discription:
-        "Assess your website’s performance and provide improvement recommendations.",
+        "Pioneering the future of wearable technology for a safer tomorrow.",
     },
     {
-      heading: "Action Management",
+      heading: "Mission",
       discription:
-        "Assess your website’s performance and provide improvement recommendations.",
+        "Focused on delivering real-time health monitoring and emergency response solutions.",
     },
   ];
 

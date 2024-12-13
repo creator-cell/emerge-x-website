@@ -13,18 +13,14 @@ interface VerticalSliderTypes {
 }
 const VerticalSlider: React.FC<VerticalSliderTypes> = ({ activeIndex }) => {
   const data = [
-    { line: "AI Superpowers" },
-    { line: "Offline mode" },
-    { line: "Collaboration" },
-    { line: "Real time" },
-    { line: "Repeating tasks" },
-    { line: "Real time" },
-    { line: "Collaboration" },
-    { line: "Offline mode" },
-    { line: "AI Superpowers" },
-    { line: "Repeating tasks" },
-    { line: "Offline mode" },
-    { line: "Real time" },
+    { line: "Prevention" },
+    { line: "Preparedness" },
+    { line: "Recovery" },
+    { line: "Response" },
+    { line: "Prevention" },
+    { line: "Preparedness" },
+    { line: "Recovery" },
+    { line: "Response" },
   ];
   const swiperRefVertical = useRef<any>(null);
 
