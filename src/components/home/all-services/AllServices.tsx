@@ -116,6 +116,68 @@ const AllServices = ({ }: Props) => {
 
 
   useEffect(() => {
+    const slider = sliderRef.current;
+    if (!slider) return;
+
+    let startY = 0;
+
+    const handleTouchStart = (e: TouchEvent) => {
+      startY = e.touches[0].clientY;
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      // Prevent default scrolling if animation is active
+      if (isAnimating) {
+        e.preventDefault();
+        return;
+      }
+
+      const deltaY = e.touches[0].clientY - startY;
+
+      if (Math.abs(deltaY) > 50) {
+        // Determine direction of swipe
+        const direction = deltaY < 0 ? 1 : -1;
+
+        // Check bounds
+        const isAtStart = activeIndex === 0 && direction === -1;
+        const isAtEnd = activeIndex === sliderData.length - 1 && direction === 1;
+
+        if (!isAtStart && !isAtEnd) {
+          e.preventDefault();
+          updateSlide(direction);
+        }
+
+        startY = e.touches[0].clientY; // Reset startY for smoother swipes
+      }
+    };
+
+    const updateSlide = (direction: number) => {
+      const nextIndex = Math.max(0, Math.min(sliderData.length - 1, activeIndex + direction));
+      if (nextIndex === activeIndex) return;
+
+      setIsAnimating(true);
+      setActiveIndex(nextIndex);
+
+      gsap.to(slideRef.current, {
+        x: -(nextIndex * cardWidth),
+        duration: 1,
+        ease: "power2.out",
+        onComplete: () => setIsAnimating(false),
+      });
+    };
+
+    // Attach touch event listeners
+    slider.addEventListener("touchstart", handleTouchStart);
+    slider.addEventListener("touchmove", handleTouchMove, { passive: false });
+
+    return () => {
+      slider.removeEventListener("touchstart", handleTouchStart);
+      slider.removeEventListener("touchmove", handleTouchMove);
+    };
+  }, [activeIndex, isAnimating, isInView, cardWidth]);
+
+
+  useEffect(() => {
     if (cardRef.current) {
       setCardWidth(cardRef.current.offsetWidth); // Dynamically calculate card width
     }
