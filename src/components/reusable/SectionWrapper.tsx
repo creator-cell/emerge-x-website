@@ -6,7 +6,7 @@ interface SectionWrappertypes {
 }
 const SectionWrapper: React.FC<SectionWrappertypes> = ({ children, className }) => {
 
-  return <section className={cn(` text-greyishblack`, className)}>{children}</section>;
+  return <section className={cn(` container mt-10 md:mt-28 lg:mt-32 text-greyishblack`, className)}>{children}</section>;
 
 };
 

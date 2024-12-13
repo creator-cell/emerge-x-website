@@ -1,13 +1,16 @@
 import SectionHeading from "@/components/reusable/SectionHeading";
-import SectionWrapper from "@/components/reusable/SectionWrapper";
+
 import React from "react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 const Contact = () => {
   return (
     <>
       <div className="bg-white">
-        <SectionWrapper className="pt-14 max-md:px-8 flex justify-center flex-col">
+        <Link href={'/contact-us'}>
+      
+        <div className="pt-14 max-md:px-8 flex justify-center flex-col text-greyishblack">
           <SectionHeading text="Contact Us" />
           <motion.button
             initial={{
@@ -28,7 +31,8 @@ const Contact = () => {
             className="mt-10  bg-[#3DA229] texr-[18px] sm:text-[24px] md:text-[36px] text-white xl:h-[214px] lg:h-[200px] md:h-[200px] sm:h-[200px] h-[100px] text-center flex items-center justify-center rounded-[56px] cursor-pointer ">
             Get in touch with us today
           </motion.div> */}
-        </SectionWrapper>
+        </div>
+        </Link>
       </div>
     </>
   );

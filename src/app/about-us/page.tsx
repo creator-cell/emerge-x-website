@@ -40,9 +40,6 @@ const page = () => {
             </div>
           </div>
 
-
-
-
           <div>
             <Headings
               label="Our Mission"
@@ -74,11 +71,13 @@ const page = () => {
           </div>
 
           <div>
-            <h2 className=" text-greyishblack text-xl text-center">Trusted top companies</h2>
+            <h2 className=" text-greyishblack text-xl text-center">
+              Trusted top companies
+            </h2>
 
             <div className="flex flex-wrap justify-center gap-16 mt-10">
               {trustedCompanis?.map((e, i) => (
-                <div key={i} >
+                <div key={i}>
                   <div className="w-[120px] sm:w-[140px] ">
                     <Image
                       src={"/logo/main-logo.png"}
@@ -87,7 +86,6 @@ const page = () => {
                       height={70}
                     />
                   </div>
-
                 </div>
               ))}
             </div>
