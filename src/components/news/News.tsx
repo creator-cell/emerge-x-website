@@ -44,20 +44,27 @@ export const newsItems: NewsItem[] = [
   
 export const NewsPage = ({ slug }: { slug: string }) => {
   const newsItem = newsItemsData.find((item) => item.slug === slug);
+  if (!newsItem) {
+    return (
+      <div className="min-h-screen w-full flex items-center justify-center">
+        <p className="text-xl text-gray-600">News item not found</p>
+      </div>
+    );
+  }
   const {
     D1Data, D2Image, D2Data, D3Title, D3Data, D4Image1, D4Image2, D4Data,title,date,image
   } = newsItem;
 
   const navTrain = [
     { link: "/", label: "Home", id: "a1" },
-    { link: "/", label: "News", id: "a2" },
-    { link: "/News", label: "View All", id: "a3" },
+    { link: "/news", label: "News", id: "a2" },
     {
-      link: "/News/N1fe24w",
-      label: "Hidden Danger: Old Gas Pipes in Hobart and Launceston",
-      id: "a3",
+      link: `/news/${slug}`,
+      label: title,
+      id: "a4",
     },
   ];
+
   return (
     <div className="min-h-screen w-full bg-white">
       {/* Hero Section */}
