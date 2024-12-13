@@ -6,6 +6,8 @@ import SectionWrapper from "@/components/reusable/SectionWrapper";
 import Link from "next/link";
 import React from "react";
 import { ReadonlyURLSearchParams } from "next/navigation";
+import { blogs } from "@/components/blogs/blogData";
+
 
 const navTrain = [
   { link: "/", label: "Home", id: "a1" },
@@ -71,8 +73,9 @@ about EmergeX related."
 
             {/* Trending Section */}
             <div className="hidden md:flex flex-col gap-4 mt-8">
-              {trandingData.map((e, i) => (
+              {blogs.slice(0,4).map((e, i) => (
                 <CardBlog
+                data={e}
                   key={i}
                   list={true}
                   styleHeading="text-[14px] font-[400] md:font-semibold lg:text-base"
@@ -81,9 +84,10 @@ about EmergeX related."
               ))}
             </div>
             <div className="md:hidden flex flex-col gap-4 mt-8">
-              {trandingData.map((e, i) => (
+              {blogs.slice(0,4).map((e, i) => (
                 <CardBlog
                   key={i}
+                  data={e}
                   list={false}
                   styleHeading="text-[14px] lg:text-base"
                   styleBox="aspect-square max-w-full"
@@ -96,9 +100,10 @@ about EmergeX related."
 
       <SectionWrapper>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[0] md:gap-x-[20px] lg:gap-x-[34px] gap-y-[100px]">
-          {viewAllBlogsData.map((e, i) => (
+          {blogs.map((e, i) => (
             <CardBlog
               key={i}
+              data={e}
               list={false}
               styleHeading="text-[14px] lg:text-[16px]"
               styleBox="aspect-square max-w-[270px]"
