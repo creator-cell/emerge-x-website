@@ -7,19 +7,19 @@ import Image from "next/image";
 
 const sliderData = [
   {
-    image: "/services-slider1.png",
+    image: "/services/Prevention.jpg",
     text: "Mitigation/ Prevention",
   },
   {
-    image: "/services-slider2.png",
+    image: "/services/Preparedness.jpg",
     text: "Preparedness",
   },
   {
-    image: "/services-slider1.png",
+    image: "/services/Response.jpg",
     text: "Response",
   },
   {
-    image: "/services-slider2.png",
+    image: "/services/Recovery.jpg",
     text: "Recovery",
   },
 ];

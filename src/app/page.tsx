@@ -87,7 +87,7 @@ export default function Home() {
           start: "top bottom",
           end: "bottom center",
           scrub: 1,
-          markers: true, // Debug markers for XL
+          markers: false, // Debug markers for XL
         },
       });
 

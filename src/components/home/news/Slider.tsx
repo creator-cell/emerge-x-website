@@ -21,14 +21,13 @@ import Image from "next/image";
 
 const Slider = () => {
   const SlidesData = [
-    { img: "/image 7.png" },
-    { img: "/image 8.png" },
-    { img: "/image 9.png" },
-    { img: "/image 10.png" },
-    { img: "/image 11.png" },
-    { img: "/image 10.png" },
-    { img: "/image 9.png" },
-    { img: "/image 7.png" },
+    { img: "/services/About US.jpg" },
+    { img: "/services/Recovery.jpg" },
+    { img: "/services/Prevention.jpg" },
+    { img: "/services/Preparedness.jpg" },
+    { img: "/services/Response.jpg" },
+    { img: "/services/About US.jpg" },
+    { img: "/services/Recovery.jpg" },    
   ];
 
   const [slidesPerView, setSlidesPerView] = useState(4);
