@@ -154,7 +154,7 @@ export default function Home() {
 
 
 
-    mm.add("(min-width: 765px) and (max-width: 1023px)", () => {
+    mm.add("(min-width: 768px) and (max-width: 1023px)", () => {
       // For medium screens (MD)
       const mdTimeline = gsap.timeline({
         scrollTrigger: {
