@@ -49,7 +49,7 @@ const page = () => {
               heading="The ultimate of our success over the years"
             />
             <div className="flex items-center justify-center">
-              <div className=" border w-full">
+              <div className="  w-full">
                 <Image
                   src={"/about-us/ourmission-banner.png"}
                   alt="banner"
@@ -74,7 +74,7 @@ const page = () => {
           </div>
 
           <div>
-            <h2 className=" text-xl text-center">Trusted top companies</h2>
+            <h2 className=" text-greyishblack text-xl text-center">Trusted top companies</h2>
 
             <div className="flex flex-wrap justify-center gap-16 mt-10">
               {trustedCompanis?.map((e, i) => (

@@ -4,7 +4,7 @@ const ContactUsForm = () => {
   return (
     <div>
       <form action="">
-        <div className=" space-y-6">
+        <div className="text-greyishblack space-y-6">
           <div className=" border-b-2 border-black flex flex-col">
             <label htmlFor="">Name</label>
             <input

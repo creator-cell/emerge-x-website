@@ -43,8 +43,8 @@ about EmergeX related."
             </div>
           </div>
 
-          <div className="w-[22rem] md:w-[35%] mx-auto md:mx-0">
-          <div className="flex items-center gap-5 text-[20px]">
+          <div className="w-[18rem] md:w-[35%] mx-auto md:mx-0">
+            <div className="flex items-center gap-5 text-[20px]">
               <Link
                 href={"/blogs/?tab=trending"}
                 scroll={false}
@@ -60,7 +60,9 @@ about EmergeX related."
                 href={"/blogs/?tab=recomended"}
                 scroll={false}
                 className={`${
-                  tab === "tab=recomended" ? "text-customGreen" : "text-greyishblack"
+                  tab === "tab=recomended"
+                    ? "text-customGreen"
+                    : "text-greyishblack"
                 }`}
               >
                 Recommended
