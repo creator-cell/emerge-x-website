@@ -134,7 +134,7 @@ const AllServices = ({ }: Props) => {
 
       const deltaY = e.touches[0].clientY - startY;
 
-      if (Math.abs(deltaY) > 50) {
+      if (Math.abs(deltaY) > 20) {
         // Determine direction of swipe
         const direction = deltaY < 0 ? 1 : -1;
 
@@ -166,9 +166,11 @@ const AllServices = ({ }: Props) => {
       });
     };
 
-    // Attach touch event listeners
-    slider.addEventListener("touchstart", handleTouchStart);
-    slider.addEventListener("touchmove", handleTouchMove, { passive: false });
+    if (isInView) {
+      // Attach touch event listeners
+      slider.addEventListener("touchstart", handleTouchStart);
+      slider.addEventListener("touchmove", handleTouchMove, { passive: false });
+    }
 
     return () => {
       slider.removeEventListener("touchstart", handleTouchStart);
