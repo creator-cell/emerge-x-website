@@ -11,6 +11,7 @@ import { cn } from "@/lib/utils";
 import { useMediaQuery } from "usehooks-ts";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Link from "next/link";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -214,9 +215,11 @@ const AllServices = ({ }: Props) => {
                             reporting with investigations, actions, and metrics
                             reporting.
                           </p>
+                          <Link href={'/services'}>
                           <button className=" mt-12 bg-customGreen px-4 py-1.5 md:px-6 md:py-2 text-white w-fit rounded-[60px] text-base md:text-2xl">
                             Explore Now
                           </button>
+                          </Link>
                         </div>
                       </div>
                     </div>

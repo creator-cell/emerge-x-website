@@ -2,6 +2,7 @@ import SectionHeading from "@/components/reusable/SectionHeading";
 import SectionWrapper from "@/components/reusable/SectionWrapper";
 import React from "react";
 import Slider from "./Slider";
+import Link from "next/link";
 
 const News = () => {
   return (
@@ -13,9 +14,11 @@ const News = () => {
           Work Strategy
         </div>
         <div className="text-center">
+          <Link href={'/news'}>
           <button className="px-[20px] py-[8px] text-base bg-[#222720] text-white rounded-full  mt-10   ">
             View All
           </button>
+          </Link>
         </div>
       </SectionWrapper>
     </div>

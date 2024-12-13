@@ -134,6 +134,7 @@ import { useGSAP } from '@gsap/react';
 import { useScroll } from "framer-motion";
 import { useMediaQuery } from "usehooks-ts";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
@@ -247,6 +248,14 @@ const LetestBlogs: React.FC = () => {
               ))}
             </div>
 
+            <div className="text-center">
+          <Link href={'/blogs'}>
+          <button className="px-[20px] py-[8px] text-base bg-[#222720] text-white rounded-full  mt-10   ">
+            View All
+          </button>
+          </Link>
+        </div>
+
 
           </SectionWrapper>
         </div>
@@ -262,12 +271,14 @@ const BlogCard: React.FC<BlogData> = ({ img, title, slugid }) => {
         <Image src={img} alt="services_images" height={600} width={600} />
       </div>
       <div className="flex items-center justify-between w-full px-2 mt-7 md:mt-10 gap-4">
-        <h3 className="text-black text-xl md:text-2xl text-start font-semibold w-[70%]">
+        <h3 className="text-black text-xl md:text-xl text-start font-semibold w-[70%]">
           {title}
         </h3>
+        <Link href={'/blogs/wehln'}>
         <button className="rounded-full text-sm md:text-base w-[102px] py-1.5 md:py-2 bg-customGreen text-white font-semibold">
           View more
         </button>
+        </Link>
       </div>
     </div>
   );

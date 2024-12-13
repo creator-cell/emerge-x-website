@@ -196,7 +196,7 @@ export default function Home() {
           start: "top bottom",
           end: "bottom center",
           scrub: 1,
-          markers: true, // Debug markers for XL
+          markers: false, // Debug markers for XL
         },
       });
 
@@ -209,9 +209,9 @@ export default function Home() {
         scrollTrigger: {
           trigger: "#container",
           start: "top bottom",
-          end: "bottom center",
+          end: "center bottom",
           scrub: 1,
-          markers: true, // Debug markers for LG
+          markers: false, // Debug markers for LG
         },
       });
 
@@ -240,27 +240,27 @@ export default function Home() {
       commonAnimations(mdTimeline);
     });
 
-    // mm.add("(max-width: 767px)", () => {
-    //   // For small screens (SM)
-    //   const smTimeline = gsap.timeline({
-    //     scrollTrigger: {
-    //       trigger: "#container",
-    //       start: "top 80%",
-    //       end: "bottom center",
-    //       scrub: 1,
-    //     },
-    //   });
+    mm.add("(min-width: 640px) and (max-width: 768px)", () => {
+      // For small screens (SM)
+      const smTimeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: "#container",
+          start: "top 80%",
+          end: "bottom center",
+          scrub: 1,
+        },
+      });
 
-    //   // Adjust circle width for small screens
-    //   smTimeline.to("#latest-blogs-section", {
-    //     width: "550vw", // Even larger circle width for small screens
-    //     ease: "power1.out",
-    //     borderRadius: "6px",
-    //     duration: 1,
-    //   }, "a");
+      // Adjust circle width for small screens
+      smTimeline.to("#latest-blogs-section", {
+        width: "550vw", // Even larger circle width for small screens
+        ease: "power1.out",
+        borderRadius: "6px",
+        duration: 1,
+      }, "a");
 
-    //   commonAnimations(smTimeline);
-    // });
+      commonAnimations(smTimeline);
+    });
 
     // Cleanup on unmount
     return () => {
@@ -286,7 +286,7 @@ export default function Home() {
             <LetestBlogs />
           </>
         ) :
-          <div className="relative h-[400vh]">
+          <div className="relative h-[400vh] md:h-[350vh] xl:h-[400vh]">
             <div id="serviceId" className="sticky top-0 mt-6 z-0 h-[200vh] ">
               <AllServices />
             </div>
