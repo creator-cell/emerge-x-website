@@ -234,27 +234,19 @@ const LetestBlogs: React.FC = () => {
 
             <h2
               id="sectionHeading"
-              className="opacity-0 translate-y-[50px] transition-all duration-300 ease-in-out"
+              className="opacity-0 text-black text-3xl font-bold text-center translate-y-[50px] transition-all duration-300 ease-in-out"
             >
               Latest Blogs
             </h2>
 
-            {
-              isMobile ?
-                <div className=" flex items-center gap-6 mt-8 md:mt-14 lg:mt-16 overflow-hidden">
-                  {letestBlogData.map((e, i) => (
-                    <div key={e.slugid} className="blog-card">
-                      <BlogCard img={e.img} title={e.title} slugid={e.slugid} />
-                    </div>
-                  ))}
-                </div> : <div className="grid grid-cols-1  sm:grid-cols-2 lg:grid-cols-3 gap-x-[70px] gap-y-10 lg:gap-x-[110px] mt-8 md:mt-14 lg:mt-16">
-                  {letestBlogData.map((e, i) => (
-                    <div key={e.slugid} className="blog-card">
-                      <BlogCard img={e.img} title={e.title} slugid={e.slugid} />
-                    </div>
-                  ))}
+            <div className="grid grid-cols-1  sm:grid-cols-2 lg:grid-cols-3 gap-x-[70px] lg:gap-x-[110px] mt-8 md:mt-14 lg:mt-16">
+              {letestBlogData.map((e, i) => (
+                <div key={e.slugid} className="blog-card">
+                  <BlogCard img={e.img} title={e.title} slugid={e.slugid} />
                 </div>
-            }
+              ))}
+            </div>
+
 
           </SectionWrapper>
         </div>

@@ -174,17 +174,17 @@ const AllServices = ({ }: Props) => {
           </div>
 
           <div className="w-full h-full bg-gray-800 bg-opacity-70 absolute top-0 right-0">
-            <div className="w-full relative">
+            <div className="w-full ">
               <SectionHeading text="All Services" className="text-white mt-10" />
-              <div className="w-full flex md:items-end md:py-10 gap-20 md:gap-5 flex-col md:flex-row md:justify-between">
-                <div className="w-full md:w-[48%] flex items-center justify-center gap-4 md:pb-10">
+              <div className="w-full h-full inset-0 flex md:items-end md:py-10 gap-20 md:gap-5 flex-col md:flex-row md:justify-between">
+                <div className="w-full md:w-[48%] flex items-center justify-center gap-4 md:pb-10  absolute top-[30%] sm:top-[30%] md:top-1/2 left-[50%] md:left-[22%] transform -translate-x-1/2 -translate-y-1/2">
                   <div className="w-[75%] flex flex-col gap-4 md:gap-12">
                     <div className="w-full">
-                      <div className="w-full md:p-4">
-                        <div className="md:py-3">
+                      <div className="w-full md:p-2">
+                        <div className="md:py-3 w-full  ">
                           <AnimatePresence mode="wait">
                             <motion.p
-                              className="text-base md:text-lg lg:text-[60px] text-white md:mt-10"
+                              className="text-4xl md:text-5xl lg:text-[60px] text-white md:mt-10"
                               style={{ lineHeight: "70px" }}
                               key={`current-placeholder-${activeIndex}`}
                               initial={{
@@ -214,20 +214,20 @@ const AllServices = ({ }: Props) => {
                             reporting with investigations, actions, and metrics
                             reporting.
                           </p>
+                          <button className=" mt-12 bg-customGreen px-4 py-1.5 md:px-6 md:py-2 text-white w-fit rounded-[60px] text-base md:text-2xl">
+                            Explore Now
+                          </button>
                         </div>
                       </div>
                     </div>
 
-                    <button className="bg-customGreen px-4 py-1.5 md:px-6 md:py-2 text-white w-fit rounded-[60px] text-base md:text-2xl">
-                      Explore Now
-                    </button>
                   </div>
                 </div>
 
-                <div className="w-full  md:w-[50%] overflow-visible pl-20 pb-6" ref={sliderRef}>
+                <div className="w-full  md:w-[50%] overflow-visible  md:pl-20 pb-6 absolute bottom-0 -right-[10%] sm:-right-[12%]  md:right-0    " ref={sliderRef}>
                   <motion.div
                     ref={slideRef}
-                    className="w-full flex max-md:-mt-24 md:mt-32 items-end mx-auto gap-6"
+                    className="w-full flex max-md:-mt-24 md:mt-32 items-end  se mx-auto gap-6"
                   >
                     {sliderData.map((card, index) => (
                       <ServiceCard
