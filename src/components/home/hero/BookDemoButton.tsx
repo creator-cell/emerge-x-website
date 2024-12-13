@@ -2,7 +2,7 @@
 import ModalAnimation from "@/components/reusable/ModalAnimation";
 import { cn } from "@/lib/utils";
 import { isChecked } from "@/store/fetures/buttons/providerButton";
-import { RootState } from "@/store/store";
+
 import React, { useState } from "react";
 import { FaArrowRight } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
@@ -20,9 +20,9 @@ const BookDemoButton: React.FC<BookDemoButtonTpes> = ({
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [isModalVisible, setModalVisible] = useState<boolean>(false);
   const dispatch = useDispatch();
-  const checked = useSelector((state: RootState) => state.cart.isChecked);
+ 
 
-  console.log("aa", checked);
+
 
   const hideNavBar = () => {
     if (hideNavbar) {

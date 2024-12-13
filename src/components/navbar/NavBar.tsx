@@ -6,10 +6,10 @@ import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import BookDemoButton from "../home/hero/BookDemoButton";
-import { useGSAP } from "@gsap/react";
+
 import gsap from "gsap";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
-import { div } from "framer-motion/client";
+
 import { MdOutlineClose } from "react-icons/md";
 
 gsap.registerPlugin(ScrollToPlugin);
