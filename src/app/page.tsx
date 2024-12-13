@@ -215,7 +215,40 @@ export default function Home() {
         },
       });
 
-      commonAnimations(lgTimeline);
+      // 1. Move the service section
+      lgTimeline.to(
+        "#serviceId",
+        {
+          translateY: -500,
+          duration: 1,
+        },
+        "a" // Start at label "a"
+      );
+
+      // 2. Expand the circle
+      lgTimeline.to(
+        "#latest-blogs-section",
+        {
+          width: "250vw", // Default for larger screens
+          ease: "power1.out",
+          borderRadius: "6px",
+          duration: 1,
+        },
+        "a+=0.2" // Starts 1 second after "a"
+      );
+
+      // 3. Show the blog cards
+      lgTimeline.to(
+        ".blog-card",
+        {
+          opacity: 1,
+          y: 0,
+          stagger: 0.2,
+          duration: 0.8,
+          ease: "power1.out",
+        },
+        "a+=2" // Starts 2 seconds after "a"
+      );
     });
 
     mm.add("(min-width: 768px) and (max-width: 1023px)", () => {
@@ -235,32 +268,32 @@ export default function Home() {
         ease: "power1.out",
         borderRadius: "6px",
         duration: 1,
-      }, "a");
+      }, "a-=0.2");
 
       commonAnimations(mdTimeline);
     });
 
-    mm.add("(min-width: 640px) and (max-width: 768px)", () => {
-      // For small screens (SM)
-      const smTimeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: "#container",
-          start: "top 80%",
-          end: "bottom center",
-          scrub: 1,
-        },
-      });
+    // mm.add("(min-width: 640px) and (max-width: 768px)", () => {
+    //   // For small screens (SM)
+    //   const smTimeline = gsap.timeline({
+    //     scrollTrigger: {
+    //       trigger: "#container",
+    //       start: "top 80%",
+    //       end: "bottom center",
+    //       scrub: 1,
+    //     },
+    //   });
 
-      // Adjust circle width for small screens
-      smTimeline.to("#latest-blogs-section", {
-        width: "550vw", // Even larger circle width for small screens
-        ease: "power1.out",
-        borderRadius: "6px",
-        duration: 1,
-      }, "a");
+    //   // Adjust circle width for small screens
+    //   smTimeline.to("#latest-blogs-section", {
+    //     width: "550vw", // Even larger circle width for small screens
+    //     ease: "power1.out",
+    //     borderRadius: "6px",
+    //     duration: 1,
+    //   }, "a");
 
-      commonAnimations(smTimeline);
-    });
+    //   commonAnimations(smTimeline);
+    // });
 
     // Cleanup on unmount
     return () => {
@@ -269,7 +302,7 @@ export default function Home() {
   }, []);
 
 
-  const isMobile = useMediaQuery('(max-width: 640px)'); // For screens up to 768px
+  const isMobile = useMediaQuery('(max-width: 768px)'); // For screens up to 768px
 
   return (
     <div className=" md:space-y-0 relative" id="home">
@@ -286,7 +319,7 @@ export default function Home() {
             <LetestBlogs />
           </>
         ) :
-          <div className="relative h-[400vh] md:h-[350vh] xl:h-[400vh]">
+          <div className="relative h-[400vh] md:h-[455vh] lg:h-[355vh] xl:h-[400vh]">
             <div id="serviceId" className="sticky top-0 mt-6 z-0 h-[200vh] ">
               <AllServices />
             </div>
