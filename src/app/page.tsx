@@ -34,6 +34,32 @@ export default function Home() {
 
   // }, [latestBlogRef])
 
+
+  useEffect(() => {
+    const preventZoom = (event: any) => {
+      if (event.ctrlKey || event.metaKey || event.key === '0') {
+        event.preventDefault();
+      }
+    };
+
+    const preventWheelZoom = (event: any) => {
+      if (event.ctrlKey) {
+        event.preventDefault();
+      }
+    };
+
+    document.addEventListener('keydown', preventZoom);
+    document.addEventListener('wheel', preventWheelZoom, { passive: false });
+
+    return () => {
+      document.removeEventListener('keydown', preventZoom);
+      document.removeEventListener('wheel', preventWheelZoom);
+    };
+  }, []);
+
+
+  const serviceBlogRefScope = useRef<HTMLDivElement | null>(null);
+
   useGSAP(() => {
     const mm = gsap.matchMedia();
 
@@ -79,7 +105,7 @@ export default function Home() {
     };
 
     // Breakpoint-specific animations
-    mm.add("(min-width: 1280px)", () => {
+    mm.add("(min-width: 1024px)", () => {
       // For extra-large screens (XL)
       const xlTimeline = gsap.timeline({
         scrollTrigger: {
@@ -87,9 +113,14 @@ export default function Home() {
           start: "top bottom",
           end: "bottom center",
           scrub: 1,
-          markers: true, // Debug markers for XL
+          markers: false, // Debug markers for XL
         },
       });
+      xlTimeline.to("#serviceId", {
+        translateY: -300,
+        duration: 1,
+        opacity: 0,
+      }, "b");
 
       xlTimeline.to("#latest-blogs-section", {
         width: "100vw",
@@ -97,30 +128,18 @@ export default function Home() {
         ease: "power1.out",
         borderRadius: "0",
         duration: 0.81,
-      });
+      }, "b");
 
-      xlTimeline.to(
-        "#serviceId",
-        {
-          translateY: -300,
-          duration: 0.2,
-          opacity: 0,
-          // css: {
-          //   display: "none"
-          // }
-        },
-        "b"
-      );
+      xlTimeline.to("#sectionHeading", {
+        opacity: 1,
+        duration: 0.5,
+        ease: "power1.out",
+      }, "b").from("#sectionHeading", {
+        css: {
+          fontSize: "2rem",
+        }
+      })
 
-      // xlTimeline.to("#serviceId", {
-      //   opacity: 0,
-      //   duration: 0.2,
-      // })
-
-      // Run common animations
-      commonAnimations(xlTimeline);
-
-      // Blog card animation
       xlTimeline.to(".blog-card", {
         opacity: 1,
         y: 0,
@@ -128,119 +147,49 @@ export default function Home() {
         duration: 0.8,
         scale: 1,
         ease: "power1.out",
-        scrollTrigger: {
-          trigger: ".blog-card",
-          start: "top 75%",
-          end: "top 25%",
-          scrub: true,
-          // markers: true
-        },
-      });
+      }, "b+=0.5");
+
+
     });
 
-    mm.add("(min-width: 1024px) and (max-width: 1279px)", () => {
-      // For large screens (LG)
-      const lgTimeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: "#container",
-          start: "top bottom",
-          end: "center bottom",
-          scrub: 1,
-          markers: false, // Debug markers for LG
-        },
-      });
 
-      // Adjust circle width for medium screens
-      lgTimeline.to("#latest-blogs-section", {
-        width: "100vw",
-        height: "100%",
-        ease: "power1.out",
-        borderRadius: "0",
-        duration: 1,
-      });
-
-      lgTimeline.to(
-        "#serviceId",
-        {
-          translateY: -300,
-          duration: 0.2,
-          opacity: 0,
-          // css: {
-          //   display: "none"
-          // }
-        },
-        "b"
-      );
-
-      // Run common animations
-      commonAnimations(lgTimeline);
-
-      // Blog card animation for LG
-      lgTimeline.to("#blogCard", {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        stagger: 0.2,
-        duration: 0.8,
-        ease: "power1.out",
-        scrollTrigger: {
-          trigger: ".blog-card",
-          start: "top 75%",
-          end: "top 25%",
-          scrub: true,
-        },
-      });
-    });
 
     mm.add("(min-width: 768px) and (max-width: 1023px)", () => {
       // For medium screens (MD)
       const mdTimeline = gsap.timeline({
         scrollTrigger: {
           trigger: "#container",
-          start: "top 90%",
+          start: "top bottom",
           end: "bottom center",
           scrub: 1,
+          markers: false,
         },
       });
 
-      // Adjust circle width for medium screens
-      // mdTimeline.to("#latest-blogs-section", {
-      //   width: "100vw",
-      //   height: "100%",
-      //   ease: "power1.out",
-      //   borderRadius: "0",
-      //   duration: 1,
-      // },);
 
-      mdTimeline.to(
-        "#latest-blogs-section",
-        {
-          width: "100vw",
-          height: "100vw",
-          ease: "power1.out",
-          borderRadius: "0",
-          duration: 0.81,
-        },
-        "b"
-      );
+      mdTimeline.to("#serviceId", {
+        translateY: -300,
+        duration: 1,
+        opacity: 0,
+      }, "d");
 
-      mdTimeline.to(
-        "#serviceId",
-        {
-          translateY: -300,
-          duration: 1,
-          opacity: 0,
-        },
-        "b"
-      );
+      mdTimeline.to("#latest-blogs-section", {
+        width: "100vw",
+        height: "100vw",
+        ease: "power1.out",
+        borderRadius: "0",
+        duration: 0.81,
+      }, "d");
 
-      // mdTimeline.to("#serviceId", {
-      //   opacity: 0,
-      //   duration: 0.2,
-      // })
-
-      // Run common animations for MD
-      commonAnimations(mdTimeline);
+      mdTimeline.to("#sectionHeading", {
+        opacity: 1,
+        duration: 0.5,
+        ease: "power1.out",
+      }, "d").from("#sectionHeading", {
+        css: {
+          fontSize: "2rem",
+        }
+      })
 
       mdTimeline.to(".blog-card", {
         opacity: 1,
@@ -249,21 +198,17 @@ export default function Home() {
         duration: 0.8,
         scale: 1,
         ease: "power1.out",
-        scrollTrigger: {
-          trigger: ".blog-card",
-          start: "top bottom",
-          end: "top 25%",
-          scrub: true,
-          markers: true,
-        },
-      });
+      }, "d+=0.5");
+
     });
 
     // Cleanup on unmount
     return () => {
       mm.revert();
     };
-  }, []);
+  }, {
+    scope: serviceBlogRefScope
+  });
 
   const isMobile = useMediaQuery("(max-width: 768px)"); // For screens up to 768px
 
@@ -292,6 +237,9 @@ export default function Home() {
   }, [latestBlogRef, latestBlogSectionHeight]);
   console.log("🚀 ~ Home ~ latestBlogSectionHeight:", latestBlogSectionHeight);
 
+
+
+
   return (
     <div className="space-y-4 relative " id="home">
       <div ref={targetRef} className="relative">
@@ -308,6 +256,7 @@ export default function Home() {
         </>
       ) : (
         <div
+          ref={serviceBlogRefScope}
           className={cn("relative ")}
           style={{
             height: `${latestBlogSectionHeight}px`, // Dynamically calculated height

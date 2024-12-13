@@ -21,14 +21,13 @@ import Image from "next/image";
 
 const Slider = () => {
   const SlidesData = [
-    { img: "/image 7.png" },
-    { img: "/image 8.png" },
-    { img: "/image 9.png" },
-    { img: "/image 10.png" },
-    { img: "/image 11.png" },
-    { img: "/image 10.png" },
-    { img: "/image 9.png" },
-    { img: "/image 7.png" },
+    { img: "/services/About US.jpg" },
+    { img: "/services/Recovery.jpg" },
+    { img: "/services/Prevention.jpg" },
+    { img: "/services/Preparedness.jpg" },
+    { img: "/services/Response.jpg" },
+    { img: "/services/About US.jpg" },
+    { img: "/services/Recovery.jpg" },    
   ];
 
   const [slidesPerView, setSlidesPerView] = useState(4);
@@ -54,42 +53,44 @@ const Slider = () => {
   }, []);
 
   return (
-    <Swiper
-      effect={"coverflow"}
-      grabCursor={true}
-      centeredSlides={true}
-      slidesPerView={slidesPerView}
-      initialSlide={1}
-      centeredSlidesBounds={true}
-      spaceBetween={0} // Adjust to add spacing between slides
-      loop={true}
-      coverflowEffect={{
-        rotate: 0,
-        stretch: 0,
-        depth: 100,
-        modifier: 3,
-        slideShadows: false,
-      }}
-      pagination={false}
-      navigation={false}
-      autoplay={{
-        delay: 3000,
-        disableOnInteraction: false,
-      }}
-      modules={[EffectCoverflow, Navigation, Autoplay]}
-      className="w-full mt-12" // Ensure it adapts to screen size
-      style={{position:'relative'}}
-    >
-      {SlidesData.map((e, index) => (
-        <SwiperSlide key={index}>
-          <div className="rounded-[37px]  lg:rounded-[75px] overflow-hidden  w-fit  mx-auto">
-            <div>
-              <Image src={e.img} alt="slideimages" width={450} height={720} />
+    <div className="w-[90%] md:w-[70%]">
+      <Swiper
+        effect={"coverflow"}
+        grabCursor={true}
+        centeredSlides={true}
+        slidesPerView={slidesPerView}
+        initialSlide={1}
+        centeredSlidesBounds={true}
+        spaceBetween={0} // Adjust to add spacing between slides
+        loop={true}
+        coverflowEffect={{
+          rotate: 0,
+          stretch: 0,
+          depth: 100,
+          modifier: 3,
+          slideShadows: false,
+        }}
+        pagination={false}
+        navigation={false}
+        autoplay={{
+          delay: 3000,
+          disableOnInteraction: false,
+        }}
+        modules={[EffectCoverflow, Navigation]}
+        className="w-full mt-12" // Ensure it adapts to screen size
+        style={{ position: "relative" }}
+      >
+        {SlidesData.map((e, index) => (
+          <SwiperSlide key={index}>
+            <div className="rounded-[37px]  lg:rounded-[75px] overflow-hidden  w-fit  mx-auto">
+              <div>
+                <Image src={e.img} alt="slideimages" width={450} height={720} />
+              </div>
             </div>
-          </div>
-        </SwiperSlide>
-      ))}
-    </Swiper>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </div>
   );
 };
 
