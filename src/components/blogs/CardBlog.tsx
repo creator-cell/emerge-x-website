@@ -42,8 +42,8 @@ const CardBlog: React.FC<CardBlogTypes> = ({
           className="absolute top-0 left-0"
         />
       <button 
-  className="absolute top-[1px] left-[7px] w-[80px] h-[25px] bg-green-500 text-white rounded-tl-[10px] rounded-br-[15px]">
-  Ankush
+  className="absolute top-[1px] left-[7px] w-[80px] h-[25px] bg-green-500 text-white rounded-tl-[10px] rounded-br-[15px] text-[12px]">
+  Emerge-X
 </button>
 
       </div>
