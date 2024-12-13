@@ -48,7 +48,7 @@ const About = ({ scrollYProgress }: AboutProps) => {
         // minWidth: "60vh",
         boxShadow: "0px 8px 24px rgba(0, 0, 0, 0.2)",
       }}
-      className="flex justify-center items-center relative z-30 bg-[#222720] rounded-lg transition-transform duration-500 ease-in-out"
+      className="flex justify-center pl-8 items-center relative z-30 bg-[#222720] rounded-lg transition-transform duration-500 ease-in-out"
     >
       <SectionWrapper className="mt-8 md:mt-12 lg:mt-12 w-full">
         <div className="text-center flex flex-col items-center">
@@ -78,7 +78,7 @@ const About = ({ scrollYProgress }: AboutProps) => {
               </button>
             </div>
           </div>
-          <div className="flex items-center flex-col flex-wrap gap-[60px] mt-8">
+          <div className="flex items-center flex-col flex-wrap gap-[60px] mt-8 p-6">
             {aboutCardData.map((e, i) => (
               <div
                 key={i}

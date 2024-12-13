@@ -1,21 +1,15 @@
-import type { Metadata, Viewport } from "next";
-import localFont from "next/font/local";
+import { Metadata, Viewport } from "next";
+
 import "./globals.css";
 import NavBar from "@/components/navbar/NavBar";
 import Footer from "@/components/footer/Footer";
 import { FloatingNav } from "@/components/ui/floating-navbar";
-import Head from "next/head";
-import { Html } from "next/document";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+import { Inter } from "next/font/google";  // Import Inter from Google Fonts
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -30,7 +24,7 @@ export const viewport: Viewport = {
   minimumScale: 1,
   viewportFit: "cover",
   width: 'device-width'
-}
+};
 
 export default function RootLayout({
   children,
@@ -54,7 +48,7 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body className={`${inter.className} antialiased`}>
         <div className="flex flex-col min-h-screen relative">
           {/* <NavBar /> */}
           <FloatingNav navItems={navItems} />
