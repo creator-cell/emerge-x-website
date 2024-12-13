@@ -297,7 +297,7 @@ export default function Home() {
       <div ref={targetRef} className="relative">
         <Hero scrollYProgress={scrollYProgress} />
 
-        <div className="w-screen flex justify-center" id="about-us">
+        <div className="w-full flex justify-center" id="about-us">
           <About scrollYProgress={scrollYProgress} />
         </div>
       </div>

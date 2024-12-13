@@ -56,7 +56,7 @@ const NavBar = () => {
   }, []);
 
   return (
-    <div className="w-full px-4">
+    <div className="w-full px-4 ">
       <div
         className={` w-full
         relative rounded-t-xl md:rounded-t-2xl bg-white lg:rounded-t-full flex items-center justify-between  px-10 py-3 md:py-5 lg:py-4    gap-4 transition-all duration-300 ${

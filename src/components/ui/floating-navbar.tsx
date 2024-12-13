@@ -65,6 +65,7 @@ export const FloatingNav = ({
   });
   const checked = useSelector((state: RootState) => state.cart.isChecked);
 
+
   if (checked) {
     return;
   }
