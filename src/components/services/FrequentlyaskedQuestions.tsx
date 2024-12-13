@@ -65,7 +65,7 @@ const FrequentlyaskedQuestions = () => {
                     <IoIosArrowUp size={20} /> // Arrow up when open
                   ) : (
                     <IoIosArrowDown size={20} /> // Arrow down when closed
-                  )}s
+                  )}
                 </div>
               </div>
               <div
