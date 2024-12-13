@@ -17,7 +17,7 @@ gsap.registerPlugin(ScrollToPlugin);
 const NavBar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
   const [activeSection, setActiveSection] = useState<string>("#home");
-
+// a 
   const pathName = usePathname();
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
