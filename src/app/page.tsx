@@ -83,7 +83,14 @@ export default function Home() {
           markers: true, // Debug markers for XL
         },
       });
-
+      xlTimeline.to("#serviceId", {
+        translateY: -300,
+        duration: 1,
+        opacity: 0,
+        // css: {
+        //   display: "none"
+        // }
+      }, "b");
 
       xlTimeline.to("#latest-blogs-section", {
         width: "100vw",
@@ -91,16 +98,16 @@ export default function Home() {
         ease: "power1.out",
         borderRadius: "0",
         duration: .81,
-      });
+      }, "b+=0.1");
 
-      xlTimeline.to("#serviceId", {
-        translateY: -300,
-        duration: 0.2,
-        opacity: 0,
-        // css: {
-        //   display: "none"
-        // }
+
+      xlTimeline.to("#sectionHeading", {
+        opacity: 1,
       }, "b");
+
+
+
+
 
       // xlTimeline.to("#serviceId", {
       //   opacity: 0,
@@ -190,27 +197,22 @@ export default function Home() {
         },
       });
 
-      // Adjust circle width for medium screens
-      // mdTimeline.to("#latest-blogs-section", {
-      //   width: "100vw",
-      //   height: "100%",
-      //   ease: "power1.out",
-      //   borderRadius: "0",
-      //   duration: 1,
-      // },);
-
+      // / // Adjust circle width for medium screens
       mdTimeline.to("#latest-blogs-section", {
         width: "100vw",
-        height: "100vw",
+        height: "100%",
         ease: "power1.out",
         borderRadius: "0",
-        duration: .81,
-      }, "b");
+        duration: 1,
+      },);
 
       mdTimeline.to("#serviceId", {
         translateY: -300,
-        duration: 1,
+        duration: 0.2,
         opacity: 0,
+        // css: {
+        //   display: "none"
+        // }
       }, "b");
 
       // mdTimeline.to("#serviceId", {
@@ -245,6 +247,7 @@ export default function Home() {
   }, []);
 
   const isMobile = useMediaQuery('(max-width: 768px)'); // For screens up to 768px
+  const isTablet = useMediaQuery('(min-width: 768px) and (max-width: 1023px)'); // For screens between 768px and 1023px
 
 
   useEffect(() => {
@@ -288,7 +291,7 @@ export default function Home() {
           <div className={cn("relative ")}
 
             style={{
-              height: `${latestBlogSectionHeight}px`, // Dynamically calculated height
+              height: isTablet ? `${latestBlogSectionHeight + 400}px` : `${latestBlogSectionHeight}px`, // Dynamically calculated height
             }}>
             {/* <div className={cn("relative h-[400vh] md:h-[455vh] lg:h-[355vh] xl:h-[400vh]")}> */}
             <div id="serviceId" className="opacity-100 sticky top-0 mt-6 z-0 h-[200vh] ">
