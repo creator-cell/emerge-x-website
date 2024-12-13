@@ -15,6 +15,18 @@ import Link from "next/link";
 
 gsap.registerPlugin(ScrollTrigger);
 
+
+import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/effect-coverflow';
+import 'swiper/css/pagination';
+
+
+// import required modules
+import { EffectCoverflow, Pagination } from 'swiper/modules';
+
 const sliderData = [
   {
     image: "/services/Prevention.jpg",
@@ -186,6 +198,13 @@ const AllServices = ({ }: Props) => {
     }
   }, [cardRef.current]);
 
+  const swiperRef = useRef<SwiperRef | null>(null);
+
+  useEffect(() => {
+    if (swiperRef.current) {
+      swiperRef.current.swiper.slideTo(activeIndex);
+    }
+  }, [activeIndex])
 
 
 

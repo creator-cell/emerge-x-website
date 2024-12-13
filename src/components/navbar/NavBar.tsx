@@ -56,7 +56,7 @@ const NavBar = () => {
   }, []);
 
   return (
-    <div className="w-full px-4 ">
+    <div className="w-full px-4 lg:px-14 ">
       <div
         className={` w-full
         relative rounded-t-xl md:rounded-t-2xl bg-white lg:rounded-t-full flex items-center justify-between  px-10 py-3 md:py-5 lg:py-4    gap-4 transition-all duration-300 ${
@@ -70,7 +70,7 @@ const NavBar = () => {
         </Link>
 
         {pathName === "/" ? (
-          <ul className=" sm:w-[80%] lg:w-[60%] max-w-[900px]  hidden md:flex items-center   justify-between ">
+          <ul className=" sm:w-[82%] lg:w-[65%] max-w-[900px]  hidden md:flex items-center gap-1   justify-between ">
             {navList?.map((e, i) => {
               const active = activeSection == e.link;
               return (
@@ -88,12 +88,12 @@ const NavBar = () => {
               <BookDemoButton
                 hideNavbar={false}
                 rightArrow={false}
-                className={`bg-customGreen text-white text-md lg:text-xl rounded-2xl md:py-[12px] sm:w-auto px-[8px]  md:w-[167px] text-md justify-center`}
+                className={`bg-customGreen text-white text-md lg:text-xl rounded-2xl md:py-[8px] sm:w-auto px-[4px]  md:w-[167px] text-md justify-center`}
               />
             </li>
           </ul>
         ) : (
-          <ul className=" sm:w-[80%] lg:w-[60%] max-w-[900px]  hidden md:flex items-center   justify-between ">
+          <ul className=" sm:w-[82%] lg:w-[65%] max-w-[900px]  hidden md:flex items-center  gap-1   justify-between ">
             {navList?.map((e, i) => {
               const active = pathName == e.page;
               return (
@@ -111,7 +111,7 @@ const NavBar = () => {
               <BookDemoButton
                 hideNavbar={false}
                 rightArrow={false}
-                className={`bg-customGreen text-white text-md lg:text-xl rounded-2xl md:py-[12px] sm:w-auto px-[8px]  md:w-[167px] text-md justify-center`}
+                className={`bg-customGreen text-white text-md lg:text-xl rounded-2xl md:py-[8px] sm:w-auto px-[8px]  md:w-[167px] text-md justify-center`}
               />
             </li>
           </ul>
@@ -144,7 +144,7 @@ const NavBar = () => {
             isSidebarOpen
               ? "h-[300px] rounded-b-3xl  "
               : "   h-0 rounded-b-none"
-          } overflow-hidden transition-all left-0 top-[50px]   duration-300 `}
+          } overflow-hidden transition-all left-0 top-[50px] duration-300 `}
           style={{ zIndex: 3000 }}
         >
           {pathName === "/" ? (
