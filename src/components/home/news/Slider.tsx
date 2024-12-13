@@ -1,8 +1,72 @@
-"use client";
+// import React, { useState, useEffect } from "react";
+// import "./Slider.css";
 
-// import gsap from "gsap"
-// import { ScrollSmoother } from "gsap/ScrollSmoother";
-// import { ScrollTrigger } from "gsap/ScrollTrigger";
+// const Slider = () => {
+//   const SlidesData = [
+//     { img: "/services/About US.jpg" },
+//     { img: "/services/Recovery.jpg" },
+//     { img: "/services/Prevention.jpg" },
+//     { img: "/services/Preparedness.jpg" },
+//     { img: "/services/Response.jpg" },
+//     { img: "/services/About US.jpg" },
+//     { img: "/services/Recovery.jpg" },
+//   ];
+
+//   const [activeIndex, setActiveIndex] = useState(0);
+
+//   // Auto-play logic
+//   useEffect(() => {
+//     const interval = setInterval(() => {
+//       setActiveIndex((prevIndex) => (prevIndex + 1) % SlidesData.length);
+//     }, 3000); // Change slides every 3 seconds
+
+//     return () => clearInterval(interval); // Cleanup the interval on component unmount
+//   }, [SlidesData.length]);
+
+//   const handleMouseEnter = (index:any) => {
+//     setActiveIndex(index); // Bring hovered image to the center
+//   };
+
+//   return (
+//     <div className="slider-container">
+//       <div className="slider">
+//         {SlidesData.map((slide, index) => {
+//           const isActive = index === activeIndex;
+//           const isPrev2 =
+//             index === (activeIndex - 2 + SlidesData.length) % SlidesData.length;
+//           const isPrev1 =
+//             index === (activeIndex - 1 + SlidesData.length) % SlidesData.length;
+//           const isNext1 = index === (activeIndex + 1) % SlidesData.length;
+//           const isNext2 = index === (activeIndex + 2) % SlidesData.length;
+
+//           return (
+//             <div
+//               key={index}
+//               className={`slide ${
+//                 isActive
+//                   ? "active"
+//                   : isPrev2
+//                   ? "prev2"
+//                   : isPrev1
+//                   ? "prev1"
+//                   : isNext1
+//                   ? "next1"
+//                   : isNext2
+//                   ? "next2"
+//                   : ""
+//               }`}
+//               onMouseEnter={() => handleMouseEnter(index)}
+//             >
+//               <img src={slide.img} alt={`Slide ${index}`} />
+//             </div>
+//           );
+//         })}
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Slider;
 
 import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -12,7 +76,6 @@ import {
   Navigation,
   Autoplay,
 } from "swiper/modules";
-
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
@@ -27,62 +90,63 @@ const Slider = () => {
     { img: "/services/Preparedness.jpg" },
     { img: "/services/Response.jpg" },
     { img: "/services/About US.jpg" },
-    { img: "/services/Recovery.jpg" },    
+    { img: "/services/Recovery.jpg" },
   ];
 
-  const [slidesPerView, setSlidesPerView] = useState(4);
-
-  // Update slidesPerView based on screen width
-  useEffect(() => {
-    const updateSlidesPerView = () => {
-      if (window.innerWidth >= 768) {
-        setSlidesPerView(4); // Desktop/Tablet
-      } else if (window.innerWidth >= 400) {
-        setSlidesPerView(3); // Mobile
-      } else {
-        setSlidesPerView(2);
-      }
-    };
-
-    updateSlidesPerView(); // Set initially
-    window.addEventListener("resize", updateSlidesPerView);
-
-    return () => {
-      window.removeEventListener("resize", updateSlidesPerView);
-    };
-  }, []);
-
   return (
-    <div className="w-[90%] md:w-[70%]">
+    <div className="px-10 w-full flex items-center justify-center relative">
+      {/* <div className="w-[20%] h-full bg-white absolute z-30 top-0 left-0 border border-red-600"></div> */}
+      {/* <div className="w-[20%] h-full bg-white absolute z-30 right-0 top-0 border border-red-600"></div> */}
       <Swiper
         effect={"coverflow"}
         grabCursor={true}
         centeredSlides={true}
-        slidesPerView={slidesPerView}
+        slidesPerView={"auto"}
         initialSlide={1}
         centeredSlidesBounds={true}
-        spaceBetween={0} // Adjust to add spacing between slides
+        spaceBetween={0}
         loop={true}
         coverflowEffect={{
           rotate: 0,
           stretch: 0,
-          depth: 100,
-          modifier: 3,
+          depth: 350,
+          modifier: 2.5,
           slideShadows: false,
+        }}
+        breakpoints={{
+          320: {
+            slidesPerView: 3,
+          },
+          768: {
+            slidesPerView: 3,
+          },
+          1024: {
+            slidesPerView: 3,
+          },
         }}
         pagination={false}
         navigation={false}
-        autoplay={{
-          delay: 3000,
-          disableOnInteraction: false,
-        }}
-        modules={[EffectCoverflow, Navigation, Autoplay]}
+        // autoplay={{
+        //   delay: 1000,
+        //   disableOnInteraction: false,
+        //   pauseOnMouseEnter: false,
+        //   stopOnLastSlide: false,
+        //   waitForTransition: true,
+        // }}
+        modules={[EffectCoverflow, Navigation]}
         className="w-full mt-12" // Ensure it adapts to screen size
-        style={{ position: "relative" }}
+        style={{
+          position: "relative",
+
+          overflow: "hidden",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
       >
         {SlidesData.map((e, index) => (
           <SwiperSlide key={index}>
-            <div className="rounded-[37px]  lg:rounded-[75px] overflow-hidden  w-fit  mx-auto">
+            <div className="rounded-[10px]  lg:rounded-[15px] overflow-hidden  w-fit  mx-auto">
               <div>
                 <Image src={e.img} alt="slideimages" width={450} height={720} />
               </div>
@@ -95,60 +159,3 @@ const Slider = () => {
 };
 
 export default Slider;
-
-//   gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
-//   let smoother =  ScrollSmoother.create({
-//     content:"#smooth-content",
-//     smooth:2,
-//     effects:true
-//   })
-//   let container = document.querySelector('.container');
-//   let sections = container?.querySelectorAll('.panel')  || []
-//   gsap.to(sections,{
-//     xPercent:-100*(sections?.length-1),
-//     ease : "none",
-//     scrollTrigger:{
-//       trigger:".container",
-//       pin:true,
-//       scrub:true,
-//       end:"+=3500"
-//     }
-
-//   })
-//   return (
-//     <>
-//       <div id="smooth-wrapper">
-//         <div id="smooth-content">
-//           <div className="description panel blue">
-//             <h1>test</h1>
-//           </div>
-//           <div className="container">
-//             <section className="panel red">
-//               1
-//             </section>
-//             <section className="panel red">
-//               2
-//             </section>
-//             <section className="panel red">
-//               3
-//             </section>
-//             <section className="panel red">
-//               4
-//             </section>
-//             <section className="panel red">
-//               5
-//             </section>
-//             <section className="panel red">
-//               6
-//             </section>
-
-//           </div>
-
-//         </div>
-
-//       </div>
-//     </>
-//   )
-// }
-
-// export default Slider

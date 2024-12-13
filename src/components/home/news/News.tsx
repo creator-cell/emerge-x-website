@@ -4,11 +4,13 @@ import React from "react";
 import Slider from "./Slider";
 import Link from "next/link";
 
+
 const News = () => {
   return (
     <div className="bg-white text-greyishblack flex flex-col items-center justify-center pt-14" id="news">
       <SectionHeading text="News" />
       <Slider />
+      {/* <SlickSlider/> */}
       <div className="text-center md:text-[26px] text-[20px] mt-10">
         Work Strategy
       </div>

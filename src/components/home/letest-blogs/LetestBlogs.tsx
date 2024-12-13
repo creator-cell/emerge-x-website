@@ -23,23 +23,35 @@ const LetestBlogs: React.FC = () => {
 
   const letestBlogData: BlogData[] = [
     { img: "/services/About US.jpg", title: "Frontline Workers", slugid: "#" },
-    { img: "/services/Preparedness.jpg", title: "Safety Management System", slugid: "#" },
-    { img: "/services/Prevention.jpg", title: "biological hazard", slugid: "#" },
+    {
+      img: "/services/Preparedness.jpg",
+      title: "Safety Management System",
+      slugid: "#",
+    },
+    {
+      img: "/services/Prevention.jpg",
+      title: "biological hazard",
+      slugid: "#",
+    },
     {
       img: "/services/Recovery.jpg",
       title: "Difference between hazard and risk",
       slugid: "#",
     },
-    { img: "/services/Response.jpg", title: "Safety Management Tools", slugid: "#" },
-    { img: "/services/About US.jpg", title: "Critical Control Management", slugid: "#" },
+    {
+      img: "/services/Response.jpg",
+      title: "Safety Management Tools",
+      slugid: "#",
+    },
+    {
+      img: "/services/About US.jpg",
+      title: "Critical Control Management",
+      slugid: "#",
+    },
   ];
 
-
   return (
-    <div
-      className="relative overflow-visible  h-auto p-9  "
-      id="container"
-    >
+    <div className="relative overflow-visible  h-auto p-9  " id="container">
       <div
         id="latest-blogs-section"
         className="absolute top-[30%]  left-1/2 transform -translate-x-1/2 -translate-y-1/2 aspect-square bg-white rounded-full -z-10"
