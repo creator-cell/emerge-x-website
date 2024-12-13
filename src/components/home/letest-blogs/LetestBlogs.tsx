@@ -9,6 +9,7 @@ import { useGSAP } from "@gsap/react";
 import { useMediaQuery } from "usehooks-ts";
 import Link from "next/link";
 import { blogs } from "@/components/blogs/blogData";
+import CardBlog from "@/components/blogs/CardBlog";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
@@ -56,10 +57,19 @@ const LetestBlogs: React.FC = () => {
               {blogs.map((e, i) => (
                 <div
                   key={e.id}
-                  className="blog-card lg:opacity-0 lg:scale-50"
+                  className="blog-card lg:opacity-0 lg:scale-50 mt-8"
                   id="blogCard"
                 >
-                  <BlogCard img={e.image} title={e.title}  />
+                  <CardBlog 
+                   key={i}
+                   data={e}
+                   list={false}
+                   styleHeading="text-[14px] lg:text-[16px]"
+                   styleBox="aspect-square max-w-[270px]"
+                   styleCard="items-start max-w-[270px] mx-auto"
+                   curveIconStyle="w-[40%]"
+                   dateButtonStyle="w-[32%] left-2 "
+                    />
                 </div>
               ))}
             </div>

@@ -8,7 +8,6 @@ import React from "react";
 import { ReadonlyURLSearchParams } from "next/navigation";
 import { blogs } from "@/components/blogs/blogData";
 
-
 const navTrain = [
   { link: "/", label: "Home", id: "a1" },
   { link: "/", label: "Blogs", id: "a2" },
@@ -43,30 +42,32 @@ about EmergeX related."
                 styleBox="rounded-[26px] aspect-video"
                 styleHeading="text-[16px] md:text-[36px]"
                 curveIconStyle="w-[30%]"
-                dateButtonStyle="w-[25%] top-2 left-2"
+                dateButtonStyle="w-[25%] top-2 left-2 h-[11%]"
               />
             </div>
           </div>
 
-          <div className="w-[18rem] md:w-[35%] mx-auto md:mx-0">
+          <div className="w-[18rem] md:w-[35%] mx-auto md:mx-0 max-md:hidden">
             <div className="flex items-center gap-5 text-[20px]">
               <Link
                 href={"/blogs/?tab=trending"}
                 scroll={false}
-                className={`${tab === "tab=trending" || tab === ""
+                className={`${
+                  tab === "tab=trending" || tab === ""
                     ? "text-customGreen"
                     : "text-greyishblack"
-                  }`}
+                }`}
               >
                 Trending
               </Link>
               <Link
                 href={"/blogs/?tab=recomended"}
                 scroll={false}
-                className={`${tab === "tab=recomended"
+                className={`${
+                  tab === "tab=recomended"
                     ? "text-customGreen"
                     : "text-greyishblack"
-                  }`}
+                }`}
               >
                 Recommended
               </Link>
@@ -81,6 +82,8 @@ about EmergeX related."
                   list={true}
                   styleHeading="text-[14px] font-[400] md:font-semibold lg:text-base"
                   styleBox="aspect-square max-w-[150px]"
+                  curveIconStyle="w-[60%]"
+                  dateButtonStyle="w-[45%] left-2 h-[15%] text-[8px]"
                 />
               ))}
             </div>
@@ -90,8 +93,8 @@ about EmergeX related."
                   key={i}
                   data={e}
                   list={false}
-                  styleHeading="text-[14px] lg:text-base"
-                  styleBox="aspect-square max-w-full"
+                  curveIconStyle="w-[60%]"
+                  dateButtonStyle="w-[45%] left-2 h-[15%] text-[8px]"
                 />
               ))}
             </div>
@@ -109,6 +112,8 @@ about EmergeX related."
               styleHeading="text-[14px] lg:text-[16px]"
               styleBox="aspect-square max-w-[270px]"
               styleCard="items-start max-w-[270px] mx-auto"
+              curveIconStyle="w-[40%]"
+              dateButtonStyle="w-[32%] left-2 "
             />
           ))}
         </div>
