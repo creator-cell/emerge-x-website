@@ -46,7 +46,7 @@ const Hero = ({ scrollYProgress }: HeroProps) => {
         </video>
       </div>
       <div className=" absolute left-0 bottom-8 sm:bottom-0 w-full">
-        <div className="  p-8 pb-10 w-[90%]  container ">
+        <div className="  p-12 pb-10 w-full  ">
           <div>
             <motion.h2
               style={{ transform: scaleValue }}
@@ -71,7 +71,7 @@ const Hero = ({ scrollYProgress }: HeroProps) => {
           </div>
           <div className="  flex items-center justify-center mt-16 mb-10 ">
             <BookDemoButton
-            hideNavbar={true}
+              hideNavbar={true}
               rightArrow={true}
               className=" text-2xl pl-[40px] gap-4 z-50"
             />

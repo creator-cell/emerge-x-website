@@ -82,7 +82,7 @@ const Slider = () => {
       }}
       modules={[EffectCoverflow, Navigation, Autoplay]}
       className="w-full mt-12" // Ensure it adapts to screen size
-      style={{position:'relative'}}
+      style={{ position: 'relative' }}
     >
       {SlidesData.map((e, index) => (
         <SwiperSlide key={index}>
