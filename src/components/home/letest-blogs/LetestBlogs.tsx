@@ -8,6 +8,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { useMediaQuery } from "usehooks-ts";
 import Link from "next/link";
+import { blogs } from "@/components/blogs/blogData";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
@@ -15,24 +16,23 @@ gsap.registerPlugin(useGSAP, ScrollTrigger);
 type BlogData = {
   img: string;
   title: string;
-  slugid: string;
 };
 
 const LetestBlogs: React.FC = () => {
   const isMobile = useMediaQuery("(max-width: 500px)"); // For screens up to 768px
 
-  const letestBlogData: BlogData[] = [
-    { img: "/services/About US.jpg", title: "Frontline Workers", slugid: "#" },
-    { img: "/services/Preparedness.jpg", title: "Safety Management System", slugid: "#" },
-    { img: "/services/Prevention.jpg", title: "biological hazard", slugid: "#" },
-    {
-      img: "/services/Recovery.jpg",
-      title: "Difference between hazard and risk",
-      slugid: "#",
-    },
-    { img: "/services/Response.jpg", title: "Safety Management Tools", slugid: "#" },
-    { img: "/services/About US.jpg", title: "Critical Control Management", slugid: "#" },
-  ];
+  // const letestBlogData: BlogData[] = [
+  //   { img: "/services/About US.jpg", title: "Frontline Workers", slugid: "#" },
+  //   { img: "/services/Preparedness.jpg", title: "Safety Management System", slugid: "#" },
+  //   { img: "/services/Prevention.jpg", title: "biological hazard", slugid: "#" },
+  //   {
+  //     img: "/services/Recovery.jpg",
+  //     title: "Difference between hazard and risk",
+  //     slugid: "#",
+  //   },
+  //   { img: "/services/Response.jpg", title: "Safety Management Tools", slugid: "#" },
+  //   { img: "/services/About US.jpg", title: "Critical Control Management", slugid: "#" },
+  // ];
 
 
   return (
@@ -56,13 +56,13 @@ const LetestBlogs: React.FC = () => {
             </h2>
 
             <div className="grid grid-cols-1  sm:grid-cols-2 lg:grid-cols-3 gap-x-[70px] lg:gap-x-[110px] mt-8 md:mt-14 lg:mt-16">
-              {letestBlogData.map((e, i) => (
+              {blogs.map((e, i) => (
                 <div
-                  key={e.slugid}
+                  key={e.id}
                   className="blog-card lg:opacity-0 lg:scale-50"
                   id="blogCard"
                 >
-                  <BlogCard img={e.img} title={e.title} slugid={e.slugid} />
+                  <BlogCard img={e.image} title={e.title}  />
                 </div>
               ))}
             </div>
@@ -81,7 +81,7 @@ const LetestBlogs: React.FC = () => {
   );
 };
 
-const BlogCard: React.FC<BlogData> = ({ img, title, slugid }) => {
+const BlogCard: React.FC<BlogData> = ({ img, title, }) => {
   return (
     <div className="text-center flex flex-col items-center md:gap-4 py-8">
       <div className="w-full rounded-[20px] overflow-hidden">

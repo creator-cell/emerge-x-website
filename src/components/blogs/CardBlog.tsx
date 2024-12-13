@@ -34,7 +34,6 @@ const CardBlog: React.FC<CardBlogTypes> = ({
   styleCard,
   data
 }) => {
-  console.log(data);
   return (
     <Link
       href={`/blogs/${data?.id}`}
@@ -51,10 +50,10 @@ const CardBlog: React.FC<CardBlogTypes> = ({
         )}
       >
         <Image
-          src="/blogs/Subtract.svg"
+          src={data?.image}
           alt="Subtract Icon"
-          width={100} // Set the actual width in pixels
-          height={100} // Set the actual height in pixels
+          width={270}
+          height={400} 
           className="absolute top-0 left-0"
         />
         <button

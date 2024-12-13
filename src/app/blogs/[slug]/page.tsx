@@ -8,11 +8,23 @@ import SectionWrapper from "@/components/reusable/SectionWrapper";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { blogs } from "@/components/blogs/blogData";
-
+interface BlogData {
+  id: number;
+  title: string;
+  slug: string;
+  image: string;
+  content: string;
+  heading: string;
+  details: string;
+  list1: string;
+  list2: string;
+  details2: string;
+  details3: string;
+}
 const page = () => {
   const pathname = usePathname(); // Get the full pathname of the current URL
   const [slug, setSlug] = useState<string | null>(null);
-  const [blogData, setBlogData] = useState<[]>([]);
+  const [blogData, setBlogData] = useState<BlogData[]>([])
   useEffect(() => {
     console.log(pathname)
     const IdData = pathname?.split("/").pop()
@@ -39,7 +51,7 @@ const page = () => {
               <HeroResusable
                 title={data?.title}
                 description={data?.slug}
-                image="/blogs/hero-blog-details.png"
+               image="/news/intro.png"
                 className="bg-gradient-to-r from-black/0 to-black/90"
                 textColor="white"
               />
@@ -55,10 +67,10 @@ const page = () => {
                   <div className="w-full md:w-[45%] max-w-[516px]">
                     <div>
                       <Image
-                        src={"/image-blogs-details.png"}
+                        src={data?.image}
                         alt="img"
                         width={600}
-                        height={500}
+                        height={600}
                       />
                     </div>
                   </div>
