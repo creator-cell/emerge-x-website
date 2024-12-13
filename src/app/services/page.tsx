@@ -45,7 +45,7 @@ const page = () => {
             </div>
           </div>
           <div className="prose max-w-none">
-            <p className=" text-xl md:text-4xl  text-bold text-gray-800">
+            <p className=" text-xl md:text-4xl  text-bold text-greyishblack">
               Did you hear about popular basketball or football teams travelling
               on a private aircraft in groups? Some well-known pop stars,
               dancers, and other performers do the same and fly private with
@@ -65,13 +65,13 @@ const page = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-4 mt-8 ">
           <div className=" flex ">
             <div className="w-full  md:w-[50%] ">
-              <h2 className="text-2xl font-semibold mb-6 max-w-sm ">
+              <h2 className="text-2xl font-semibold mb-6 max-w-sm text-greyishblack">
                 Innovative Cyber Threats: The Evolution of Attack Techniques
               </h2>
             </div>
           </div>
           <div className="prose max-w-none flex flex-col gap-8">
-            <p className=" text-base md:text-lg  ">
+            <p className=" text-base md:text-lg  text-greyishblack">
               EmergeX will assist you to better understand and manage workplace
               safety by integrating hazards and incident reporting with
               investigations, actions and metrics reporting.EmergeX will assist
@@ -84,7 +84,7 @@ const page = () => {
               workplace safety by integrating hazards and incident reporting
               with investigations, actions and metrics reporting.
             </p>
-            <p className=" text-base md:text-lg  ">
+            <p className=" text-base md:text-lg  text-greyishblack">
               Cybercriminals will continue to devise creative and innovative
               techniques to infiltrate systems. This may include leveraging AI
               to craft convincing phishing attacks and exploiting novel
@@ -92,7 +92,7 @@ const page = () => {
               phishing attacks and exploiting novel vulnerabilities
             </p>
             <div className="w-full border border-dashed border-black my-10"></div>
-            <p className=" text-base md:text-lg leading-[32px] ">
+            <p className=" text-base md:text-lg leading-[32px] text-greyishblack">
               Cybercriminals will continue to devise creative and innovative
               techniques to infiltrate systems. This may include leveraging AI
               to craft convincing phishing attacks and exploiting novel

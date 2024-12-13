@@ -51,9 +51,9 @@ const FrequentlyaskedQuestions = () => {
 
         <div className="mt-5 space-y-5">
           {faqData.map((faq, index) => (
-            <div key={index} className="border-b-2  border-gray-500 flex flex-col pb-4">
+            <div key={index} className=" flex flex-col pb-2">
               <div
-                className="flex justify-between items-center cursor-pointer py-2"
+                className="flex justify-between items-center cursor-pointer py-2 text-greyishblack"
                 onClick={() => handleToggle(index)}
               >
                 <label>{faq.question}</label>
@@ -65,7 +65,7 @@ const FrequentlyaskedQuestions = () => {
                     <IoIosArrowUp size={20} /> // Arrow up when open
                   ) : (
                     <IoIosArrowDown size={20} /> // Arrow down when closed
-                  )}
+                  )}s
                 </div>
               </div>
               <div
