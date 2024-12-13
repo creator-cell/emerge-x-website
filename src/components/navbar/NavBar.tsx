@@ -9,6 +9,8 @@ import BookDemoButton from "../home/hero/BookDemoButton";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+import { div } from "framer-motion/client";
+import { MdOutlineClose } from "react-icons/md";
 
 gsap.registerPlugin(ScrollToPlugin);
 
@@ -16,12 +18,10 @@ const NavBar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
   const [activeSection, setActiveSection] = useState<string>("#home");
 
-
   const pathName = usePathname();
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
-
 
   const scrollToSection = (id: string) => {
     gsap.to(window, {
@@ -29,13 +29,14 @@ const NavBar = () => {
       scrollTo: { y: id, offsetY: 0 }, // Scroll to the section ID
       ease: "power2.inOut", // Easing function for smoothness
     });
-    setIsSidebarOpen(false); // Close sidebar when clicking a link
+    setIsSidebarOpen(false);
+    // Close sidebar when clicking a link
   };
-
 
   // Update active section based on scroll position
   useEffect(() => {
     const handleScroll = () => {
+     
       const sections = navList.map((item) => ({
         id: item.link,
         element: document.querySelector(item.link),
@@ -55,82 +56,149 @@ const NavBar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-
   return (
-    <>
-      <div className="w-full relative flex items-center justify-center">
-        <div className="bg-white flex items-center justify-between rounded-xl md:rounded-2xl lg:rounded-full shadow-customNavbarShadow px-10 py-3 md:py-5 lg:py-4  mx-6  gap-4 w-full  lg:w-[90%]">
-          <Link href={"/"} className="w-[130px] md:w-[192px] h-auto ">
-            <Image
-              src={"/logo/main-logo.png"}
-              alt=""
-              width={200}
-              height={70}
-            />
-          </Link>
+    <div className="w-full px-4">
+      <div
+        className={` w-full
+        relative rounded-t-xl md:rounded-t-2xl bg-white lg:rounded-t-full flex items-center justify-between  px-10 py-3 md:py-5 lg:py-4    gap-4 transition-all duration-300 ${
+          isSidebarOpen
+            ? " rounded-b-none   "
+            : "rounded-b-xl  md:rounded-b-2xl lg:rounded-b-full "
+        }`}
+      >
+        <Link href={"/"} className="w-[130px] md:w-[192px] h-auto ">
+          <Image src={"/logo/main-logo.png"} alt="" width={200} height={70} />
+        </Link>
 
+        {pathName === "/" ? (
           <ul className=" sm:w-[80%] lg:w-[60%] max-w-[900px]  hidden md:flex items-center   justify-between ">
             {navList?.map((e, i) => {
               const active = activeSection == e.link;
               return (
                 <li
                   key={i}
-                  className={`hover:text-customGreen cursor-pointer text-md lg:text-xl ${active ? "text-customGreen" : "text-[#767676]"
-                    }`}
+                  className={`hover:text-customGreen cursor-pointer text-md lg:text-xl ${
+                    active ? "text-customGreen" : "text-[#767676]"
+                  }`}
                 >
-                  <div
-                    onClick={() => scrollToSection(e.link)}
-                  >{e.label}</div>
+                  <div onClick={() => scrollToSection(e.link)}>{e.label}</div>
                 </li>
               );
             })}
             <li>
               <BookDemoButton
                 rightArrow={false}
-                className=" bg-customGreen text-white text-md lg:text-xl rounded-2xl md:py-[12px] sm:w-auto px-[8px]  md:w-[167px] text-md justify-center"
+                className={`bg-customGreen text-white text-md lg:text-xl rounded-2xl md:py-[12px] sm:w-auto px-[8px]  md:w-[167px] text-md justify-center`}
               />
             </li>
           </ul>
-          <button onClick={toggleSidebar} className=" md:hidden text-[33px]">
-            <GiHamburgerMenu />
-          </button>
+        ) : (
+          <ul className=" sm:w-[80%] lg:w-[60%] max-w-[900px]  hidden md:flex items-center   justify-between ">
+            {navList?.map((e, i) => {
+              const active = pathName == e.page;
+              return (
+                <li
+                  key={i}
+                  className={`hover:text-customGreen cursor-pointer text-md lg:text-xl ${
+                    active ? "text-customGreen" : "text-[#767676]"
+                  }`}
+                >
+                  <Link href={e.page}>{e.label}</Link>
+                </li>
+              );
+            })}
+            <li>
+              <BookDemoButton
+                rightArrow={false}
+                className={`bg-customGreen text-white text-md lg:text-xl rounded-2xl md:py-[12px] sm:w-auto px-[8px]  md:w-[167px] text-md justify-center`}
+              />
+            </li>
+          </ul>
+        )}
+
+        <div
+          className={`block md:hidden transition-all duration-300  ${
+            isSidebarOpen ? " rotate-180" : " rotate-0"
+          }`}
+        >
+          {isSidebarOpen ? (
+            <button
+              onClick={() => setIsSidebarOpen(false)}
+              className="md:hidden text-black text-[33px]"
+            >
+              <MdOutlineClose />
+            </button>
+          ) : (
+            <button
+              onClick={() => setIsSidebarOpen(true)}
+              className=" md:hidden text-black text-[33px]"
+            >
+              <GiHamburgerMenu />
+            </button>
+          )}
+        </div>
+
+        <div
+          className={` absolute bg-white block md:hidden   w-full  ${
+            isSidebarOpen
+              ? "h-[300px] rounded-b-3xl  "
+              : "   h-0 rounded-b-none"
+          } overflow-hidden transition-all left-0 top-[50px]   duration-300 `}
+          style={{ zIndex: 3000 }}
+        >
+          {pathName === "/" ? (
+            <ul className=" space-y-2 pt-5 ">
+              {navList?.map((e, i) => {
+                const isActive = activeSection === e.link;
+                return (
+                  <li
+                    key={i}
+                    onClick={() => {
+                      setIsSidebarOpen(false);
+                    }}
+                    className=" text-base   px-5 py-1.5 border-b border-dashed pb-2"
+                  >
+                    {" "}
+                    <div
+                      onClick={() => scrollToSection(e.link)}
+                      className={`flex items-center justify-center gap-[16px]   ${
+                        isActive ? "text-[#3DA229]" : "text-[#767676]"
+                      }`}
+                    >
+                      {e.label}
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+          ) : (
+            <ul className=" space-y-2 pt-5 ">
+              {navList?.map((e, i) => {
+                const isActive = activeSection === e.page;
+                return (
+                  <li
+                    key={i}
+                    onClick={() => {
+                      setIsSidebarOpen(false);
+                    }}
+                    className=" text-base   px-5 py-1.5 border-b border-dashed pb-2"
+                  >
+                    <Link
+                      href={e.page}
+                      className={`flex items-center justify-center gap-[16px]    ${
+                        isActive ? "text-[#3DA229]" : "text-[#767676]"
+                      }`}
+                    >
+                      {e.label}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          )}
         </div>
       </div>
-
-      <div
-        className={`bg-white block md:hidden   w-[250px] h-screen fixed left-0 top-0 border-r transition-transform duration-300 ${isSidebarOpen ? "transform-none" : "transform -translate-x-full "
-          } lg:transform-none lg:translate-x-0`}
-        style={{ zIndex: 3000 }}
-      >
-        <ul className=" space-y-2 pt-5">
-          {navList?.map((e, i) => {
-            const isActive = activeSection === e.link;
-            return (
-              <li
-                key={i}
-                className=" text-base hover:bg-[#f9fafb]  px-5 py-1.5"
-              >
-                {" "}
-                <div
-                  onClick={() => scrollToSection(e.link)}
-                  className={`flex items-center gap-[16px] ${isActive ? "text-[#3DA229]" : "text-[#767676]"
-                    }`}
-                >
-                  {e.label}
-                </div>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-      {isSidebarOpen && (
-        <div
-          onClick={() => setIsSidebarOpen(false)}
-          className="fixed w-full h-full bg-gray-800   bg-opacity-25 left-0 top-0   "
-          style={{ zIndex: 40 }}
-        ></div>
-      )}
-    </>
+    </div>
   );
 };
 
