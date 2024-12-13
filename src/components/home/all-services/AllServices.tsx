@@ -49,7 +49,6 @@ const AllServices = ({ }: Props) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [cardWidth, setCardWidth] = useState(270);
   const [isAnimating, setIsAnimating] = useState(false);
-  const [scrollEnd, setScrollEnd] = useState(false)
 
 
 
@@ -117,6 +116,68 @@ const AllServices = ({ }: Props) => {
 
 
   useEffect(() => {
+    const slider = sliderRef.current;
+    if (!slider) return;
+
+    let startY = 0;
+
+    const handleTouchStart = (e: TouchEvent) => {
+      startY = e.touches[0].clientY;
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      // Prevent default scrolling if animation is active
+      if (isAnimating) {
+        e.preventDefault();
+        return;
+      }
+
+      const deltaY = e.touches[0].clientY - startY;
+
+      if (Math.abs(deltaY) > 50) {
+        // Determine direction of swipe
+        const direction = deltaY < 0 ? 1 : -1;
+
+        // Check bounds
+        const isAtStart = activeIndex === 0 && direction === -1;
+        const isAtEnd = activeIndex === sliderData.length - 1 && direction === 1;
+
+        if (!isAtStart && !isAtEnd) {
+          e.preventDefault();
+          updateSlide(direction);
+        }
+
+        startY = e.touches[0].clientY; // Reset startY for smoother swipes
+      }
+    };
+
+    const updateSlide = (direction: number) => {
+      const nextIndex = Math.max(0, Math.min(sliderData.length - 1, activeIndex + direction));
+      if (nextIndex === activeIndex) return;
+
+      setIsAnimating(true);
+      setActiveIndex(nextIndex);
+
+      gsap.to(slideRef.current, {
+        x: -(nextIndex * cardWidth),
+        duration: 1,
+        ease: "power2.out",
+        onComplete: () => setIsAnimating(false),
+      });
+    };
+
+    // Attach touch event listeners
+    slider.addEventListener("touchstart", handleTouchStart);
+    slider.addEventListener("touchmove", handleTouchMove, { passive: false });
+
+    return () => {
+      slider.removeEventListener("touchstart", handleTouchStart);
+      slider.removeEventListener("touchmove", handleTouchMove);
+    };
+  }, [activeIndex, isAnimating, isInView, cardWidth]);
+
+
+  useEffect(() => {
     if (cardRef.current) {
       setCardWidth(cardRef.current.offsetWidth); // Dynamically calculate card width
     }
@@ -130,22 +191,8 @@ const AllServices = ({ }: Props) => {
       <section className=" relative  h-[200vh] " ref={targetRef}>
         <motion.div
           ref={containerRef}
-          className={cn(`sticky  top-[2.5vh] transform  bg-cover bg-center md:mx-8 rounded-xl md:rounded-[56px] overflow-hidden h-[95vh]`,
+          className={cn(`sticky  top-[2.5vh] transform  bg-cover bg-center md:mx-8 rounded-0 md:rounded-[56px] overflow-hidden h-[90vh] sm:h-[95vh]`,
           )}
-        // <motion.div
-        //   className={cn(`sticky  ${isMobile && " top-8"} transform  bg-cover bg-center md:mx-4 rounded-xl md:rounded-[56px] overflow-hidden h-[700px] md:h-[800px]`,
-        //     isAnimateInView ? "-translate-y-1/2 top-1/2 " : "translate-y-0 top-8"
-        //   )}
-
-        // initial={{ top: "8%", transform: "translateY(0)" }} // Initial state (before it comes into view)
-        // animate={{
-        //   top: isAnimateInView ? "50%" : "8%", // Adjust top when in view
-        //   transform: isAnimateInView ? "translateY(-50%)" : "translateY(0)", // Adjust transform when in view
-        // }}
-        // transition={{
-        //   top: { duration: 0.6, ease: "easeOut" }, // Smooth transition for 'top'
-        //   transform: { duration: 0.6, ease: "easeOut" }, // Smooth transition for 'transform'
-        // }}
         >
           {/* Image Transition */}
           <div className="w-full h-full absolute top-0 left-0">
@@ -185,7 +232,7 @@ const AllServices = ({ }: Props) => {
                         <div className="md:py-3 w-full  ">
                           <AnimatePresence mode="wait">
                             <motion.p
-                              className="text-4xl md:text-5xl lg:text-[60px] text-white md:mt-10"
+                              className="text-xl md:text-5xl lg:text-[60px] text-white md:mt-10 whitespace-nowrap"
                               style={{ lineHeight: "70px" }}
                               key={`current-placeholder-${activeIndex}`}
                               initial={{
@@ -209,16 +256,16 @@ const AllServices = ({ }: Props) => {
                             </motion.p>
                           </AnimatePresence>
 
-                          <p className="text-base md:text-lg lg:text-xl text-white md:mt-10">
+                          <p className="text-xs md:text-lg lg:text-xl text-white md:mt-10">
                             EmergeX will assist you to better understand and manage
                             workplace safety by integrating hazards and incident
                             reporting with investigations, actions, and metrics
                             reporting.
                           </p>
                           <Link href={'/services'}>
-                          <button className=" mt-12 bg-customGreen px-4 py-1.5 md:px-6 md:py-2 text-white w-fit rounded-[60px] text-base md:text-2xl">
-                            Explore Now
-                          </button>
+                            <button className=" mt-12 bg-customGreen px-4 py-1.5 md:px-6 md:py-2 text-white w-fit rounded-[60px] text-base md:text-2xl">
+                              Explore Now
+                            </button>
                           </Link>
                         </div>
                       </div>
@@ -227,10 +274,10 @@ const AllServices = ({ }: Props) => {
                   </div>
                 </div>
 
-                <div className="w-full  md:w-[50%] overflow-visible  md:pl-20 pb-6 absolute bottom-0 -right-[10%] sm:-right-[12%]  md:right-0    " ref={sliderRef}>
+                <div className="w-full  md:w-[50%] overflow-visible  md:pl-20 pb-6 absolute bottom-0 -right-[25%] sm:-right-[12%]  md:right-[12%]  lg:right-0   " ref={sliderRef}>
                   <motion.div
                     ref={slideRef}
-                    className="w-full flex max-md:-mt-24 md:mt-32 items-end  se mx-auto gap-6"
+                    className="w-full flex max-md:-mt-24 md:mt-32 items-end mx-auto gap-6"
                   >
                     {sliderData.map((card, index) => (
                       <ServiceCard
@@ -259,7 +306,7 @@ const ServiceCard = React.forwardRef<HTMLDivElement, { image: string; text: stri
   ({ image, text, isActive, isLastIndex, index, activeIndex }, ref) => (
     <AnimatePresence>
       <motion.div
-        className="h-[420px] flex items-end"
+        className=" h-[420px] flex items-end"
         ref={ref}
         initial={{
           scale: 1,
@@ -283,11 +330,19 @@ const ServiceCard = React.forwardRef<HTMLDivElement, { image: string; text: stri
           ease: "easeIn",
         }}
       >
-        <div className="rounded-2xl overflow-visible w-[240px]">
-          <Image src={image} alt={text} height={800} width={400} />
+        <div className="rounded-2xl overflow-hidden  w-[200px] sm:w-[240px] lg:h-[300px] h-[220px] relative">
+          <Image
+            src={image}
+            alt={text}
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          />
         </div>
+
       </motion.div>
     </AnimatePresence>
+
   )
 );
 

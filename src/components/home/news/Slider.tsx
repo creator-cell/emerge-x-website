@@ -54,41 +54,39 @@ const Slider = () => {
   }, []);
 
   return (
-    <div className="flex w-full justify-center  mx-auto  mt-10 md:mt-20 ">
-      <Swiper
-        effect={"coverflow"}
-        grabCursor={true}
-        centeredSlides={true}
-        slidesPerView={slidesPerView}
-        initialSlide={1}
-        centeredSlidesBounds={true}
-        spaceBetween={0} // Adjust to add spacing between slides
-        loop={true}
-        coverflowEffect={{
-          rotate: 0,
-          stretch: 0,
-          depth: 100,
-          modifier: 3,
-          slideShadows: false,
-        }}
-        pagination={false}
-        navigation={false}
-        autoplay={{
-          delay: 3000,
-          disableOnInteraction: false,
-        }}
-        modules={[EffectCoverflow, Navigation, Autoplay]}
-        className="w-full " // Ensure it adapts to screen size
-      >
-        {SlidesData.map((e, index) => (
-          <SwiperSlide key={index}>
-            <div className="relative w-[200px] md:w-[350px] rounded-[30px] lg:rounded-[75px] overflow-hidden">
-              <Image src={e.img} alt="slideimages" width={450} height={720} />
-            </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
-    </div>
+    <Swiper
+      effect={"coverflow"}
+      grabCursor={true}
+      centeredSlides={true}
+      slidesPerView={slidesPerView}
+      initialSlide={1}
+      centeredSlidesBounds={true}
+      spaceBetween={0} // Adjust to add spacing between slides
+      loop={true}
+      coverflowEffect={{
+        rotate: 0,
+        stretch: 0,
+        depth: 100,
+        modifier: 3,
+        slideShadows: false,
+      }}
+      pagination={false}
+      navigation={false}
+      autoplay={{
+        delay: 3000,
+        disableOnInteraction: false,
+      }}
+      modules={[EffectCoverflow, Navigation, Autoplay]}
+      className="w-full mt-12" // Ensure it adapts to screen size
+    >
+      {SlidesData.map((e, index) => (
+        <SwiperSlide key={index}>
+          <div className="rounded-[37px]  lg:rounded-[75px] overflow-hidden">
+            <Image src={e.img} alt="slideimages" width={450} height={720} />
+          </div>
+        </SwiperSlide>
+      ))}
+    </Swiper>
   );
 };
 

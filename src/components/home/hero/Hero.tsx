@@ -16,7 +16,7 @@ const Hero = ({ scrollYProgress }: HeroProps) => {
 
 
   return (
-    <motion.div className=" sticky top-0 h-[100vh] overflow-hidden  " >
+    <motion.div className=" sticky top-0 h-screen overflow-hidden  " >
       <div >
         <video
           controlsList="nodownload"
@@ -48,17 +48,20 @@ const Hero = ({ scrollYProgress }: HeroProps) => {
           Your browser does not support the video tag.
         </video>
       </div>
-      <div className=" absolute left-0 bottom-0 w-full">
+      <div className=" absolute left-0 bottom-8 sm:bottom-0 w-full">
         <div className="  p-8 pb-10 w-[90%] ">
           <div>
             <motion.h2
               style={{ transform: scaleValue }}
-              className=" text-[38px] md:text-[70px] font-[700] text-[#222720] leading-[105px]">
+              className="text-[38px] md:text-[70px] font-[700] text-[#222720] leading-[60px] md:leading-[105px] whitespace-nowrap">
               Featuring over
+              <br />
+              <span className="text-customGreen">50 modules</span>
             </motion.h2>
-            <motion.h2 style={{ transform: scaleValue }} className="text-[38px] md:text-[70px] font-[700] text-customGreen">
+
+            {/* <motion.h2 style={{ transform: scaleValue }} className="text-[38px] md:text-[70px] font-[700] text-customGreen">
               50 modules
-            </motion.h2>
+            </motion.h2> */}
           </div>
           <div className=" flex flex-col sm:flex-row sm:items-end justify-between gap-4 mt-12">
             <motion.p
