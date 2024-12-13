@@ -9,6 +9,8 @@ import {
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import NavBar from "../navbar/NavBar";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
 
 export const FloatingNav = ({
   navItems,
@@ -61,7 +63,11 @@ export const FloatingNav = ({
       }
     }
   });
+  const checked = useSelector((state: RootState) => state.cart.isChecked);
 
+  if (checked) {
+    return;
+  }
   return (
     <div className="w-full container">
       {!isFloatingNav ? (
@@ -82,7 +88,7 @@ export const FloatingNav = ({
               opacity: 0,
               y: -100,
             }}
-            className="w-full fixed top-4 left-0 z-30"
+            className="w-full fixed top-4 left-0 z-10"
           >
             <NavBar />
           </motion.div>

@@ -193,7 +193,7 @@ export default function Home() {
   }, []);
 
   const isMobile = useMediaQuery('(max-width: 768px)'); // For screens up to 768px
-
+ 
   return (
     <div className="space-y-4 relative" id="home">
       <div ref={targetRef} className="relative">

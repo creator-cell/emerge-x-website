@@ -1,3 +1,4 @@
+import useDisableScroll from "@/hooks/useDisableScroll ";
 import React from "react";
 
 interface ModalAnimationTypes {
@@ -9,14 +10,15 @@ const ModalAnimation: React.FC<ModalAnimationTypes> = ({
   isVisible,
   onClose,
 }) => {
+  useDisableScroll(isVisible);
   return (
-    <div className="fixed left-0 top-0 w-full h-screen z-50 bg-[#010101]  flex items-center justify-center  ">
+    <div className=" z-[9000] fixed left-0 top-0 w-full h-screen  bg-[#010101]  flex items-center justify-center   ">
       <div className={`popup-border`}>
         <div className="left-shine"></div>
         <div className="right-shine"></div>
 
         <button
-          onClick={onClose}
+          onClick={ onClose}
           className="absolute top-4 right-5 text-white bg-[#222720]  rounded-full p-2 transition font-bold"
           aria-label="Close Modal"
         >

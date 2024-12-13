@@ -17,7 +17,7 @@ gsap.registerPlugin(ScrollToPlugin);
 const NavBar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
   const [activeSection, setActiveSection] = useState<string>("#home");
-// a 
+  // a
   const pathName = usePathname();
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -36,7 +36,6 @@ const NavBar = () => {
   // Update active section based on scroll position
   useEffect(() => {
     const handleScroll = () => {
-     
       const sections = navList.map((item) => ({
         id: item.link,
         element: document.querySelector(item.link),
@@ -87,6 +86,7 @@ const NavBar = () => {
             })}
             <li>
               <BookDemoButton
+                hideNavbar={false}
                 rightArrow={false}
                 className={`bg-customGreen text-white text-md lg:text-xl rounded-2xl md:py-[12px] sm:w-auto px-[8px]  md:w-[167px] text-md justify-center`}
               />
@@ -109,6 +109,7 @@ const NavBar = () => {
             })}
             <li>
               <BookDemoButton
+                hideNavbar={false}
                 rightArrow={false}
                 className={`bg-customGreen text-white text-md lg:text-xl rounded-2xl md:py-[12px] sm:w-auto px-[8px]  md:w-[167px] text-md justify-center`}
               />

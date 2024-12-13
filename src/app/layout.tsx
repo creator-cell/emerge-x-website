@@ -6,6 +6,7 @@ import Footer from "@/components/footer/Footer";
 import { FloatingNav } from "@/components/ui/floating-navbar";
 
 import { Inter } from "next/font/google";  // Import Inter from Google Fonts
+import StoreProvider from "./StoreProvider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -49,6 +50,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} antialiased`}>
+      <StoreProvider>
+
+     
         <div className="flex flex-col min-h-screen relative">
           {/* <NavBar /> */}
           <FloatingNav navItems={navItems} />
@@ -57,6 +61,7 @@ export default function RootLayout({
           </div>
           <Footer />
         </div>
+        </StoreProvider>
       </body>
     </html>
   );
