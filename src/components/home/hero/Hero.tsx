@@ -73,7 +73,7 @@ const Hero = ({ scrollYProgress }: HeroProps) => {
             <BookDemoButton
               hideNavbar={true}
               rightArrow={true}
-              className=" text-2xl pl-[40px] gap-4 z-50"
+              className="text-lg md:text-2xl pl-[40px] gap-4 z-50"
             />
           </div>
         </div>
