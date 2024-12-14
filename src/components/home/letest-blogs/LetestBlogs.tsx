@@ -37,8 +37,8 @@ const LetestBlogs: React.FC = () => {
 
 
   return (
-    <div className="relative overflow-visible  h-auto p-9  " >
-       <span id={"container"} className='mt-[-160px] pb-[130px] block' >
+    <div className="relative overflow-visible  h-auto p-9  " id="container" >
+       <span id={"animationContainer"} className='mt-[-160px] pb-[130px] block' >
                     &nbsp;
                 </span>
       <div
