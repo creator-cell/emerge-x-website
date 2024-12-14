@@ -202,7 +202,6 @@ export default function Home() {
 
     });
 
-    // Cleanup on unmount
     return () => {
       mm.revert();
     };
