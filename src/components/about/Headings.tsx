@@ -10,6 +10,7 @@ const Headings: React.FC<HeadingsPropsTypes> = ({ label, heading }) => {
         {heading}
       </h2>
     </div>
+    // a 
   );
 };
 

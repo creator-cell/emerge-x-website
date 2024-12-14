@@ -68,13 +68,13 @@ const CardBlog: React.FC<CardBlogTypes> = ({
           fill
           className="w-full object-cover "
         />
-        <button className={cn(`absolute z-20 top-[0] left-[7px] w-[80px] h-[25px] bg-green-500 text-white rounded-tl-[12px] rounded-br-[20px] rounded-tr-[8px] rounded-bl-[12px] text-[12px]`,dateButtonStyle)}>
-          13-12-2024
+        <button className={cn(`absolute z-20  top-[0] left-[7px] w-[80px] h-[25px] bg-green-500 text-white rounded-tl-[12px] rounded-br-[20px] rounded-tr-[8px] rounded-bl-[12px] text-[12px]`,dateButtonStyle)}>
+        Abraham 
         </button>
       </div>
       <div className={`${list ? " w-[60%] h-fit" : "w-full"}`}>
         <p className={cn(" text-customGreen text-xs font-[500]", styleDate)}>
-          Dec 23,2024
+          Dec 13,2024
         </p>
         <h2 className={cn(" text-greyishblack  font-[600]", styleHeading)}>
           {data?.title}

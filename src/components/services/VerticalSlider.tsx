@@ -17,7 +17,7 @@ const VerticalSlider: React.FC<VerticalSliderTypes> = ({ activeIndex }) => {
     { line: "Preparedness" },
     { line: "Recovery" },
     { line: "Response" },
-    { line: "Prevention" },
+    { line: "Prevention" }, 
     { line: "Preparedness" },
     { line: "Recovery" },
     { line: "Response" },

@@ -68,7 +68,7 @@
 
 // export default Slider;
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import {
   EffectCoverflow,
@@ -92,16 +92,47 @@ const Slider = () => {
     { img: "/services/About US.jpg" },
     { img: "/services/Recovery.jpg" },
   ];
+ const swiperRef = useRef<any>(null);
+  const [activeIndex, setActiveIndex] = useState<number>(0);
+   useEffect(() => {
+      const swiperInstance = swiperRef.current?.swiper;
+  
+      if (swiperInstance) {
+        const updateIndex = () => setActiveIndex(swiperInstance.activeIndex);
+  
+        swiperInstance.on("slideChange", updateIndex);
+        updateIndex(); // Set initial active index
+  
+        return () => {
+          swiperInstance.off("slideChange", updateIndex);
+        };
+      }
+    }, []);
 
+    useEffect(()=>{
+      if (swiperRef.current) {
+        swiperRef.current.swiper.slideNext();
+      }
+    },[])
+  
+    // const goToSlide = (index: number) => {
+    //   if (swiperRef.current) {
+    //     swiperRef.current.swiper.slideTo(index);
+    //   }
+    // };
 
-
-
+    // const slideNext = () => {
+    //   if (swiperRef.current) {
+    //     swiperRef.current.swiper.slideNext();
+    //   }
+    // };
   return (
-    <div className="sm:px-10 w-full flex items-center justify-center relative">
+    <div className="md:px-10 w-full flex items-center justify-center relative">
       {/* <div className="w-[20%] h-full bg-white absolute z-30 top-0 left-0 border border-red-600"></div> */}
       {/* <div className="w-[20%] h-full bg-white absolute z-30 right-0 top-0 border border-red-600"></div> */}
       <Swiper
         effect={"coverflow"}
+        ref={swiperRef}
         grabCursor={true}
         centeredSlides={true}
         slidesPerView={"auto"}
@@ -118,7 +149,7 @@ const Slider = () => {
         }}
         breakpoints={{
           320: {
-            slidesPerView: 2,
+            slidesPerView: 3,
           },
           768: {
             slidesPerView: 3,
@@ -136,7 +167,8 @@ const Slider = () => {
         //   stopOnLastSlide: false,
         //   waitForTransition: true,
         // }}
-        modules={[EffectCoverflow, Navigation]}
+      
+        modules={[EffectCoverflow, Navigation,Autoplay]}
         className="w-full mt-12" // Ensure it adapts to screen size
         style={{
           position: "relative",
@@ -149,7 +181,7 @@ const Slider = () => {
       >
         {SlidesData.map((e, index) => (
           <SwiperSlide key={index}>
-            <div className="rounded-[10px]  lg:rounded-[15px] overflow-hidden  w-fit  mx-auto">
+            <div className="rounded-[10px]  lg:rounded-[15px] overflow-hidden  w-fit  h-fit mx-auto">
               <div>
                 <Image src={e.img} alt="slideimages" width={450} height={720} />
               </div>
