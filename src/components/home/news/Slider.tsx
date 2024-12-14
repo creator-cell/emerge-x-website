@@ -93,6 +93,9 @@ const Slider = () => {
     { img: "/services/Recovery.jpg" },
   ];
 
+
+
+
   return (
     <div className="sm:px-10 w-full flex items-center justify-center relative">
       {/* <div className="w-[20%] h-full bg-white absolute z-30 top-0 left-0 border border-red-600"></div> */}
