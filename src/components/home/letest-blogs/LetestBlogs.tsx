@@ -37,7 +37,10 @@ const LetestBlogs: React.FC = () => {
 
 
   return (
-    <div className="relative overflow-visible  h-auto p-9  " id="container">
+    <div className="relative overflow-visible  h-auto p-9  " >
+       <span id={"container"} className='mt-[-160px] pb-[130px] block' >
+                    &nbsp;
+                </span>
       <div
         id="latest-blogs-section"
         className="absolute top-[30%]  left-1/2 transform -translate-x-1/2 -translate-y-1/2 aspect-square bg-white rounded-full -z-10"
