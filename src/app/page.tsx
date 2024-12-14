@@ -147,7 +147,7 @@ export default function Home() {
         duration: 0.8,
         scale: 1,
         ease: "power1.out",
-      }, "b+=0.5");
+      }, "b+=0.3");
 
 
     });
@@ -198,7 +198,7 @@ export default function Home() {
         duration: 0.8,
         scale: 1,
         ease: "power1.out",
-      }, "d+=0.5");
+      }, "d+=0.3");
 
     });
 
