@@ -3,13 +3,16 @@ import SectionWrapper from "@/components/reusable/SectionWrapper";
 import React from "react";
 import Slider from "./Slider";
 import Link from "next/link";
+import SliderWithMotion from "./SliderWithMotion";
 
 
 const News = () => {
   return (
     <div className="bg-white text-greyishblack flex flex-col items-center justify-center pt-14" id="news">
       <SectionHeading text="News" />
-      <Slider />
+      {/* <Slider /> */}
+      
+      <SliderWithMotion/>
       {/* <SlickSlider/> */}
       <div className="text-center md:text-[26px] text-[20px] mt-10">
         Work Strategy

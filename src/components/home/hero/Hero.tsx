@@ -32,7 +32,7 @@ const Hero = ({ scrollYProgress }: HeroProps) => {
           <div>
             <motion.h2
               style={{ transform: scaleValue }}
-              className="text-[38px] md:text-[70px] font-[700] text-[#222720] leading-[60px] md:leading-[105px] whitespace-nowrap"
+              className="text-[38px] md:text-[70px] font-[700] text-white leading-[60px] md:leading-[105px] whitespace-nowrap"
             >
               Featuring over
               <br />
@@ -46,9 +46,9 @@ const Hero = ({ scrollYProgress }: HeroProps) => {
           <div className=" flex flex-col sm:flex-row sm:items-end justify-between gap-4 mt-4">
             <motion.p
               style={{ transform: scaleValue }}
-              className=" text-[#232A20] text-xl md:text-[28px]"
+              className=" text-white text-xl md:text-[28px]"
             >
-              What services do we offer
+              What services do we offer 
             </motion.p>{" "}
           </div>
           <div className="  flex items-center justify-center mt-16 mb-10 ">

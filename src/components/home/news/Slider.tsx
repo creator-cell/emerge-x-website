@@ -140,6 +140,7 @@ const Slider = () => {
         centeredSlidesBounds={true}
         spaceBetween={0}
         loop={true}
+        autoplay
         coverflowEffect={{
           rotate: 0,
           stretch: 0,
