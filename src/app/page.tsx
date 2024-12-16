@@ -35,15 +35,6 @@ export default function Home() {
   const blogsAllData = useSelector((state: RootState) => state.blog.blogsData)
   const newsAllData = useSelector((state: RootState) => state.news.newsData)
 
-  const dispatch = useDispatch();
-  console.log("blogsData", blogsAllData)
-  // useEffect(() => {
-  //   if (latestBlogRef?.current) {
-  //     setlatestBlogSectionHeight(latestBlogRef.current.offsetHeight)
-  //     // setlatestBlogSectionHeight(latestBlogRef.current.clientHeight)
-  //   }
-
-  // }, [latestBlogRef])
 const dispatch = useDispatch();
 
   useEffect(() => {
