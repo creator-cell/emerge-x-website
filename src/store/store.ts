@@ -1,5 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import cartReducer from "@/store/fetures/buttons/providerButton";
+import blogReducer from "@/store/reducer/blog";
+import newsReducer from "@/store/reducer/news";
 
 
 
@@ -7,6 +9,8 @@ export const makeStore = () => {
   return configureStore({
     reducer: {
       cart: cartReducer,
+      blog: blogReducer,
+      news: newsReducer,
 
  
     },
