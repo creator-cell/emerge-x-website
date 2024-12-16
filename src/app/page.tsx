@@ -18,6 +18,8 @@ import { getApiHelper } from "@/components/helper/apiHelper";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import { blogsData } from "@/store/reducer/blog";
+import { newsData } from "@/store/reducer/news";
+
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -30,9 +32,8 @@ export default function Home() {
 
   const [latestBlogSectionHeight, setlatestBlogSectionHeight] = useState(0);
   const blogsAllData = useSelector((state: RootState) => state.blog.blogsData)
-  const newsAllData = useSelector((state: RootState) => state.news.NewsData)
+  const newsAllData = useSelector((state: RootState) => state.news.newsData)
   const dispatch = useDispatch();
-  console.log("blogsData", blogsAllData)
   // useEffect(() => {
   //   if (latestBlogRef?.current) {
   //     setlatestBlogSectionHeight(latestBlogRef.current.offsetHeight)
@@ -43,15 +44,27 @@ export default function Home() {
 
 
   useEffect(() => {
-    getBlogData()
+    getNewsData()
   }, [])
 
-  const getBlogData = async () => {
-    const response = await getApiHelper('http://localhost:8081/v1/blog?page=1&limit=10', "GET")
-    dispatch(blogsData(response))
 
-    console.log(response)
-  }
+  const getNewsData = async () => {
+    try {
+      const response = await getApiHelper('http://localhost:8081/v1/news?page=1&limit=10', "GET");
+  
+      if (response?.success) {
+        dispatch(newsData(response?.data));
+        console.log("Blogs Data:", response?.data);
+      } else {
+        console.error("Failed to fetch blogs:", response?.error);
+      }
+    } catch (error: any) {
+      console.error("API error:", error.error || error.message);
+      alert( error.error || error.message);
+    }
+  };
+
+  console.log(newsAllData)
 
 
   useEffect(() => {

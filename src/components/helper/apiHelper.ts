@@ -1,13 +1,17 @@
 import axios from "axios";
 
-export const getApiHelper = (api: any, method: any) => {
-  const apiUrl = api;
+export const getApiHelper = (api: string, method: string) => {
   return new Promise((resolve, reject) => {
     axios({
       method: method,
-      url: apiUrl,
+      url: api,
     })
-      .then((res) => resolve(res))
-      .catch((error) => reject(error));
+      .then((res) => {
+        resolve({ success: true, data: res.data });
+      })
+      .catch((error) => {
+        const errorMessage = error.response?.data?.message || error.message || "Something went wrong";
+        reject({ success: false, error: errorMessage });
+      });
   });
 };

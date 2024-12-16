@@ -2,23 +2,23 @@ import { createSlice } from "@reduxjs/toolkit";
 
 
 export interface NewsState {
-    NewsData: any;
+    newsData: any;
 }
 
 const initialState: NewsState = {
-    NewsData: []
+    newsData: []
 }
 
 export const NewsSlice = createSlice({
     name: 'News',
     initialState,
     reducers: {
-        NewsData: (state, action) => {
-            state.NewsData = (action.payload)
+        newsData: (state, action) => {
+            state.newsData = (action.payload)
         },
     },
 });
 
 
-export const { NewsData } = NewsSlice.actions
+export const { newsData } = NewsSlice.actions
 export default NewsSlice.reducer;
