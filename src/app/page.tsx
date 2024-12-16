@@ -14,6 +14,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { useMediaQuery } from "usehooks-ts";
 import { cn } from "@/lib/utils";
+import { getApiHelper } from "@/components/helper/apiHelper";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -33,6 +34,16 @@ export default function Home() {
   //   }
 
   // }, [latestBlogRef])
+
+
+  useEffect(() => {
+    getBlogData()
+  },[])
+
+  const getBlogData = async () => {
+    const response = await getApiHelper('http://localhost:8081/v1/blog?page=1&limit=10',"GET")
+    console.log(response)
+  }
 
 
   useEffect(() => {
