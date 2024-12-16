@@ -10,6 +10,8 @@ import { useMediaQuery } from "usehooks-ts";
 import Link from "next/link";
 import { blogs } from "@/components/blogs/blogData";
 import CardBlog from "@/components/blogs/CardBlog";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
@@ -21,6 +23,8 @@ type BlogData = {
 
 const LetestBlogs: React.FC = () => {
   const isMobile = useMediaQuery("(max-width: 500px)"); // For screens up to 768px
+  const blogsAllData = useSelector((state: RootState) => state.blog.blogsData)
+
 
   // const letestBlogData: BlogData[] = [
   //   { img: "/services/About US.jpg", title: "Frontline Workers", slugid: "#" },
@@ -38,9 +42,9 @@ const LetestBlogs: React.FC = () => {
 
   return (
     <div className="relative overflow-visible  h-auto p-9  " id="container" >
-       <span id={"animationContainer"} className='mt-[-160px] pb-[130px] block' >
-                    &nbsp;
-                </span>
+      <span id={"animationContainer"} className='mt-[-160px] pb-[130px] block' >
+        &nbsp;
+      </span>
       <div
         id="latest-blogs-section"
         className="absolute top-[30%]  left-1/2 transform -translate-x-1/2 -translate-y-1/2 aspect-square bg-white rounded-full -z-10"
@@ -57,22 +61,22 @@ const LetestBlogs: React.FC = () => {
             </h2>
 
             <div className="grid grid-cols-1  sm:grid-cols-2 lg:grid-cols-3 gap-x-[70px] lg:gap-x-[110px] mt-8 md:mt-14 lg:mt-16">
-              {blogs.map((e, i) => (
+              {blogsAllData?.blog?.slice(0,6).map((e:any, i:number) => (
                 <div
-                  key={e.id}
+                  key={e._id}
                   className="blog-card lg:opacity-0 lg:scale-50 mt-8"
                   id="blogCard"
                 >
-                  <CardBlog 
-                   key={i}
-                   data={e}
-                   list={false}
-                   styleHeading="text-[14px] lg:text-[16px]"
-                   styleBox="aspect-square max-w-[270px]"
-                   styleCard="items-start max-w-[270px] mx-auto"
-                   curveIconStyle="w-[40%]"
-                   dateButtonStyle="w-[32%] left-2 "
-                    />
+                  <CardBlog
+                    key={i}
+                    data={e}
+                    list={false}
+                    styleHeading="text-[14px] lg:text-[16px]"
+                    styleBox="aspect-square max-w-[270px]"
+                    styleCard="items-start max-w-[270px] mx-auto"
+                    curveIconStyle="w-[40%]"
+                    dateButtonStyle="w-[32%] left-2 "
+                  />
                 </div>
               ))}
             </div>

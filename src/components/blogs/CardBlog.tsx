@@ -1,14 +1,14 @@
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 // import icon from "./blog/Subtract.svg"
 import Image from "next/image";
 
 export interface BlogsData {
-  id: number;
+  _id: number;
   title: string;
   slug: string;
-  image: string;
+  futureImages: string;
   content: string;
   heading: string;
   details: string;
@@ -16,6 +16,7 @@ export interface BlogsData {
   list2: string;
   details2: string;
   details3: string;
+  createdAt: string;
 }
 
 interface CardBlogTypes {
@@ -26,7 +27,7 @@ interface CardBlogTypes {
   styleCard?: string;
   data?: Partial<BlogsData>;
   curveIconStyle?: string;
-  dateButtonStyle?:string;
+  dateButtonStyle?: string;
 }
 const CardBlog: React.FC<CardBlogTypes> = ({
   list,
@@ -38,9 +39,24 @@ const CardBlog: React.FC<CardBlogTypes> = ({
   curveIconStyle,
   dateButtonStyle
 }) => {
+  const [date,setDate]=useState(data?.createdAt|| "")
+  useEffect(() => {
+    const apiDate = data?.createdAt;
+
+    // Create a Date object
+    const dateObj = new Date(apiDate || "");
+
+    // Format the date as "Dec 13, 2024"
+    const formattedDate = dateObj.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+    });
+    setDate(formattedDate)
+  }, [])
   return (
     <Link
-      href={`/blogs/${data?.id}`}
+      href={`/blogs/${data?._id}`}
       className={cn(
         ` w-full flex gap-4 items-center    ${list ? "flex-row" : "flex-col"}`,
         styleCard
@@ -48,8 +64,7 @@ const CardBlog: React.FC<CardBlogTypes> = ({
     >
       <div
         className={cn(
-          ` ${
-            list ? "w-[30%] " : " w-full "
+          ` ${list ? "w-[30%] " : " w-full "
           }  rounded-[14px] bg-[#D9D9D9] relative`,
           styleBox
         )}
@@ -61,20 +76,20 @@ const CardBlog: React.FC<CardBlogTypes> = ({
           height={400}
           className={cn(` absolute top-0 left-0 z-20 w-[60%] `, curveIconStyle)}
         />
-{/* a  */}
         <Image
-          src={data?.image || ""}
+          // src={data?.futureImages || ""}
+          src="/services/About US.jpg"
           alt="Subtract Icon"
           fill
           className="w-full object-cover "
         />
-        <button className={cn(`absolute z-20  top-[0] left-[7px] w-[80px] h-[25px] bg-green-500 text-white rounded-tl-[12px] rounded-br-[20px] rounded-tr-[8px] rounded-bl-[12px] text-[12px]`,dateButtonStyle)}>
-        Abraham 
+        <button className={cn(`absolute z-20  top-[0] left-[7px] w-[80px] h-[25px] bg-green-500 text-white rounded-tl-[12px] rounded-br-[20px] rounded-tr-[8px] rounded-bl-[12px] text-[12px]`, dateButtonStyle)}>
+          Abraham
         </button>
       </div>
       <div className={`${list ? " w-[60%] h-fit" : "w-full"}`}>
         <p className={cn(" text-customGreen text-xs font-[500]", styleDate)}>
-          Dec 13,2024
+          {date}
         </p>
         <h2 className={cn(" text-greyishblack  font-[600]", styleHeading)}>
           {data?.title}

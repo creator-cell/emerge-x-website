@@ -8,6 +8,8 @@ import SectionWrapper from "@/components/reusable/SectionWrapper";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { blogs } from "@/components/blogs/blogData";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
 interface BlogData {
   id: number;
   title: string;
@@ -25,16 +27,14 @@ const page = () => {
   const pathname = usePathname(); // Get the full pathname of the current URL
   const [slug, setSlug] = useState<string | null>(null);
   const [blogData, setBlogData] = useState<BlogData[]>([]);
+  const blogsAllData = useSelector((state: RootState) => state.blog.blogsData)
   useEffect(() => {
     if (!pathname) return;
 
     const IdData = pathname?.split("/").pop();
     if (!IdData) return;
 
-    const numericId = parseInt(IdData, 10); // Convert to a number
-    if (isNaN(numericId)) return; // Ensure valid number
-
-    const AllData = blogs.filter((e) => e.id === numericId); // Compare as numbers
+    const AllData = blogsAllData?.blog?.filter((e:any) => e._id == IdData); 
     setBlogData(AllData);
   }, [pathname]);
   const navTrain = [
@@ -55,7 +55,7 @@ const page = () => {
           <>
             <HeroResusable
               title={data?.title}
-              description={data?.slug}
+              description={data?.title}
               image="/news/intro.png"
               className="bg-gradient-to-r from-black/0 to-black/90"
               textColor="white"
@@ -72,7 +72,8 @@ const page = () => {
                 <div className="w-full md:w-[45%] max-w-[516px]">
                   <div>
                     <Image
-                      src={data?.image}
+                      // src={data?.image}
+                      src="/services/About US.jpg"
                       alt="img"
                       width={600}
                       height={600}
@@ -106,7 +107,7 @@ const page = () => {
                 You may also like
               </h2>
               <div className=" mt-20 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[0] md:gap-x-[20px] lg:gap-x-[34px] gap-y-[100px] ">
-                {blogs?.slice(0, 4).map((e, i) => (
+                {blogsAllData?.blog?.slice(0, 4).map((e:any, i:number) => (
                   <CardBlog
                     key={i}
                     data={e}

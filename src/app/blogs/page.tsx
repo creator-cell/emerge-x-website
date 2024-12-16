@@ -1,12 +1,18 @@
+'use client'
 import CardBlog from "@/components/blogs/CardBlog";
 import HeroBlog from "@/components/blogs/HeroBlog";
 import BreadCrumb from "@/components/reusable/BreadCrumb";
 import { HeroResusable } from "@/components/reusable/HeroReusable";
 import SectionWrapper from "@/components/reusable/SectionWrapper";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { ReadonlyURLSearchParams } from "next/navigation";
 import { blogs } from "@/components/blogs/blogData";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/store/store";
+import { getApiHelper } from "@/components/helper/apiHelper";
+import { blogsData } from "@/store/reducer/blog";
+import { Button } from "@/components/ui/button";
 
 const navTrain = [
   { link: "/", label: "Home", id: "a1" },
@@ -16,9 +22,28 @@ const navTrain = [
 
 const page = ({ searchParams }: { searchParams: ReadonlyURLSearchParams }) => {
   const tab = searchParams ? new URLSearchParams(searchParams).toString() : "";
+  const blogsAllData = useSelector((state: RootState) => state.blog.blogsData)
 
-  const trandingData = [0, 2, 3, 4];
-  const viewAllBlogsData = [0, 2, 3, 4, 5, 6, 7, 8, 1];
+  const [currentPage, setCurrentPage] = useState<number>(blogsAllData?.currentPage || 1)
+  const dispatch = useDispatch();
+  const handlePagination = async (page: number) => {
+    try {
+      const response = await getApiHelper(`http://localhost:8081/v1/blog?page=${page}&limit=10`, "GET");
+
+      if (response?.success) {
+        dispatch(blogsData(response?.data));
+      } else {
+        console.error("Failed to fetch blogs:", response?.error);
+      }
+    } catch (error: any) {
+      console.error("API error:", error.error || error.message);
+    }
+
+  }
+
+  useEffect(()=>{
+    setCurrentPage(blogsAllData?.currentPage)
+  },[blogsAllData])
 
   return (
     <div className="min-h-screen">
@@ -37,7 +62,7 @@ about EmergeX related."
 
             <div className="w-full mt-8">
               <CardBlog
-                data={blogs[1]}
+                data={blogsAllData?.blog?.[1]}
                 list={false}
                 styleBox="rounded-[26px] aspect-video"
                 styleHeading="text-[16px] md:text-[36px]"
@@ -52,22 +77,20 @@ about EmergeX related."
               <Link
                 href={"/blogs/?tab=trending"}
                 scroll={false}
-                className={`${
-                  tab === "tab=trending" || tab === ""
-                    ? "text-customGreen"
-                    : "text-greyishblack"
-                }`}
+                className={`${tab === "tab=trending" || tab === ""
+                  ? "text-customGreen"
+                  : "text-greyishblack"
+                  }`}
               >
                 Trending
               </Link>
               <Link
                 href={"/blogs/?tab=recomended"}
                 scroll={false}
-                className={`${
-                  tab === "tab=recomended"
-                    ? "text-customGreen"
-                    : "text-greyishblack"
-                }`}
+                className={`${tab === "tab=recomended"
+                  ? "text-customGreen"
+                  : "text-greyishblack"
+                  }`}
               >
                 Recommended
               </Link>
@@ -75,7 +98,7 @@ about EmergeX related."
 
             {/* Trending Section */}
             <div className="hidden md:flex flex-col gap-4 mt-8">
-              {blogs.slice(0, 4).map((e, i) => (
+              {blogsAllData?.blog?.slice(0, 4).map((e: any, i: number) => (
                 <CardBlog
                   data={e}
                   key={i}
@@ -88,7 +111,7 @@ about EmergeX related."
               ))}
             </div>
             <div className="md:hidden flex flex-col gap-4 mt-8">
-              {blogs.slice(0, 4).map((e, i) => (
+              {blogsAllData?.blog?.map((e: any, i: number) => (
                 <CardBlog
                   key={i}
                   data={e}
@@ -104,7 +127,7 @@ about EmergeX related."
 
       <SectionWrapper>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[0] md:gap-x-[20px] lg:gap-x-[34px] gap-y-[100px]">
-          {blogs.map((e, i) => (
+          {blogsAllData?.blog?.map((e: any, i: number) => (
             <CardBlog
               key={i}
               data={e}
@@ -118,6 +141,26 @@ about EmergeX related."
           ))}
         </div>
       </SectionWrapper>
+
+      <div className="flex justify-center gap-4 mt-8">
+        <Button
+          onClick={() => handlePagination(currentPage - 1)}
+          disabled={blogsAllData?.previousPage === true ? false : true}
+          className="px-4 py-2 bg-[#3DA229B3] text-white rounded-md hover:bg-[#3DA229] "
+        >
+          Previous
+        </Button>
+        <div>
+          <span className="text-lg font-semibold">{`Page ${currentPage} of ${blogsAllData?.pages?.length || 1}`}</span>
+        </div>
+        <Button
+          onClick={() => handlePagination(currentPage + 1)}
+          disabled={blogsAllData?.nextPage === true ? false : true}
+          className="px-4 py-2 bg-[#3DA229B3] text-white rounded-md hover:bg-[#3DA229]"
+        >
+          Next
+        </Button>
+      </div>
     </div>
   );
 };

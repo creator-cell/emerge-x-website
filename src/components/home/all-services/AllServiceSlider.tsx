@@ -37,10 +37,8 @@ const AllServiceSlider: React.FC = () => {
 
 
   const [scrollX, setscrollX] = useState(cardWidth)
-  console.log("🚀 ~ scrollX:", scrollX)
 
   useEffect(() => {
-    console.log("🚀 ~ activeIndex:", activeIndex)
     setscrollX(cardWidth * activeIndex)
 
   }, [activeIndex])
@@ -67,7 +65,6 @@ const AllServiceSlider: React.FC = () => {
       // Calculate the raw index (without rounding)
       const rawIndex = offset / cardWidth;
 
-      // console.log("🚀 ~ unsubscribe ~ rawIndex:", rawIndex);
 
       // Determine the new index based on the threshold
       let newIndex = 0;
@@ -78,7 +75,6 @@ const AllServiceSlider: React.FC = () => {
       // Ensure the index doesn't exceed bounds
       newIndex = Math.min(Math.floor(rawIndex), sliderData.length - 1);
 
-      // console.log("🚀 ~ unsubscribe ~ rounded newIndex:", newIndex);
 
       // Scroll the container to the current active card
       if (sliderRef.current) {

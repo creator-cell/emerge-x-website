@@ -29,10 +29,7 @@ export default function Home() {
   });
 
   const [latestBlogSectionHeight, setlatestBlogSectionHeight] = useState(0);
-  const blogsAllData = useSelector((state: RootState) => state.blog.blogsData)
-  const newsAllData = useSelector((state: RootState) => state.news.NewsData)
-  const dispatch = useDispatch();
-  console.log("blogsData", blogsAllData)
+
   // useEffect(() => {
   //   if (latestBlogRef?.current) {
   //     setlatestBlogSectionHeight(latestBlogRef.current.offsetHeight)
@@ -40,19 +37,26 @@ export default function Home() {
   //   }
 
   // }, [latestBlogRef])
-
+const dispatch = useDispatch();
 
   useEffect(() => {
     getBlogData()
   }, [])
 
   const getBlogData = async () => {
-    const response = await getApiHelper('http://localhost:8081/v1/blog?page=1&limit=10', "GET")
-    dispatch(blogsData(response))
-
-    console.log(response)
-  }
-
+    try {
+      const response = await getApiHelper('http://localhost:8081/v1/blog?page=1&limit=10', "GET");
+  
+      if (response?.success) {
+        dispatch(blogsData(response?.data));
+      } else {
+        console.error("Failed to fetch blogs:", response?.error);
+      }
+    } catch (error: any) {
+      console.error("API error:", error.error || error.message);
+    }
+  };
+  
 
   useEffect(() => {
     const preventZoom = (event: any) => {
@@ -236,8 +240,6 @@ export default function Home() {
         const blogSectionHeight = latestBlogRef.current.clientHeight || 0;
         const viewportHeight = window.innerHeight * 2;
 
-        console.log("🚀 ~ updateHeight ~ viewportHeight:", viewportHeight);
-        // Adjust height dynamically, with optional limits for larger screens
         const calculatedHeight = Math.min(
           viewportHeight + blogSectionHeight,
           2 * viewportHeight
@@ -253,7 +255,6 @@ export default function Home() {
     window.addEventListener("resize", updateHeight);
     return () => window.removeEventListener("resize", updateHeight);
   }, [latestBlogRef, latestBlogSectionHeight]);
-  console.log("🚀 ~ Home ~ latestBlogSectionHeight:", latestBlogSectionHeight);
 
 
 
