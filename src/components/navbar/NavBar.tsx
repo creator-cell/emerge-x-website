@@ -55,7 +55,7 @@ const NavBar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const router = useRouter()
+  const router = useRouter();
 
   return (
     <div className="w-full px-4 lg:px-14 ">
@@ -95,16 +95,22 @@ const NavBar = () => {
         ) : (
           <ul className=" sm:w-[82%] lg:w-[70%] max-w-[900px]  hidden md:flex items-center  gap-1   justify-between ">
             {navList?.map((e, i) => {
-              const active = pathName == e.page || (pathName.includes(e.page) && pathName !== "/");
+              const active =
+                e.page !== "/" &&
+                (pathName === e.page || pathName.startsWith(`${e.page}/`));
               return (
                 <li
                   key={i}
                   className={`hover:text-customGreen cursor-pointer text-md lg:text-xl ${active ? "text-customGreen" : "text-[#767676]"
                     }`}
                 >
-                  <button onClick={() => {
-                    router.push(e.page)
-                  }}>{e.label}</button>
+                  <button
+                    onClick={() => {
+                      router.push(e.page);
+                    }}
+                  >
+                    {e.label}
+                  </button>
                 </li>
               );
             })}
@@ -141,8 +147,8 @@ const NavBar = () => {
 
         <div
           className={` absolute bg-white block md:hidden   w-full  ${isSidebarOpen
-            ? "h-[300px] rounded-b-3xl  "
-            : "   h-0 rounded-b-none"
+              ? "h-[300px] rounded-b-3xl  "
+              : "   h-0 rounded-b-none"
             } overflow-hidden transition-all left-0 top-[50px] duration-300 `}
           style={{ zIndex: 3000 }}
         >
@@ -173,7 +179,9 @@ const NavBar = () => {
           ) : (
             <ul className=" space-y-2 pt-5 ">
               {navList?.map((e, i) => {
-                const isActive = activeSection === e.page;
+                const isActive =
+                  e.page !== "/" &&
+                  (pathName === e.page || pathName.startsWith(`${e.page}/`));
                 return (
                   <li
                     key={i}
@@ -185,7 +193,7 @@ const NavBar = () => {
                     <button
                       // href={e.page}
                       onClick={() => {
-                        router.push(e.page)
+                        router.push(e.page);
                       }}
                       className={`flex items-center justify-center gap-[16px]    ${isActive ? "text-[#3DA229]" : "text-[#767676]"
                         }`}

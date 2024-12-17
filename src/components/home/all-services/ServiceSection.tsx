@@ -8,85 +8,124 @@ import Image from "next/image";
 gsap.registerPlugin(ScrollTrigger);
 
 const sliderData = [
-    { id: "1", image: "/services/Prevention.jpg", text: "Mitigation/Prevention", heading: "Emerge-X Revolutionizing Safety with Advanced Wearable Technology", description: "Revolutionizing safety with cutting-edge technology: real-time health monitoring, brain function analysis, and GPS tracking ensure rapid response, empowering users with unmatched protection and peace of mind." },
-    { id: "2", image: "/services/Preparedness.jpg", text: "Preparedness", heading: "Emerge-X Revolutionizing Emergency Preparedness", description: "Revolutionizing emergency preparedness through comprehensive training and simulation programs. These ensure that wearers and emergency teams are equipped to respond effectively in any critical situation. Our advanced wearable technology supports these efforts by providing real-time health monitoring, ensuring that preparedness is backed by actionable data." },
-    { id: "3", image: "/services/Response.jpg", text: "Response", heading: "Emerge-X Revolutionizing Recovery with Wearable Technology", description: "Revolutionizing recovery with advanced wearable technology that monitors health metrics during rehabilitation. Continuous tracking of vital signs helps optimize recovery time by providing real-time data, ensuring that wearers get the support they need to fully recover after an incident." },
-    { id: "4", image: "/services/Recovery.jpg", text: "Recovery", heading: "Emerge-X enhances response efficiency with real-time alert systems.", description: "Revolutionizing response times with advanced wearable technology that sends immediate alerts and coordinates real-time responses with emergency teams. This ensures fast intervention and rapid assistance, maximizing safety during critical situations." },
+    {
+        id: "1",
+        image: "/services/Prevention.jpg",
+        text: "Mitigation/Prevention",
+        heading:
+            "Emerge-X Revolutionizing Safety with Advanced Wearable Technology",
+        description:
+            "Revolutionizing safety with cutting-edge technology: real-time health monitoring, brain function analysis, and GPS tracking ensure rapid response, empowering users with unmatched protection and peace of mind.",
+    },
+    {
+        id: "2",
+        image: "/services/Preparedness.jpg",
+        text: "Preparedness",
+        heading: "Emerge-X Revolutionizing Emergency Preparedness",
+        description:
+            "Revolutionizing emergency preparedness through comprehensive training and simulation programs. These ensure that wearers and emergency teams are equipped to respond effectively in any critical situation. Our advanced wearable technology supports these efforts by providing real-time health monitoring, ensuring that preparedness is backed by actionable data.",
+    },
+    {
+        id: "3",
+        image: "/services/Response.jpg",
+        text: "Response",
+        heading: "Emerge-X Revolutionizing Recovery with Wearable Technology",
+        description:
+            "Revolutionizing recovery with advanced wearable technology that monitors health metrics during rehabilitation. Continuous tracking of vital signs helps optimize recovery time by providing real-time data, ensuring that wearers get the support they need to fully recover after an incident.",
+    },
+    {
+        id: "4",
+        image: "/services/Recovery.jpg",
+        text: "Recovery",
+        heading:
+            "Emerge-X enhances response efficiency with real-time alert systems.",
+        description:
+            "Revolutionizing response times with advanced wearable technology that sends immediate alerts and coordinates real-time responses with emergency teams. This ensures fast intervention and rapid assistance, maximizing safety during critical situations.",
+    },
 ];
-
-
 
 const ServiceSection = () => {
     const containerRef = useRef(null);
     const router = useRouter();
 
-    useGSAP(() => {
-        const details = gsap.utils.toArray(".service-card:not(:first-child)");
-        const allPhotos = gsap.utils.toArray(".right-image");
-        const photos = gsap.utils.toArray(".right-image:not(:first-child)")
+    useGSAP(
+        () => {
+            const details = gsap.utils.toArray(".service-card:not(:first-child)");
+            const allPhotos = gsap.utils.toArray(".right-image");
+            const photos = gsap.utils.toArray(".right-image:not(:first-child)");
 
-        // gsap.set(photos.slice(1), { autoAlpha: 0 }); // Hide non-first images initially
-        gsap.set(photos, { yPercent: 101 })
-
-        ScrollTrigger.create({
-            trigger: ".gallery",
-            start: "top top",
-            end: "bottom bottom",
-            pin: ".right-wrapper", // Pin wrapper instead of direct flex child
-            // pinSpacing: false, // Add spacing
-            // markers: false,
-        });
-
-        details.forEach((detail, index) => {
-            let headline = (detail as any).querySelector("h2");
-
-            let animation = gsap.timeline()
-                .to(photos[index] as any, { yPercent: 0, duration: 1, ease: "power1.inOut" }) // Fade-in current image
-                .set(allPhotos[index] as any, { autoAlpha: 0 }); // Fade-out for next step
+            // gsap.set(photos.slice(1), { autoAlpha: 0 }); // Hide non-first images initially
+            gsap.set(photos, { yPercent: 101 });
 
             ScrollTrigger.create({
-                trigger: headline,
-                start: "top 80%",
-                end: "top 20%",
-                animation: animation,
-                scrub: 1,
-                markers: false,
+                trigger: ".gallery",
+                start: "top top",
+                end: "bottom bottom",
+                pin: ".right-wrapper", // Pin wrapper instead of direct flex child
+                // pinSpacing: false, // Add spacing
+                // markers: false,
             });
-        });
 
+            details.forEach((detail, index) => {
+                let headline = (detail as any).querySelector("h2");
 
-    }, { scope: containerRef });
+                let animation = gsap
+                    .timeline()
+                    .to(photos[index] as any, {
+                        yPercent: 0,
+                        duration: 1,
+                        ease: "power1.inOut",
+                    }) // Fade-in current image
+                    .set(allPhotos[index] as any, { autoAlpha: 0 }); // Fade-out for next step
 
-    useGSAP(() => {
-        const cards = gsap.utils.toArray(".service-card");
-        const backgroundColors = ["#FFFAF0", "#F0FFF4", "#F0F8FF", "#FFF5F5"]; // Light pastel colors
-
-        cards.forEach((card, index) => {
-            ScrollTrigger.create({
-                trigger: card as any,
-                start: "top center",
-                end: "bottom center",
-                onEnter: () => {
-                    gsap.to(".gallery", {
-                        backgroundColor: backgroundColors[index],
-                        duration: 0.5,
-                        overwrite: "auto",
-                    });
-                },
-                onEnterBack: () => {
-                    gsap.to(".gallery", {
-                        backgroundColor: backgroundColors[index],
-                        duration: 0.5,
-                        overwrite: "auto",
-                    });
-                },
+                ScrollTrigger.create({
+                    trigger: headline,
+                    start: "top 80%",
+                    end: "top 20%",
+                    animation: animation,
+                    scrub: 1,
+                    markers: false,
+                });
             });
-        });
-    }, { scope: containerRef });
+        },
+        { scope: containerRef }
+    );
 
+    useGSAP(
+        () => {
+            const cards = gsap.utils.toArray(".service-card");
+            const backgroundColors = ["#FFFAF0", "#F0FFF4", "#F0F8FF", "#FFF5F5"]; // Light pastel colors
+
+            cards.forEach((card, index) => {
+                ScrollTrigger.create({
+                    trigger: card as any,
+                    start: "top center",
+                    end: "bottom center",
+                    onEnter: () => {
+                        gsap.to(".gallery", {
+                            backgroundColor: backgroundColors[index],
+                            duration: 0.5,
+                            overwrite: "auto",
+                        });
+                    },
+                    onEnterBack: () => {
+                        gsap.to(".gallery", {
+                            backgroundColor: backgroundColors[index],
+                            duration: 0.5,
+                            overwrite: "auto",
+                        });
+                    },
+                });
+            });
+        },
+        { scope: containerRef }
+    );
 
     return (
-        <div ref={containerRef} >
+        <div ref={containerRef}>
+            <span id={"services"} className="mt-[-140px] pb-[150px] block">
+                &nbsp;
+            </span>
             <div className="flex gap-4 gallery">
                 {/* Left Section */}
                 <div className=" w-full md:w-1/2 space-y-8">
@@ -105,10 +144,6 @@ const ServiceSection = () => {
                             </div>
                             <p className="text-black/90  font-light text-lg">
                                 <strong className="pb-3">{service.description}</strong>
-                                <strong>{service.description}</strong>
-                                <strong>{service.description}</strong>
-                                <strong>{service.description}</strong>
-                                <strong>{service.description}</strong>
                                 <strong>{service.description}</strong>
                                 <strong>{service.description}</strong>
                             </p>

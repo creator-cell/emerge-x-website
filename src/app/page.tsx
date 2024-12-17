@@ -42,7 +42,7 @@ export default function Home() {
 
   const getBlogData = async () => {
     try {
-      const response = await getApiHelper('http://localhost:8081/v1/blog?page=1&limit=10', "GET");
+      const response: any = await getApiHelper('https://emerge-x-backend-c2kvq.ondigitalocean.app/v1/blog?page=1&limit=10', "GET");
       if (response?.success) {
         dispatch(blogsData(response?.data));
         console.log("Blogs Data:", response?.data);
@@ -56,7 +56,7 @@ export default function Home() {
 
   const getNewsData = async () => {
     try {
-      const response = await getApiHelper('http://localhost:8081/v1/news?page=1&limit=10', "GET");
+      const response: any = await getApiHelper('https://emerge-x-backend-c2kvq.ondigitalocean.app/v1/news?page=1&limit=10', "GET");
 
       if (response?.success) {
         dispatch(newsData(response?.data));

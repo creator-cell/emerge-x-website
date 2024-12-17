@@ -29,7 +29,7 @@ const page = ({ searchParams }: { searchParams: ReadonlyURLSearchParams }) => {
   const dispatch = useDispatch();
   const handlePagination = async (page: number) => {
     try {
-      const response = await getApiHelper(`http://localhost:8081/v1/blog?page=${page}&limit=10`, "GET");
+      const response: any = await getApiHelper(`https://emerge-x-backend-c2kvq.ondigitalocean.app/v1/blog?page=${page}&limit=10`, "GET");
 
       if (response?.success) {
         dispatch(blogsData(response?.data));
@@ -49,15 +49,14 @@ const page = ({ searchParams }: { searchParams: ReadonlyURLSearchParams }) => {
     setCurrentPage(blogsAllData?.currentPage)
   }, [blogsAllData])
 
-  console.log(blogsAllData)
+  console.log("Blogs Data:", blogsAllData);
 
   return (
     <div className="min-h-screen">
       <HeroResusable
         title="What's New?"
-        description="Stay up-to-date with Everything 
-about EmergeX related."
-        image="/news/intro.png"
+        description="Stay up-to-date with Everything about EmergeX related."
+        image={blogsAllData?.blog?.[0].bannerImage ?? "/news/intro.png"}
         className="bg-gradient-to-r from-black/0 to-black/90"
         textColor="white"
       />
@@ -83,6 +82,7 @@ about EmergeX related."
                   styleHeading="text-[16px] md:text-[36px]"
                   curveIconStyle="w-[30%]"
                   dateButtonStyle="w-[25%] top-2 left-2 h-[11%]"
+                  imageStyle="rounded-[26px]"
                 />
               </div>
             </div>
@@ -122,6 +122,7 @@ about EmergeX related."
                     styleBox="aspect-square max-w-[150px]"
                     curveIconStyle="w-[60%]"
                     dateButtonStyle="w-[45%] left-2 h-[15%] text-[8px]"
+                    imageStyle="rounded-[14px]"
                   />
                 ))}
                 {
@@ -136,6 +137,7 @@ about EmergeX related."
                     list={false}
                     curveIconStyle="w-[60%]"
                     dateButtonStyle="w-[45%] left-2 h-[15%] text-[8px]"
+                    imageStyle="rounded-[26px]"
                   />
                 ))}
                 {
@@ -164,6 +166,7 @@ about EmergeX related."
                 styleCard="items-start max-w-[270px] mx-auto"
                 curveIconStyle="w-[40%]"
                 dateButtonStyle="w-[32%] left-2 "
+                imageStyle="rounded-[26px]"
               />
             ))}
           </div>

@@ -39,7 +39,7 @@ export const AllNewsPage = () => {
 
   const getNewsData = async (page: number) => {
     try {
-      const response = await getApiHelper(`http://localhost:8081/v1/news?page=${page}&limit=10`, "GET");
+      const response: any = await getApiHelper(`https://emerge-x-backend-c2kvq.ondigitalocean.app/v1/news?page=${page}&limit=10`, "GET");
 
       if (response?.success) {
         dispatch(newsData(response?.data));
@@ -68,7 +68,7 @@ export const AllNewsPage = () => {
       {/* Hero Section */}
       <HeroResusable
         title="What's New?"
-        image="/news/intro.png"
+        image={newsAllData?.news?.[0].heroBanner ?? "/news/intro.png"}
         description="Stay up-to-date with Everything about EmergeX related"
         textColor="white"
         className="absolute inset-0 bg-gradient-to-r from-white/0 to-black/90"

@@ -18,3 +18,31 @@ export interface PaginationParams {
     page: number;
     limit: number;
 }
+
+
+interface BlogPost {
+    _id: string;
+    htmlBody: string;
+    description: string;
+    bannerImage: string;
+    futureImages: string;
+    title: string;
+    createdAt: string;
+    updatedAt: string;
+    __v: number;
+}
+
+// Interface for pagination details
+interface Page {
+    number: number;
+    url: string;
+}
+
+// Parent interface to encapsulate the full JSON structure
+export interface BlogDataResponse {
+    blog: BlogPost;
+    pages: Page[];
+    nextPage: boolean;
+    currentPage: number;
+    previousPage: boolean;
+}

@@ -66,7 +66,7 @@ const LetestBlogs: React.FC<BlogDataTypes> = ({ data }) => {
   return (
     <div ref={containerRef}>
       <div className="relative overflow-visible  h-auto p-9  " id="container" >
-        <span id={"animationContainer"} className='mt-[-160px] pb-[130px] block' >
+        <span id={"blogs"} className='mt-[-160px] pb-[130px] block' >
           &nbsp;
         </span>
         <div
@@ -100,6 +100,7 @@ const LetestBlogs: React.FC<BlogDataTypes> = ({ data }) => {
                         styleBox="aspect-square max-w-[100%]"
                         curveIconStyle="w-[60%]"
                         dateButtonStyle="w-[45%] left-2 h-[15%] text-[15px]"
+                        imageStyle="rounded-[26px]"
                       />
                       {/* <BlogCard img={'/services/About US.jpg'} title={e.title}
                       /> */}

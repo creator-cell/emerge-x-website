@@ -28,6 +28,7 @@ interface CardBlogTypes {
   data?: Partial<BlogsData>;
   curveIconStyle?: string;
   dateButtonStyle?: string;
+  imageStyle?: string;
 }
 const CardBlog: React.FC<CardBlogTypes> = ({
   list,
@@ -37,9 +38,10 @@ const CardBlog: React.FC<CardBlogTypes> = ({
   styleCard,
   data,
   curveIconStyle,
-  dateButtonStyle
+  dateButtonStyle,
+  imageStyle
 }) => {
-  const [date,setDate]=useState("")
+  const [date, setDate] = useState("")
   useEffect(() => {
     const apiDate = data?.createdAt;
     // Create a Date object
@@ -65,7 +67,7 @@ const CardBlog: React.FC<CardBlogTypes> = ({
       <div
         className={cn(
           ` ${list ? "w-[30%] " : " w-full "
-          }  rounded-[14px] bg-[#D9D9D9] relative`,
+          }  rounded-[14px] relative`,
           styleBox
         )}
       >
@@ -77,14 +79,14 @@ const CardBlog: React.FC<CardBlogTypes> = ({
           className={cn(` absolute top-0 left-0 z-20 w-[60%] `, curveIconStyle)}
         />
         <Image
-          // src={data?.futureImages || ""}
-          src="/services/About US.jpg"
+          src={data?.futureImages || ""}
+          // src="/services/About US.jpg"
           alt="Subtract Icon"
           fill
-          className="w-full object-cover "
+          className={cn("w-full object-cover ", imageStyle)}
         />
         <button className={cn(`absolute z-20  top-[0] left-[7px] w-[80px] h-[25px] bg-green-500 text-white rounded-tl-[12px] rounded-br-[20px] rounded-tr-[8px] rounded-bl-[12px] text-[12px]`, dateButtonStyle)}>
-        {data && date} 
+          {data && date}
         </button>
       </div>
       <div className={`${list ? " w-[60%] h-fit" : "w-full"}`}>
