@@ -4,13 +4,14 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { servicesImages } from "@/assets/services";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const sliderData = [
     {
         id: "1",
-        image: "/services/Prevention.jpg",
+        image: servicesImages.mitigatioion,
         text: "Mitigation/Prevention",
         heading:
             "Emerge-X Revolutionizing Safety with Advanced Wearable Technology",
@@ -19,7 +20,7 @@ const sliderData = [
     },
     {
         id: "2",
-        image: "/services/Preparedness.jpg",
+        image: servicesImages.Preparedness,
         text: "Preparedness",
         heading: "Emerge-X Revolutionizing Emergency Preparedness",
         description:
@@ -27,7 +28,7 @@ const sliderData = [
     },
     {
         id: "3",
-        image: "/services/Response.jpg",
+        image: servicesImages.response,
         text: "Response",
         heading: "Emerge-X Revolutionizing Recovery with Wearable Technology",
         description:
@@ -35,7 +36,7 @@ const sliderData = [
     },
     {
         id: "4",
-        image: "/services/Recovery.jpg",
+        image: servicesImages.recovery,
         text: "Recovery",
         heading:
             "Emerge-X enhances response efficiency with real-time alert systems.",
@@ -174,8 +175,10 @@ const ServiceSection = () => {
                     <div className="absolute w-[80%] lg:w-[70%]   max-lg:max-h-[24rem] h-[50vh] aspect-square border shadow-lg rounded-md overflow-hidden inset-0 top-1/2 left-1/2  transform -translate-x-1/2 -translate-y-1/2  flex items-center justify-center">
                         {sliderData.map((service, index) => (
                             <div key={index} className="right-image absolute w-full h-full ">
-                                <img
+                                <Image
                                     src={service.image}
+                                    width={800}
+                                    height={400}
                                     alt={service.text}
                                     className="w-full h-full object-cover rounded-lg shadow-lg"
                                 />
