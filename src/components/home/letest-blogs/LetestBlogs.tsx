@@ -6,15 +6,9 @@ import React, { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { useMediaQuery } from "usehooks-ts";
 import Link from "next/link";
-import { blogs } from "@/components/blogs/blogData";
 import CardBlog from "@/components/blogs/CardBlog";
-import { useSelector } from "react-redux";
-import { RootState } from "@/store/store";
-import { useGetBlogsQuery } from "@/store/blogs";
 import { BlogData } from "@/store/blogs/types/blog.types";
-import { cn } from "@/lib/utils";
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 
@@ -91,7 +85,7 @@ const LetestBlogs: React.FC<BlogDataTypes> = ({ data }) => {
               </h2>
 
               <div className="mt-8 md:mt-14 lg:mt-16 ">
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
                   {data?.blog?.slice(0, 6).map((e: any, i: number) => (
                     <div
                       key={e._id}

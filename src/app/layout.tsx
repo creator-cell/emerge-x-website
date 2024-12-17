@@ -50,17 +50,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} antialiased`}>
-      <StoreProvider>
+        <StoreProvider>
 
-     
-        <div className="flex flex-col min-h-screen relative">
-          {/* <NavBar /> */}
-          <FloatingNav navItems={navItems} />
-          <div className="flex-1">
-            {children}
+
+          <div className="flex flex-col min-h-screen relative">
+            {/* <NavBar /> */}
+            <FloatingNav navItems={navItems} />
+            <div className="flex-1">
+              {children}
+            </div>
+            <Footer />
           </div>
-          <Footer />
-        </div>
         </StoreProvider>
       </body>
     </html>
