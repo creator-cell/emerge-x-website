@@ -1,7 +1,6 @@
 "use client";
 
 import About from "@/components/home/about/About";
-import AllServices from "@/components/home/all-services/AllServices";
 import Contact from "@/components/home/contactus/Contact";
 import Hero from "@/components/home/hero/Hero";
 import LetestBlogs from "@/components/home/letest-blogs/LetestBlogs";
@@ -11,14 +10,13 @@ import { useEffect, useRef, useState } from "react";
 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
-import { useMediaQuery } from "usehooks-ts";
-import { cn } from "@/lib/utils";
 import { getApiHelper } from "@/components/helper/apiHelper";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import { blogsData } from "@/store/reducer/blog";
 import { newsData } from "@/store/reducer/news";
+import ServiceSection from "@/components/home/all-services/ServiceSection";
+import { useGetBlogsQuery } from "@/store/blogs";
 
 
 gsap.registerPlugin(ScrollTrigger);
@@ -35,7 +33,7 @@ export default function Home() {
   const blogsAllData = useSelector((state: RootState) => state.blog.blogsData)
   const newsAllData = useSelector((state: RootState) => state.news.newsData)
 
-const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     getNewsData()
@@ -95,181 +93,7 @@ const dispatch = useDispatch();
   }, []);
 
 
-  const serviceBlogRefScope = useRef<HTMLDivElement | null>(null);
-
-  useGSAP(() => {
-    const mm = gsap.matchMedia();
-
-    // Common animations
-    const commonAnimations = (timeline: any) => {
-      // 1. Move the service card upwards
-      timeline.to(
-        "#serviceId",
-        {
-          translateY: -300,
-          duration: 1,
-          css: {
-            display: "none",
-          },
-        },
-        "a"
-      );
-
-      timeline.to(
-        "#sectionHeading",
-        {
-          opacity: 1,
-          duration: 0.5,
-          ease: "power1.out",
-        },
-        "a"
-      );
-
-      // 2. Expand the circle
-      // timeline.to("#latest-blogs-section", {
-      //   width: "100vw",
-      //   height: "100vw",
-      //   ease: "power1.out",
-      //   borderRadius: "0",
-      //   duration: 1,
-      // }, "a");
-
-      // 3. Set overflow to hidden for #container (Separate this animation)
-      // timeline.to("#container", {
-      //   css: { overflow: "hidden" },
-      //   duration: 0.5,
-      // }, "a+=0.7");
-    };
-
-    // Breakpoint-specific animations
-    mm.add("(min-width: 1024px)", () => {
-      // For extra-large screens (XL)
-      const xlTimeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: "#container",
-          start: "top bottom",
-          end: "bottom center",
-          scrub: 1,
-          markers: false, // Debug markers for XL
-        },
-      });
-      xlTimeline.to("#serviceId", {
-        translateY: -300,
-        duration: 1,
-        opacity: 0,
-      }, "b");
-
-      xlTimeline.to("#latest-blogs-section", {
-        width: "100vw",
-        height: "100vw",
-        ease: "power1.out",
-        borderRadius: "0",
-        duration: 0.81,
-      }, "b");
-
-      xlTimeline.to("#sectionHeading", {
-        opacity: 1,
-        duration: 0.5,
-        ease: "power1.out",
-      }, "b").from("#sectionHeading", {
-        css: {
-          fontSize: "2rem",
-        }
-      })
-
-      xlTimeline.to(".blog-card", {
-        opacity: 1,
-        y: 0,
-        stagger: 0.2,
-        duration: 0.8,
-        scale: 1,
-        ease: "power1.out",
-      }, "b+=0.3");
-
-
-    });
-
-
-
-    mm.add("(min-width: 768px) and (max-width: 1023px)", () => {
-      // For medium screens (MD)
-      const mdTimeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: "#container",
-          start: "top bottom",
-          end: "bottom center",
-          scrub: 1,
-          markers: false,
-        },
-      });
-
-
-      mdTimeline.to("#serviceId", {
-        translateY: -300,
-        duration: 1,
-        opacity: 0,
-      }, "d");
-
-      mdTimeline.to("#latest-blogs-section", {
-        width: "100vw",
-        height: "100vw",
-        ease: "power1.out",
-        borderRadius: "0",
-        duration: 0.81,
-      }, "d");
-
-      mdTimeline.to("#sectionHeading", {
-        opacity: 1,
-        duration: 0.5,
-        ease: "power1.out",
-      }, "d").from("#sectionHeading", {
-        css: {
-          fontSize: "2rem",
-        }
-      })
-
-      mdTimeline.to(".blog-card", {
-        opacity: 1,
-        y: 0,
-        stagger: 0.2,
-        duration: 0.8,
-        scale: 1,
-        ease: "power1.out",
-      }, "d+=0.3");
-
-    });
-
-    return () => {
-      mm.revert();
-    };
-  }, {
-    scope: serviceBlogRefScope
-  });
-
-  const isMobile = useMediaQuery("(max-width: 768px)"); // For screens up to 768px
-
-  useEffect(() => {
-    const updateHeight = () => {
-      if (latestBlogRef?.current) {
-        const blogSectionHeight = latestBlogRef.current.clientHeight || 0;
-        const viewportHeight = window.innerHeight * 2;
-
-        const calculatedHeight = Math.min(
-          viewportHeight + blogSectionHeight,
-          2 * viewportHeight
-        );
-        setlatestBlogSectionHeight(calculatedHeight);
-      }
-    };
-
-    // Initial height calculation
-    updateHeight();
-
-    // Recalculate on window resize
-    window.addEventListener("resize", updateHeight);
-    return () => window.removeEventListener("resize", updateHeight);
-  }, [latestBlogRef, latestBlogSectionHeight]);
-
+  const { data } = useGetBlogsQuery({ page: 1, limit: 10 });
 
 
 
@@ -282,31 +106,13 @@ const dispatch = useDispatch();
           <About scrollYProgress={scrollYProgress} />
         </div>
       </div>
-      {isMobile ? (
-        <>
-          <AllServices />
-          <LetestBlogs />
-        </>
-      ) : (
-        <div
-          ref={serviceBlogRefScope}
-          className={cn("relative ")}
-          style={{
-            height: `${latestBlogSectionHeight}px`, // Dynamically calculated height
-          }}
-        >
-          {/* <div className={cn("relative h-[400vh] md:h-[455vh] lg:h-[355vh] xl:h-[400vh]")}> */}
-          <div
-            id="serviceId"
-            className="opacity-100 sticky top-0 mt-6 z-0 h-[200vh] "
-          >
-            <AllServices />
-          </div>
-          <div ref={latestBlogRef} className="relative z-10">
-            <LetestBlogs />
-          </div>
-        </div>
-      )}
+      <>
+        <ServiceSection />
+        {
+          data?.blog && data.blog.length > 0 &&
+          <LetestBlogs data={data} />
+        }
+      </>
       <News />
       <Contact />
     </div>

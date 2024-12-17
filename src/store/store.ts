@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import cartReducer from "@/store/fetures/buttons/providerButton";
 import blogReducer from "@/store/reducer/blog";
 import newsReducer from "@/store/reducer/news";
+import { BlogApi } from "./blogs";
 
 
 
@@ -11,13 +12,10 @@ export const makeStore = () => {
       cart: cartReducer,
       blog: blogReducer,
       news: newsReducer,
-
- 
+      [BlogApi.reducerPath]: BlogApi.reducer,
     },
     middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(
-    
-      ),
+      getDefaultMiddleware().concat(BlogApi.middleware),
   });
 };
 

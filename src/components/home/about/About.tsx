@@ -48,7 +48,7 @@ const About = ({ scrollYProgress }: AboutProps) => {
         // minWidth: "60vh",
         boxShadow: "0px 8px 24px rgba(0, 0, 0, 0.2)",
       }}
-      className="flex justify-center pl-8 items-center relative z-30 bg-[#222720] rounded-lg transition-transform duration-500 ease-in-out"
+      className="flex justify-center lg:pl-8 items-center relative z-30 bg-[#222720] rounded-lg transition-transform duration-500 ease-in-out"
     >
       <SectionWrapper className="mt-8 md:mt-12 lg:mt-12 w-full">
         <div className="text-center flex flex-col items-center">
@@ -61,7 +61,7 @@ const About = ({ scrollYProgress }: AboutProps) => {
           className="grid grid-cols-1 md:grid-cols-2 items-center gap-6 mt-10 pb-16 w-full"
           id="about-section"
         >
-          <div className="w-[70%]">
+          <div className=" w-full lg:w-[70%]">
             <p className="text-white text-justify leading-6 sm:leading-9 md:leading-[44px] font-[400] text-[15px] sm:text-[24px] md:text-[32px] mt-10 px-4">
               At EmergeX, we aim higher and strive harder to make workplace safety
             </p>
