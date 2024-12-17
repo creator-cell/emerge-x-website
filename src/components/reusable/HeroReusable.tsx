@@ -26,7 +26,7 @@ export const HeroResusable: React.FC<HeroResusableProps> = ({
   className,
 }) => {
   return (
-    <div className="relative h-[400px] md:h-[500px]  lg:h-[100vh] w-full overflow-hidden xs:rounded-b-[20px] sm:rounded-b-[40px] md:rounded-b-[80px] lg:rounded-b-[120px]">
+    <div className="relative h-[450px] md:h-[500px]  lg:h-[100vh] w-full overflow-hidden xs:rounded-b-[20px] sm:rounded-b-[40px] md:rounded-b-[80px] lg:rounded-b-[120px]">
       <Image src={image} alt={title} fill className="object-cover" />
 
       {/* White gradient overlay with right side emphasis */}
@@ -47,17 +47,15 @@ export const HeroResusable: React.FC<HeroResusableProps> = ({
           max-w-2xl "
       >
         <h1
-          className={`text-3xl  sm:text-5xl text-center  font-semibold md:text-end md:justify-end text-${
-            textColor || "black"
-          } mb-4`}
+          className={`text-2xl  sm:text-5xl text-center  font-semibold md:text-end md:justify-end text-${textColor || "black"
+            } mb-4`}
         >
           {title}
         </h1>
 
         <div
-          className={`flex items-center text-center sm:justify-center md:text-end md:justify-end lg:text-end lg:justify-end gap-2 text-${
-            textColor || "black"
-          } text-base `}
+          className={`flex items-center text-center sm:justify-center md:text-end md:justify-end lg:text-end lg:justify-end gap-2 text-${textColor || "black"
+            } text-base `}
         >
           {description ? (
             <p className="mb-4 text-xl sm:text-2xl leading-7 text-gray-200  ">
