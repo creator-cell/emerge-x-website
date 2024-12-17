@@ -4,30 +4,20 @@ import storage from "redux-persist/lib/storage"; // Using localStorage
 import cartReducer from "@/store/fetures/buttons/providerButton";
 import blogReducer from "@/store/reducer/blog";
 import newsReducer from "@/store/reducer/news";
+import { BlogApi } from "./blogs";
 
-// Combine all reducers
-const rootReducer = combineReducers({
-  cart: cartReducer,
-  blog: blogReducer,
-  news: newsReducer,
-});
 
-// Redux Persist configuration
-const persistConfig = {
-  key: "root",
-  storage, // Storing in localStorage
-  whitelist: ["cart", "blog" , 'news'], // Only persist these reducers
-};
-
-const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const makeStore = () => {
   return configureStore({
-    reducer: persistedReducer,
+    reducer: {
+      cart: cartReducer,
+      blog: blogReducer,
+      news: newsReducer,
+      [BlogApi.reducerPath]: BlogApi.reducer,
+    },
     middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware({
-        serializableCheck: false, // Avoid redux-persist warnings
-      }),
+      getDefaultMiddleware().concat(BlogApi.middleware),
   });
 };
 
