@@ -25,14 +25,14 @@ const Footer = () => {
               safety by integrating hazards and incident reporting with
               investigations, actions, and metrics reporting.
             </p>
-            <div className="space-y-4">
+            {/* <div className="space-y-4">
               <strong>Subscribe Us</strong>
               <div className="flex items-center gap-3">
                 <div className="bg-black rounded-full p-3"></div>
                 <div className="bg-black rounded-full p-3"></div>
                 <div className="bg-black rounded-full p-3"></div>
               </div>
-            </div>
+            </div> */}
           </div>
           <div className="flex justify-start lg:justify-center">
             <div>
