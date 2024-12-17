@@ -70,7 +70,7 @@ const NavBar = () => {
         </Link>
 
         {pathName === "/" ? (
-          <ul className=" sm:w-[82%] lg:w-[65%] max-w-[900px]  hidden md:flex items-center gap-1   justify-between ">
+          <ul className=" sm:w-[82%] lg:w-[70%] max-w-[900px]  hidden md:flex items-center gap-1   justify-between ">
             {navList?.map((e, i) => {
               const active = activeSection == e.link;
               return (
@@ -93,7 +93,7 @@ const NavBar = () => {
             </li>
           </ul>
         ) : (
-          <ul className=" sm:w-[82%] lg:w-[65%] max-w-[900px]  hidden md:flex items-center  gap-1   justify-between ">
+          <ul className=" sm:w-[82%] lg:w-[70%] max-w-[900px]  hidden md:flex items-center  gap-1   justify-between ">
             {navList?.map((e, i) => {
               const active = pathName == e.page;
               return (

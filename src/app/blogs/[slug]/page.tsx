@@ -11,17 +11,12 @@ import { blogs } from "@/components/blogs/blogData";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 interface BlogData {
-  id: number;
+  _id: string;
   title: string;
-  slug: string;
-  image: string;
-  content: string;
-  heading: string;
-  details: string;
-  list1: string;
-  list2: string;
-  details2: string;
-  details3: string;
+  htmlBody: string;
+  description: string;
+  bannerImage: string | null;
+  futureImages: string | null;
 }
 const page = () => {
   const pathname = usePathname(); // Get the full pathname of the current URL
@@ -34,7 +29,8 @@ const page = () => {
     const IdData = pathname?.split("/").pop();
     if (!IdData) return;
 
-    const AllData = blogsAllData?.blog?.filter((e:any) => e._id == IdData); 
+    const AllData = blogsAllData?.blog?.filter((e: any) => e._id == IdData);
+    console.log(AllData)
     setBlogData(AllData);
   }, [pathname]);
   const navTrain = [
@@ -55,7 +51,7 @@ const page = () => {
           <>
             <HeroResusable
               title={data?.title}
-              description={data?.title}
+              description={data?.description}
               image="/news/intro.png"
               className="bg-gradient-to-r from-black/0 to-black/90"
               textColor="white"
@@ -66,7 +62,7 @@ const page = () => {
               <div className=" flex flex-col md:flex-row md:justify-between gap-5 mt-10 text-greyishblack">
                 <div className=" w-full md:w-[58%] max-w-[611px] ">
                   <p className="text-base md:text-[18px] leading-[32px]">
-                    {data?.content}
+                    {/* {data?.description} */}
                   </p>
                 </div>
                 <div className="w-full md:w-[45%] max-w-[516px]">
@@ -83,22 +79,22 @@ const page = () => {
               </div>
             </SectionWrapper>
             <SectionWrapper>
-              <h2 className=" text-center font-[600]  text-2xl">
-                {data?.heading}
-              </h2>
+              {/* <h2 className=" text-center font-[600]  text-2xl">
+                {data?.description}
+              </h2> */}
               <div className=" flex justify-between gap-5 mt-20 text-base md:text-[18px] font-[400] leading-[30px] md:leading-[32px]">
-                <div className="w-full md:w-[48%]  ">
+                {/* <div className="w-full md:w-[48%]  ">
                   <p>{data?.details}</p>
                   <ul className="list-disc pt-4 pl-5">
                     <li>{data?.list1}</li>
                     <li>{data?.list2}</li>
                   </ul>
-                </div>
-                <div className=" hidden md:flex  w-[48%]   flex-col gap-8">
-                  <p>{data?.details2}</p>
-                  <div className=" border border-dashed border-black"></div>
-                  <p className="pt-4">{data?.details3}</p>
-                </div>
+                </div> */}
+                <div
+                  className="hidden md:flex w-[48%] flex-col gap-8"
+                  dangerouslySetInnerHTML={{ __html: data?.htmlBody }}
+                ></div>
+                
               </div>
             </SectionWrapper>
 
@@ -107,7 +103,7 @@ const page = () => {
                 You may also like
               </h2>
               <div className=" mt-20 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[0] md:gap-x-[20px] lg:gap-x-[34px] gap-y-[100px] ">
-                {blogsAllData?.blog?.slice(0, 4).map((e:any, i:number) => (
+                {blogsAllData?.blog?.slice(0, 4).map((e: any, i: number) => (
                   <CardBlog
                     key={i}
                     data={e}

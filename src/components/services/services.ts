@@ -71,7 +71,7 @@ export const servicesData = [
         "id": 3,
         "title": "Recovery Service",
         "titledetails": "Ensure swift recovery with integrated technology, providing wearers with continuous health monitoring and post-incident support for faster rehabilitation.",
-        "image": "/services/Recovery Service.jpg",
+        "image": "/services/Recovery.jpg",
         "whatsnew": "Revolutionizing recovery with advanced wearable technology that monitors health metrics during rehabilitation. Continuous tracking of vital signs helps optimize recovery time by providing real-time data, ensuring that wearers get the support they need to fully recover after an incident.",
         "whatsnewContent": "How does our recovery technology enhance rehabilitation? Emerge-X’s recovery solution integrates real-time health monitoring with post-incident support to ensure a smooth recovery process. Wearable technology provides continuous feedback to health professionals, helping tailor rehabilitation efforts to individual needs and accelerating recovery times.",
         "heading": "Emerge-X Revolutionizing Recovery with Wearable Technology",

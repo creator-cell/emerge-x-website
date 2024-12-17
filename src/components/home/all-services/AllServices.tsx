@@ -31,18 +31,22 @@ const sliderData = [
   {
     image: "/services/Prevention.jpg",
     text: "Mitigation/ Prevention",
+    id:"1"
   },
   {
     image: "/services/Preparedness.jpg",
     text: "Preparedness",
+    id:"2"
   },
   {
     image: "/services/Response.jpg",
     text: "Response",
+    id:"3"
   },
   {
     image: "/services/Recovery.jpg",
     text: "Recovery",
+    id:"4"
   },
 ];
 
@@ -284,7 +288,7 @@ const AllServices = ({ }: Props) => {
                             reporting with investigations, actions, and metrics
                             reporting.
                           </p>
-                          <Link href={'/services'}>
+                          <Link href={`/services/${sliderData[activeIndex]?.id}`}>
                             <button className=" mt-12 bg-customGreen px-4 py-1.5 md:px-6 md:py-2 text-white w-fit rounded-[60px] text-base md:text-2xl">
                               Explore Now
                             </button>

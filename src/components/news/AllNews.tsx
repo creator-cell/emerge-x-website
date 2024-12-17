@@ -6,8 +6,10 @@ import SectionWrapper from "../reusable/SectionWrapper";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import { newsData } from "@/store/reducer/news";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getApiHelper } from "../helper/apiHelper";
+import { Button } from "../ui/button";
+import Loader from "../Loader";
 
 interface NewsItem {
   title: string;
@@ -29,31 +31,31 @@ export const AllNewsPage = () => {
   const newsAllData = useSelector((state: RootState) => state.news.newsData)
   const dispatch = useDispatch();
 
+  const [currentPage, setCurrentPage] = useState<number>(newsAllData?.currentPage || 1)
+  useEffect(() => {
+    getNewsData(1)
+  }, [])
 
-    useEffect(() => {
-      getNewsData()
-    }, [])
-  
-  
-    const getNewsData = async () => {
-      try {
-        const response = await getApiHelper('http://localhost:8081/v1/news?page=1&limit=10', "GET");
-    
-        if (response?.success) {
-          dispatch(newsData(response?.data));
-          console.log("Blogs Data:", response?.data);
-        } else {
-          console.error("Failed to fetch blogs:", response?.error);
-        }
-      } catch (error: any) {
-        console.error("API error:", error.error || error.message);
-        alert( error.error || error.message);
+
+  const getNewsData = async (page: number) => {
+    try {
+      const response = await getApiHelper(`http://localhost:8081/v1/news?page=${page}&limit=10`, "GET");
+
+      if (response?.success) {
+        dispatch(newsData(response?.data));
+        console.log("Blogs Data:", response?.data);
+      } else {
+        console.error("Failed to fetch blogs:", response?.error);
       }
-    };
+    } catch (error: any) {
+      console.error("API error:", error.error || error.message);
+      alert(error.error || error.message);
+    }
+  };
 
 
   const newsItemsData = newsAllData?.news
-
+  console.log(newsAllData)
 
   const navTrain = [
     { link: "/", label: "Home", id: "a1" },
@@ -75,7 +77,34 @@ export const AllNewsPage = () => {
       {/* Breadcrumb */}
       <SectionWrapper>
         <BreadCrumb navTrainData={navTrain} />
+        {
+          newsAllData?.length === 0 &&
+          <Loader />
+        }
         <NewsGrid news={newsItemsData} />
+        {
+          newsAllData?.length !== 0 &&
+
+          <div className="flex justify-center gap-4 mt-8">
+            <Button
+              onClick={() => getNewsData(currentPage - 1)}
+              disabled={newsAllData?.previousPage === true ? false : true}
+              className="px-4 py-2 bg-[#3DA229B3] text-white rounded-md hover:bg-[#3DA229] "
+            >
+              Previous
+            </Button>
+            <div>
+              <span className="text-lg font-semibold">{`Page ${currentPage} of ${newsAllData?.pages?.length || 1}`}</span>
+            </div>
+            <Button
+              onClick={() => getNewsData(currentPage + 1)}
+              disabled={newsAllData?.nextPage === true ? false : true}
+              className="px-4 py-2 bg-[#3DA229B3] text-white rounded-md hover:bg-[#3DA229]"
+            >
+              Next
+            </Button>
+          </div>
+        }
       </SectionWrapper>
     </main>
   );

@@ -1,24 +1,24 @@
-'use client'
+'use client';
 
+import { AppStore, makeStore, persistor } from '@/store/store';
+import React, { ReactNode, useRef } from 'react';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 
-
-import { AppStore, makeStore } from '@/store/store'
-import React, { ReactNode, useRef } from 'react'
-import { Provider } from 'react-redux'
-
-
-const StoreProvider = ({children}:{children:ReactNode}) => {
-
-  const storeRef = useRef<AppStore>()
+const StoreProvider = ({ children }: { children: ReactNode }) => {
+  const storeRef = useRef<AppStore>();
   if (!storeRef.current) {
-  
-    storeRef.current = makeStore()
-    //add initial state
-    // storeRef.current.dispatch(add("test"))
+    storeRef.current = makeStore();
   }
-  return (
-    <Provider store={storeRef.current}>{children}</Provider>
-  )
-}
 
-export default StoreProvider
+  return (
+    <Provider store={storeRef.current}>
+      {/* PersistGate ensures the app waits for rehydrated state */}
+      <PersistGate loading={null} persistor={persistor}>
+        {children}
+      </PersistGate>
+    </Provider>
+  );
+};
+
+export default StoreProvider;
