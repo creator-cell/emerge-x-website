@@ -14,9 +14,7 @@ const StoreProvider = ({ children }: { children: ReactNode }) => {
   return (
     <Provider store={storeRef.current}>
       {/* PersistGate ensures the app waits for rehydrated state */}
-      <PersistGate loading={null} persistor={persistor}>
-        {children}
-      </PersistGate>
+      {children}
     </Provider>
   );
 };

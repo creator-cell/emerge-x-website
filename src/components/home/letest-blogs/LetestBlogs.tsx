@@ -14,7 +14,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import { useGetBlogsQuery } from "@/store/blogs";
 import { BlogData } from "@/store/blogs/types/blog.types";
-
+import { cn } from "@/lib/utils";
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 
@@ -35,7 +35,7 @@ const LetestBlogs: React.FC<BlogDataTypes> = ({ data }) => {
       trigger: "#container", // The parent container for the cards
       start: "top 80%",
       end: "bottom 20%",
-      markers: true,
+      markers: false,
       onEnter: () => {
         gsap.to(".blog-card", {
           opacity: 1,
@@ -85,34 +85,35 @@ const LetestBlogs: React.FC<BlogDataTypes> = ({ data }) => {
             <div>
               <h2
                 id="sectionHeading"
-                className=" md:opacity-0 text-black text-3xl font-bold text-center translate-y-[50px] transition-all duration-300 ease-in-out"
+                className="pb-8 md:opacity-0 text-black text-3xl font-bold text-center translate-y-[50px] transition-all duration-300 ease-in-out"
               >
                 Latest Blogs
               </h2>
 
-              <div className="grid grid-cols-1  sm:grid-cols-2 lg:grid-cols-3 gap-x-[70px] lg:gap-x-[110px] mt-8 md:mt-14 lg:mt-16">
-                {data?.blog?.slice(0, 6).map((e: any, i: number) => (
-                  <div
-                    key={e._id}
-                    className="blog-card lg:opacity-0 lg:scale-50 mt-8"
-                    id="blogCard"
-                  >
-                    <BlogCard
-                      key={i}
-                      // img={e.image}
-                      img={"/services/About US.jpg"}
-                      title={e.title}
-                    // data={e}
-                    // list={false}
-                    // styleHeading="text-[14px] lg:text-[16px]"
-                    // styleBox="aspect-square max-w-[270px]"
-                    // styleCard="items-start max-w-[270px] mx-auto"
-                    // curveIconStyle="w-[40%]"
-                    // dateButtonStyle="w-[32%] left-2 "
-                    />
-                  </div>
-                ))}
+              <div className="mt-8 md:mt-14 lg:mt-16 ">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
+                  {data?.blog?.slice(0, 6).map((e: any, i: number) => (
+                    <div
+                      key={e._id}
+                      className="blog-card lg:opacity-0 lg:scale-50 w-full"
+                      id="blogCard"
+                    >
+                      <CardBlog
+                        data={e}
+                        key={i}
+                        list={false}
+                        styleHeading="text-[14px] font-[400] md:font-semibold lg:text-base"
+                        styleBox="aspect-square max-w-[100%]"
+                        curveIconStyle="w-[60%]"
+                        dateButtonStyle="w-[45%] left-2 h-[15%] text-[15px]"
+                      />
+                      {/* <BlogCard img={'/services/About US.jpg'} title={e.title}
+                      /> */}
+                    </div>
+                  ))}
+                </div>
               </div>
+
 
               <div className="text-center">
                 <Link href={"/blogs"}>
@@ -145,6 +146,7 @@ const BlogCard = ({ img, title, }: { img: string, title: string }) => {
           </button>
         </Link>
       </div>
+
     </div>
   );
 };

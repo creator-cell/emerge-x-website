@@ -2,7 +2,7 @@
 import { navList } from "@/enums/Navbar/navbarlist";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import BookDemoButton from "../home/hero/BookDemoButton";
@@ -55,15 +55,16 @@ const NavBar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const router = useRouter()
+
   return (
     <div className="w-full px-4 lg:px-14 ">
       <div
         className={` w-full
-        relative rounded-t-xl md:rounded-t-2xl bg-white lg:rounded-t-full flex items-center justify-between  px-10 py-3 md:py-5 lg:py-4    gap-4 transition-all duration-300 ${
-          isSidebarOpen
+        relative rounded-t-xl md:rounded-t-2xl bg-white lg:rounded-t-full flex items-center justify-between  px-10 py-3 md:py-5 lg:py-4    gap-4 transition-all duration-300 ${isSidebarOpen
             ? " rounded-b-none   "
             : "rounded-b-xl  md:rounded-b-2xl lg:rounded-b-full "
-        }`}
+          }`}
       >
         <Link href={"/"} className="w-[130px] md:w-[192px] h-auto ">
           <Image src={"/logo/main-logo.png"} alt="" width={200} height={70} />
@@ -76,9 +77,8 @@ const NavBar = () => {
               return (
                 <li
                   key={i}
-                  className={`hover:text-customGreen cursor-pointer text-md lg:text-xl ${
-                    active ? "text-customGreen" : "text-[#767676]"
-                  }`}
+                  className={`hover:text-customGreen cursor-pointer text-md lg:text-xl ${active ? "text-customGreen" : "text-[#767676]"
+                    }`}
                 >
                   <div onClick={() => scrollToSection(e.link)}>{e.label}</div>
                 </li>
@@ -95,15 +95,16 @@ const NavBar = () => {
         ) : (
           <ul className=" sm:w-[82%] lg:w-[70%] max-w-[900px]  hidden md:flex items-center  gap-1   justify-between ">
             {navList?.map((e, i) => {
-              const active = pathName == e.page;
+              const active = pathName == e.page || (pathName.includes(e.page) && pathName !== "/");
               return (
                 <li
                   key={i}
-                  className={`hover:text-customGreen cursor-pointer text-md lg:text-xl ${
-                    active ? "text-customGreen" : "text-[#767676]"
-                  }`}
+                  className={`hover:text-customGreen cursor-pointer text-md lg:text-xl ${active ? "text-customGreen" : "text-[#767676]"
+                    }`}
                 >
-                  <Link href={e.page}>{e.label}</Link>
+                  <button onClick={() => {
+                    router.push(e.page)
+                  }}>{e.label}</button>
                 </li>
               );
             })}
@@ -118,9 +119,8 @@ const NavBar = () => {
         )}
 
         <div
-          className={`block md:hidden transition-all duration-300  ${
-            isSidebarOpen ? " rotate-180" : " rotate-0"
-          }`}
+          className={`block md:hidden transition-all duration-300  ${isSidebarOpen ? " rotate-180" : " rotate-0"
+            }`}
         >
           {isSidebarOpen ? (
             <button
@@ -140,11 +140,10 @@ const NavBar = () => {
         </div>
 
         <div
-          className={` absolute bg-white block md:hidden   w-full  ${
-            isSidebarOpen
-              ? "h-[300px] rounded-b-3xl  "
-              : "   h-0 rounded-b-none"
-          } overflow-hidden transition-all left-0 top-[50px] duration-300 `}
+          className={` absolute bg-white block md:hidden   w-full  ${isSidebarOpen
+            ? "h-[300px] rounded-b-3xl  "
+            : "   h-0 rounded-b-none"
+            } overflow-hidden transition-all left-0 top-[50px] duration-300 `}
           style={{ zIndex: 3000 }}
         >
           {pathName === "/" ? (
@@ -162,9 +161,8 @@ const NavBar = () => {
                     {" "}
                     <div
                       onClick={() => scrollToSection(e.link)}
-                      className={`flex items-center justify-center gap-[16px]   ${
-                        isActive ? "text-[#3DA229]" : "text-[#767676]"
-                      }`}
+                      className={`flex items-center justify-center gap-[16px]   ${isActive ? "text-[#3DA229]" : "text-[#767676]"
+                        }`}
                     >
                       {e.label}
                     </div>
@@ -184,14 +182,16 @@ const NavBar = () => {
                     }}
                     className=" text-base   px-5 py-1.5 border-b border-dashed pb-2"
                   >
-                    <Link
-                      href={e.page}
-                      className={`flex items-center justify-center gap-[16px]    ${
-                        isActive ? "text-[#3DA229]" : "text-[#767676]"
-                      }`}
+                    <button
+                      // href={e.page}
+                      onClick={() => {
+                        router.push(e.page)
+                      }}
+                      className={`flex items-center justify-center gap-[16px]    ${isActive ? "text-[#3DA229]" : "text-[#767676]"
+                        }`}
                     >
                       {e.label}
-                    </Link>
+                    </button>
                   </li>
                 );
               })}
