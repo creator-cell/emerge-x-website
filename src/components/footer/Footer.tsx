@@ -43,6 +43,9 @@ const Footer = () => {
                     <Link href={e.link}>{e.label}</Link>
                   </li>
                 ))}
+                <div>
+                  <Link href={"/contact-us"} >contact us</Link>
+                </div>
               </ul>
             </div>
           </div>

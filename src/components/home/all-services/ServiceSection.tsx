@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -60,11 +60,11 @@ const ServiceSection = () => {
 
             ScrollTrigger.create({
                 trigger: ".gallery",
-                start: "top top",
+                start: "top 10%",
                 end: "bottom bottom",
                 pin: ".right-wrapper", // Pin wrapper instead of direct flex child
-                // pinSpacing: false, // Add spacing
-                // markers: false,
+                // pinSpacing: true, // Add spacing
+                markers: true,
             });
 
             details.forEach((detail, index) => {
@@ -121,6 +121,11 @@ const ServiceSection = () => {
         },
         { scope: containerRef }
     );
+
+    useEffect(() => {
+        // Refresh ScrollTrigger on component mount
+        ScrollTrigger.refresh();
+    }, []);
 
     return (
         <div ref={containerRef}>
