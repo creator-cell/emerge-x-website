@@ -12,6 +12,7 @@ import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
 import { AnimatePresence, motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { servicesData } from "@/components/services/services";
+import Link from "next/link";
 
 const HomeServiceSlider: React.FC = ({
 
@@ -90,6 +91,13 @@ const HomeServiceSlider: React.FC = ({
                 {servicesData?.[activeIndex]?.titledetails}
               </motion.p>
             </AnimatePresence>
+          </div>
+          <div className="flex self-start items-start justify-start mt-12">
+            <Link href={`/services/${servicesData?.[activeIndex]?.id}`}
+              className="px-[20px] py-[8px] text-[16px] sm:text-base bg-[#3DA229] rounded-full text-white hover:bg-[#3DA229] transition-all duration-300 ease-in-out"
+            >
+              Explore Now
+            </Link>
           </div>
         </div>
         <div className=" w-full md:w-[60%]">

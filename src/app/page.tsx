@@ -111,7 +111,7 @@ export default function Home() {
       </div>
       <>
         {/* <ServiceSection /> */}
-        <div className="bg-greyishblack pt-12 ">
+        <div className="bg-greyishblack pt-12 " id="services">
           <SectionHeading text="All Services" className="text-white" />
           <HomeServiceSlider />
         </div>
