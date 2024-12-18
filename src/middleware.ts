@@ -21,7 +21,6 @@ export function middleware(request: NextRequest) {
     });
   }
 
-  // Allow authenticated users to access other routes
   console.log('-> (m)token exists, allowing request to proceed');
   return NextResponse.next();
 }
