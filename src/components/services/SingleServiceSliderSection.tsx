@@ -15,8 +15,8 @@ import { servicesData } from "./services";
 
 
 interface Props {
-  subHeading: string;
-  numericId: number
+  subHeading?: string;
+  numericId?: number
   page?: string
 }
 
