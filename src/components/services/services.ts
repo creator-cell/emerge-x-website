@@ -277,6 +277,7 @@ export const servicesData = [
   {
     "id": 3,
     "title": "Response Service",
+    image: "/services/About US.jpg",
     subHeading: "Integrated Solutions for Efficient Emergency Management",
     "titledetails": "Enhance emergency response efficiency and effectiveness with Emerge-X's integrated hardware solutions. Our platform ensures complete automation, providing real-time access to critical information, enabling prompt and coordinated emergency management to minimize impact and ensure safety",
     "whatsnewContent": "How does our response technology work? Emerge-X’s wearable devices immediately detect abnormalities and send alerts to local emergency response teams. This seamless integration ensures quick action by emergency responders, reducing delays and improving outcomes during high-risk situations.",
