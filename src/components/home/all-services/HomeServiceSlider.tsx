@@ -57,8 +57,6 @@ const HomeServiceSlider: React.FC = ({
 
   return (
     <div className={` bg-greyishblack text-white pt-24    pb-10   rounded-t-[40px] md:rounded-t-[90px] lg:rounded-t-[110px] `}>
-
-
       <div className=" w-full flex flex-col md:flex-row md:justify-between gap-5 md:pl-[50px] ">
         <div className="w-full  space-y-24 md:w-[30%] flex flex-col items-end">
 
