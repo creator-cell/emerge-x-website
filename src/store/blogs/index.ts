@@ -4,7 +4,7 @@ import { BlogData, BlogDataResponse, BlogDataTypes, PaginationParams } from "./t
 
 export const BlogApi = createApi({
     reducerPath: "blogApi",
-    baseQuery: fetchBaseQuery({ baseUrl: "https://emerge-x-backend-c2kvq.ondigitalocean.app/v1/blog" }),
+    baseQuery: fetchBaseQuery({ baseUrl: "/v1/blog" }),
     tagTypes: ["Blog"],
     endpoints: (builder) => ({
         getBlogs: builder.query<BlogData, PaginationParams>({
