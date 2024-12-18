@@ -13,8 +13,7 @@ const sliderData = [
         id: "1",
         image: servicesImages.mitigatioion,
         text: "Mitigation/Prevention",
-        heading:
-            "Emerge-X Revolutionizing Safety with Advanced Wearable Technology",
+        heading: "Explore how Emerge-X utilizes AI CCTV Cameras, Wearable Devices, and HSE Management Software to enhance workplace safety, monitor health indicators, and streamline HSE processes. Mitigate risks, ensure compliance, and foster a safer working environment with our innovative solutions.",
         description:
             "Revolutionizing safety with cutting-edge technology: real-time health monitoring, brain function analysis, and GPS tracking ensure rapid response, empowering users with unmatched protection and peace of mind.",
     },
@@ -22,7 +21,7 @@ const sliderData = [
         id: "2",
         image: servicesImages.Preparedness,
         text: "Preparedness",
-        heading: "Emerge-X Revolutionizing Emergency Preparedness",
+        heading: "Enhance your organization's readiness with Emerge-X's comprehensive preparedness solutions, including online and offline training, emergency drill support, and real-time training tracking. Equip your team with essential skills to respond effectively in emergencies and foster resilience",
         description:
             "Revolutionizing emergency preparedness through comprehensive training and simulation programs. These ensure that wearers and emergency teams are equipped to respond effectively in any critical situation. Our advanced wearable technology supports these efforts by providing real-time health monitoring, ensuring that preparedness is backed by actionable data.",
     },
@@ -30,7 +29,7 @@ const sliderData = [
         id: "3",
         image: servicesImages.response,
         text: "Response",
-        heading: "Emerge-X Revolutionizing Recovery with Wearable Technology",
+        heading: "Enhance emergency response efficiency and effectiveness with Emerge-X's integrated hardware solutions. Our platform ensures complete automation, providing real-time access to critical information, enabling prompt and coordinated emergency management to minimize impact and ensure safety",
         description:
             "Revolutionizing recovery with advanced wearable technology that monitors health metrics during rehabilitation. Continuous tracking of vital signs helps optimize recovery time by providing real-time data, ensuring that wearers get the support they need to fully recover after an incident.",
     },
@@ -39,7 +38,7 @@ const sliderData = [
         image: servicesImages.recovery,
         text: "Recovery",
         heading:
-            "Emerge-X enhances response efficiency with real-time alert systems.",
+            "Facilitate effective recovery with Emerge-X's comprehensive services, including automated incident reporting, AI-driven root cause analysis, and tailored precautionary measures. Empower your organization to learn, adapt, and strengthen emergency management capabilities post-incident",
         description:
             "Revolutionizing response times with advanced wearable technology that sends immediate alerts and coordinates real-time responses with emergency teams. This ensures fast intervention and rapid assistance, maximizing safety during critical situations.",
     },
@@ -60,10 +59,10 @@ const ServiceSection = () => {
 
             ScrollTrigger.create({
                 trigger: ".gallery",
-                start: "top 10%",
+                start: "top top",
                 end: "bottom bottom",
                 pin: ".right-wrapper", // Pin wrapper instead of direct flex child
-                // pinSpacing: true, // Add spacing
+                pinSpacing: true, // Add spacing
                 markers: true,
             });
 
@@ -81,8 +80,8 @@ const ServiceSection = () => {
 
                 ScrollTrigger.create({
                     trigger: headline,
-                    start: "top 80%",
-                    end: "top 20%",
+                    start: "clamp(top 80%)",
+                    end: "clamp(top 20%)",
                     animation: animation,
                     scrub: 1,
                     markers: false,
@@ -138,7 +137,7 @@ const ServiceSection = () => {
                     {sliderData.map((service, index) => (
                         <div
                             key={index}
-                            className="service-card p-4 lg:p-8 min-h-screen flex flex-col gap-16 justify-center  rounded-md"
+                            className="service-card p-4 lg:p-8 min-h-[50vh] flex flex-col gap-6 justify-center  rounded-md"
                         >
                             <div className="space-y-3">
                                 <h2 className="text-4xl font-bold mb-4 text-gray-800">
@@ -148,11 +147,6 @@ const ServiceSection = () => {
                                     <strong>{service.heading}</strong>
                                 </p>
                             </div>
-                            <p className="text-black/90  font-light text-lg">
-                                <strong className="pb-3">{service.description}</strong>
-                                <strong>{service.description}</strong>
-                                <strong>{service.description}</strong>
-                            </p>
                             <button
                                 type="submit"
                                 onClick={() => router.push(`/services/${service.id}`)}
@@ -177,7 +171,7 @@ const ServiceSection = () => {
 
                 {/* Right Section Wrapper */}
                 <div className="w-1/2 h-screen right-wrapper  relative overflow-hidden  hidden md:flex">
-                    <div className="absolute w-[80%] lg:w-[70%]   max-lg:max-h-[24rem] h-[50vh] aspect-square border shadow-lg rounded-md overflow-hidden inset-0 top-1/2 left-1/2  transform -translate-x-1/2 -translate-y-1/2  flex items-center justify-center">
+                    <div className="absolute w-[80%] lg:w-[70%] max-lg:max-h-[24rem] h-[50vh] aspect-square border shadow-lg rounded-md overflow-hidden inset-0 top-1/2 left-1/2  transform -translate-x-1/2 -translate-y-1/2  flex items-center justify-center">
                         {sliderData.map((service, index) => (
                             <div key={index} className="right-image absolute w-full h-full ">
                                 <Image

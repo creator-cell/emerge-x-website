@@ -24,12 +24,15 @@ export interface PreparednessData {
   details2: string;
   details3: string;
   faqtitle: string;
+  subHeading: string;
+  details: string;
   faq: Faq[];
 }
 const page = () => {
   const pathname = usePathname(); // Get the full pathname of the current URL
-  const [slug, setSlug] = useState<string | null>(null);
+  const [id, setId] = useState<number | null>(null);
   const [allData, setAllData] = useState<PreparednessData[]>([]);
+
 
   useEffect(() => {
     if (!pathname) return;
@@ -38,10 +41,11 @@ const page = () => {
     if (!IdData) return;
 
     const numericId = parseInt(IdData, 10); // Convert to a number
+    setId(numericId);
     if (isNaN(numericId)) return; // Ensure valid number
 
     const AllData = servicesData.filter((e) => e.id === numericId); // Compare as numbers
-    setAllData(AllData);
+    setAllData(AllData as any);
   }, [pathname]);
 
   const navTrain = [
@@ -68,9 +72,9 @@ const page = () => {
               textColor="white"
             />
 
-            <SectionWrapper>
+            <SectionWrapper >
               <BreadCrumb navTrainData={navTrain} />
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-4 mt-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-4 mt-8 hidden">
                 <div className=" flex items-end">
                   <div className="w-full  md:w-[50%]">
                     <h2 className="text-2xl font-semibold mb-6 max-w-sm">
@@ -90,8 +94,8 @@ const page = () => {
             </SectionWrapper>
 
             <div>
-              <SectionWrapper>
-                <SingleServiceSliderSection />
+              <SectionWrapper className="w-full">
+                <SingleServiceSliderSection subHeading={data?.subHeading} numericId={id ?? 0} />
               </SectionWrapper>
             </div>
 
@@ -106,18 +110,25 @@ const page = () => {
                 </div>
                 <div className="prose max-w-none flex flex-col gap-8">
                   <p className=" text-base md:text-lg  text-greyishblack">
-                    {data?.details2}
+                    {/* {data?.details2} */}
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: data?.details,
+                      }}
+                    />
+                    {/* {data?.heading} */}
+
                   </p>
 
-                  <div className="w-full border border-dashed border-black my-10"></div>
+                  {/* <div className="w-full border border-dashed border-black my-10"></div>
                   <p className=" text-base md:text-lg leading-[32px] text-greyishblack">
                     {data?.details3}
-                  </p>
+                  </p> */}
                 </div>
               </div>
             </SectionWrapper>
 
-            <SectionWrapper>
+            <SectionWrapper className="w-full">
               <ImageHoverEffect />
             </SectionWrapper>
             <SectionWrapper>

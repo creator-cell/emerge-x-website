@@ -91,7 +91,7 @@ const CardBlog: React.FC<CardBlogTypes> = ({
       </div>
       <div className={`${list ? " w-[60%] h-fit" : "w-full"}`}>
         <p className={cn(" text-customGreen text-xs font-[500]", styleDate)}>
-          {data && date}
+          {/* {data && date} */}
         </p>
         <h2 className={cn(" text-greyishblack  font-[600]", styleHeading)}>
           {data?.title}

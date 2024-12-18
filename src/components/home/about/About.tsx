@@ -61,12 +61,25 @@ const About = ({ scrollYProgress }: AboutProps) => {
           className="grid grid-cols-1 md:grid-cols-2 items-center gap-6 mt-10 pb-16 w-full"
           id="about-section"
         >
-          <div className=" w-full lg:w-[70%]">
+          <div className=" w-full ">
             <p className="text-white text-justify leading-6 sm:leading-9 md:leading-[44px] font-[400] text-[15px] sm:text-[24px] md:text-[32px] mt-10 px-4">
-              At EmergeX, we aim higher and strive harder to make workplace safety
+              Emerge-X: Your Partner in quick,
+              effective emergency solutions
+
             </p>
             <p className="text-justify text-white  opacity-45 leading-6 whitespace-pre-line  sm:leading-8  font-[400] text-xs sm:text-[18px] mt-8 px-4">
-              EmergeX will assist you to better understand and manage workplace safety by integrating hazards and incident reporting with investigations, actions and metrics reporting.EmergeX will assist you to better understand and manage workplace safety by integrating hazards and incident reporting with investigations, actions and metrics reporting..
+              Welcome to Emerge-X, a seasoned leader in Emergency Management Solutions with 15 years of expertise. Our innovative software platform is tailored to enhance organizational safety and resilience through the four pillars of the Emergency Management Cycle: Mitigation/Prevention, Preparedness, Response, and Recovery.
+
+              Proactive risk reduction is paramount at Emerge-X. Leveraging cutting-edge technology, such as AI-driven monitoring and health management tools, we identify and address potential hazards preemptively to safeguard your workforce effectively.
+
+              Preparedness is key to efficient emergency management. Our diverse training solutions, complemented by real-time tracking, ensure your team is well-equipped to handle any crisis. Emergency drills further refine your organization's readiness.
+
+              During crises, our response solutions, supported by AI and automation, provide instant access to critical information for swift decision-making. Our recovery services focus on learning and improvement, offering automated incident reporting and root cause analysis to enhance future preparedness.
+
+              Emerge-X is devoted to equipping organizations with the necessary tools for confident emergency navigation. We strive to instill a culture of safety, resilience, and continuous enhancement in emergency management.
+
+              Come join us in shaping a safer tomorrow.
+
             </p>
             <div className="flex items-start justify-start mt-12 px-4">
               <button

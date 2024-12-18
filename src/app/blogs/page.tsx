@@ -182,9 +182,9 @@ const page = ({ searchParams }: { searchParams: ReadonlyURLSearchParams }) => {
 
 
       {
-        blogsAllData?.length !== 0 &&
+        blogsAllData?.length >= 10 &&
 
-        <div className="flex justify-center gap-4 mt-8">
+        <div className="flex justify-center items-center gap-4 mt-8">
           <Button
             onClick={() => handlePagination(currentPage - 1)}
             disabled={blogsAllData?.previousPage === true ? false : true}

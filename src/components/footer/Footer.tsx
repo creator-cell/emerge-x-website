@@ -57,11 +57,11 @@ const Footer = () => {
             <div className="flex flex-col md:flex-row gap-8 lg:justify-between mt-8">
               <div className="text-[16px]">
                 <p className="font-semibold">Phone</p>
-                <p>+1 (800) 555-1234</p>
+                <p>+971 55 544 0210</p>
               </div>
               <div className="text-[16px]">
                 <p className="font-semibold">Email</p>
-                <p>info@emergex.com</p>
+                <p>info@emerge-x.com</p>
               </div>
             </div>
           </div>

@@ -17,6 +17,8 @@ import { blogsData } from "@/store/reducer/blog";
 import { newsData } from "@/store/reducer/news";
 import ServiceSection from "@/components/home/all-services/ServiceSection";
 import { useGetBlogsQuery } from "@/store/blogs";
+import SingleServiceSliderSection from "@/components/services/SingleServiceSliderSection";
+import SectionHeading from "@/components/reusable/SectionHeading";
 
 
 gsap.registerPlugin(ScrollTrigger);
@@ -107,7 +109,11 @@ export default function Home() {
         </div>
       </div>
       <>
-        <ServiceSection />
+        {/* <ServiceSection /> */}
+        <div className="bg-greyishblack pt-12 ">
+          <SectionHeading text="All Services" className="text-white" />
+          <SingleServiceSliderSection subHeading="" numericId={1} page={"home"} />
+        </div>
         {
           data?.blog && data.blog.length > 0 &&
           <LetestBlogs data={data} />
