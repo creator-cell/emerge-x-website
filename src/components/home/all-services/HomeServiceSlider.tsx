@@ -156,7 +156,9 @@ const HomeServiceSlider: React.FC = ({
               >
                 <FaArrowLeftLong />
               </button>
-
+              <div>
+                {activeIndex + 1} /{servicesData.length}
+              </div>
               <button
                 disabled={activeIndex === servicesData.length - 1}
                 onClick={slideNext}

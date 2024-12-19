@@ -32,7 +32,7 @@ export const HeroResusable: React.FC<HeroResusableProps> = ({
       {/* White gradient overlay with right side emphasis */}
       <div
         className={cn(
-          `absolute inset-0 bg-gradient-to-r from-white/0 to-white/90`,
+          `absolute inset-0 bg-gradient-to-r from-white/0 to-black/90`,
           className
         )}
       />
@@ -47,14 +47,14 @@ export const HeroResusable: React.FC<HeroResusableProps> = ({
           max-w-2xl "
       >
         <h1
-          className={`text-2xl  sm:text-5xl text-center  font-semibold md:text-end md:justify-end text-${textColor || "black"
+          className={`text-2xl  sm:text-5xl text-center  font-semibold md:text-end md:justify-end text-${textColor || "white"
             } mb-4`}
         >
           {title}
         </h1>
 
         <div
-          className={`flex items-center text-center sm:justify-center md:text-end md:justify-end lg:text-end lg:justify-end gap-2 text-${textColor || "black"
+          className={`flex items-center text-center sm:justify-center md:text-end md:justify-end lg:text-end lg:justify-end gap-2 text-${textColor || "white"
             } text-base `}
         >
           {description ? (

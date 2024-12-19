@@ -61,7 +61,7 @@ const NavBar = () => {
     <div className="w-full px-4 lg:px-14 ">
       <div
         className={` w-full
-        relative rounded-t-xl md:rounded-t-2xl bg-white lg:rounded-t-full flex items-center justify-between  px-10 py-3 md:py-5 lg:py-4    gap-4 transition-all duration-300 ${isSidebarOpen
+        relative rounded-t-xl md:rounded-t-2xl bg-white shadow-md lg:rounded-t-full flex items-center justify-between  px-10 py-3 md:py-5 lg:py-4    gap-4 transition-all duration-300 ${isSidebarOpen
             ? " rounded-b-none   "
             : "rounded-b-xl  md:rounded-b-2xl lg:rounded-b-full "
           }`}
@@ -147,8 +147,8 @@ const NavBar = () => {
 
         <div
           className={` absolute bg-white block md:hidden   w-full  ${isSidebarOpen
-              ? "h-[300px] rounded-b-3xl  "
-              : "   h-0 rounded-b-none"
+            ? "h-[300px] rounded-b-3xl  "
+            : "   h-0 rounded-b-none"
             } overflow-hidden transition-all left-0 top-[50px] duration-300 `}
           style={{ zIndex: 3000 }}
         >

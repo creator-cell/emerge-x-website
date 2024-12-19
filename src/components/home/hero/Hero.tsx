@@ -14,12 +14,14 @@ const Hero = ({ scrollYProgress }: HeroProps) => {
 
   return (
     <motion.div className=" sticky top-0 h-screen overflow-hidden  ">
-      <div>
+      <div className="">
         <img
           src={'/news/intro.png'}
           alt="Hero desktop"
-          className="w-full hidden md:block absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 min-w-full min-h-full object-cover z-[-1]"
+          className="w-full  hidden md:block absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 min-w-full min-h-full object-cover z-[-1]"
         />
+        <div className="bg-gradient-to-r from-black/80 to-transparent w-full h-full absolute top-0 left-0 z-1" />
+
         <img
           src={'/news/intro.png'}
           alt="Hero mobile"
@@ -28,11 +30,12 @@ const Hero = ({ scrollYProgress }: HeroProps) => {
       </div>
 
       <div className=" absolute left-0 bottom-8 sm:bottom-0 w-full">
+
         <div className="  p-12 pb-10 w-full  ">
           <div>
             <motion.h2
               style={{ transform: scaleValue }}
-              className="text-[38px] md:text-[70px] font-[700] text-white leading-[60px] md:leading-[105px] whitespace-nowrap"
+              className="text-[38px] md:text-[58px] font-[700] text-white leading-[60px] md:leading-[70px] whitespace-nowrap"
             >
               Reliable
               <br />

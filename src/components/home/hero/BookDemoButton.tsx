@@ -20,7 +20,7 @@ const BookDemoButton: React.FC<BookDemoButtonTpes> = ({
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [isModalVisible, setModalVisible] = useState<boolean>(false);
   const dispatch = useDispatch();
- 
+
 
 
 
@@ -43,7 +43,7 @@ const BookDemoButton: React.FC<BookDemoButtonTpes> = ({
           hidenavBarshow();
         }}
         className={cn(
-          ` bg-[#222720] text-white rounded-full flex items-center`,
+          ` bg-[#222720] text-white rounded-full flex items-center border border-white`,
           className
         )}
       >

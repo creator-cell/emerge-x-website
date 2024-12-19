@@ -5,6 +5,7 @@ import cartReducer from "@/store/fetures/buttons/providerButton";
 import blogReducer from "@/store/reducer/blog";
 import newsReducer from "@/store/reducer/news";
 import { BlogApi } from "./blogs";
+import { NewsApi } from "./news";
 
 
 
@@ -15,9 +16,10 @@ export const makeStore = () => {
       blog: blogReducer,
       news: newsReducer,
       [BlogApi.reducerPath]: BlogApi.reducer,
+      [NewsApi.reducerPath]: NewsApi.reducer,
     },
     middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(BlogApi.middleware),
+      getDefaultMiddleware().concat(BlogApi.middleware, NewsApi.middleware),
   });
 };
 

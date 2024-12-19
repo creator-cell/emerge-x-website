@@ -42,6 +42,10 @@ body {
    
   }
 
+  .image-overlay{
+    background: linear-gradient(101.19deg, #000000 -29.77%, rgba(0, 0, 0, 0) 98.94%);
+  }
+
   @property --angle {
     syntax: "<angle>";
     initial-value: 0deg;

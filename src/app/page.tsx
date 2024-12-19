@@ -20,6 +20,7 @@ import { useGetBlogsQuery } from "@/store/blogs";
 import SingleServiceSliderSection from "@/components/services/SingleServiceSliderSection";
 import SectionHeading from "@/components/reusable/SectionHeading";
 import HomeServiceSlider from "@/components/home/all-services/HomeServiceSlider";
+import { useGetNewsQuery } from "@/store/news";
 
 
 gsap.registerPlugin(ScrollTrigger);
@@ -62,7 +63,7 @@ export default function Home() {
       const response: any = await getApiHelper('https://emerge-x-backend-c2kvq.ondigitalocean.app/v1/news?page=1&limit=10', "GET");
 
       if (response?.success) {
-        dispatch(newsData(response?.data));
+        // dispatch(newsData(response?.data));
         console.log("Blogs Data:", response?.data);
       } else {
         console.error("Failed to fetch blogs:", response?.error);
@@ -97,6 +98,8 @@ export default function Home() {
 
 
   const { data } = useGetBlogsQuery({ page: 1, limit: 10 });
+  const { data: newsData } = useGetNewsQuery({ page: 1, limit: 5 });
+  console.log("🚀 ~ Home ~ newsData:", newsData)
 
 
 
@@ -120,7 +123,10 @@ export default function Home() {
           <LetestBlogs data={data} />
         }
       </>
-      <News />
+      {
+        newsData && newsData?.news?.length > 0 &&
+        <News newdData={newsData?.news} />
+      }
       <Contact />
     </div>
   );

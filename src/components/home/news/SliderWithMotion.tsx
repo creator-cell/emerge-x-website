@@ -2,8 +2,16 @@
 import React, { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useSwipeable } from "react-swipeable";
+import { NewsItem } from "@/store/news/types/news.types";
+import { useRouter } from "next/navigation";
 
-const SliderWithMotion = () => {
+
+interface SliderWithMotionProps {
+  newdData: NewsItem[]
+}
+
+
+const SliderWithMotion = ({ newdData }: SliderWithMotionProps) => {
   const [positionIdex, setPositionIndex] = useState([0, 1, 2, 3, 4]);
   const [isPaused, setIsPaused] = useState(false);
   const [imgWidth, setImgWidth] = useState('');
@@ -37,8 +45,11 @@ const SliderWithMotion = () => {
     right1: { x: "50%", scale: 0.7, zIndex: 2 },
   };
 
+  const router = useRouter();
+
   const handleImageClick = (clickedIndex: number) => {
     console.log(clickedIndex);
+    router.push(`/news/${newdData[clickedIndex]._id}`);
   };
 
   useEffect(() => {
@@ -74,6 +85,11 @@ const SliderWithMotion = () => {
       window.removeEventListener("resize", updateSlidesPerView);
     };
   }, []);
+
+
+  const centerIndex = positionIdex.findIndex((pos) => position[pos] === "center");
+
+
   return (
     <>
       <div
@@ -82,25 +98,37 @@ const SliderWithMotion = () => {
         onMouseLeave={() => setIsPaused(false)}
         className="w-full flex items-center flex-col justify-center  h-[250px] sm:h-[500px] lg:h-[500px] overflow-hidden relative"
       >
-        {SlidesData.map((e, index) => (
+        {newdData?.map((e, index) => (
           <motion.img
             key={index}
-            src={e.img}
+            src={e.featureImage}
             alt={"slide"}
-            className="rounded-[12px]"
+            className="rounded-[12px] cursor-pointer"
             initial="center"
             animate={position[positionIdex[index]]}
             variants={imageVariant}
             transition={{ duration: 0.5 }}
             style={{
               width: imgWidth,
-
               position: "absolute",
             }}
             onClick={() => handleImageClick(index)}
           />
         ))}
       </div>
+
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={centerIndex}
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          exit={{ opacity: 0, y: 50 }}
+          className="text-center md:text-[26px] text-[20px] mt-10">
+          {newdData?.[centerIndex]?.heading}
+        </motion.div>
+      </AnimatePresence>
+
       {/* <button
         className="text-black text-[36px] bg-green-400 px-2"
         onClick={handleNext}
