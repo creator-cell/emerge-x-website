@@ -13,6 +13,10 @@ export interface Faq {
   question: string;
   answer: string;
 }
+export interface footerImagesArra {
+  id: number;
+  image: string;
+}
 export interface PreparednessData {
   id: number;
   title: string;
@@ -27,12 +31,12 @@ export interface PreparednessData {
   subHeading: string;
   details: string;
   faq: Faq[];
+  footerImages: footerImagesArra[];
 }
 const page = () => {
   const pathname = usePathname(); // Get the full pathname of the current URL
   const [id, setId] = useState<number | null>(null);
   const [allData, setAllData] = useState<PreparednessData[]>([]);
-
 
   useEffect(() => {
     if (!pathname) return;
@@ -51,10 +55,10 @@ const page = () => {
   const navTrain = [
     { link: "/", label: "Home", id: "a1" },
     { link: "/", label: "Services", id: "a2" },
-    { link: "/services", label: "View All", id: "a3" },
+
     {
-      link: "/services/s1fe24w",
-      label: "Mitigation/Prevention",
+      link: `/services/${id}`,
+      label: allData[0]?.title,
       id: "a3",
     },
   ];
@@ -72,9 +76,9 @@ const page = () => {
               textColor="white"
             />
 
-            <SectionWrapper >
+            <SectionWrapper>
               <BreadCrumb navTrainData={navTrain} />
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-4 mt-8 hidden">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-4 mt-8 ">
                 <div className=" flex items-end">
                   <div className="w-full  md:w-[50%]">
                     <h2 className="text-2xl font-semibold mb-6 max-w-sm">
@@ -95,7 +99,10 @@ const page = () => {
 
             <div>
               <SectionWrapper className="w-full">
-                <SingleServiceSliderSection subHeading={data?.subHeading} numericId={id ?? 0} />
+                <SingleServiceSliderSection
+                  subHeading={data?.subHeading}
+                  numericId={id ?? 0}
+                />
               </SectionWrapper>
             </div>
 
@@ -117,7 +124,6 @@ const page = () => {
                       }}
                     />
                     {/* {data?.heading} */}
-
                   </p>
 
                   {/* <div className="w-full border border-dashed border-black my-10"></div>
@@ -129,7 +135,7 @@ const page = () => {
             </SectionWrapper>
 
             <SectionWrapper className="w-full">
-              <ImageHoverEffect />
+              <ImageHoverEffect imageData={data?.footerImages} />
             </SectionWrapper>
             <SectionWrapper>
               <FrequentlyaskedQuestions

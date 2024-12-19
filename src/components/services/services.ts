@@ -1,5 +1,6 @@
 import { Mservice1, Mservice2, Mservice3 } from "@/assets/services/Metegation";
 import { preparedness1, preparedness2, preparedness3, preparedness4, preparedness5 } from "@/assets/services/Preparedness";
+import { recovery1, recovery2, recovery3, recovery4, recovery5, recovery6, recovery7 } from "@/assets/services/Recovery";
 import { response1, response2, response3, response4, response5, response6, response7 } from "@/assets/services/Response";
 
 export const servicesData = [
@@ -63,6 +64,11 @@ export const servicesData = [
         "content": "Our comprehensive software solutions streamline Health, Safety, and Environmental (HSE) management processes, facilitating compliance and effective risk management.",
         "image": Mservice3
       }
+    ],
+    footerImages:[
+      {"id":1,"image":Mservice1},
+      {"id":2,"image":Mservice3},
+      {"id":3,"image":Mservice2},
     ]
 
   },
@@ -168,6 +174,11 @@ With our comprehensive services, we aim to establish a strong foundation for eff
         "content": "Empower employees with knowledge and practice to respond to emergencies effectively and confidently, ensuring safety and minimal disruptions.",
         "image": preparedness5
       }
+    ],
+    footerImages:[
+      {"id":1,"image":preparedness1},
+      {"id":2,"image":preparedness5},
+      {"id":3,"image":preparedness4},
     ]
 
   },
@@ -247,44 +258,49 @@ With Emerge-X, post-incident recovery becomes a transformative opportunity—one
         "id": 1,
         "heading": "Automated Incident Reporting",
         "content": "Efficiently record incidents in real-time with minimal manual input, ensuring accurate documentation.",
-        "image": "/services/Prevention.jpg"
+        "image": recovery1
       },
       {
         "id": 2,
         "heading": "Detailed Incident Reports",
         "content": "Comprehensive reports provide in-depth insights into incidents, aiding analysis and decision-making.",
-        "image": "/services/Preparedness.jpg"
+        "image":recovery3
       },
       {
         "id": 3,
         "heading": "AI-Driven Root Cause Analysis",
         "content": "Leverage AI to identify underlying causes of incidents quickly and accurately.",
-        "image": "/services/Recovery.jpg"
+        "image": recovery2
       },
       {
         "id": 4,
         "heading": "Tailored Precautionary Measures",
         "content": "Customized preventive actions to address specific risks and prevent future occurrences.",
-        "image": "/services/About US.jpg"
+        "image": recovery7
       },
       {
         "id": 5,
         "heading": "Enhanced Safety Protocols",
         "content": "Strengthened safety measures based on insights from incident analysis and feedback.",
-        "image": "/services/Response.jpg"
+        "image": recovery4
       },
       {
         "id": 6,
         "heading": "Streamlined Recovery Process",
         "content": "Efficient plans and tools to ensure swift recovery and minimize downtime after incidents.",
-        "image": "/services/About US.jpg"
+        "image":recovery6
       },
       {
         "id": 7,
         "heading": "Improved Preparedness for Future Challenges",
         "content": "Lessons learned and continuous improvements enable readiness for potential risks and challenges.",
-        "image": "/services/Response.jpg"
+        "image": recovery5
       }
+    ],
+    footerImages:[
+      {"id":1,"image":recovery1},
+      {"id":2,"image":recovery5},
+      {"id":3,"image":recovery4},
     ]
 
   },
@@ -401,6 +417,11 @@ With Emerge-X, your emergency teams are equipped to tackle challenges head-on, e
         "content": "Comprehensive measures to protect employees, assets, and stakeholders during emergencies.",
         "image": response7
       }
+    ],
+    footerImages:[
+      {"id":1,"image":response1},
+      {"id":2,"image": response7},
+      {"id":3,"image":response6},
     ]
 
   }

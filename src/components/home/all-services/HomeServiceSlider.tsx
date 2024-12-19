@@ -152,7 +152,7 @@ const HomeServiceSlider: React.FC = ({
               <button
                 onClick={slidePreview}
                 disabled={activeIndex === 0}
-                className=" w-10 h-10 rounded-full disabled:grayscale disabled:opacity-50  hover:bg-customGreen/70  bg-customGreen border text-white flex items-center justify-center"
+                className=" w-10 h-10 z-20 rounded-full disabled:grayscale disabled:opacity-50  hover:bg-customGreen/70  bg-customGreen border text-white flex items-center justify-center"
               >
                 <FaArrowLeftLong />
               </button>
@@ -162,7 +162,7 @@ const HomeServiceSlider: React.FC = ({
               <button
                 disabled={activeIndex === servicesData.length - 1}
                 onClick={slideNext}
-                className=" w-10 h-10  disabled:grayscale disabled:opacity-50  hover:bg-customGreen/70  bg-customGreen  rounded-full border text-white flex items-center justify-center"
+                className=" w-10 h-10 z-20  disabled:grayscale disabled:opacity-50  hover:bg-customGreen/70  bg-customGreen  rounded-full border text-white flex items-center justify-center"
               >
                 <FaArrowRightLong />
               </button>
