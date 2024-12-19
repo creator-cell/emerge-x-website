@@ -196,7 +196,9 @@ const SingleServiceSliderSection: React.FC<Props> = ({
               >
                 <FaArrowLeftLong />
               </button>
-
+              <div>
+                {activeIndex + 1} /{serviceData.length}
+              </div>
               <button
                 disabled={activeIndex === serviceData.length - 1}
                 onClick={slideNext}
