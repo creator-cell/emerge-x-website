@@ -4,7 +4,8 @@ import { NewsResponse } from "./types/news.types";
 
 export const NewsApi = createApi({
     reducerPath: "newsApi",
-    baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:8081/v1/news" }),
+    // baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:8081/v1/news" }),
+    baseQuery: fetchBaseQuery({ baseUrl: "/v1/news" }),
     tagTypes: ["News"],
     endpoints: (build) => ({
         getNews: build.query<NewsResponse, PaginationParams>({

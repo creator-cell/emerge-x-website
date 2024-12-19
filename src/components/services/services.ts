@@ -1,3 +1,7 @@
+import { Mservice1, Mservice2, Mservice3 } from "@/assets/services/Metegation";
+import { preparedness1, preparedness2, preparedness3, preparedness4, preparedness5 } from "@/assets/services/Preparedness";
+import { response1, response2, response3, response4, response5, response6, response7 } from "@/assets/services/Response";
+
 export const servicesData = [
   {
     id: 1,
@@ -45,19 +49,19 @@ export const servicesData = [
         "id": 1,
         "heading": "AI CCTV Cameras and Software",
         "content": "Our AI-driven surveillance technology constantly monitors worksites in real-time, enabling the early identification of potential hazards before they escalate.",
-        "image": "/services/Prevention.jpg"
+        "image": Mservice1
       },
       {
         "id": 2,
         "heading": "Wearable Devices",
         "content": "State-of-the-art wearable technology is utilized to monitor health indicators and manage fatigue, promoting employee well-being and ensuring a safer workforce.",
-        "image": "/services/Preparedness.jpg"
+        "image": Mservice2
       },
       {
         "id": 3,
         "heading": "HSE Management System Software",
         "content": "Our comprehensive software solutions streamline Health, Safety, and Environmental (HSE) management processes, facilitating compliance and effective risk management.",
-        "image": "/services/Recovery.jpg"
+        "image": Mservice3
       }
     ]
 
@@ -138,31 +142,31 @@ With our comprehensive services, we aim to establish a strong foundation for eff
         "id": 1,
         "heading": "Online and Offline Training Programs",
         "content": "Flexible learning options, allowing employees to access safety and emergency response training anytime, anywhere, with structured online modules and practical offline sessions.",
-        "image": "/services/Prevention.jpg"
+        "image": preparedness1
       },
       {
         "id": 2,
         "heading": "Emergency Drill Support",
         "content": "Comprehensive guidance and support for conducting realistic emergency drills, preparing employees for swift, effective responses to crises.",
-        "image": "/services/Preparedness.jpg"
+        "image": preparedness2
       },
       {
         "id": 3,
         "heading": "Real-Time Training Tracking",
         "content": "Monitor employee progress and performance in training programs through live tracking dashboards, ensuring timely completion and readiness.",
-        "image": "/services/Recovery.jpg"
+        "image": preparedness3
       },
       {
         "id": 4,
         "heading": "Tailored Feedback and Continuous Improvement",
         "content": "Personalized feedback after training sessions to address gaps and improve skills, fostering ongoing development for employees.",
-        "image": "/services/About US.jpg"
+        "image": preparedness4
       },
       {
         "id": 5,
         "heading": "Confidence and Efficiency in Emergency Response",
         "content": "Empower employees with knowledge and practice to respond to emergencies effectively and confidently, ensuring safety and minimal disruptions.",
-        "image": "/services/Response.jpg"
+        "image": preparedness5
       }
     ]
 
@@ -359,43 +363,43 @@ With Emerge-X, your emergency teams are equipped to tackle challenges head-on, e
         "id": 1,
         "heading": "Integrated Hardware Solutions",
         "content": "Advanced devices seamlessly connected to streamline emergency management and enhance operational efficiency.",
-        "image": "/services/Prevention.jpg"
+        "image": response1
       },
       {
         "id": 2,
         "heading": "Complete Automation of Emergency Operations",
         "content": "Fully automated systems to handle emergency processes, reducing manual intervention and improving response times.",
-        "image": "/services/Preparedness.jpg"
+        "image": response2
       },
       {
         "id": 3,
         "heading": "Real-Time Access to Critical Information",
         "content": "Instant availability of essential data for informed decision-making during emergencies.",
-        "image": "/services/Recovery.jpg"
+        "image": response3
       },
       {
         "id": 4,
         "heading": "Empowered Emergency Teams",
         "content": "Equip teams with tools and resources to handle crises effectively and confidently.",
-        "image": "/services/About US.jpg"
+        "image": response4
       },
       {
         "id": 5,
         "heading": "Prompt and Coordinated Response",
         "content": "Streamlined communication and operations ensure quick, unified actions during emergencies.",
-        "image": "/services/Response.jpg"
+        "image": response5
       },
       {
         "id": 6,
         "heading": "Minimized Impact of Emergencies",
         "content": "Effective systems reduce damages, disruptions, and risks during critical situations.",
-        "image": "/services/About US.jpg"
+        "image": response6
       },
       {
         "id": 7,
         "heading": "Ensured Safety for All Involved",
         "content": "Comprehensive measures to protect employees, assets, and stakeholders during emergencies.",
-        "image": "/services/Response.jpg"
+        "image": response7
       }
     ]
 

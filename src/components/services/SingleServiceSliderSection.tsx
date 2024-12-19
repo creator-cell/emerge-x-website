@@ -163,18 +163,18 @@ const SingleServiceSliderSection: React.FC<Props> = ({
               },
             }}
             virtual
-            style={{ position: "relative" }}
+            style={{ position: "relative", borderRadius: "16px" }}
           >
             {serviceData?.map((item, i) => (
-              <SwiperSlide key={i}>
+              <SwiperSlide key={i} className="rounded-[16px]">
                 <div className="w-full ">
                   <div className="w-full px-4">
                     <Image
                       src={item.image}
                       alt="slideimg"
                       width={800}
-                      height={400}
-                      className="rounded-[16px]"
+                      height={500}
+                      className="rounded-[16px] max-h-[450px] w-full object-cover"
                     />
                   </div>
                 </div>
