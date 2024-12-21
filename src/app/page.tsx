@@ -22,7 +22,6 @@ import SectionHeading from "@/components/reusable/SectionHeading";
 import HomeServiceSlider from "@/components/home/all-services/HomeServiceSlider";
 import { useGetNewsQuery } from "@/store/news";
 
-
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
@@ -34,19 +33,22 @@ export default function Home() {
 
   const [latestBlogSectionHeight, setlatestBlogSectionHeight] = useState(0);
 
-  const blogsAllData = useSelector((state: RootState) => state.blog.blogsData)
-  const newsAllData = useSelector((state: RootState) => state.news.newsData)
+  const blogsAllData = useSelector((state: RootState) => state.blog.blogsData);
+  const newsAllData = useSelector((state: RootState) => state.news.newsData);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    getNewsData()
-    getBlogData()
-  }, [])
+    getNewsData();
+    getBlogData();
+  }, []);
 
   const getBlogData = async () => {
     try {
-      const response: any = await getApiHelper('https://emerge-x-backend-c2kvq.ondigitalocean.app/v1/blog?page=1&limit=10', "GET");
+      const response: any = await getApiHelper(
+        "https://emerge-x-backend-c2kvq.ondigitalocean.app/v1/blog?page=1&limit=10",
+        "GET"
+      );
       if (response?.success) {
         dispatch(blogsData(response?.data));
         console.log("Blogs Data:", response?.data);
@@ -56,11 +58,14 @@ export default function Home() {
     } catch (error: any) {
       console.error("API error:", error.error || error.message);
     }
-  }
+  };
 
   const getNewsData = async () => {
     try {
-      const response: any = await getApiHelper('https://emerge-x-backend-c2kvq.ondigitalocean.app/v1/news?page=1&limit=10', "GET");
+      const response: any = await getApiHelper(
+        "https://emerge-x-backend-c2kvq.ondigitalocean.app/v1/news?page=1&limit=10",
+        "GET"
+      );
 
       if (response?.success) {
         // dispatch(newsData(response?.data));
@@ -73,10 +78,9 @@ export default function Home() {
     }
   };
 
-
   useEffect(() => {
     const preventZoom = (event: any) => {
-      if (event.ctrlKey || event.metaKey || event.key === '0') {
+      if (event.ctrlKey || event.metaKey || event.key === "0") {
         event.preventDefault();
       }
     };
@@ -87,21 +91,18 @@ export default function Home() {
       }
     };
 
-    document.addEventListener('keydown', preventZoom);
-    document.addEventListener('wheel', preventWheelZoom, { passive: false });
+    document.addEventListener("keydown", preventZoom);
+    document.addEventListener("wheel", preventWheelZoom, { passive: false });
 
     return () => {
-      document.removeEventListener('keydown', preventZoom);
-      document.removeEventListener('wheel', preventWheelZoom);
+      document.removeEventListener("keydown", preventZoom);
+      document.removeEventListener("wheel", preventWheelZoom);
     };
   }, []);
 
-
   const { data } = useGetBlogsQuery({ page: 1, limit: 10 });
   const { data: newsData } = useGetNewsQuery({ page: 1, limit: 5 });
-  console.log("🚀 ~ Home ~ newsData:", newsData)
-
-
+  console.log("🚀 ~ Home ~ newsData:", newsData);
 
   return (
     <div className="space-y-4 relative " id="home">
@@ -118,15 +119,11 @@ export default function Home() {
           <SectionHeading text="All Services" className="text-white" />
           <HomeServiceSlider />
         </div>
-        {
-          data?.blog && data.blog.length > 0 &&
-          <LetestBlogs data={data} />
-        }
+        {data?.blog && data.blog.length > 0 && <LetestBlogs data={data} />}
       </>
-      {
-        newsData && newsData?.news?.length > 0 &&
+      {newsData && newsData?.news?.length > 0 && (
         <News newdData={newsData?.news} />
-      }
+      )}
       <Contact />
     </div>
   );

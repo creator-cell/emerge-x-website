@@ -23,7 +23,7 @@ const page = () => {
   const pathname = usePathname(); // Get the full pathname of the current URL
   const [slug, setSlug] = useState<string | null>(null);
   const [blogData, setBlogData] = useState<BlogData[]>([]);
-  const blogsAllData = useSelector((state: RootState) => state.blog.blogsData)
+  const blogsAllData = useSelector((state: RootState) => state.blog.blogsData);
   useEffect(() => {
     if (!pathname) return;
 
@@ -32,7 +32,7 @@ const page = () => {
     setSlug(IdData);
 
     const AllData = blogsAllData?.blog?.filter((e: any) => e._id == IdData);
-    console.log(AllData)
+    console.log(AllData);
     setBlogData(AllData);
   }, [pathname]);
   const navTrain = [
@@ -46,16 +46,15 @@ const page = () => {
     },
   ];
 
-
   const { data } = useGetSingleBlogQuery(slug ?? "");
-  console.log("🚀 ~ page ~ data:", data)
+  console.log("🚀 ~ page ~ data:", data);
 
   return (
     <div className=" min-h-screen">
       <HeroResusable
         title={data?.blog?.title ?? ""}
         description={data?.blog?.description ?? ""}
-        image={data?.blog?.bannerImage ?? "/news/intro.png"}
+        image={data?.blog?.bannerImage ?? ""}
         className="bg-gradient-to-r from-black/0 to-black/90"
         textColor="white"
       />
@@ -72,8 +71,7 @@ const page = () => {
             <div>
               <Image
                 src={data?.blog?.futureImages ?? ""}
-                // src="/services/About US.jpg"
-                alt="img"
+                alt="img-blog"
                 width={600}
                 height={600}
               />
@@ -97,7 +95,6 @@ const page = () => {
             className="hidden md:flex w-[48%] flex-col gap-8"
             dangerouslySetInnerHTML={{ __html: data?.blog?.htmlBody ?? "" }}
           ></div>
-
         </div>
       </SectionWrapper>
 
@@ -119,7 +116,7 @@ const page = () => {
           ))}
         </div>
       </SectionWrapper>
-    </div >
+    </div>
   );
 };
 

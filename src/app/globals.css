@@ -5,14 +5,11 @@
 :root {
   --background: #ffffff;
   /* --foreground: #171717; */
-  --customGreen:#3DA229;
-  --greyishblack:#222720;
-
+  --customGreen: #3da229;
+  --greyishblack: #222720;
 }
 
 /* new */
-
-
 
 @media (prefers-color-scheme: dark) {
   :root {
@@ -29,21 +26,26 @@ body {
   /* background-color: black; */
 }
 
-@layer utilities {  
+
+
+@layer utilities {
   .popup-border {
-    padding:10px;
+    padding: 10px;
     width: 90%;
-  
+
     max-width: 450px;
     background: #222720;
     text-align: center;
     border-radius: 20px;
     position: relative;
-   
   }
 
-  .image-overlay{
-    background: linear-gradient(101.19deg, #000000 -29.77%, rgba(0, 0, 0, 0) 98.94%);
+  .image-overlay {
+    background: linear-gradient(
+      101.19deg,
+      #000000 -29.77%,
+      rgba(0, 0, 0, 0) 98.94%
+    );
   }
 
   @property --angle {
@@ -80,11 +82,11 @@ body {
     filter: blur(1.5rem);
     opacity: 0.5;
   }
-  @keyframes rotate { 
+  @keyframes rotate {
     0% {
       --angle: 0deg;
     }
-    50%{
+    50% {
       --angle: 360deg;
     }
     100% {
@@ -92,7 +94,8 @@ body {
     }
   }
   @keyframes colorChange {
-    0%, 50% {
+    0%,
+    50% {
       background-image: conic-gradient(
         from var(--angle),
         #ff4545,
@@ -102,7 +105,8 @@ body {
         #ff4545
       );
     }
-    50.01%, 100% {
+    50.01%,
+    100% {
       background-image: conic-gradient(
         from var(--angle),
         #ff4545,
@@ -214,5 +218,3 @@ body {
     }
   }
 }
-
-

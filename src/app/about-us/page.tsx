@@ -1,3 +1,5 @@
+import { aboutHeroImage } from "@/assets/about-us";
+import { team1, team2, team3, team4 } from "@/assets/about-us/team";
 import Headings from "@/components/about/Headings";
 import OurteamCard from "@/components/about/OurteamCard";
 import OurVisionCards from "@/components/about/OurVisionCards";
@@ -12,7 +14,32 @@ const page = () => {
     { link: "/", label: "Home", id: "a1" },
     { link: "/about-us", label: "About Us", id: "a2" },
   ];
-  const visioncards = [0,1,2]
+  const visioncards = [
+    {
+      id: 1,
+      name: "Kashyap Jagdish Kamble",
+      image: team1,
+      designation: "Founder",
+    },
+    {
+      id: 2,
+      name: "Priyanka Kashyap Kamble",
+      image:team2,
+      designation: "Co-Founder",
+    },
+    {
+      id: 3,
+      name: "Yassir Aslam",
+      image: team3,
+      designation: "CEO",
+    },
+    {
+      id: 4,
+      name: "Vibin Baby",
+      image: team4,
+      designation: "CTO",
+    },
+  ];
   const visionCardsData = [
     {
       title: "Experience",
@@ -36,11 +63,13 @@ const page = () => {
     },
     {
       title: "Empowerment",
-      description: "Developing wearable tech solutions to enhance personal health safety globally.",
+      description:
+        "Developing wearable tech solutions to enhance personal health safety globally.",
     },
     {
       title: "Safety",
-      description: "Dedicated to creating technologies that safeguard health in real-time.",
+      description:
+        "Dedicated to creating technologies that safeguard health in real-time.",
     },
   ];
   const trustedCompanis = [0, 1, 2, 3, 4, 5];
@@ -49,7 +78,7 @@ const page = () => {
       <HeroResusable
         title="Journey of Innovation and excellence"
         description="From humble beginnings to industry leadership, we have continuously pushed boundaries to deliver innovative solutions"
-        image="/services/About US.jpg"
+        image={aboutHeroImage.src}
         className="bg-gradient-to-r from-black/10 to-black/90"
         textColor="white"
       />
@@ -80,9 +109,9 @@ const page = () => {
               heading="Focused on delivering real-time health monitoring and emergency response solutions."
             />
             <div className="flex items-center justify-center">
-              <div className="  w-full">
+              <div className="  w-full  rounded-3xl overflow-hidden">
                 <Image
-                  src={"/services/About US.jpg"}
+                  src={"/about-us/about-poster.jpg"}
                   alt="banner"
                   width={1800}
                   height={1600}
@@ -97,9 +126,9 @@ const page = () => {
               heading="Together we combine outstanding team"
             />
 
-            <div className=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  gap-12 md:gap-8 ">
+            <div className=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-12 md:gap-8 ">
               {visioncards?.map((e, i) => (
-                <OurteamCard key={i} />
+                <OurteamCard key={e.id} {...e} />
               ))}
             </div>
           </div>

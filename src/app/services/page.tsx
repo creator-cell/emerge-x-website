@@ -22,13 +22,13 @@ const page = () => {
 
   return (
     <div className=" min-h-screen">
-      <HeroResusable
+      {/* <HeroResusable
         title={servicesData[0].title}
         description={servicesData[0].titledetails}
         image={servicesData[0]?.image ?? ""}
         className="bg-gradient-to-r from-black/5 to-black/90"
         textColor="white"
-      />
+      /> */}
 
       <SectionWrapper>
         <BreadCrumb navTrainData={navTrain} />
@@ -79,9 +79,9 @@ const page = () => {
         </div>
       </SectionWrapper>
 
-      <SectionWrapper>
-        <ImageHoverEffect />
-      </SectionWrapper>
+      {/* <SectionWrapper> */}
+        {/* <ImageHoverEffect /> */}
+      {/* </SectionWrapper> */}
       <SectionWrapper>
         <FrequentlyaskedQuestions faq={servicesData[0].faq} title={servicesData[0].faqtitle} />
       </SectionWrapper>

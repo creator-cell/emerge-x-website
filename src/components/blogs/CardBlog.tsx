@@ -72,7 +72,7 @@ const CardBlog: React.FC<CardBlogTypes> = ({
         )}
       >
         <Image
-          src={"/blogs/Subtract.svg"}
+          src={"/Subtract.svg"}
           alt="Subtract Icon"
           width={280}
           height={400}

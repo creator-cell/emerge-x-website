@@ -12,7 +12,7 @@ interface IFormInputs {
   name: string;
   email: string;
   mobile: string;
-  country?: string;
+  description: string;
 }
 
 // Yup validation schema
@@ -32,7 +32,7 @@ const schema = yup.object({
     .min(10, "mobile No must be at least 10 digits")
     .max(15, "mobile No must not exceed 15 digits")
     .required("mobile No is required"),
-  country: yup.string().optional(),
+    description: yup.string().required("description No is required"),
 });
 
 interface ModalAnimationTypes {
@@ -146,7 +146,7 @@ const ModalAnimation: React.FC<ModalAnimationTypes> = ({
                 type="text"
                 id="name"
                 {...register("name")}
-                className="border-none outline-none bg-[#222720] px-3 text-white"
+                className="border-none outline-none bg-[#222720]  text-white"
               />
               {errors.name && (
                 <span className="text-red-500 text-xs text-left">
@@ -167,7 +167,7 @@ const ModalAnimation: React.FC<ModalAnimationTypes> = ({
                 type="email"
                 id="email"
                 {...register("email")}
-                className="border-none outline-none bg-[#222720] px-3 text-white"
+                className="border-none outline-none bg-[#222720]  text-white"
               />
               {errors.email && (
                 <span className="text-red-500 text-xs text-left">
@@ -190,7 +190,7 @@ const ModalAnimation: React.FC<ModalAnimationTypes> = ({
                 id="mobile"
                 {...register("mobile")}
                 onInput={handlemobileChange} // Call the handler to restrict input to numbers only
-                className="border-none outline-none bg-[#222720] px-3 text-white"
+                className="border-none outline-none bg-[#222720]  text-white"
               />
               {errors.mobile && (
                 <span className="text-red-500 text-xs text-left">
@@ -200,19 +200,24 @@ const ModalAnimation: React.FC<ModalAnimationTypes> = ({
             </div>
 
             {/* Country */}
-            <div className="w-full flex flex-col gap-1 border-b border-b-white pb-2">
+            <div className="w-full flex flex-col gap-1">
               <label
                 htmlFor="country"
                 className="text-sm sm:text-base text-white text-start"
               >
-                Country (Optional)
+                Description
               </label>
-              <input
-                type="text"
-                id="country"
-                {...register("country")}
-                className="border-none outline-none bg-[#222720] px-3 text-white"
+              <textarea
+               
+                id="description"
+                {...register("description")}
+                className="border border-white outline-none bg-[#222720]  text-white rounded-md p-2"
               />
+               {errors.description && (
+                <span className="text-red-500 text-xs text-left">
+                  {errors.description.message}
+                </span>
+              )}
             </div>
 
             {/* Submit Button */}

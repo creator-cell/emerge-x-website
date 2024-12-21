@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { NewsGrid } from "./NewsGrid";
 import { HeroResusable } from "../reusable/HeroReusable";
 import BreadCrumb from "../reusable/BreadCrumb";
@@ -27,19 +27,22 @@ interface NewsItem {
 }
 
 export const AllNewsPage = () => {
-
-  const newsAllData = useSelector((state: RootState) => state.news.newsData)
+  const newsAllData = useSelector((state: RootState) => state.news.newsData);
   const dispatch = useDispatch();
 
-  const [currentPage, setCurrentPage] = useState<number>(newsAllData?.currentPage || 1)
+  const [currentPage, setCurrentPage] = useState<number>(
+    newsAllData?.currentPage || 1
+  );
   useEffect(() => {
-    getNewsData(1)
-  }, [])
-
+    getNewsData(1);
+  }, []);
 
   const getNewsData = async (page: number) => {
     try {
-      const response: any = await getApiHelper(`https://emerge-x-backend-c2kvq.ondigitalocean.app/v1/news?page=${page}&limit=10`, "GET");
+      const response: any = await getApiHelper(
+        `https://emerge-x-backend-c2kvq.ondigitalocean.app/v1/news?page=${page}&limit=10`,
+        "GET"
+      );
 
       if (response?.success) {
         dispatch(newsData(response?.data));
@@ -53,9 +56,8 @@ export const AllNewsPage = () => {
     }
   };
 
-
-  const newsItemsData = newsAllData?.news
-  console.log(newsAllData)
+  const newsItemsData = newsAllData?.news;
+  console.log(newsAllData);
 
   const navTrain = [
     { link: "/", label: "Home", id: "a1" },
@@ -68,7 +70,7 @@ export const AllNewsPage = () => {
       {/* Hero Section */}
       <HeroResusable
         title="What's New?"
-        image={newsAllData?.news?.[0].heroBanner ?? "/news/intro.png"}
+        image={newsAllData?.news?.[0].heroBanner ?? ""}
         description="Stay up-to-date with Everything about EmergeX related"
         textColor="white"
         className="absolute inset-0 bg-gradient-to-r from-white/0 to-black/90"
@@ -77,14 +79,9 @@ export const AllNewsPage = () => {
       {/* Breadcrumb */}
       <SectionWrapper>
         <BreadCrumb navTrainData={navTrain} />
-        {
-          newsAllData?.length === 0 &&
-          <Loader />
-        }
+        {newsAllData?.length === 0 && <Loader />}
         <NewsGrid news={newsItemsData} />
-        {
-          newsAllData?.length !== 0 &&
-
+        {newsAllData?.length !== 0 && (
           <div className="flex justify-center gap-4 mt-8">
             <Button
               onClick={() => getNewsData(currentPage - 1)}
@@ -94,7 +91,9 @@ export const AllNewsPage = () => {
               Previous
             </Button>
             <div>
-              <span className="text-lg font-semibold">{`Page ${currentPage} of ${newsAllData?.pages?.length || 1}`}</span>
+              <span className="text-lg font-semibold">{`Page ${currentPage} of ${
+                newsAllData?.pages?.length || 1
+              }`}</span>
             </div>
             <Button
               onClick={() => getNewsData(currentPage + 1)}
@@ -104,7 +103,7 @@ export const AllNewsPage = () => {
               Next
             </Button>
           </div>
-        }
+        )}
       </SectionWrapper>
     </main>
   );

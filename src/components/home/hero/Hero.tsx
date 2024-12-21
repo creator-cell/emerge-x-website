@@ -1,8 +1,9 @@
 import React from "react";
-import { FaArrowRight } from "react-icons/fa6";
+
 import BookDemoButton from "./BookDemoButton";
 import { MotionValue, useMotionTemplate, useTransform } from "framer-motion";
 import { motion } from "framer-motion";
+import { introImage } from "@/assets/news";
 
 interface HeroProps {
   scrollYProgress: MotionValue<number>;
@@ -16,21 +17,20 @@ const Hero = ({ scrollYProgress }: HeroProps) => {
     <motion.div className=" sticky top-0 h-screen overflow-hidden  ">
       <div className="">
         <img
-          src={'/news/intro.png'}
+          src={introImage.src}
           alt="Hero desktop"
           className="w-full  hidden md:block absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 min-w-full min-h-full object-cover z-[-1]"
         />
         <div className="bg-gradient-to-r from-black/80 to-transparent w-full h-full absolute top-0 left-0 z-1" />
 
         <img
-          src={'/news/intro.png'}
+          src={introImage.src}
           alt="Hero mobile"
           className="w-full md:hidden absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 min-w-full min-h-full object-cover z-[-1]"
         />
       </div>
 
       <div className=" absolute left-0 bottom-8 sm:bottom-0 w-full">
-
         <div className="  p-12 pb-10 w-full  ">
           <div>
             <motion.h2

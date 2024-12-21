@@ -13,9 +13,7 @@ interface AboutProps {
 }
 
 const About = ({ scrollYProgress }: AboutProps) => {
-
-
-  const router = useRouter()
+  const router = useRouter();
 
   // Initial dimensions and scroll-based transformations
   const width = useTransform(scrollYProgress, [0, 0.5], [60, 100]);
@@ -23,8 +21,6 @@ const About = ({ scrollYProgress }: AboutProps) => {
 
   const borderRadious = useTransform(scrollYProgress, [0, 0.5], [20, 0]);
   const borderRadiousValue = useMotionTemplate`${borderRadious}px`;
-
-
 
   const aboutCardData = [
     {
@@ -52,51 +48,60 @@ const About = ({ scrollYProgress }: AboutProps) => {
     >
       <SectionWrapper className="mt-8 md:mt-12 lg:mt-12 w-full">
         <div className="text-center flex flex-col items-center">
-          <SectionHeading
-            text="About us"
-            className=" text-white"
-          />
+          <SectionHeading text="About us" className=" text-white" />
         </div>
+
         <div
-          className="grid grid-cols-1 md:grid-cols-2 items-center gap-6 mt-10 pb-16 w-full"
+          className="flex  flex-col md:flex-row items-center gap-6 mt-10 pb-16 w-full"
           id="about-section"
         >
-          <div className=" w-full ">
+          <div className=" w-full  ">
             <p className="text-white text-justify leading-6 sm:leading-9 md:leading-[44px] font-[400] text-[15px] sm:text-[24px] md:text-[32px] mt-10 px-4">
-              Emerge-X: Your Partner in quick,
-              effective emergency solutions
-
+              Emerge-X: Your Partner in quick, effective emergency solutions
             </p>
             <p className="text-justify text-white  opacity-45 leading-6 whitespace-pre-line  sm:leading-8  font-[400] text-xs sm:text-[18px] mt-8 px-4">
-              Welcome to Emerge-X, a seasoned leader in Emergency Management Solutions with 15 years of expertise. Our innovative software platform is tailored to enhance organizational safety and resilience through the four pillars of the Emergency Management Cycle: Mitigation/Prevention, Preparedness, Response, and Recovery.
-
-              Proactive risk reduction is paramount at Emerge-X. Leveraging cutting-edge technology, such as AI-driven monitoring and health management tools, we identify and address potential hazards preemptively to safeguard your workforce effectively.
-
-              Preparedness is key to efficient emergency management. Our diverse training solutions, complemented by real-time tracking, ensure your team is well-equipped to handle any crisis. Emergency drills further refine your organization's readiness.
-
-              During crises, our response solutions, supported by AI and automation, provide instant access to critical information for swift decision-making. Our recovery services focus on learning and improvement, offering automated incident reporting and root cause analysis to enhance future preparedness.
-
-              Emerge-X is devoted to equipping organizations with the necessary tools for confident emergency navigation. We strive to instill a culture of safety, resilience, and continuous enhancement in emergency management.
-
-              Come join us in shaping a safer tomorrow.
-
+              Welcome to Emerge-X, a seasoned leader in Emergency Management
+              Solutions with 15 years of expertise. Our innovative software
+              platform is tailored to enhance organizational safety and
+              resilience through the four pillars of the Emergency Management
+              Cycle: Mitigation/Prevention, Preparedness, Response, and
+              Recovery. Proactive risk reduction is paramount at Emerge-X.
+              Leveraging cutting-edge technology, such as AI-driven monitoring
+              and health management tools, we identify and address potential
+              hazards preemptively to safeguard your workforce effectively.
+              Preparedness is key to efficient emergency management. Our diverse
+              training solutions, complemented by real-time tracking, ensure
+              your team is well-equipped to handle any crisis. Emergency drills
+              further refine your organization's readiness. During crises, our
+              response solutions, supported by AI and automation, provide
+              instant access to critical information for swift decision-making.
+              Our recovery services focus on learning and improvement, offering
+              automated incident reporting and root cause analysis to enhance
+              future preparedness. Emerge-X is devoted to equipping
+              organizations with the necessary tools for confident emergency
+              navigation. We strive to instill a culture of safety, resilience,
+              and continuous enhancement in emergency management. Come join us
+              in shaping a safer tomorrow.
             </p>
             <div className="flex items-start justify-start mt-12 px-4">
               <button
                 type="submit"
-                onClick={() => router.push('/about-us')}
+                onClick={() => router.push("/about-us")}
                 className="px-[20px] py-[8px] text-[16px] sm:text-base bg-[#3DA229] rounded-full text-white hover:bg-[#3DA229] transition-all duration-300 ease-in-out"
               >
                 Explore Now
               </button>
             </div>
           </div>
-          <div className="flex items-center flex-col flex-wrap gap-[60px] mt-8 p-6">
-            {aboutCardData.map((e, i) => (
+
+          <div className="flex items-center flex-col flex-wrap gap-[60px] mt-8 p-6 ">
+            <ScrollTriggered />
+            {/* {aboutCardData.map((e, i) => (
               <div
                 key={i}
-                className={`${i % 2 === 0 ? "rotate-[355deg]" : "rotate-[5deg]"
-                  } border border-solid border-[#517741] rounded-[24px] p-[16px] flex flex-col gap-6 py-8 w-full sm:w-1/2 md:w-[60%] lg:w-[40%]`}
+                className={`${
+                  i % 2 === 0 ? "rotate-[355deg]" : "rotate-[5deg]"
+                } border border-solid border-[#517741] rounded-[24px] p-[16px] flex flex-col gap-6 py-8 w-full sm:w-1/2 md:w-[60%] lg:w-[40%]`}
               >
                 <div className="text-[40px]">
                   <MdVerifiedUser color="#517741" />
@@ -108,7 +113,7 @@ const About = ({ scrollYProgress }: AboutProps) => {
                   {e.discription}
                 </p>
               </div>
-            ))}
+            ))} */}
           </div>
         </div>
       </SectionWrapper>
@@ -117,3 +122,110 @@ const About = ({ scrollYProgress }: AboutProps) => {
 };
 
 export default About;
+
+function ScrollTriggered() {
+  return (
+    <div>
+      <Card />
+    </div>
+  );
+}
+
+function Card() {
+  const sectionVariants = {
+    hidden: { strokeDasharray: "0 100", strokeDashoffset: "0" },
+    visible: { strokeDasharray: "25 75", strokeDashoffset: "0" },
+  };
+
+  return (
+    <div className="flex flex-col items-center justify-between   ">
+      <div className="flex justify-center items-center relative">
+        <motion.svg
+          className="w-40 h-40 sm:w-60 sm:h-60 lg:w-80 lg:h-80 rotate-[-90deg]"
+          viewBox="0 0 40 40"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          {/* Section 1 */}
+          <motion.circle
+            cx="20"
+            cy="20"
+            r="15.915"
+            fill="transparent"
+            stroke="#FFFFFF"
+            strokeWidth="8"
+            variants={sectionVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.5 }} // Allow repeated animation
+            transition={{ duration: 1, ease: "easeInOut" }}
+          />
+          {/* Section 2 */}
+          <motion.circle
+            cx="20"
+            cy="20"
+            r="15.915"
+            fill="transparent"
+            stroke="#3DA229"
+            strokeWidth="8"
+            variants={{
+              hidden: { strokeDasharray: "0 100", strokeDashoffset: "25" },
+              visible: { strokeDasharray: "25 75", strokeDashoffset: "25" },
+            }}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.5 }}
+            transition={{ duration: 1, delay: 0.2, ease: "easeInOut" }}
+          />
+          {/* Section 3 */}
+          <motion.circle
+            cx="20"
+            cy="20"
+            r="15.915"
+            fill="transparent"
+            stroke="#FFFFFF"
+            strokeWidth="8"
+            variants={{
+              hidden: { strokeDasharray: "0 100", strokeDashoffset: "50" },
+              visible: { strokeDasharray: "25 75", strokeDashoffset: "50" },
+            }}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.5 }}
+            transition={{ duration: 1, delay: 0.4, ease: "easeInOut" }}
+          />
+          {/* Section 4 */}
+          <motion.circle
+            cx="20"
+            cy="20"
+            r="15.915"
+            fill="transparent"
+            stroke="#3DA229"
+            strokeWidth="8"
+            variants={{
+              hidden: { strokeDasharray: "0 100", strokeDashoffset: "75" },
+              visible: { strokeDasharray: "25 75", strokeDashoffset: "75" },
+            }}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.5 }}
+            transition={{ duration: 1, delay: 0.6, ease: "easeInOut" }}
+          />
+        </motion.svg>
+        <div className="absolute text-center text-white font-[600]">
+          <p className="text-xs sm:text-sm absolute top-10 left-10 ">
+            Recovery 
+          </p>
+          <p className="text-xs sm:text-sm absolute top-10 right-10 text-[#7eb965]">
+            Response 
+          </p>
+          <p className="text-xs sm:text-sm absolute bottom-10 right-10  ">
+            Mitigation/ Prevention
+          </p>
+          <p className="text-xs sm:text-sm absolute bottom-10 left-10 text-[#7eb965] ">
+            Preparedness
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}

@@ -1,13 +1,13 @@
-'use client'
+"use client";
 import CardBlog from "@/components/blogs/CardBlog";
-import HeroBlog from "@/components/blogs/HeroBlog";
+
 import BreadCrumb from "@/components/reusable/BreadCrumb";
 import { HeroResusable } from "@/components/reusable/HeroReusable";
 import SectionWrapper from "@/components/reusable/SectionWrapper";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { ReadonlyURLSearchParams } from "next/navigation";
-import { blogs } from "@/components/blogs/blogData";
+
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import { getApiHelper } from "@/components/helper/apiHelper";
@@ -23,13 +23,18 @@ const navTrain = [
 
 const page = ({ searchParams }: { searchParams: ReadonlyURLSearchParams }) => {
   const tab = searchParams ? new URLSearchParams(searchParams).toString() : "";
-  const blogsAllData = useSelector((state: RootState) => state.blog.blogsData)
+  const blogsAllData = useSelector((state: RootState) => state.blog.blogsData);
 
-  const [currentPage, setCurrentPage] = useState<number>(blogsAllData?.currentPage || 1)
+  const [currentPage, setCurrentPage] = useState<number>(
+    blogsAllData?.currentPage || 1
+  );
   const dispatch = useDispatch();
   const handlePagination = async (page: number) => {
     try {
-      const response: any = await getApiHelper(`https://emerge-x-backend-c2kvq.ondigitalocean.app/v1/blog?page=${page}&limit=10`, "GET");
+      const response: any = await getApiHelper(
+        `https://emerge-x-backend-c2kvq.ondigitalocean.app/v1/blog?page=${page}&limit=10`,
+        "GET"
+      );
 
       if (response?.success) {
         dispatch(blogsData(response?.data));
@@ -39,15 +44,14 @@ const page = ({ searchParams }: { searchParams: ReadonlyURLSearchParams }) => {
     } catch (error: any) {
       console.error("API error:", error.error || error.message);
     }
-
-  }
+  };
   useEffect(() => {
     handlePagination(1);
-  }, [])
+  }, []);
 
   useEffect(() => {
-    setCurrentPage(blogsAllData?.currentPage)
-  }, [blogsAllData])
+    setCurrentPage(blogsAllData?.currentPage);
+  }, [blogsAllData]);
 
   console.log("Blogs Data:", blogsAllData);
 
@@ -60,15 +64,13 @@ const page = ({ searchParams }: { searchParams: ReadonlyURLSearchParams }) => {
         className="bg-gradient-to-r from-black/0 to-black/90"
         textColor="white"
       />
-      {
-        blogsAllData?.length === 0 &&
+      {blogsAllData?.length === 0 && (
         <div className="flex text-center items-center w-full justify-center mt-5">
           <Loader />
         </div>
-      }
+      )}
 
-      {
-        blogsAllData?.length !== 0 &&
+      {blogsAllData?.length !== 0 && (
         <SectionWrapper>
           <div className="flex flex-col md:flex-row md:justify-between gap-5">
             <div className="w-full md:w-[60%]">
@@ -92,20 +94,22 @@ const page = ({ searchParams }: { searchParams: ReadonlyURLSearchParams }) => {
                 <Link
                   href={"/blogs/?tab=trending"}
                   scroll={false}
-                  className={`${tab === "tab=trending" || tab === ""
-                    ? "text-customGreen"
-                    : "text-greyishblack"
-                    }`}
+                  className={`${
+                    tab === "tab=trending" || tab === ""
+                      ? "text-customGreen"
+                      : "text-greyishblack"
+                  }`}
                 >
                   Trending
                 </Link>
                 <Link
                   href={"/blogs/?tab=recomended"}
                   scroll={false}
-                  className={`${tab === "tab=recomended"
-                    ? "text-customGreen"
-                    : "text-greyishblack"
-                    }`}
+                  className={`${
+                    tab === "tab=recomended"
+                      ? "text-customGreen"
+                      : "text-greyishblack"
+                  }`}
                 >
                   Recommended
                 </Link>
@@ -125,9 +129,7 @@ const page = ({ searchParams }: { searchParams: ReadonlyURLSearchParams }) => {
                     imageStyle="rounded-[14px]"
                   />
                 ))}
-                {
-                  blogsAllData?.length === 0 && <Loader />
-                }
+                {blogsAllData?.length === 0 && <Loader />}
               </div>
               <div className="md:hidden flex flex-col gap-4 mt-8">
                 {blogsAllData?.blog?.map((e: any, i: number) => (
@@ -140,20 +142,20 @@ const page = ({ searchParams }: { searchParams: ReadonlyURLSearchParams }) => {
                     imageStyle="rounded-[26px]"
                   />
                 ))}
-                {
-                  blogsAllData?.length === 0 &&
+                {blogsAllData?.length === 0 && (
                   <div>
-                    Data Loading .... <span><Loader /></span>
+                    Data Loading ....{" "}
+                    <span>
+                      <Loader />
+                    </span>
                   </div>
-                }
+                )}
               </div>
             </div>
           </div>
         </SectionWrapper>
-      }
-      {
-        blogsAllData?.length !== 0 &&
-
+      )}
+      {blogsAllData?.length !== 0 && (
         <SectionWrapper>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[0] md:gap-x-[20px] lg:gap-x-[34px] gap-y-[100px]">
             {blogsAllData?.blog?.map((e: any, i: number) => (
@@ -170,20 +172,15 @@ const page = ({ searchParams }: { searchParams: ReadonlyURLSearchParams }) => {
               />
             ))}
           </div>
-          {
-            blogsAllData?.length === 0 &&
+          {blogsAllData?.length === 0 && (
             <div className="flex text-center items-center w-full justify-center">
               <Loader />
             </div>
-          }
+          )}
         </SectionWrapper>
+      )}
 
-      }
-
-
-      {
-        blogsAllData?.length >= 10 &&
-
+      {blogsAllData?.length >= 10 && (
         <div className="flex justify-center items-center gap-4 mt-8">
           <Button
             onClick={() => handlePagination(currentPage - 1)}
@@ -193,7 +190,9 @@ const page = ({ searchParams }: { searchParams: ReadonlyURLSearchParams }) => {
             Previous
           </Button>
           <div>
-            <span className="text-lg font-semibold">{`Page ${currentPage} of ${blogsAllData?.pages?.length || 1}`}</span>
+            <span className="text-lg font-semibold">{`Page ${currentPage} of ${
+              blogsAllData?.pages?.length || 1
+            }`}</span>
           </div>
           <Button
             onClick={() => handlePagination(currentPage + 1)}
@@ -203,7 +202,7 @@ const page = ({ searchParams }: { searchParams: ReadonlyURLSearchParams }) => {
             Next
           </Button>
         </div>
-      }
+      )}
     </div>
   );
 };
