@@ -218,3 +218,37 @@ body {
     }
   }
 }
+
+.globalColorBG {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.buttogGradientBG{
+  background: radial-gradient(50% 50% at 50% 50%, #3DA229 37.14%, #59C245 100%),
+linear-gradient(180deg, #3DA229 0%, rgba(23, 105, 99, 0) 100%);
+
+}
+
+.globalColor{
+  color: rgba(61, 162, 41, 1);
+
+}
+
+.bGglobalColor{
+  background-color: rgba(61, 162, 41, 1);
+
+}
+
+.blueColor{
+  color: rgba(183, 187, 199, 1);
+}
+
+.contactBgButton{
+  background: radial-gradient(50% 50% at 50% 50%, #050E03 37.14%, #284123 100%),
+linear-gradient(180deg, #000000 0%, rgba(23, 105, 99, 0) 100%);
+
+}
+
+.bg-custom-gradient {
+  background: radial-gradient(circle at center, #064e3b, #047857, rgba(0, 0, 0, 0.3));
+}

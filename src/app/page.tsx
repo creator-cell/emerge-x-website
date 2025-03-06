@@ -1,8 +1,6 @@
 "use client";
 
-import About from "@/components/home/about/About";
 import Contact from "@/components/home/contactus/Contact";
-import Hero from "@/components/home/hero/Hero";
 import LetestBlogs from "@/components/home/letest-blogs/LetestBlogs";
 import News from "@/components/home/news/News";
 import { useScroll } from "framer-motion";
@@ -21,6 +19,9 @@ import SingleServiceSliderSection from "@/components/services/SingleServiceSlide
 import SectionHeading from "@/components/reusable/SectionHeading";
 import HomeServiceSlider from "@/components/home/all-services/HomeServiceSlider";
 import { useGetNewsQuery } from "@/store/news";
+import Hero from "@/components/Hero";
+import AboutUs from "@/components/About";
+import Services from "@/components/Services";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -105,25 +106,33 @@ export default function Home() {
   console.log("🚀 ~ Home ~ newsData:", newsData);
 
   return (
-    <div className="space-y-4 relative " id="home">
+    <div className="space-y-4 relative bg-black" id="home">
       <div ref={targetRef} className="relative">
-        <Hero scrollYProgress={scrollYProgress} />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-green-950 via-green-900 to-black opacity-30 z-0" />
 
-        <div className="w-full flex justify-center" id="about-us">
-          <About scrollYProgress={scrollYProgress} />
+        {/* <Hero scrollYProgress={scrollYProgress} /> */}
+        <Hero/>
+
+        <div className="" id="about">
+          {/* <About scrollYProgress={scrollYProgress} /> */}
+          <AboutUs/>
         </div>
       </div>
       <>
         {/* <ServiceSection /> */}
-        <div className="bg-greyishblack pt-12 " id="services">
-          <SectionHeading text="All Services" className="text-white" />
-          <HomeServiceSlider />
-        </div>
+        <div id="services" className="scroll-mt-20">
+  <Services />
+</div>
+
+        <div id="blogs" className="scroll-mt-20">
         {data?.blog && data.blog.length > 0 && <LetestBlogs data={data} />}
+        </div>
       </>
+      <div id="news" className="scroll-mt-20">
       {newsData && newsData?.news?.length > 0 && (
         <News newdData={newsData?.news} />
       )}
+      </div>
       <Contact />
     </div>
   );

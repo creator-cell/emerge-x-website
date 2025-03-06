@@ -2,11 +2,12 @@ import { Metadata, Viewport } from "next";
 
 import "./globals.css";
 import NavBar from "@/components/navbar/NavBar";
-import Footer from "@/components/footer/Footer";
 import { FloatingNav } from "@/components/ui/floating-navbar";
 
 import { Inter } from "next/font/google";  // Import Inter from Google Fonts
 import StoreProvider from "./StoreProvider";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -59,7 +60,8 @@ export default function RootLayout({
 
           <div className="flex flex-col min-h-screen relative">
             {/* <NavBar /> */}
-            <FloatingNav navItems={navItems} />
+            {/* <FloatingNav navItems={navItems} /> */}
+            <Header/>
             <div className="flex-1">
               {children}
             </div>

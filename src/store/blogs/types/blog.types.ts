@@ -7,6 +7,7 @@ export interface BlogDataTypes {
     htmlBody: string; // HTML content
     title: string; // Title text
     updatedAt: string; // ISO date string
+    authorName?: string; // Author name
 }
 
 

@@ -1,33 +1,73 @@
-import SectionHeading from "@/components/reusable/SectionHeading";
+"use client"
 
-import React from "react";
-import { motion } from "framer-motion";
-import Link from "next/link";
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { useInView, motion } from "framer-motion"
+import Image from "next/image"
+import Link from "next/link"
+import { useRef, useState } from "react"
 
-const Contact = () => {
+export default function Contact() {
+  const [email, setEmail] = useState("")
+  const ref = useRef(null)
+  const isInView = useInView(ref, { margin: "-100px 0px" })
+
   return (
     <>
-      <div className="bg-white">
-        <div className="pt-14 max-md:px-8 flex justify-center flex-col items-center  ">
-          <SectionHeading text="Contact Us" />
-          <Link href={"/contact-us"} className="w-full md:w-[60%]" >
-            <motion.button
-              initial={{
-                borderRadius: "9px",
-              }}
-              whileHover={{
-                borderRadius: "220px",
-              }}
-              transition={{ duration: 0.5, stiffness: 100 }}
-              className="mt-10  bg-[#3DA229] text-white  text-lg md:text-2xl py-8 md:py-12 px-4 w-full whitespace-nowrap md:px-16  self-center "
-            >
-              Get in touch with us today
-            </motion.button>
-          </Link>
-        </div>
-      </div>
-    </>
-  );
-};
+      <section className="py-24 px-4">
+        <div className="max-w-4xl mx-auto">
+          <div className="bGglobalColor rounded-3xl p-12 text-center">
+            <h2 className="text-3xl font-normal mb-4 leading-[28.8px] tracking-[4%] text-center">
+              We&apos;d love to hear from you.
+            </h2>
+            <h3 className="text-5xl font-bold mb-6 leading-[52.8px] tracking-[4%] text-center">
+              Contact us!
+            </h3>
+            <p className="text-lg font-normal leading-[26.28px] tracking-[0%] text-center mb-8">
+              Reach out to us with any questions or feedback—we're here to <br /> help and happy to connect!
+            </p>
 
-export default Contact;
+            {/* Flex container adjusted for mobile responsiveness */}
+            <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+              <Input
+                type="email"
+                placeholder="Enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="bg-white py-6 rounded-[12px] border-none"
+              />
+              <Link href="/contact-us">
+
+              <Button className="contactBgButton hover:bg-[#2a2a2a] text-white py-6 px-6">
+                Let's connect
+              </Button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Image container with mobile responsiveness */}
+      <motion.div
+        ref={ref}
+        className="relative z-10 max-w-7xl mx-auto mb-8"
+        initial={{ opacity: 0, y: 100 }}
+        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 100 }}
+        transition={{ duration: 1.2, ease: "easeOut" }}
+      >
+        {/* Image scaling to be responsive on mobile */}
+        <div className="w-full sm:w-[50%] mx-auto overflow-hidden">
+          <Image
+            src="/image/emergex.png" // Use the correct path in your public folder
+            alt="EmergeX"
+            layout="responsive"
+            width={1280}
+            height={700}
+            objectFit="cover"
+            className="object-cover"
+          />
+        </div>
+      </motion.div>
+    </>
+  )
+}
