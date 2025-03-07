@@ -26,15 +26,7 @@ export default function Footer() {
         />
       </Link>
       
-      <Link href="#" className="text-yellow-500 hover:text-[#4CAF50] transition-colors">
-        {/* Twitter Logo */}
-        <Image
-          src="/logo/t.png" // Twitter logo
-          alt="Twitter"
-          width={24} // Size of the icon
-          height={24}
-        />
-      </Link>
+    
       
       <Link href="#" className="text-yellow-500 hover:text-[#4CAF50] transition-colors">
         {/* Instagram Logo */}
@@ -57,9 +49,7 @@ export default function Footer() {
       </Link>
     </div>
 
-          <div className="mt-6 text-[14px]">
-            <p>Copyright © 2025 EmergeX</p>
-          </div>
+         
         </div>
 
         {/* Center Section: Links (Now Properly Centered) */}
@@ -97,15 +87,19 @@ export default function Footer() {
 
             <p className="flex items-center gap-2 text-[14px]">
               <Phone className="h-5 w-5" />
-              +923183561921
+              +971 55 544 0210
             </p>
             <p className="flex items-center gap-2 text-[14px]">
               <Mail className="h-5 w-5" />
-              info@datacore.com.sa
+              info@emerge-x.com
             </p>
           </div>
         </div>
+        <div className="mt-6 text-[14px]">
+            <p>Copyright © 2025 EmergeX</p>
+          </div>
       </div>
+     
     </footer>
   )
 }

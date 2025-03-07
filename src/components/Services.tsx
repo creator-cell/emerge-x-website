@@ -15,7 +15,7 @@ const services = [
     description:
       "Explore how Emerge-X utilizes AI CCTV Cameras, Wearable Devices, and HSE Management Software to enhance workplace safety, monitor health indicators, and streamline HSE processes. Mitigate risks, ensure compliance, and foster a safer working environment with our innovative solutions.",
     image1: MserviceHero,
-    image2: MserviceHero,
+    image2: servicesImages.Preparedness,
   },
   {
     id: "preparedness",
@@ -23,7 +23,7 @@ const services = [
     description:
       "Enhance your organization's readiness with Emerge-X's comprehensive preparedness solutions, including online and offline training, emergency drill support, and real-time training tracking. Equip your team with essential skills to respond effectively in emergencies and foster resilience.",
     image1: servicesImages.Preparedness,
-    image2: servicesImages.Preparedness,
+    image2: servicesImages.recovery,
   },
   {
     id: "recovery",
@@ -31,7 +31,7 @@ const services = [
     description:
       "Facilitate effective recovery with Emerge-X's comprehensive services, including automated incident reporting, AI-driven root cause analysis, and tailored precautionary measures. Empower your organization to learn, adapt, and strengthen emergency management capabilities post-incident.",
     image1: servicesImages.recovery,
-    image2: servicesImages.recovery,
+    image2: servicesImages.response,
   },
   {
     id: "response",
@@ -39,7 +39,7 @@ const services = [
     description:
       "Enhance emergency response efficiency and effectiveness with Emerge-X's integrated hardware solutions. Our platform ensures complete automation, providing real-time access to critical information, enabling prompt and coordinated emergency management to minimize impact and ensure safety.",
     image1: servicesImages.response,
-    image2: servicesImages.response,
+    image2: MserviceHero,
   },
 ];
 
@@ -130,8 +130,8 @@ export default function Services() {
                   <Image
                     src={activeService.image1 || "/placeholder.svg"}
                     alt={activeService.title}
-                    height={300}
-                    width={300}
+                    height={375}
+                    width={375}
                     className="object-cover rounded-3xl absolute top-0 left-0 z-20"
                   />
 
@@ -139,8 +139,8 @@ export default function Services() {
                   <Image
                     src={activeService.image2 || "/placeholder.svg"}
                     alt={activeService.title}
-                    height={350}
-                    width={350}
+                    height={300}
+                    width={300}
                     className="object-cover rounded-3xl absolute bottom-0 right-0 z-10"
                   />
                 </div>

@@ -73,7 +73,7 @@ const News: React.FC<NewsProps> = ({ newdData }) => {
   }, [])
   return (
     <section ref={sectionRef} id="news-section" className="py-8 sm:py-12 px-4 overflow-hidden">
-      <div className="max-w-[900px] mx-auto text-center">
+      <div className="max-w-[900px] mx-auto text-let sm:text-center">
         {/* Title animations */}
         <motion.h2
           className="text-3xl mb-2"
@@ -100,10 +100,10 @@ const News: React.FC<NewsProps> = ({ newdData }) => {
             transition={{ duration: 0.6, ease: "easeOut" }}
           >
             <div
-              className="cursor-pointer absolute sm:left-[-20px] top-[-20px] sm:top-1/2 sm:-translate-y-1/2 left-[calc(40%-30px)] rounded-full z-10 border-none"
+              className="cursor-pointer absolute sm:left-[-20px] top-[-20px] sm:top-1/2 sm:-translate-y-1/2 left-[calc(10%-30px)] rounded-full z-10 border-none"
               onClick={() => setActiveIndex((prev) => (prev - 1 + newdData.length) % newdData.length)}
             >
-              <Image src="/logo/left.svg" alt="Left Arrow" width={24} height={24} className="text-white w-full" />
+              <Image src="/logo/left.svg" alt="Left Arrow" width={24} height={24} className="text-white w-[40px] sm:w-full" />
             </div>
           </motion.div>
 
@@ -207,13 +207,14 @@ const News: React.FC<NewsProps> = ({ newdData }) => {
             transition={{ duration: 0.6, ease: "easeOut" }}
           >
             <div
-              className="cursor-pointer absolute sm:right-[-60px] top-[-20px] sm:top-1/2 sm:-translate-y-1/2 right-[calc(40%-30px)] rounded-full border-none z-10"
+              className="cursor-pointer absolute sm:right-[-60px] top-[-20px] sm:top-1/2 sm:-translate-y-1/2 right-[calc(75%-20px)] rounded-full border-none z-10"
               onClick={() => setActiveIndex((prev) => (prev + 1) % newdData.length)}
             >
-              <Image src="/logo/right.svg" alt="Right Arrow" width={24} height={24} className="text-white w-full" />
+              <Image src="/logo/right.svg" alt="Right Arrow" width={24} height={24} className="text-white w-[40px] sm:w-full" />
             </div>
           </motion.div>
         </div>
+        <Link href="/news">
 
         {/* Explore Button */}
         <motion.div
@@ -222,13 +223,13 @@ const News: React.FC<NewsProps> = ({ newdData }) => {
           animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 100 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
-          <Link href="/news">
 
-          <Button className="buttogGradientBG hover:bg-[#45a049] text-[14px] sm:text-[16px] px-6 sm:px-8 py-4 sm:py-6 mt-8 sm:mt-12 text-white rounded-[10px]">
+          <Button className=" cursor-pointer buttogGradientBG hover:bg-[#45a049] text-[14px] sm:text-[16px] px-6 sm:px-8 py-4 sm:py-6 mt-8 sm:mt-12 text-white rounded-[10px]">
             Explore all news
           </Button>
-          </Link>
         </motion.div>
+        </Link>
+
       </div>
     </section>
   )
