@@ -13,7 +13,7 @@ import Services from "@/components/Services";
 const  Home = ()=> {
 
   // const { data } = useGetBlogsQuery({ page: 1, limit: 10 });
-  // const { data: newsData } = useGetNewsQuery({ page: 1, limit: 5 });
+  const { data: newsData } = useGetNewsQuery({ page: 1, limit: 5 });
   // console.log("🚀 ~ Home ~ newsData:", newsData);
 
   return (
@@ -35,9 +35,9 @@ const  Home = ()=> {
         </div> */}
       </>
       <div id="news" className="scroll-mt-20">
-        {/* {newsData && newsData?.news?.length > 0 && (
+        {newsData && newsData?.news?.length > 0 && (
           <News newdData={newsData?.news} />
-        )} */}
+        )}
       </div>
       <Contact />
     </div>
