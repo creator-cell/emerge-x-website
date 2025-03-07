@@ -1,9 +1,10 @@
 import { AllNewsPage } from "@/components/news";
+import { Suspense } from "react";
 
 export default function AllNews() {
   return (
-    <div >
+    <Suspense fallback={<div>Loading...</div>}>
       <AllNewsPage />
-    </div>
+    </Suspense>
   );
 }
