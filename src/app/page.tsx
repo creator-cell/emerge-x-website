@@ -12,7 +12,7 @@ import Services from "@/components/Services";
 
 const  Home = ()=> {
 
-  // const { data } = useGetBlogsQuery({ page: 1, limit: 10 });
+  const { data } = useGetBlogsQuery({ page: 1, limit: 10 });
   const { data: newsData } = useGetNewsQuery({ page: 1, limit: 5 });
   // console.log("🚀 ~ Home ~ newsData:", newsData);
 
@@ -30,9 +30,9 @@ const  Home = ()=> {
           <Services />
         </div> */}
 
-        {/* <div id="blogs" className="scroll-mt-20">
+        <div id="blogs" className="scroll-mt-20">
           {data?.blog && data.blog.length > 0 && <LetestBlogs data={data} />}
-        </div> */}
+        </div>
       </>
       <div id="news" className="scroll-mt-20">
         {newsData && newsData?.news?.length > 0 && (
