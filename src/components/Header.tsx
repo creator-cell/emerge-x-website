@@ -124,7 +124,7 @@ const Header = () => {
                     {/* Logo */}
                     <Link href="/" className="flex items-center space-x-2">
                         <Image
-                            src={hasScrolled ? "/blacklogo.png" : "/logo/emergelogo.png"}
+                            src={hasScrolled ? "/blacklogo.png" : "/clear.png"}
                             alt="EmergeX Logo"
                             width={150}
                             height={50}

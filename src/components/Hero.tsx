@@ -78,17 +78,24 @@ const Hero = () => {
         {/* Hero Content (Lower z-index than mobile menu) */}
         <motion.div
           ref={ref}
-          className="relative z-10 max-w-5xl mx-auto text-white px-4 text-center"
+          className="relative z-10 max-w-5xl mx-auto text-white px-4 text-center mt-40"
           initial={{ opacity: 0, y: 100 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 100 }}
           transition={{ duration: 1.2, ease: "easeOut" }}
         >
-          <h1 className="text-4xl md:text-7xl font-semibold leading-[58.09px] tracking-normal text-center">
-            <span className="block mb-4">Empowering excellence</span>
+          {/* Heading for Desktop */}
+          <h1 className="hidden sm:block text-2xl md:text-[48px] font-semibold leading-[58.09px] tracking-normal text-center">
+            <span className="block mb-0 sm:mb-1">Empowering excellence</span>
             <span className="block">with over <span className="text-[#4CAF50]">50 Modules</span></span>
           </h1>
 
-          <p className="text-base md:text-lg font-light leading-[25.2px] tracking-normal text-center text-white mt-6 mb-12">
+          {/* Heading for Mobile */}
+          <h1 className="block sm:hidden text-[24px] font-semibold leading-[1.2] text-center">
+            Empowering excellence with over <span className="text-[#4CAF50]">50 Modules</span>
+          </h1>
+
+
+          <p className="text-base md:text-[18px] font-light leading-[25.2px] tracking-normal text-center text-white mt-6 mb-12">
             Comprehensive solutions tailored to your needs: Explore our wide range of  <br />services designed to empower your
             success.
           </p>
@@ -102,9 +109,9 @@ const Hero = () => {
               Book a demo
             </Button>
             <Link href="/contact-us">
-            <Button size="lg" variant="outline" className="border-white text-white bg-transparent py-6 rounded-[10px]">
-              Contact us
-            </Button>
+              <Button size="lg" variant="outline" className="border-white text-white bg-transparent py-6 rounded-[10px]">
+                Contact us
+              </Button>
             </Link>
           </div>
         </motion.div>

@@ -52,7 +52,7 @@ export default function AboutUs() {
         >
           <Lottie
             animationData={animationData}
-            className="md:w-[700px] md:h-[700px] w-auto h-auto"
+            className="md:w-[1000px] md:h-[1000px] w-auto h-auto md:-ml-[10rem] -ml-[1rem]"
           />
         </motion.div>
 
