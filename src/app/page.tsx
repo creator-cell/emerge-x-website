@@ -6,11 +6,13 @@ import News from "@/components/home/news/News";
 import { useGetBlogsQuery } from "@/store/blogs";
 import { useGetNewsQuery } from "@/store/news";
 import Hero from "@/components/Hero";
-import AboutUs from "@/components/About";
 import Services from "@/components/Services";
+import dynamic from "next/dynamic";
+
+const AboutUs = dynamic(() => import("@/components/About"), { ssr: false });
 
 
-const  Home = ()=> {
+const Home = () => {
 
   const { data } = useGetBlogsQuery({ page: 1, limit: 10 });
   const { data: newsData } = useGetNewsQuery({ page: 1, limit: 5 });
@@ -21,9 +23,9 @@ const  Home = ()=> {
       <div  className="relative">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-green-950 via-green-900 to-black opacity-30 z-0" />
         <Hero />
-        {/* <div className="" id="about">
+        <div className="" id="about">
           <AboutUs />
-        </div> */}
+        </div>
       </div>
       <>
         <div id="services" className="scroll-mt-20">
