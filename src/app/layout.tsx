@@ -1,10 +1,8 @@
 import { Metadata, Viewport } from "next";
 
 import "./globals.css";
-import NavBar from "@/components/navbar/NavBar";
-import { FloatingNav } from "@/components/ui/floating-navbar";
 
-import { Inter } from "next/font/google";  // Import Inter from Google Fonts
+import { Inter } from "next/font/google";  
 import StoreProvider from "./StoreProvider";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -37,33 +35,15 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const navItems = [
-    {
-      name: "Home",
-      link: "/",
-    },
-    {
-      name: "About",
-      link: "/about",
-    },
-    {
-      name: "Contact",
-      link: "/contact",
-    },
-  ];
 
   return (
     <html lang="en">
       <body className={`${inter.className} antialiased`}>
         <StoreProvider>
-
-
           <div className="flex flex-col min-h-screen relative">
-            {/* <NavBar /> */}
-            {/* <FloatingNav navItems={navItems} /> */}
             <Header/>
             <div className="flex-1">
-              {children}
+              {children} 
             </div>
             <Footer />
           </div>
