@@ -152,7 +152,9 @@ const Header = () => {
                                 ))}
 
                                 {/* Services Dropdown (Desktop) - RIGHT AFTER ABOUT US */}
-                                <NavigationMenuItem ref={desktopDropdownRef}>
+                                <NavigationMenuItem >
+                                <div ref={desktopDropdownRef} className="relative">
+
                                     <button
                                         onClick={() => setServicesDropdown(!servicesDropdown)}
                                         className={`flex items-center gap-2 text-[16px] font-[400] transition-colors ${hasScrolled
@@ -173,6 +175,7 @@ const Header = () => {
                                             ))}
                                         </div>
                                     )}
+                                    </div>
                                 </NavigationMenuItem>
 
                                 {/* Remaining Nav Links */}
