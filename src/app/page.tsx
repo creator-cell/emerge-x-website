@@ -26,9 +26,9 @@ const  Home = ()=> {
         </div> */}
       </div>
       <>
-        {/* <div id="services" className="scroll-mt-20">
+        <div id="services" className="scroll-mt-20">
           <Services />
-        </div> */}
+        </div>
 
         <div id="blogs" className="scroll-mt-20">
           {data?.blog && data.blog.length > 0 && <LetestBlogs data={data} />}
