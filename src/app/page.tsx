@@ -18,13 +18,13 @@ const  Home = ()=> {
 
   return (
     <div className="space-y-4 relative bg-black" id="home">
-      {/* <div  className="relative">
+      <div  className="relative">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-green-950 via-green-900 to-black opacity-30 z-0" />
-        <Hero />
+        {/* <Hero /> */}
         <div className="" id="about">
           <AboutUs />
         </div>
-      </div> */}
+      </div>
       <>
         {/* <div id="services" className="scroll-mt-20">
           <Services />
