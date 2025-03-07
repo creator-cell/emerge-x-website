@@ -80,29 +80,29 @@ export default function Home() {
     }
   };
 
-  useEffect(() => {
-    if (typeof window === "undefined") return; // Ensure this runs only in the browser
+  // useEffect(() => {
+  //   if (typeof window === "undefined") return; // Ensure this runs only in the browser
   
-    const preventZoom = (event: any) => {
-      if (event.ctrlKey || event.metaKey || event.key === "0") {
-        event.preventDefault();
-      }
-    };
+  //   const preventZoom = (event: any) => {
+  //     if (event.ctrlKey || event.metaKey || event.key === "0") {
+  //       event.preventDefault();
+  //     }
+  //   };
   
-    const preventWheelZoom = (event: any) => {
-      if (event.ctrlKey) {
-        event.preventDefault();
-      }
-    };
+  //   const preventWheelZoom = (event: any) => {
+  //     if (event.ctrlKey) {
+  //       event.preventDefault();
+  //     }
+  //   };
   
-    document.addEventListener("keydown", preventZoom);
-    document.addEventListener("wheel", preventWheelZoom, { passive: false });
+  //   document.addEventListener("keydown", preventZoom);
+  //   document.addEventListener("wheel", preventWheelZoom, { passive: false });
   
-    return () => {
-      document.removeEventListener("keydown", preventZoom);
-      document.removeEventListener("wheel", preventWheelZoom);
-    };
-  }, []);
+  //   return () => {
+  //     document.removeEventListener("keydown", preventZoom);
+  //     document.removeEventListener("wheel", preventWheelZoom);
+  //   };
+  // }, []);
   
 
   const { data } = useGetBlogsQuery({ page: 1, limit: 10 });
