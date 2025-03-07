@@ -12,11 +12,9 @@ import Services from "@/components/Services";
 
 export default function Home() {
 
-
-
-  const { data } = useGetBlogsQuery({ page: 1, limit: 10 });
-  const { data: newsData } = useGetNewsQuery({ page: 1, limit: 5 });
-  console.log("🚀 ~ Home ~ newsData:", newsData);
+  // const { data } = useGetBlogsQuery({ page: 1, limit: 10 });
+  // const { data: newsData } = useGetNewsQuery({ page: 1, limit: 5 });
+  // console.log("🚀 ~ Home ~ newsData:", newsData);
 
   return (
     <div className="space-y-4 relative bg-black" id="home">
@@ -32,14 +30,14 @@ export default function Home() {
           <Services />
         </div>
 
-        <div id="blogs" className="scroll-mt-20">
+        {/* <div id="blogs" className="scroll-mt-20">
           {data?.blog && data.blog.length > 0 && <LetestBlogs data={data} />}
-        </div>
+        </div> */}
       </>
       <div id="news" className="scroll-mt-20">
-        {newsData && newsData?.news?.length > 0 && (
+        {/* {newsData && newsData?.news?.length > 0 && (
           <News newdData={newsData?.news} />
-        )}
+        )} */}
       </div>
       <Contact />
     </div>
