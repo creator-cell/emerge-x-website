@@ -13,6 +13,7 @@ export default function AboutUs() {
   const rightControls = useAnimation();
 
   useEffect(() => {
+    if (typeof window === "undefined") return;
     const handleScroll = () => {
       const section = document.getElementById("about-section");
       if (!section) return;

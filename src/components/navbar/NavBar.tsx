@@ -35,6 +35,7 @@ const NavBar = () => {
 
   // Update active section based on scroll position
   useEffect(() => {
+    if (typeof window === "undefined") return;
     const handleScroll = () => {
       const sections = navList.map((item) => ({
         id: item.link,

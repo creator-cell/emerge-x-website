@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 
 const useDisableScroll = (isModalOpen: boolean) => {
+  if (typeof window === "undefined") return;
   useEffect(() => {
     if (isModalOpen) {
       document.body.style.overflow = "hidden";
