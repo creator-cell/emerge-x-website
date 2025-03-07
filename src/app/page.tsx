@@ -6,7 +6,6 @@ import News from "@/components/home/news/News";
 import { useScroll } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
-import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { getApiHelper } from "@/components/helper/apiHelper";
 import { useDispatch, useSelector } from "react-redux";
@@ -23,7 +22,6 @@ import Hero from "@/components/Hero";
 import AboutUs from "@/components/About";
 import Services from "@/components/Services";
 
-gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
   const targetRef = useRef<HTMLDivElement | null>(null);
@@ -40,9 +38,12 @@ export default function Home() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    getNewsData();
-    getBlogData();
+    if (typeof window !== "undefined") {
+      getNewsData();
+      getBlogData();
+    }
   }, []);
+  
 
   const getBlogData = async () => {
     try {
@@ -80,26 +81,29 @@ export default function Home() {
   };
 
   useEffect(() => {
+    if (typeof window === "undefined") return; // Ensure this runs only in the browser
+  
     const preventZoom = (event: any) => {
       if (event.ctrlKey || event.metaKey || event.key === "0") {
         event.preventDefault();
       }
     };
-
+  
     const preventWheelZoom = (event: any) => {
       if (event.ctrlKey) {
         event.preventDefault();
       }
     };
-
+  
     document.addEventListener("keydown", preventZoom);
     document.addEventListener("wheel", preventWheelZoom, { passive: false });
-
+  
     return () => {
       document.removeEventListener("keydown", preventZoom);
       document.removeEventListener("wheel", preventWheelZoom);
     };
   }, []);
+  
 
   const { data } = useGetBlogsQuery({ page: 1, limit: 10 });
   const { data: newsData } = useGetNewsQuery({ page: 1, limit: 5 });
