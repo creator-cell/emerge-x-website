@@ -1,5 +1,4 @@
 import { aboutHeroImage } from "@/assets/about-us";
-import { team1, team2, team3, team4 } from "@/assets/about-us/team";
 import Headings from "@/components/about/Headings";
 import OurteamCard from "@/components/about/OurteamCard";
 import OurVisionCards from "@/components/about/OurVisionCards";
@@ -8,6 +7,14 @@ import { HeroResusable } from "@/components/reusable/HeroReusable";
 import SectionWrapper from "@/components/reusable/SectionWrapper";
 import Image from "next/image";
 import React from "react";
+
+
+
+const team1 = "/team/abouttem1.JPG";
+const team2 = "/team/abouttem2.JPG";
+const team3 = "/team/abouttem3.PNG";
+const team4 = "/team/abouttem4.jpg";
+
 
 const page = () => {
   const navTrain = [
@@ -24,7 +31,7 @@ const page = () => {
     {
       id: 2,
       name: "Priyanka Kashyap Kamble",
-      image:team2,
+      image: team2,
       designation: "Co-Founder",
     },
     {
