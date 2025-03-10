@@ -63,10 +63,10 @@ export default function AboutUs() {
           animate={rightControls}
           transition={{ duration: 1.2, ease: "easeOut" }}
         >
-          <span className="font-semibold text-[16px] leading-[19.36px] tracking-[4px] text-[#3DA229] uppercase mb-6 block">
+          <span className="font-semibold text-[16px] leading-[19.36px] tracking-[4px] text-[#3DA229] uppercase mb-12 block mt-2 md:-mt-12">
             ABOUT US
           </span>
-          <h2 className="text-[32px] lg:text-[40px] font-normal leading-[38.73px] tracking-normal mb-6">
+          <h2 className="text-[32px] lg:text-[40px] font-normal leading-[38.73px] tracking-normal mb-6 md:mb-8">
             At EmergeX, we aim higher and strive harder to make workplace safety
           </h2>
 
