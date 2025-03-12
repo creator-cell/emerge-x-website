@@ -76,7 +76,7 @@ const News: React.FC<NewsProps> = ({ newdData }) => {
       <div className="max-w-[900px] mx-auto text-let sm:text-center">
         {/* Title animations */}
         <motion.h2
-          className="text-3xl mb-2"
+          className="text-3xl mb-2 text-gray-300"
           initial={{ y: -100, opacity: 0 }}
           animate={isVisible ? { y: 0, opacity: 1 } : { y: -100, opacity: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}

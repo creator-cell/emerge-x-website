@@ -17,13 +17,13 @@ export default function Contact() {
       <section className="py-24 px-4">
         <div className="max-w-4xl mx-auto">
           <div className="bGglobalColor rounded-3xl p-12 text-center">
-            <h2 className="text-3xl font-normal mb-4 leading-[28.8px] tracking-[4%] text-center">
+            <h2 className="text-3xl font-normal mb-4 leading-[28.8px] tracking-[4%] text-center text-gray-300">
               We&apos;d love to hear from you.
             </h2>
-            <h3 className="text-5xl font-bold mb-6 leading-[52.8px] tracking-[4%] text-center">
+            <h3 className="text-5xl font-bold mb-6 leading-[52.8px] tracking-[4%] text-center text-gray-300">
               Contact us!
             </h3>
-            <p className="text-lg font-normal leading-[26.28px] tracking-[0%] text-center mb-8">
+            <p className="text-lg font-normal leading-[26.28px] tracking-[0%] text-center mb-8 text-gray-300">
               Reach out to us with any questions or feedback—we're here to <br /> help and happy to connect!
             </p>
 

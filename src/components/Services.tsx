@@ -95,11 +95,11 @@ export default function Services() {
               >
                 <div className="mb-8 md:mb-16">
                   <h2 className="text-2xl md:text-3xl mb-2">Our</h2>
-                  <h3 className="text-[36px] md:text-[48px] font-extrabold leading-[1.2] md:leading-[57.6px] tracking-normal globalColor">
+                  <h3 className="text-[36px] md:text-[48px] text-gray-300 font-extrabold leading-[1.2] md:leading-[57.6px] tracking-normal globalColor">
                     Services
                   </h3>
                 </div>
-                <h4 className="text-3xl md:text-4xl font-bold mb-4 md:mb-6 uppercase">{activeService.title}</h4>
+                <h4 className="text-3xl md:text-4xl font-bold mb-4 md:mb-6 uppercase text-gray-300">{activeService.title}</h4>
                 <p className="text-gray-300 mb-6 md:mb-8">{activeService.description}</p>
                 <Link href="/services">
 

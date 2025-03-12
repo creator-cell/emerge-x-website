@@ -23,19 +23,23 @@ const Header = () => {
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
-            if (
-                desktopDropdownRef.current &&
-                !desktopDropdownRef.current.contains(event.target as Node) &&
-                mobileDropdownRef.current &&
-                !mobileDropdownRef.current.contains(event.target as Node)
-            ) {
-                setTimeout(() => setServicesDropdown(false), 100); // Small delay to prevent instant closing
+          // For desktop view, only check desktop dropdown ref
+          if (window.innerWidth >= 768) {
+            if (desktopDropdownRef.current && !desktopDropdownRef.current.contains(event.target as Node)) {
+              setServicesDropdown(false)
             }
-        };
+          }
+          // For mobile view, only check mobile dropdown ref
+          else {
+            if (mobileDropdownRef.current && !mobileDropdownRef.current.contains(event.target as Node)) {
+              setServicesDropdown(false)
+            }
+          }
+        }
     
-        document.addEventListener("mousedown", handleClickOutside);
-        return () => document.removeEventListener("mousedown", handleClickOutside);
-    }, []);
+        document.addEventListener("mousedown", handleClickOutside)
+        return () => document.removeEventListener("mousedown", handleClickOutside)
+      }, [])
     
     
     const pathname = usePathname();
@@ -103,6 +107,10 @@ const Header = () => {
                                         key={name}
                                         href={path}
                                         className="block px-4 py-3 text-black hover:bg-gray-100"
+                                        onClick={() => {
+                                            setIsMenuOpen(false); // Ensure mobile menu closes
+                                            setServicesDropdown(false); // Ensure dropdown closes
+                                          }}
                                     >
                                         {name}
                                     </Link>

@@ -89,7 +89,7 @@ const LetestBlogs: React.FC<BlogDataTypes> = ({ data }) => {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="w-full" // Ensure it takes full width
           >
-            <h2 className="text-3xl mb-2">Our</h2>
+            <h2 className="text-3xl mb-2 text-gray-300">Our</h2>
             <h3 className="text-[48px] md:text-[48px] font-extrabold leading-[1.2] md:leading-[57.6px] tracking-normal globalColor">
               Latest Blogs
             </h3>
@@ -179,7 +179,7 @@ const LetestBlogs: React.FC<BlogDataTypes> = ({ data }) => {
                     transition={{ duration: 0.8 }}
                   />
                   <div className="p-4 md:p-6 absolute bottom-8 w-[90%] bg-black h-auto md:h-[32vh] rounded-[20px] rounded-tl-none">
-                    <h4 className="text-lg md:text-xl font-semibold mb-2 md:mb-4 leading-tight md:leading-[21.6px] tracking-normal">
+                    <h4 className="text-lg md:text-xl font-semibold mb-2 md:mb-4 leading-tight md:leading-[21.6px] tracking-normal text-gray-300">
                       {blog.title}
                     </h4>
                     <div className="flex gap-2 text-xs md:text-sm text-gray-400 mb-2 md:mb-4">

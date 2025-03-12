@@ -85,12 +85,12 @@ const Hero = () => {
         >
           {/* Heading for Desktop */}
           <h1 className="hidden sm:block text-2xl md:text-[48px] font-semibold leading-[58.09px] tracking-normal text-center">
-            <span className="block mb-0 sm:mb-1">Empowering excellence</span>
-            <span className="block">with over <span className="text-[#4CAF50]">50 Modules</span></span>
+            <span className="block mb-0 sm:mb-1 text-gray-300">Empowering excellence</span>
+            <span className="block text-gray-300">with over <span className="text-[#4CAF50]">50 Modules</span></span>
           </h1>
 
           {/* Heading for Mobile */}
-          <h1 className="block sm:hidden text-[24px] font-semibold leading-[1.2] text-center">
+          <h1 className="block sm:hidden text-[24px] font-semibold leading-[1.2] text-center text-gray-300">
             Empowering excellence with over <span className="text-[#4CAF50]">50 Modules</span>
           </h1>
 
