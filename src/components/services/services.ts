@@ -410,7 +410,7 @@ With Emerge-X, post-incident recovery becomes a transformative opportunity—one
   {
     id: 3,
     title: "Response Service",
-    image: servicesImages.response,
+    image: servicesImages.res,
     subHeading: "Integrated Solutions for Efficient Emergency Management",
     titledetails:
       "Enhance emergency response efficiency and effectiveness with Emerge-X's integrated hardware solutions. Our platform ensures complete automation, providing real-time access to critical information, enabling prompt and coordinated emergency management to minimize impact and ensure safety",

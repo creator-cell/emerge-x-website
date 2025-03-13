@@ -23,7 +23,7 @@ const Home = () => {
       <div  className="relative">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-green-950 via-green-900 to-black opacity-30 z-0" />
         <Hero />
-        <div className="" id="about">
+        <div className="scroll-mt-10" id="about">
           <AboutUs />
         </div>
       </div>

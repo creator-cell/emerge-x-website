@@ -101,19 +101,27 @@ const Hero = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="buttogGradientBG hover:bg-[#45a049] text-white py-6 rounded-[10px]"
+            <Button
+              size="lg"
+              className="buttogGradientBG hover:bg-[#45a049] text-white py-6 rounded-[10px] w-full sm:w-auto"
               onClick={() => {
                 setOpenModal(true);
               }}
             >
               Book a demo
             </Button>
-            <Link href="/contact-us">
-              <Button size="lg" variant="outline" className="border-white text-white bg-transparent py-6 rounded-[10px]">
+
+            <Link href="/contact-us" className="w-full sm:w-auto">
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-white text-white bg-transparent py-6 rounded-[10px] w-full"
+              >
                 Contact us
               </Button>
             </Link>
           </div>
+
         </motion.div>
       </section>
     </div>

@@ -119,7 +119,10 @@ const Header = () => {
                         )}
                     </div>
 
-                    <Button className="bg-[#4CAF50] hover:bg-[#45a049] text-white w-40">Book a Demo</Button>
+                    <Button
+                                                onClick={() => setOpenModal(true)}
+                    
+                    className="bg-[#4CAF50] hover:bg-[#45a049] text-white w-40">Book a Demo</Button>
                 </div>
             )}
 
@@ -132,7 +135,7 @@ const Header = () => {
                     {/* Logo */}
                     <Link href="/" className="flex items-center space-x-2">
                         <Image
-                            src={hasScrolled ? "/blacklogo.png" : "/clear.png"}
+                            src={hasScrolled ? "/main-logo.png" : "/clear.png"}
                             alt="EmergeX Logo"
                             width={150}
                             height={50}
@@ -221,6 +224,14 @@ const Header = () => {
                     </button>
                 </nav>
             </header>
+            {openModal && (
+          <ModalAnimation
+            isVisible={openModal}
+            onClose={() => {
+              setOpenModal(false);
+            }}
+          />
+        )}
         </>
     );
 };

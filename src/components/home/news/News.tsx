@@ -103,7 +103,13 @@ const News: React.FC<NewsProps> = ({ newdData }) => {
               className="cursor-pointer absolute sm:left-[-20px] top-[-20px] sm:top-1/2 sm:-translate-y-1/2 left-[calc(10%-30px)] rounded-full z-10 border-none"
               onClick={() => setActiveIndex((prev) => (prev - 1 + newdData.length) % newdData.length)}
             >
-              <Image src="/logo/left.svg" alt="Left Arrow" width={24} height={24} className="text-white w-[40px] sm:w-full" />
+              <Image
+                src="/logo/left.svg"
+                alt="Left Arrow"
+                width={24}
+                height={24}
+                className="text-white w-[40px] sm:w-full"
+              />
             </div>
           </motion.div>
 
@@ -118,25 +124,27 @@ const News: React.FC<NewsProps> = ({ newdData }) => {
               {newdData?.map((item, index) => (
                 <motion.div
                   key={index}
-                  className={`absolute rounded-2xl overflow-hidden shadow-lg transition-all duration-500 ease-in-out ${index === activeIndex
+                  className={`absolute rounded-2xl overflow-hidden shadow-lg transition-all duration-500 ease-in-out ${
+                    index === activeIndex
                       ? "z-40"
                       : index === (activeIndex + 1) % newdData.length
                         ? "z-30"
                         : index === (activeIndex + 2) % newdData.length
                           ? "z-20"
                           : "z-10"
-                    }`}
+                  }`}
                   initial={false}
                   animate={{
                     top: "50%",
-                    left:
+                    left: "50%",
+                    translateX:
                       index === activeIndex
-                        ? "0%"
+                        ? "-50%"
                         : index === (activeIndex + 1) % newdData.length
-                          ? "5%"
+                          ? "-45%"
                           : index === (activeIndex + 2) % newdData.length
-                            ? "10%"
-                            : "45%",
+                            ? "-40%"
+                            : "-35%",
                     opacity:
                       index === activeIndex
                         ? 1
@@ -156,8 +164,8 @@ const News: React.FC<NewsProps> = ({ newdData }) => {
                     translateY: "-50%",
                     display:
                       index === activeIndex ||
-                        index === (activeIndex + 1) % newdData.length ||
-                        index === (activeIndex + 2) % newdData.length
+                      index === (activeIndex + 1) % newdData.length ||
+                      index === (activeIndex + 2) % newdData.length
                         ? "block"
                         : "none",
                   }}
@@ -172,6 +180,7 @@ const News: React.FC<NewsProps> = ({ newdData }) => {
                     width: "100%",
                     height: "80%",
                     position: "absolute",
+                    transformOrigin: "center",
                   }}
                 >
                   <div className="relative w-full h-full">
@@ -186,11 +195,13 @@ const News: React.FC<NewsProps> = ({ newdData }) => {
                           {item.heading}
                         </h4>
                         <div className="flex gap-2 text-xs text-gray-300">
-                          <span>{new Date(item.updatedAt).toLocaleDateString("en-GB", {
-                            day: "2-digit",
-                            month: "long",
-                            year: "numeric",
-                          })}</span>
+                          <span>
+                            {new Date(item.updatedAt).toLocaleDateString("en-GB", {
+                              day: "2-digit",
+                              month: "long",
+                              year: "numeric",
+                            })}
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -210,26 +221,29 @@ const News: React.FC<NewsProps> = ({ newdData }) => {
               className="cursor-pointer absolute sm:right-[-60px] top-[-20px] sm:top-1/2 sm:-translate-y-1/2 right-[calc(75%-20px)] rounded-full border-none z-10"
               onClick={() => setActiveIndex((prev) => (prev + 1) % newdData.length)}
             >
-              <Image src="/logo/right.svg" alt="Right Arrow" width={24} height={24} className="text-white w-[40px] sm:w-full" />
+              <Image
+                src="/logo/right.svg"
+                alt="Right Arrow"
+                width={24}
+                height={24}
+                className="text-white w-[40px] sm:w-full"
+              />
             </div>
           </motion.div>
         </div>
         <Link href="/news">
-
-        {/* Explore Button */}
-        <motion.div
-          className="mt-4"
-          initial={{ opacity: 0, y: 100 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 100 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-        >
-
-          <Button className=" cursor-pointer buttogGradientBG hover:bg-[#45a049] text-[14px] sm:text-[16px] px-6 sm:px-8 py-4 sm:py-6 mt-8 sm:mt-12 text-white rounded-[10px]">
-            Explore all news
-          </Button>
-        </motion.div>
+          {/* Explore Button */}
+          <motion.div
+            className="mt-4"
+            initial={{ opacity: 0, y: 100 }}
+            animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 100 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
+            <Button className=" cursor-pointer buttogGradientBG hover:bg-[#45a049] text-[14px] sm:text-[16px] px-6 sm:px-8 py-4 sm:py-6 mt-8 sm:mt-12 text-white rounded-[10px]">
+              Explore all news
+            </Button>
+          </motion.div>
         </Link>
-
       </div>
     </section>
   )

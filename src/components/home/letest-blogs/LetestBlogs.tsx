@@ -194,8 +194,8 @@ const LetestBlogs: React.FC<BlogDataTypes> = ({ data }) => {
                       <span className="blueColor">{blog.authorName}</span>
                     </div>
                     <p className="blueColor mb-4 md:mb-6 text-sm md:text-base leading-tight md:leading-[23.2px] font-normal tracking-normal">
-                      {blog.description.length > 100
-                        ? `${blog.description.substring(0, 100)}...`
+                      {blog.description.length > 70
+                        ? `${blog.description.substring(0, 70)}...`
                         : blog.description}
                     </p>
 
