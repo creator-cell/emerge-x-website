@@ -33,7 +33,8 @@ export const NewsGrid: React.FC<NewsGridProps> = ({ news }) => {
                 alt={item.title}
                 width={500}
                 height={500}
-                className="object-cover"
+
+                className="object-cover w-full h-[15rem]"
               />
             </div>
             <div className="mt-3 text-center">

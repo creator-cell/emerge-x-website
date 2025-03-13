@@ -7,7 +7,7 @@ export const BlogApi = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: "/v1/blog" }),
     tagTypes: ["Blog"],
     endpoints: (builder) => ({
-        getBlogs: builder.query<BlogData, PaginationParams>({
+        getBlogs: builder.query<any, any>({
             query: ({ page = 1, limit = 10 }) => `?page=${page}&limit=${limit}`,
             providesTags: ["Blog"],
         }),

@@ -8,7 +8,7 @@ export const NewsApi = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: "/v1/news" }),
     tagTypes: ["News"],
     endpoints: (build) => ({
-        getNews: build.query<NewsResponse, PaginationParams>({
+        getNews: build.query<any, any>({
             query: ({ page, limit }) => `?page=${page}&limit=${limit}`,
             providesTags: ["News"],
         }),

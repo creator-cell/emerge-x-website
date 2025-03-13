@@ -1,73 +1,55 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { HeroResusable } from "../reusable/HeroReusable";
 import { NewsGrid } from "./NewsGrid";
 import SectionWrapper from "../reusable/SectionWrapper";
 import BreadCrumb from "../reusable/BreadCrumb";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/store/store";
-import { newsData } from "@/store/reducer/news";
-import { useEffect } from "react";
-import { getApiHelper } from "../helper/apiHelper";
+import { useMemo } from "react";
+import { useGetNewsQuery } from "@/store/news";
 
 const responseImage = "/services/Response.jpg";
 
+interface News {
+  _id: string;
+  heading: string;
+  mainDescription: string;
+  description1: string;
+  description2: string;
+  finalDescription: string;
+  heroBanner: string;
+  featureImage: string;
+  subFeatureImage1: string;
+  subFeatureImage2: string;
+  createdAt: string;
+}
+
 export const NewsPage = ({ slug }: { slug: string }) => {
-  const newsAllData = useSelector((state: RootState) => state.news.newsData);
-  const dispatch = useDispatch();
+  const { data: newsData, isLoading, error } = useGetNewsQuery({ page: 1, limit: 10 });
 
-  useEffect(() => {
-    getNewsData();
-  }, []);
+  const newsItem = useMemo(() => {
+    return newsData?.news?.find((item: News) => item._id === slug);
+  }, [newsData, slug]);
 
-  const getNewsData = async () => {
-    try {
-      const response: any = await getApiHelper(
-        "https://emerge-x-backend-c2kvq.ondigitalocean.app/v1/news?page=1&limit=10",
-        "GET"
-      );
+  const latestNews = useMemo(() => {
+    if (!newsData?.news || !newsItem) return [];
 
-      if (response?.success) {
-        dispatch(newsData(response?.data));
-      } else {
-        console.error("Failed to fetch blogs:", response?.error);
-      }
-    } catch (error: any) {
-      console.error("API error:", error.error || error.message);
-      alert(error.error || error.message);
-    }
-  };
+    return newsData.news
+      .filter((item: News) => item._id !== newsItem._id)
+      .sort((a: News, b: News) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+      .slice(0, 3);
+  }, [newsData, newsItem]);
 
-  const newsItem =
-    newsAllData &&
-    newsAllData.news &&
-    newsAllData.news.find((item: any) => item._id === slug);
+  if (isLoading) {
+    return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
+  }
 
-  if (!newsItem) {
+  if (error || !newsItem) {
     return (
       <div className="min-h-screen w-full flex items-center justify-center">
         <p className="text-xl text-gray-600">News item not found</p>
       </div>
     );
-  }
-
-  // Interface for the news object
-  interface News {
-    _id: string;
-    heading: string;
-    mainDescription: string;
-    description1: string;
-    description2: string;
-    finalDescription: string;
-    heroBanner: string;
-    featureImage: string;
-    subFeatureImage1: string;
-    subFeatureImage2: string;
-    createdAt: string;
-    updatedAt: string;
-    __v: number;
   }
 
   const {
@@ -81,118 +63,82 @@ export const NewsPage = ({ slug }: { slug: string }) => {
     subFeatureImage2,
     heroBanner,
   }: News = newsItem;
-  console.log("🚀 ~ NewsPage ~ newsItem:", newsItem);
 
   const navTrain = [
     { link: "/", label: "Home", id: "a1" },
     { link: "/news", label: "News", id: "a2" },
-    {
-      link: `/news/${slug}`,
-      label: heading,
-      id: "a4",
-    },
+    { link: `/news/${slug}`, label: heading, id: "a4" },
   ];
 
-  function formatDate(dateString: string) {
+  const formatDate = (dateString: string) => {
     const options = { year: "numeric", month: "short", day: "numeric" };
-    const date = new Date(dateString);
-    return date.toLocaleDateString("en-US", options as any);
-  }
-
-  // Exclude the current news item and get the latest 3 news
-  const latestNews = newsAllData.news
-    .filter((item: any) => item._id !== newsItem._id) // Exclude the current news item
-    .sort(
-      (a: any, b: any) =>
-        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-    ) // Sort by createdAt descending
-    .slice(0, 3); // Get the top 3 latest items
+    return new Date(dateString).toLocaleDateString("en-US", options as any);
+  };
 
   return (
     <div className="min-h-screen w-full bg-white">
       {/* Hero Section */}
-      <HeroResusable
-        image={heroBanner}
-        title={heading}
-        date={formatDate(createdAt)}
-      />
+      <HeroResusable image={heroBanner} title={heading} date={formatDate(createdAt)} />
 
       {/* Breadcrumb */}
+      <SectionWrapper>
+        <BreadCrumb navTrainData={navTrain} />
 
-      {/* Main Content */}
-      <div>
-        <SectionWrapper>
-          <BreadCrumb navTrainData={navTrain} />
-          <div className="grid gap-2 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 mt-8">
-            <div></div>
-            <div className="prose max-w-none">
-              <p className="text-4xl text-bold text-gray-800">{heading}</p>
-            </div>
+        {/* Main Content */}
+        <div className="grid gap-2 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 mt-8">
+          <div className="prose max-w-none">
+            <p className="text-4xl font-bold text-gray-800">{heading}</p>
           </div>
-        </SectionWrapper>
+        </div>
+      </SectionWrapper>
 
-        <SectionWrapper>
-          <div className="grid gap-2 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
-            <h2 className="text-4xl font-semibold text-gray-400 mb-6 max-w-sm">
-              What Happened
-            </h2>
-            <div>
-              <Image
-                src={featureImage ?? ""}
-                alt="Feedback System"
-                width={600}
-                height={400}
-                className="rounded-lg w-full"
-              />
-            </div>
-          </div>
-        </SectionWrapper>
+      <SectionWrapper>
+        <div className="grid gap-2 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
+          <h2 className="text-4xl font-semibold text-gray-400 mb-6 max-w-sm">What Happened</h2>
+          <Image
+            src={featureImage || responseImage}
+            alt="Feature"
+            width={600}
+            height={400}
+            className="rounded-lg w-full"
+          />
+        </div>
+      </SectionWrapper>
 
-        <SectionWrapper>
-          <div className="grid gap-2 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
-            <h2 className="text-xl leading-[44px] font-semibold text-gray-400 mb-6 lg:max-w-sm md:max-w-sm sm:max-w-full">
-              {mainDescription}
-            </h2>
-            <div className="grid gap-10">
-              <p className="text-lg text-gray-600">{description1}</p>
-            </div>
-          </div>
-        </SectionWrapper>
+      <SectionWrapper>
+        <div className="grid gap-2 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
+          <h2 className="text-xl leading-[44px] font-semibold text-gray-400 mb-6 lg:max-w-sm">
+            {mainDescription}
+          </h2>
+          <p className="text-lg text-gray-600">{description1}</p>
+        </div>
+      </SectionWrapper>
 
-        <SectionWrapper>
-          <div className="w-full">
-            {/* <h2 className="text-4xl font-semibold text-gray-400 mb-6 max-w-sm">What Happened</h2> */}
-            <div>
-              <div className="grid gap-4 grid-cols-2">
-                <Image
-                  src={subFeatureImage1 ?? ""}
-                  alt="Feedback System"
-                  width={600}
-                  height={400}
-                  className="rounded-lg w-full min-h-[385px]"
-                />
-                <Image
-                  src={subFeatureImage2 ?? ""}
-                  alt="Feedback System"
-                  width={600}
-                  height={400}
-                  className="rounded-lg w-full min-h-[385px]"
-                />
-              </div>
-              <p className="mt-6 text-lg text-gray-600">{description2}</p>
-            </div>
-          </div>
-        </SectionWrapper>
+      <SectionWrapper>
+        <div className="grid gap-4 grid-cols-2">
+          <Image
+            src={subFeatureImage1 || responseImage}
+            alt="Sub Feature 1"
+            width={600}
+            height={400}
+            className="rounded-lg w-full min-h-[385px]"
+          />
+          <Image
+            src={subFeatureImage2 || responseImage}
+            alt="Sub Feature 2"
+            width={600}
+            height={400}
+            className="rounded-lg w-full min-h-[385px]"
+          />
+        </div>
+        <p className="mt-6 text-lg text-gray-600">{description2}</p>
+      </SectionWrapper>
 
-        <SectionWrapper>
-          <div className="">
-            <h2 className="text-4xl font-semibold mb-8 text-center text-gray-900">
-              You may also like
-            </h2>
-            <NewsGrid news={latestNews} />
-          </div>
-        </SectionWrapper>
-      </div>
+      {/* Related News */}
+      <SectionWrapper>
+        <h2 className="text-4xl font-semibold mb-8 text-center text-gray-900">You may also like</h2>
+        <NewsGrid news={latestNews} />
+      </SectionWrapper>
     </div>
   );
 };
