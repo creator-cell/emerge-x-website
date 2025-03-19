@@ -23,35 +23,47 @@ const Header = () => {
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
-          // For desktop view, only check desktop dropdown ref
-          if (window.innerWidth >= 768) {
-            if (desktopDropdownRef.current && !desktopDropdownRef.current.contains(event.target as Node)) {
-              setServicesDropdown(false)
+            // For desktop view, only check desktop dropdown ref
+            if (window.innerWidth >= 768) {
+                if (desktopDropdownRef.current && !desktopDropdownRef.current.contains(event.target as Node)) {
+                    setServicesDropdown(false)
+                }
             }
-          }
-          // For mobile view, only check mobile dropdown ref
-          else {
-            if (mobileDropdownRef.current && !mobileDropdownRef.current.contains(event.target as Node)) {
-              setServicesDropdown(false)
+            // For mobile view, only check mobile dropdown ref
+            else {
+                if (mobileDropdownRef.current && !mobileDropdownRef.current.contains(event.target as Node)) {
+                    setServicesDropdown(false)
+                }
             }
-          }
         }
-    
+
         document.addEventListener("mousedown", handleClickOutside)
         return () => document.removeEventListener("mousedown", handleClickOutside)
-      }, [])
-    
-    
+    }, [])
+
+
     const pathname = usePathname();
 
     useEffect(() => {
         const handleScroll = () => {
-            setHasScrolled(window.scrollY > 10);
+            // Always keep scroll state true on specific pages
+            if (
+                pathname === "/contact-us" ||
+                pathname.startsWith("/services/") ||
+                pathname.startsWith("/blogs") ||
+                pathname.startsWith("/news") 
+            ) {
+                setHasScrolled(true);
+            } else {
+                setHasScrolled(window.scrollY > 10);
+            }
         };
+
+        handleScroll(); // Ensure it applies immediately on mount
 
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
+    }, [pathname]);
 
     const [openModal, setOpenModal] = useState<boolean>(false);
 
@@ -80,7 +92,8 @@ const Header = () => {
                         <X size={32} />
                     </button>
 
-                    {navLinks.map(({ name, path }) => (
+                    {/* Render Home and About first */}
+                    {navLinks.slice(0, 2).map(({ name, path }) => (
                         <Link
                             key={name}
                             href={path}
@@ -108,9 +121,9 @@ const Header = () => {
                                         href={path}
                                         className="block px-4 py-3 text-black hover:bg-gray-100"
                                         onClick={() => {
-                                            setIsMenuOpen(false); // Ensure mobile menu closes
-                                            setServicesDropdown(false); // Ensure dropdown closes
-                                          }}
+                                            setIsMenuOpen(false); // Close menu
+                                            setServicesDropdown(false); // Close dropdown
+                                        }}
                                     >
                                         {name}
                                     </Link>
@@ -119,12 +132,27 @@ const Header = () => {
                         )}
                     </div>
 
+                    {/* Render remaining links (Blogs, News) */}
+                    {navLinks.slice(2).map(({ name, path }) => (
+                        <Link
+                            key={name}
+                            href={path}
+                            className="text-xl text-white"
+                            onClick={() => setIsMenuOpen(false)}
+                        >
+                            {name}
+                        </Link>
+                    ))}
+
                     <Button
-                                                onClick={() => setOpenModal(true)}
-                    
-                    className="bg-[#4CAF50] hover:bg-[#45a049] text-white w-40">Book a Demo</Button>
+                        onClick={() => setOpenModal(true)}
+                        className="bg-[#4CAF50] hover:bg-[#45a049] text-white w-40"
+                    >
+                        Book a Demo
+                    </Button>
                 </div>
             )}
+
 
             {/* Header */}
             <header
@@ -135,7 +163,7 @@ const Header = () => {
                     {/* Logo */}
                     <Link href="/" className="flex items-center space-x-2">
                         <Image
-                            src={hasScrolled ? "/main-logo.png" : "/clear.png"}
+                            src={ hasScrolled ? "/main-logo.png" : "/whilogo.png"}
                             alt="EmergeX Logo"
                             width={150}
                             height={50}
@@ -152,8 +180,8 @@ const Header = () => {
                                         <Link href={path} legacyBehavior passHref>
                                             <NavigationMenuLink
                                                 className={`text-[16px] font-[400] transition-colors ${hasScrolled
-                                                        ? "text-black hover:text-[#4CAF50]"
-                                                        : "text-white hover:text-[#4CAF50]"
+                                                    ? "text-black hover:text-[#4CAF50]"
+                                                    : "text-white hover:text-[#4CAF50]"
                                                     }`}
                                             >
                                                 {name}
@@ -164,28 +192,28 @@ const Header = () => {
 
                                 {/* Services Dropdown (Desktop) - RIGHT AFTER ABOUT US */}
                                 <NavigationMenuItem >
-                                <div ref={desktopDropdownRef} className="relative">
+                                    <div ref={desktopDropdownRef} className="relative">
 
-                                    <button
-                                        onClick={() => setServicesDropdown(!servicesDropdown)}
-                                        className={`flex items-center gap-2 text-[16px] font-[400] transition-colors ${hasScrolled
+                                        <button
+                                            onClick={() => setServicesDropdown(!servicesDropdown)}
+                                            className={`flex items-center gap-2 text-[16px] font-[400] transition-colors ${hasScrolled
                                                 ? "text-black hover:text-[#4CAF50]"
                                                 : "text-white hover:text-[#4CAF50]"
-                                            }`}
-                                    >
-                                        Services <ChevronDown size={18} />
-                                    </button>
+                                                }`}
+                                        >
+                                            Services <ChevronDown size={18} />
+                                        </button>
 
-                                    {servicesDropdown && (
-                                        <div className="absolute mt-3 w-48 bg-white shadow-lg rounded-lg flex flex-col text-left">
-                                            {serviceOptions.map(({ name, path }) => (
-                                                <Link key={name} href={path} className="block px-4 py-3 text-black hover:bg-gray-100" onClick={() => setServicesDropdown(false)}>
+                                        {servicesDropdown && (
+                                            <div className="absolute mt-3 w-48 bg-white shadow-lg rounded-lg flex flex-col text-left">
+                                                {serviceOptions.map(({ name, path }) => (
+                                                    <Link key={name} href={path} className="block px-4 py-3 text-black hover:bg-gray-100" onClick={() => setServicesDropdown(false)}>
 
-                                                    {name}
-                                                </Link>
-                                            ))}
-                                        </div>
-                                    )}
+                                                        {name}
+                                                    </Link>
+                                                ))}
+                                            </div>
+                                        )}
                                     </div>
                                 </NavigationMenuItem>
 
@@ -195,8 +223,8 @@ const Header = () => {
                                         <Link href={path} legacyBehavior passHref>
                                             <NavigationMenuLink
                                                 className={`text-[16px] font-[400] transition-colors ${hasScrolled
-                                                        ? "text-black hover:text-[#4CAF50]"
-                                                        : "text-white hover:text-[#4CAF50]"
+                                                    ? "text-black hover:text-[#4CAF50]"
+                                                    : "text-white hover:text-[#4CAF50]"
                                                     }`}
                                             >
                                                 {name}
@@ -225,13 +253,13 @@ const Header = () => {
                 </nav>
             </header>
             {openModal && (
-          <ModalAnimation
-            isVisible={openModal}
-            onClose={() => {
-              setOpenModal(false);
-            }}
-          />
-        )}
+                <ModalAnimation
+                    isVisible={openModal}
+                    onClose={() => {
+                        setOpenModal(false);
+                    }}
+                />
+            )}
         </>
     );
 };

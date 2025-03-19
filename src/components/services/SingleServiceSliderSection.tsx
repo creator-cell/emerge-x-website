@@ -69,17 +69,17 @@ const SingleServiceSliderSection: React.FC<Props> = ({
 
   return (
     <div className={` bg-greyishblack text-white  ${page !== "home" ? "pt-[70px] md:pt-[150px]" : "pt-24"}  pb-10   rounded-t-[40px] md:rounded-t-[90px] lg:rounded-t-[110px] `}>
-      <div className=" mx-4 flex flex-col  md:flex-row md:justify-between  md:px-[50px]">
+
+      <div className="mx-4 flex flex-col items-center justify-center text-center md:flex-row md:justify-between md:items-start md:text-left md:px-[50px]">
         <div className="w-full md:w-[25%]">
-          <p className=" text-xl md:text-[36px] md:leading-[43px]">
+          <p className="text-xl md:text-[36px] md:leading-[43px]">
             {subHeading}
           </p>
         </div>
 
-        {
-          page !== "home" &&
+        {page !== "home" && (
           <div className="mx-4 w-full md:w-[50%]">
-            <div className=" h-[200px]">
+            <div className="mt-8 md:mt-0 flex items-center justify-center md:justify-end">
               <AnimatePresence mode="wait">
                 <motion.p
                   key={activeIndex}
@@ -87,14 +87,16 @@ const SingleServiceSliderSection: React.FC<Props> = ({
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5 }}
                   exit={{ opacity: 0, y: -20 }}
-                  className="text-3xl w-full  font-[400] text-right">
+                  className="text-3xl w-full font-[400] md:text-right"
+                >
                   {serviceData?.[activeIndex]?.heading}
                 </motion.p>
               </AnimatePresence>
             </div>
           </div>
-        }
+        )}
       </div>
+
 
 
 
@@ -119,7 +121,7 @@ const SingleServiceSliderSection: React.FC<Props> = ({
             </div>
           }
           <div className={cn("px-4 md:px-0",
-            page !== "home" && "mt-32"
+            page !== "home" && "mt-12 md:mt-32"
           )}>
             <h2 className="text-2xl font-semibold mb-6 max-w-sm">
               What&apos;s New?
@@ -183,9 +185,8 @@ const SingleServiceSliderSection: React.FC<Props> = ({
           </SwiperComponent>
         </div>
       </div>
-      <div className="flex items-center justify-between ">
-        <div className="w-[32%]"></div>
-        <div className="flex items-center gap-4 mt-5 w-[56.5%]">
+      <div className="flex items-center justify-center ">
+        <div className="flex items-center gap-4 mt-5">
           {
             serviceData && serviceData.length > 0 &&
             <>

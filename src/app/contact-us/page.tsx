@@ -14,9 +14,8 @@ const page = () => {
                 Get in touch with us today
               </h2>
               <p className=" text-base text-greyishblack mt-5">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Suspendisse sed ipsum urna. Pellentesque laoreet dolor et mi
-                faucibus maximus et eu elit.
+              Reach out to us with any questions or feedback—we're here to help and happy to connect!
+
               </p>
             </div>
           </div>

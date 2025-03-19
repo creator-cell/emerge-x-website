@@ -10,7 +10,7 @@ import Link from "next/link"
 
 const services = [
   {
-    id: "mitigation",
+    id: 1,
     title: "Mitigation/Prevention",
     description:
       "Explore how Emerge-X utilizes AI CCTV Cameras, Wearable Devices, and HSE Management Software to enhance workplace safety, monitor health indicators, and streamline HSE processes. Mitigate risks, ensure compliance, and foster a safer working environment with our innovative solutions.",
@@ -18,7 +18,7 @@ const services = [
     image2: servicesImages.Preparedness,
   },
   {
-    id: "preparedness",
+    id: 2,
     title: "Preparedness",
     description:
       "Enhance your organization's readiness with Emerge-X's comprehensive preparedness solutions, including online and offline training, emergency drill support, and real-time training tracking. Equip your team with essential skills to respond effectively in emergencies and foster resilience.",
@@ -26,7 +26,7 @@ const services = [
     image2: servicesImages.recovery,
   },
   {
-    id: "recovery",
+    id: 3,
     title: "Recovery Service",
     description:
       "Facilitate effective recovery with Emerge-X's comprehensive services, including automated incident reporting, AI-driven root cause analysis, and tailored precautionary measures. Empower your organization to learn, adapt, and strengthen emergency management capabilities post-incident.",
@@ -34,7 +34,7 @@ const services = [
     image2: servicesImages.res,
   },
   {
-    id: "response",
+    id: 4,
     title: "Response Service",
     description:
       "Enhance emergency response efficiency and effectiveness with Emerge-X's integrated hardware solutions. Our platform ensures complete automation, providing real-time access to critical information, enabling prompt and coordinated emergency management to minimize impact and ensure safety.",
@@ -94,15 +94,14 @@ export default function Services() {
                 className="mb-8"
               >
                 <div className="mb-8 md:mb-16">
-                  <h2 className="text-2xl md:text-3xl mb-2">Our</h2>
+                  <h2 className="text-2xl md:text-3xl mb-2 text-gray-300">Our</h2>
                   <h3 className="text-[36px] md:text-[48px] text-gray-300 font-extrabold leading-[1.2] md:leading-[57.6px] tracking-normal globalColor">
                     Services
                   </h3>
                 </div>
                 <h4 className="text-3xl md:text-4xl font-bold mb-4 md:mb-6 uppercase text-gray-300">{activeService.title}</h4>
                 <p className="text-gray-300 mb-6 md:mb-8">{activeService.description}</p>
-                <Link href="/services">
-
+                <Link href={`/services/${activeService.id}`}>
                 <Button className="buttogGradientBG hover:bg-[#45a049] text-[16px] px-6 md:px-8 py-5 md:py-6 mt-4 md:mt-6 text-white rounded-[10px]">
                   Explore now
                 </Button>

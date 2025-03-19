@@ -258,7 +258,7 @@ With our comprehensive services, we aim to establish a strong foundation for eff
     ],
   },
   {
-    id: 4,
+    id: 3,
     title: "Recovery Service",
     subHeading: "Comprehensive Solutions for Organizational Readiness",
     titledetails:
@@ -408,7 +408,7 @@ With Emerge-X, post-incident recovery becomes a transformative opportunity—one
     ],
   },
   {
-    id: 3,
+    id: 4,
     title: "Response Service",
     image: servicesImages.res,
     subHeading: "Integrated Solutions for Efficient Emergency Management",

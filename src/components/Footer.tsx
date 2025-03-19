@@ -13,43 +13,43 @@ export default function Footer() {
         {/* Left Section: About */}
         <div className="flex flex-col items-start md:items-start">
           <p className="max-w-md blueColor text-[14px]">
-          EmergeX will assist you to better understand and manage workplace safety by integrating hazards and incident reporting with investigations, actions, and metrics reporting.
+            EmergeX will assist you to better understand and manage workplace safety by integrating hazards and incident reporting with investigations, actions, and metrics reporting.
           </p>
           <div className="flex gap-4 mt-6">
-      <Link href="#" className="text-yellow-500 hover:text-[#4CAF50] transition-colors">
-        {/* Facebook Logo */}
-        <Image
-          src="/logo/f.png" // Assuming the image is stored in the public folder
-          alt="Facebook"
-          width={24} // Size of the icon
-          height={24}
-        />
-      </Link>
-      
-    
-      
-      <Link href="#" className="text-yellow-500 hover:text-[#4CAF50] transition-colors">
-        {/* Instagram Logo */}
-        <Image
-          src="/logo/i.png" // Instagram logo
-          alt="Instagram"
-          width={24} // Size of the icon
-          height={24}
-        />
-      </Link>
-      
-      <Link href="#" className="text-yellow-500 hover:text-[#4CAF50] transition-colors">
-        {/* LinkedIn Logo */}
-        <Image
-          src="/logo/l.png" // LinkedIn logo
-          alt="LinkedIn"
-          width={24} // Size of the icon
-          height={24}
-        />
-      </Link>
-    </div>
+            <Link href="#" className="text-yellow-500 hover:text-[#4CAF50] transition-colors">
+              {/* Facebook Logo */}
+              <Image
+                src="/logo/f.png" // Assuming the image is stored in the public folder
+                alt="Facebook"
+                width={24} // Size of the icon
+                height={24}
+              />
+            </Link>
 
-         
+
+
+            <Link href="#" className="text-yellow-500 hover:text-[#4CAF50] transition-colors">
+              {/* Instagram Logo */}
+              <Image
+                src="/logo/i.png" // Instagram logo
+                alt="Instagram"
+                width={24} // Size of the icon
+                height={24}
+              />
+            </Link>
+
+            <Link href="#" className="text-yellow-500 hover:text-[#4CAF50] transition-colors">
+              {/* LinkedIn Logo */}
+              <Image
+                src="/logo/l.png" // LinkedIn logo
+                alt="LinkedIn"
+                width={24} // Size of the icon
+                height={24}
+              />
+            </Link>
+          </div>
+
+
         </div>
 
         {/* Center Section: Links (Now Properly Centered) */}
@@ -96,10 +96,10 @@ export default function Footer() {
           </div>
         </div>
         <div className="mt-6 text-[14px]">
-            <p>Copyright © 2025 EmergeX</p>
-          </div>
+          <p>Copyright © 2025 EmergeX</p>
+        </div>
       </div>
-     
+
     </footer>
   )
 }
