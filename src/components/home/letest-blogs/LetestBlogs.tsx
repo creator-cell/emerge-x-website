@@ -1,15 +1,15 @@
-"use client";
+"use client"
 
-import Image from "next/image";
-import React, { useRef } from "react";
+import Image from "next/image"
+import type React from "react"
+import { useRef } from "react"
 
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
-import Link from "next/link";
-import CardBlog from "@/components/blogs/CardBlog";
-import { BlogData } from "@/store/blogs/types/blog.types";
-gsap.registerPlugin(useGSAP, ScrollTrigger);
+import gsap from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { useGSAP } from "@gsap/react"
+import Link from "next/link"
+import type { BlogData } from "@/store/blogs/types/blog.types"
+gsap.registerPlugin(useGSAP, ScrollTrigger)
 import { useState, useEffect } from "react"
 import { Swiper, SwiperSlide } from "swiper/react"
 import { Navigation, Autoplay } from "swiper/modules"
@@ -17,7 +17,7 @@ import "swiper/css"
 import "swiper/css/navigation"
 import { Play } from "lucide-react"
 import { motion, AnimatePresence, useInView } from "framer-motion"
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/button"
 
 // Slide animation variants
 const slideVariants = {
@@ -38,8 +38,7 @@ interface BlogDataTypes {
 }
 
 const LetestBlogs: React.FC<BlogDataTypes> = ({ data }) => {
-
-  console.log('sffdsdsf', data?.blog)
+  console.log("sffdsdsf", data?.blog)
 
   const swiperRef = useRef<any>(null)
   const sectionRef = useRef(null)
@@ -74,11 +73,11 @@ const LetestBlogs: React.FC<BlogDataTypes> = ({ data }) => {
     setPage([page + newDirection, newDirection])
   }
 
-
   return (
-    <section ref={sectionRef} className="py-8 md:py-12 px-4 overflow-x-hidden"> {/* Add overflow-x-hidden */}
+    <section ref={sectionRef} className="py-8 md:py-12 px-4 overflow-x-hidden">
+      {" "}
+      {/* Add overflow-x-hidden */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-green-950 via-green-900 to-black opacity-30 z-0" />
-
       <div className="max-w-7xl mx-auto">
         {/* Heading & Controls */}
         <div className="flex flex-col md:flex-row justify-between items-start mb-12 gap-6">
@@ -107,36 +106,24 @@ const LetestBlogs: React.FC<BlogDataTypes> = ({ data }) => {
               and the latest trends in our field.
             </p>
 
-            <div className="flex justify-center items-center gap-4 mt-8 cursor-pointer">
+            <div className="flex justify-center items-center gap-4 mt-8 cursor-pointer relative z-50">
               <div
-
                 onClick={() => {
                   swiperRef.current?.slidePrev()
                   paginate(-1)
                 }}
+                className="relative z-50 cursor-pointer"
               >
-                <Image
-                  src="/logo/Frame.svg"
-                  alt="Left Arrow"
-                  width={34}
-                  height={34}
-                  className="w-full cursor-pointer"
-                />
+                <Image src="/logo/Frame.svg" alt="Left Arrow" width={34} height={34} className="w-full" />
               </div>
               <div
-
                 onClick={() => {
                   swiperRef.current?.slideNext()
                   paginate(1)
                 }}
+                className="relative z-50 cursor-pointer"
               >
-                <Image
-                  src="/logo/arrow.svg"
-                  alt="Right Arrow"
-                  width={34}
-                  height={34}
-                  className="w-[80%] cursor-pointer"
-                />
+                <Image src="/logo/arrow.svg" alt="Right Arrow" width={34} height={34} className="w-[80%]" />
               </div>
             </div>
           </motion.div>
@@ -152,11 +139,11 @@ const LetestBlogs: React.FC<BlogDataTypes> = ({ data }) => {
           navigation={false}
           modules={[Autoplay, Navigation]}
           onSwiper={(swiper) => (swiperRef.current = swiper)}
-          className="overflow-hidden" // Prevent Swiper from causing overflow
+          className="overflow-hidden pointer-events-none" // Added pointer-events-none
         >
           <AnimatePresence initial={false} custom={direction}>
             {data?.blog?.map((blog, index) => (
-              <SwiperSlide key={index}>
+              <SwiperSlide key={index} className="pointer-events-auto">
                 <motion.div
                   key={`slide-${animationKey}-${index}`}
                   custom={direction}
@@ -184,23 +171,22 @@ const LetestBlogs: React.FC<BlogDataTypes> = ({ data }) => {
                     </h4>
                     <div className="flex gap-2 text-xs md:text-sm text-gray-400 mb-2 md:mb-4">
                       <div className="relative">
-                        <span>{new Date(blog.updatedAt).toLocaleDateString("en-GB", {
-                          day: "2-digit",
-                          month: "long",
-                          year: "numeric",
-                        })}</span>
+                        <span>
+                          {new Date(blog.updatedAt).toLocaleDateString("en-GB", {
+                            day: "2-digit",
+                            month: "long",
+                            year: "numeric",
+                          })}
+                        </span>
                       </div>
                       <span className="text-w">•</span>
                       <span className="blueColor">{blog.authorName}</span>
                     </div>
                     <p className="blueColor mb-4 md:mb-6 text-sm md:text-base leading-tight md:leading-[23.2px] font-normal tracking-normal">
-                      {blog.description.length > 70
-                        ? `${blog.description.substring(0, 70)}...`
-                        : blog.description}
+                      {blog.description.length > 70 ? `${blog.description.substring(0, 70)}...` : blog.description}
                     </p>
 
                     <Link href="/blogs">
-
                       <motion.div whileHover={{ x: 10 }} transition={{ type: "spring", stiffness: 200, duration: 0.5 }}>
                         <Button
                           variant="link"
@@ -219,7 +205,8 @@ const LetestBlogs: React.FC<BlogDataTypes> = ({ data }) => {
         </Swiper>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default LetestBlogs;
+export default LetestBlogs
+
