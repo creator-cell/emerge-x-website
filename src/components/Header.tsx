@@ -48,10 +48,10 @@ const Header = () => {
         const handleScroll = () => {
             // Always keep scroll state true on specific pages
             if (
-                pathname === "/contact-us" ||
-                pathname.startsWith("/services/") ||
-                pathname.startsWith("/blogs") ||
-                pathname.startsWith("/news") 
+                pathname === "/contact-us" 
+                // pathname.startsWith("/services/") ||
+                // pathname.startsWith("/blogs") ||
+                // pathname.startsWith("/news") 
             ) {
                 setHasScrolled(true);
             } else {

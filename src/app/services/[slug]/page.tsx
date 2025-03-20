@@ -72,7 +72,7 @@ const page = () => {
               title={data?.title}
               description={data?.titledetails}
               image={data?.image}
-              className="bg-gradient-to-r from-black/5 to-black/60"
+              className="bg-gradient-to-b from-black/50 to-black/80"
               textColor="white"
             />
 

@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -32,7 +32,7 @@ const schema = yup.object({
     .min(10, "mobile No must be at least 10 digits")
     .max(15, "mobile No must not exceed 15 digits")
     .required("mobile No is required"),
-    note: yup.string().required("description is required"),
+  note: yup.string().required("description is required"),
 });
 
 interface ModalAnimationTypes {
@@ -54,52 +54,80 @@ const ModalAnimation: React.FC<ModalAnimationTypes> = ({
     resolver: yupResolver(schema),
   });
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const onSubmit: SubmitHandler<IFormInputs> = async (data) => {
-    console.log(data);
+    setIsLoading(true); // Start loading
     try {
-      // Posting data using fetch
-      const response = await fetch("http://localhost:8081/v1/demoRequest", {
+      const response = await fetch("https://admin.emerge-x.com/v1/demoRequest", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
       });
-
+  
+      const responseData = await response.json(); // Parse the response
+      console.log("API Response Data:", responseData);
+  
       if (!response.ok) {
-        toast.error(
-          " Something went wrong! Please double-check the form and try again.",
-          {
+        // Handle errors (Validation or API issues)
+        if (responseData?.message) {
+          toast.error(responseData.message, {
             duration: 4000,
             position: "top-center",
-            icon: "❌", // Custom icon for error
+            icon: "❌",
+          });
+        }
+  
+        if (responseData?.errors?.length) {
+          responseData.errors.forEach((error: any) => {
+            toast.error(`${error.msg}`, {
+              duration: 4000,
+              position: "top-center",
+              icon: "⚠️",
+            });
+          });
+        }
+  
+        return; // Exit on error
+      }
+  
+      // ✅ Handle success (Status 201 - Created)
+      if (response.status === 201 && responseData?.demoRequest) {
+        const { name, email, note } = responseData.demoRequest;
+  
+        // Show success toast
+        toast.success(
+          `🎉 ${responseData.message}`,
+          {
+            duration: 5000,
+            position: "top-center",
+            icon: "✅",
           }
         );
-        return;
-      }
-
-      const responseData = await response.json();
-      toast.success(
-        "Form submitted successfully! We will get back to you shortly.",
-        {
+  
+        // Delay closing to let the toast render
+        setTimeout(() => {
+          onClose(); // Close modal only after toast appears
+        }, 1000);
+      } else {
+        // Fallback success message
+        toast.success("Form submitted successfully!", {
           duration: 4000,
           position: "top-center",
-          icon: "🎉", // Custom icon for success
-        }
-      );
-      console.log("Form Data Submitted:", responseData);
-
-      onClose();
+          icon: "🎉",
+        });
+      }
     } catch (error) {
       console.error("Error submitting form:", error);
-      toast.error(
-        "Something went wrong! Please double-check the form and try again.",
-        {
-          duration: 4000,
-          position: "top-center",
-          icon: "❌", // Custom icon for error
-        }
-      );
+      toast.error("Something went wrong! Please try again later.", {
+        duration: 4000,
+        position: "top-center",
+        icon: "❌",
+      });
+    } finally {
+      setIsLoading(false); // Stop loading indicator
     }
   };
 
@@ -208,12 +236,12 @@ const ModalAnimation: React.FC<ModalAnimationTypes> = ({
                 Description
               </label>
               <textarea
-               
+
                 id="note"
                 {...register("note")}
                 className="border border-white outline-none bg-[#222720]  text-white rounded-md p-2"
               />
-               {errors.note && (
+              {errors.note && (
                 <span className="text-red-500 text-xs text-left">
                   {errors.note.message}
                 </span>
@@ -223,10 +251,13 @@ const ModalAnimation: React.FC<ModalAnimationTypes> = ({
             {/* Submit Button */}
             <div className="flex items-center justify-center">
               <button
+                disabled={isLoading}
+
                 type="submit"
                 className="px-[20px] py-[8px] text-sm sm:text-base bg-white rounded-full text-black hover:bg-[#3DA229] transition-all duration-300 ease-in-out hover:text-white"
               >
-                Submit
+                {isLoading ? "Submitting..." : "Submit"}
+
               </button>
             </div>
           </form>

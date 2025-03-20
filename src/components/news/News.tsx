@@ -107,10 +107,15 @@ export const NewsPage = ({ slug }: { slug: string }) => {
 
       <SectionWrapper>
         <div className="grid gap-2 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
-          <h2 className="text-xl leading-[44px] font-semibold text-gray-400 mb-6 lg:max-w-sm">
-            {mainDescription}
-          </h2>
-          <p className="text-lg text-gray-600">{description1}</p>
+          <h2
+            className="text-xl leading-[44px] font-semibold text-gray-400 mb-6 lg:max-w-sm"
+            dangerouslySetInnerHTML={{ __html: mainDescription }}
+          />
+
+          <p
+            className="text-lg text-gray-600"
+            dangerouslySetInnerHTML={{ __html: description1 }}
+          />
         </div>
       </SectionWrapper>
 
@@ -131,7 +136,10 @@ export const NewsPage = ({ slug }: { slug: string }) => {
             className="rounded-lg w-full min-h-[385px]"
           />
         </div>
-        <p className="mt-6 text-lg text-gray-600">{description2}</p>
+        <p
+          className="mt-6 text-lg text-gray-600"
+          dangerouslySetInnerHTML={{ __html: description2 }}
+        />
       </SectionWrapper>
 
       {/* Related News */}

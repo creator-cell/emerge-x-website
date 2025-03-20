@@ -14,6 +14,10 @@ interface HeroResusableProps {
   className?: string;
 }
 
+const removeInlineStyles = (html: string) =>
+  html.replace(/\s?style="[^"]*"/gi, "");
+
+
 export const HeroResusable: React.FC<HeroResusableProps> = ({
   image,
   title,
@@ -53,9 +57,12 @@ export const HeroResusable: React.FC<HeroResusableProps> = ({
           className={`flex items-center text-center sm:justify-center md:text-end lg:text-end gap-2 text-${textColor || "white"} text-base`}
         >
           {description ? (
-            <p className="mb-4 text-xl sm:text-2xl leading-7 text-gray-200">
-              {description}
-            </p>
+            <p
+            className="mb-4 text-xl sm:text-2xl leading-7 text-gray-200"
+            dangerouslySetInnerHTML={{
+              __html: removeInlineStyles(description),
+            }}
+          />
           ) : (
             <span className="text-xl leading-6">
               {date} - Share Via <Link href={facebookUrl}>Facebook</Link>,{" "}

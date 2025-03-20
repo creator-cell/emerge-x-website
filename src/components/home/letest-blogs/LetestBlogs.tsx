@@ -182,9 +182,14 @@ const LetestBlogs: React.FC<BlogDataTypes> = ({ data }) => {
                       <span className="text-w">•</span>
                       <span className="blueColor">{blog.authorName}</span>
                     </div>
-                    <p className="blueColor mb-4 md:mb-6 text-sm md:text-base leading-tight md:leading-[23.2px] font-normal tracking-normal">
-                      {blog.description.length > 70 ? `${blog.description.substring(0, 70)}...` : blog.description}
-                    </p>
+                    <p
+                      className="blueColor mb-4 md:mb-6 text-sm md:text-base leading-tight md:leading-[23.2px] font-normal tracking-normal"
+                      dangerouslySetInnerHTML={{
+                        __html: blog.description.length > 70
+                          ? `${blog.description.replace(/<[^>]*>/g, "").substring(0, 70)}...`
+                          : blog.description,
+                      }}
+                    />
 
                     <Link href="/blogs">
                       <motion.div whileHover={{ x: 10 }} transition={{ type: "spring", stiffness: 200, duration: 0.5 }}>

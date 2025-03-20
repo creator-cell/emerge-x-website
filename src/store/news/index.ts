@@ -12,8 +12,18 @@ export const NewsApi = createApi({
             query: ({ page, limit }) => `?page=${page}&limit=${limit}`,
             providesTags: ["News"],
         }),
+
+        postDemoRequest: build.mutation<any, any>({
+            query: (formData) => ({
+              url: "/demoRequest",
+              method: "POST",
+              body: formData,
+            }),
+            invalidatesTags: ["News"], // Invalidate cache if necessary
+          }),
+
     }),
 })
 
 
-export const { useGetNewsQuery } = NewsApi;
+export const { useGetNewsQuery,usePostDemoRequestMutation  } = NewsApi;
