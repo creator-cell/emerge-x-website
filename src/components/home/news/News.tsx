@@ -72,7 +72,7 @@ const News: React.FC<NewsProps> = ({ newdData }) => {
     }
   }, [])
   return (
-    <section ref={sectionRef} id="news-section" className="py-8 sm:py-12 px-4 overflow-hidden">
+    <section ref={sectionRef} id="news-section" className="py-8 sm:py-12 px-4 overflow-hidden relative">
       <div className="max-w-[900px] mx-auto text-let sm:text-center">
         {/* Title animations */}
         <motion.h2
@@ -231,7 +231,7 @@ const News: React.FC<NewsProps> = ({ newdData }) => {
             </div>
           </motion.div>
         </div>
-        <Link href="/news">
+        <Link href="/news" className="relative z-50 block">
           {/* Explore Button */}
           <motion.div
             className="mt-4"
@@ -239,7 +239,7 @@ const News: React.FC<NewsProps> = ({ newdData }) => {
             animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 100 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
           >
-            <Button className=" cursor-pointer buttogGradientBG hover:bg-[#45a049] text-[14px] sm:text-[16px] px-6 sm:px-8 py-4 sm:py-6 mt-8 sm:mt-12 text-white rounded-[10px]">
+            <Button className="relative z-50 cursor-pointer buttogGradientBG hover:bg-[#45a049] text-[14px] sm:text-[16px] px-6 sm:px-8 py-4 sm:py-6 mt-8 sm:mt-12 text-white rounded-[10px]">
               Explore all news
             </Button>
           </motion.div>
