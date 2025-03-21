@@ -4,7 +4,7 @@ import { useRef, useEffect } from "react"
 import { motion, useAnimation } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import Lottie from "lottie-react"
-import animationData from "../../public/lottie.json"
+import animationData from "../../public/lott.json"
 import Link from "next/link"
 
 export default function AboutUs() {
