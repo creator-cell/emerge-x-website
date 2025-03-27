@@ -25,9 +25,9 @@ const Home = () => {
     }
 
     let isScrolling = false
-    let scrollTimeout
+    let scrollTimeout: ReturnType<typeof setTimeout> | undefined
 
-    const handleWheel = (e) => {
+    const handleWheel = (e:any) => {
       // If we're already scrolling, prevent additional scrolls
       if (isScrolling) {
         e.preventDefault()
