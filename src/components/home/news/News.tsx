@@ -47,7 +47,7 @@ const News: React.FC<NewsProps> = ({ newdData }) => {
 
     autoplayIntervalRef.current = setInterval(() => {
       setActiveIndex((prevIndex) => (prevIndex + 1) % newdData.length)
-    }, 3000)
+    }, 5000) // Changed from 3000 to 5000 for a more relaxed pace
 
     return () => {
       if (autoplayIntervalRef.current) {
@@ -79,7 +79,7 @@ const News: React.FC<NewsProps> = ({ newdData }) => {
           className="text-3xl mb-2 text-gray-300"
           initial={{ y: -100, opacity: 0 }}
           animate={isVisible ? { y: 0, opacity: 1 } : { y: -100, opacity: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
+          transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
         >
           Our
         </motion.h2>
@@ -87,7 +87,7 @@ const News: React.FC<NewsProps> = ({ newdData }) => {
           className="text-[32px] sm:text-[48px] font-extrabold leading-[1.2] sm:leading-[57.6px] tracking-normal globalColor mb-8 sm:mb-12"
           initial={{ y: -100, opacity: 0 }}
           animate={isVisible ? { y: 0, opacity: 1 } : { y: -100, opacity: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
+          transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1], delay: 0.1 }}
         >
           Latest news
         </motion.h3>
@@ -97,7 +97,7 @@ const News: React.FC<NewsProps> = ({ newdData }) => {
           <motion.div
             initial={{ x: -100, opacity: 0 }}
             animate={isVisible ? { x: 0, opacity: 1 } : { x: -100, opacity: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
+            transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1], delay: 0.2 }}
           >
             <div
               className="cursor-pointer absolute sm:left-[-20px] top-[-20px] sm:top-1/2 sm:-translate-y-1/2 left-[calc(10%-30px)] rounded-full z-10 border-none"
@@ -118,7 +118,7 @@ const News: React.FC<NewsProps> = ({ newdData }) => {
             className="relative w-full h-[300px] sm:h-[400px] max-w-[700px]"
             initial={{ opacity: 0 }}
             animate={isVisible ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
           >
             <div className="relative h-full">
               {newdData?.map((item, index) => (
@@ -169,7 +169,12 @@ const News: React.FC<NewsProps> = ({ newdData }) => {
                         ? "block"
                         : "none",
                   }}
-                  transition={{ duration: 0.5 }}
+                  transition={{
+                    duration: 0.7,
+                    ease: [0.25, 0.1, 0.25, 1],
+                    opacity: { duration: 0.8 },
+                    scale: { duration: 0.8 },
+                  }}
                   onClick={() => {
                     if (index !== activeIndex) {
                       setActiveIndex(index)
@@ -191,9 +196,11 @@ const News: React.FC<NewsProps> = ({ newdData }) => {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-6 text-left">
                       <div>
-                        <h4 className="text-base sm:text-xl font-semibold mb-1 sm:mb-2 text-white line-clamp-2">
+                      <Link href={`/news/${item._id}`} passHref>
+                      <h4 className="text-base sm:text-xl font-semibold mb-1 sm:mb-2 text-white line-clamp-2">
                           {item.heading}
                         </h4>
+                        </Link>
                         <div className="flex gap-2 text-xs text-gray-300">
                           <span>
                             {new Date(item.updatedAt).toLocaleDateString("en-GB", {
@@ -215,7 +222,7 @@ const News: React.FC<NewsProps> = ({ newdData }) => {
           <motion.div
             initial={{ x: 100, opacity: 0 }}
             animate={isVisible ? { x: 0, opacity: 1 } : { x: 100, opacity: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
+            transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1], delay: 0.2 }}
           >
             <div
               className="cursor-pointer absolute sm:right-[-60px] top-[-20px] sm:top-1/2 sm:-translate-y-1/2 right-[calc(75%-20px)] rounded-full border-none z-10"
@@ -237,7 +244,7 @@ const News: React.FC<NewsProps> = ({ newdData }) => {
             className="mt-4"
             initial={{ opacity: 0, y: 100 }}
             animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 100 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
+            transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1], delay: 0.4 }}
           >
             <Button className="relative z-50 cursor-pointer buttogGradientBG hover:bg-[#45a049] text-[14px] sm:text-[16px] px-6 sm:px-8 py-4 sm:py-6 mt-8 sm:mt-12 text-white rounded-[10px]">
               Explore all news

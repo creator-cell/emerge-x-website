@@ -165,9 +165,9 @@ const LetestBlogs: React.FC<BlogDataTypes> = ({ data }) => {
                     animate={isMobile || isInView ? { scale: 1 } : {}} // Always animate on mobile
                     transition={{ duration: 0.8 }}
                   />
-                  <div className="p-4 md:p-6 absolute bottom-8 w-[90%] bg-black h-auto md:h-[32vh] rounded-[20px] rounded-tl-none">
+                  <div className="p-4 md:p-6 absolute bottom-8 w-[90%] bg-black h-[32vh] flex flex-col justify-between rounded-[20px] rounded-tl-none">
                     <h4 className="text-lg md:text-xl font-semibold mb-2 md:mb-4 leading-tight md:leading-[21.6px] tracking-normal text-gray-300">
-                      {blog.title}
+                    {blog.title.length > 40 ? `${blog.title.substring(0, 40)}...` : blog.title}
                     </h4>
                     <div className="flex gap-2 text-xs md:text-sm text-gray-400 mb-2 md:mb-4">
                       <div className="relative">
@@ -183,7 +183,7 @@ const LetestBlogs: React.FC<BlogDataTypes> = ({ data }) => {
                       <span className="blueColor">{blog.authorName}</span>
                     </div>
                     <p
-                      className="blueColor mb-4 md:mb-6 text-sm md:text-base leading-tight md:leading-[23.2px] font-normal tracking-normal"
+                      className="blueColor mb-4 md:mb-4 text-sm md:text-base leading-tight md:leading-[23.2px] font-normal tracking-normal"
                       dangerouslySetInnerHTML={{
                         __html: blog.description.length > 70
                           ? `${blog.description.replace(/<[^>]*>/g, "").substring(0, 70)}...`
@@ -191,7 +191,7 @@ const LetestBlogs: React.FC<BlogDataTypes> = ({ data }) => {
                       }}
                     />
 
-                    <Link href="/blogs">
+                    <Link href={`/blogs/${blog._id}`} passHref>
                       <motion.div whileHover={{ x: 10 }} transition={{ type: "spring", stiffness: 200, duration: 0.5 }}>
                         <Button
                           variant="link"

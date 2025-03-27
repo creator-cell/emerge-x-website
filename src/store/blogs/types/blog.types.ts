@@ -8,6 +8,7 @@ export interface BlogDataTypes {
     title: string; // Title text
     updatedAt: string; // ISO date string
     authorName?: string; // Author name
+    _id?:string;
 }
 
 

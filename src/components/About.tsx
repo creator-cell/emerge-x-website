@@ -1,16 +1,15 @@
-"use client"
-
-import { useRef, useEffect } from "react"
+import { useRef, useEffect, useState } from "react"
 import { motion, useAnimation } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import Lottie from "lottie-react"
 import animationData from "../../public/lott.json"
+import staticLott from "../../public/aaa.json"
 import Link from "next/link"
 
 export default function AboutUs() {
   const ref = useRef<HTMLDivElement>(null)
-  const leftControls = useAnimation()
   const rightControls = useAnimation()
+  const [isAnimated, setIsAnimated] = useState(false) // Track animation state for desktop
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,27 +24,38 @@ export default function AboutUs() {
       const isLeaving = rect.bottom < windowHeight * 0.5 || rect.top > windowHeight * 0.5
 
       if (isEntering) {
-        leftControls.start({ opacity: 1, x: 0, transition: { duration: 0.8, ease: "easeOut" } })
         rightControls.start({ opacity: 1, x: 0, transition: { duration: 0.8, ease: "easeOut", delay: 0.2 } })
       } else if (isLeaving) {
-        leftControls.start({ opacity: 0, x: "-100%", transition: { duration: 0.8, ease: "easeIn" } })
         rightControls.start({ opacity: 0, x: "100%", transition: { duration: 0.8, ease: "easeIn", delay: 0.2 } })
       }
     }
 
-    // Run once on mount to check initial position
-    handleScroll()
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.intersectionRatio >= 0.8) {
+          setIsAnimated(true)
+        } else {
+          setIsAnimated(false)
+        }
+      },
+      { threshold: [0.8] }
+    )
 
+    if (ref.current) observer.observe(ref.current)
+
+    handleScroll()
     window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [leftControls, rightControls])
+    return () => {
+      observer.disconnect()
+      window.removeEventListener("scroll", handleScroll)
+    }
+  }, [rightControls])
 
   return (
     <section id="about-section" className="px-4 relative overflow-hidden py-12">
       <div className="relative z-10 max-w-[1336px] mx-auto">
         {/* Mobile layout */}
         <div className="lg:hidden">
-          {/* Mobile heading */}
           <div className="mb-6">
             <span className="font-semibold text-[16px] leading-[19.36px] tracking-[4px] text-[#3DA229] uppercase block">
               ABOUT US
@@ -55,18 +65,14 @@ export default function AboutUs() {
             </h2>
           </div>
 
-          {/* Mobile image - now between heading and description */}
           <div className="mb-6">
             <Lottie animationData={animationData} className="h-auto w-auto m-4" />
           </div>
 
-          {/* Mobile description and button */}
           <div>
             <p className="text-gray-300 text-[16px] leading-normal tracking-normal mb-8">
               EmergeX will assist you to better understand and manage workplace safety by integrating hazards and
-              incident reporting with investigations, actions and metrics reporting. EmergeX will assist you to better
-              understand and manage workplace safety by integrating hazards and incident reporting with investigations,
-              actions and metrics reporting.
+              incident reporting with investigations, actions and metrics reporting.
             </p>
 
             <Link href="/about-us">
@@ -77,26 +83,20 @@ export default function AboutUs() {
           </div>
         </div>
 
-        {/* Desktop layout - grid with 2 columns (unchanged) */}
+        {/* Desktop layout */}
         <div className="hidden lg:grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left Container (Image/Placeholder) */}
-          <motion.div
-            initial={{ opacity: 0, x: "-100%" }}
-            animate={leftControls}
-            transition={{ duration: 1.2, ease: "easeOut" }}
-            className="relative"
-          >
-            <Lottie animationData={animationData} className="sm:h-[30rem] w-auto h-auto m-4" />
-          </motion.div>
+          {/* Left Container (Static first, then Animated Lottie) */}
+          <div className="relative">
+            <Lottie animationData={isAnimated ? animationData : staticLott} className="sm:h-[30rem] w-auto h-auto m-4" />
+          </div>
 
-          {/* Right Container (Text Content) */}
+          {/* Right Container (Text Content with Animation) */}
           <motion.div
             ref={ref}
             initial={{ opacity: 0, x: "100%" }}
             animate={rightControls}
             transition={{ duration: 1.2, ease: "easeOut" }}
           >
-            {/* Desktop heading */}
             <div>
               <span className="font-semibold text-[16px] leading-[19.36px] tracking-[4px] text-[#3DA229] uppercase mb-12 block mt-2 md:-mt-12">
                 ABOUT US
@@ -108,9 +108,7 @@ export default function AboutUs() {
 
             <p className="text-gray-300 text-[16px] leading-normal tracking-normal mb-8">
               EmergeX will assist you to better understand and manage workplace safety by integrating hazards and
-              incident reporting with investigations, actions and metrics reporting. EmergeX will assist you to better
-              understand and manage workplace safety by integrating hazards and incident reporting with investigations,
-              actions and metrics reporting.
+              incident reporting with investigations, actions and metrics reporting.
             </p>
 
             <Link href="/about-us">
@@ -124,4 +122,3 @@ export default function AboutUs() {
     </section>
   )
 }
-
