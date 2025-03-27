@@ -12,7 +12,6 @@ interface NewsProps {
 }
 
 const News: React.FC<NewsProps> = ({ newdData }) => {
-  console.log("News Data:", newdData)
 
   const [isVisible, setIsVisible] = useState(false)
   const sectionRef = useRef(null)

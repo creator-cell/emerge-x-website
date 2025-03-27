@@ -48,7 +48,6 @@ const SliderWithMotion = ({ newdData }: SliderWithMotionProps) => {
   const router = useRouter();
 
   const handleImageClick = (clickedIndex: number) => {
-    console.log(clickedIndex);
     router.push(`/news/${newdData[clickedIndex]._id}`);
   };
 

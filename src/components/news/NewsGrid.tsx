@@ -16,7 +16,6 @@ interface NewsGridProps {
 }
 
 export const NewsGrid: React.FC<NewsGridProps> = ({ news }) => {
-  console.log("🚀 ~ news:======>>>", news)
   function formatDate(dateString: string) {
     const options = { year: 'numeric', month: 'short', day: 'numeric' };
     const date = new Date(dateString);

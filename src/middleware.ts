@@ -7,7 +7,6 @@ export function middleware(request: NextRequest) {
   if (request.nextUrl.pathname === "/services") {
     const url = request.nextUrl.clone();
     url.pathname = "/services/1";
-    console.log("-> (m)redirecting /services to /services/1");
     return NextResponse.redirect(url);
   }
 
@@ -22,7 +21,6 @@ export function middleware(request: NextRequest) {
       api_url + request.nextUrl.pathname + request.nextUrl.search
     );
 
-    console.log("-> (m)forwarding-url /api:", url.toString());
     return NextResponse.rewrite(url.toString(), {
       headers: {
         ...request.headers,
@@ -30,7 +28,6 @@ export function middleware(request: NextRequest) {
     });
   }
 
-  console.log("-> (m)token exists, allowing request to proceed");
   return NextResponse.next();
 }
 

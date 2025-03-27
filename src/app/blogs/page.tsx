@@ -31,7 +31,6 @@ const page = ({ searchParams }: { searchParams: ReadonlyURLSearchParams }) => {
     setCurrentPage(page)
   }
 
-  console.log("Blogs Data:", blogsAllData)
 
   return (
     <div className="min-h-screen">

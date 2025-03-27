@@ -68,7 +68,6 @@ const ModalAnimation: React.FC<ModalAnimationTypes> = ({
       });
   
       const responseData = await response.json(); // Parse the response
-      console.log("API Response Data:", responseData);
   
       if (!response.ok) {
         // Handle errors (Validation or API issues)

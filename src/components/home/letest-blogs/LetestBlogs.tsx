@@ -38,7 +38,6 @@ interface BlogDataTypes {
 }
 
 const LetestBlogs: React.FC<BlogDataTypes> = ({ data }) => {
-  console.log("sffdsdsf", data?.blog)
 
   const swiperRef = useRef<any>(null)
   const sectionRef = useRef(null)

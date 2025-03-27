@@ -66,7 +66,6 @@ const mobileUsForm = () => {
         }
       );
 
-      console.log("Success:", result);
       reset();
     } catch (error) {
       console.error("Error:", error);

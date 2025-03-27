@@ -32,7 +32,6 @@ const page = () => {
     setSlug(IdData);
 
     const AllData = blogsAllData?.blog?.filter((e: any) => e._id == IdData);
-    console.log(AllData);
     setBlogData(AllData);
   }, [pathname]);
   const navTrain = [
@@ -47,7 +46,6 @@ const page = () => {
   ];
 
   const { data } = useGetSingleBlogQuery(slug ?? "");
-  console.log("🚀 ~ page ~ data:", data);
 
   return (
     <div className=" min-h-screen">

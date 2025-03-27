@@ -53,7 +53,6 @@ const CardBlog: React.FC<CardBlogTypes> = ({
       month: 'short',
       day: 'numeric',
     });
-    console.log(formattedDate)
     setDate(formattedDate)
   }, [])
   return (
