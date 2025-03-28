@@ -36,7 +36,7 @@ const mobileUsForm = () => {
 
   const onSubmit = async (data: any) => {
     try {
-      const response = await fetch("http://localhost:8081/v1/contact", {
+      const response = await fetch("https://admin.emerge-x.com/v1/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
