@@ -1,5 +1,5 @@
 "use client"
-
+ 
 import { useState, useRef, useEffect } from "react"
 import { Button } from "./ui/button"
 import { motion, AnimatePresence, useInView } from "framer-motion"
@@ -7,7 +7,7 @@ import Image from "next/image"
 import { MserviceHero } from "@/assets/services/Metegation"
 import { servicesImages } from "@/assets/services"
 import Link from "next/link"
-
+ 
 const services = [
   {
     id: 1,
@@ -42,13 +42,13 @@ const services = [
     image2: MserviceHero,
   },
 ];
-
-
+ 
+ 
 export default function Services() {
   const [activeService, setActiveService] = useState(services[0])
   const ref = useRef(null)
   const [isMobile, setIsMobile] = useState(false)
-
+ 
   // Check if the screen is mobile
   useEffect(() => {
     const handleResize = () => {
@@ -58,23 +58,23 @@ export default function Services() {
     window.addEventListener("resize", handleResize)
     return () => window.removeEventListener("resize", handleResize)
   }, [])
-
+ 
   // Modified to only trigger when 75% of the component is in view (for non-mobile screens)
   const isInView = useInView(ref, {
     once: false,
-    amount: isMobile ? 0 : 0.75, // Disable 75% logic for mobile
+    amount: isMobile ? 0 : 0.3, // Disable 75% logic for mobile
   })
-
+ 
   // Initial state for animations - start with everything hidden
   const [hasAnimated, setHasAnimated] = useState(false)
-
+ 
   // Update hasAnimated when the component comes into view
   useEffect(() => {
     if (isInView && !hasAnimated) {
       setHasAnimated(true)
     }
   }, [isInView, hasAnimated])
-
+ 
   return (
     <section ref={ref} className="py-12 px-4 relative overflow-hidden">
       <div className="relative z-10 max-w-[1336px] mx-auto">
@@ -87,9 +87,13 @@ export default function Services() {
                 animate={isMobile || isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: "-100vw" }} // Always animate on mobile
                 exit={{ opacity: 0, x: "100vw" }}
                 transition={{
-                  duration: 0.8,
+                  duration: 2,
                   ease: "easeOut",
-                  delay: hasAnimated ? 0 : 0.2,
+                  type: "spring",
+                  stiffness: 80,
+                  damping: 12,
+                  mass: 1,
+                  delay: hasAnimated ? 0 : 0.4,
                 }}
                 className="mb-8"
               >
@@ -102,24 +106,28 @@ export default function Services() {
                 <h4 className="text-3xl md:text-4xl font-bold mb-4 md:mb-6 uppercase text-gray-300">{activeService.title}</h4>
                 <p className="text-gray-300 mb-6 md:mb-8">{activeService.description}</p>
                 <Link href={`/services/${activeService.id}`}>
-                <Button className="buttogGradientBG hover:bg-[#45a049] text-[16px] px-6 md:px-8 py-5 md:py-6 mt-4 md:mt-6 text-white rounded-[10px]">
-                  Explore now
-                </Button>
+                  <Button className="buttogGradientBG hover:bg-[#45a049] text-[16px] px-6 md:px-8 py-5 md:py-6 mt-4 md:mt-6 text-white rounded-[10px]">
+                    Explore now
+                  </Button>
                 </Link>
               </motion.div>
             </AnimatePresence>
           </div>
-
+ 
           <div className="relative">
-            <AnimatePresence mode="wait">
+            <AnimatePresence mode="wait" >
               <motion.div
                 key={activeService.id}
                 initial={{ opacity: 0, x: "100vw" }}
                 animate={isMobile || isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: "100vw" }} // Always animate on mobile
                 exit={{ opacity: 0, x: "-100vw" }}
                 transition={{
-                  duration: 0.8,
+                  duration: 2,
                   ease: "easeOut",
+                  type: "spring",
+                  stiffness: 80,
+                  damping: 12,
+                  mass: 1,
                   delay: hasAnimated ? 0 : 0.4,
                 }}
                 className="relative"
@@ -133,7 +141,7 @@ export default function Services() {
                     width={375}
                     className="object-cover rounded-3xl absolute top-0 left-0 z-20"
                   />
-
+ 
                   {/* Bottom Image */}
                   <Image
                     src={activeService.image2 || "/placeholder.svg"}
@@ -147,7 +155,7 @@ export default function Services() {
             </AnimatePresence>
           </div>
         </div>
-
+ 
         <div className="mt-16 md:mt-24 grid grid-cols-2 sm:grid-cols-4 gap-4 mx-4 md:ml-40 md:mx-0">
           {services.map((service) => (
             <button key={service.id} className="text-left" onMouseEnter={() => setActiveService(service)}>
@@ -163,9 +171,8 @@ export default function Services() {
                   />
                 </div>
                 <span
-                  className={`block text-sm font-medium transition-colors ${
-                    activeService.id === service.id ? "text-white" : "text-gray-500"
-                  }`}
+                  className={`block text-sm font-medium transition-colors ${activeService.id === service.id ? "text-white" : "text-gray-500"
+                    }`}
                 >
                   {service.title}
                 </span>

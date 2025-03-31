@@ -1,124 +1,110 @@
-import { useRef, useEffect, useState } from "react"
-import { motion, useAnimation } from "framer-motion"
-import { Button } from "@/components/ui/button"
-import Lottie from "lottie-react"
-import animationData from "../../public/lott.json"
-import staticLott from "../../public/aaa.json"
-import Link from "next/link"
-
-export default function AboutUs() {
-  const ref = useRef<HTMLDivElement>(null)
-  const rightControls = useAnimation()
-  const [isAnimated, setIsAnimated] = useState(false) // Track animation state for desktop
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const section = document.getElementById("about-section")
-      if (!section) return
-
-      const rect = section.getBoundingClientRect()
-      const windowHeight = window.innerHeight
-
-      // Section is in view if it's at least 50% visible
-      const isEntering = rect.top < windowHeight * 0.5 && rect.bottom > windowHeight * 0.5
-      const isLeaving = rect.bottom < windowHeight * 0.5 || rect.top > windowHeight * 0.5
-
-      if (isEntering) {
-        rightControls.start({ opacity: 1, x: 0, transition: { duration: 0.8, ease: "easeOut", delay: 0.2 } })
-      } else if (isLeaving) {
-        rightControls.start({ opacity: 0, x: "100%", transition: { duration: 0.8, ease: "easeIn", delay: 0.2 } })
-      }
-    }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.intersectionRatio >= 0.8) {
-          setIsAnimated(true)
-        } else {
-          setIsAnimated(false)
-        }
+import { useRef, useEffect } from "react";
+import { motion, useAnimation, useInView } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import Lottie from "lottie-react";
+import animationData from "../../public/lott.json";
+ 
+export default function AboutUsSection() {
+  const ref = useRef(null);
+  const controls = useAnimation();
+  const isInView = useInView(ref, { amount: 0.6, once: false });
+ 
+  // Animation variants for the container and individual text elements
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1, // Increased stagger for a more gradual reveal
       },
-      { threshold: [0.8] }
-    )
-
-    if (ref.current) observer.observe(ref.current)
-
-    handleScroll()
-    window.addEventListener("scroll", handleScroll)
-    return () => {
-      observer.disconnect()
-      window.removeEventListener("scroll", handleScroll)
+    },
+  };
+ 
+  const textVariants = {
+    hidden: { opacity: 0, x: "50vw" },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        type: "spring",
+        stiffness: 80,
+        damping: 12,
+        mass: 1,
+        ease: "easeOut",
+      },
+    },
+  };
+ 
+  useEffect(() => {
+    if (isInView) {
+      controls.start("visible"); // Play animation when in view
+    } else {
+      controls.start("hidden"); // Reverse animation when out of view
     }
-  }, [rightControls])
-
+  }, [controls, isInView]);
+ 
   return (
-    <section id="about-section" className="px-4 relative overflow-hidden py-12">
-      <div className="relative z-10 max-w-[1336px] mx-auto">
-        {/* Mobile layout */}
-        <div className="lg:hidden">
-          <div className="mb-6">
-            <span className="font-semibold text-[16px] leading-[19.36px] tracking-[4px] text-[#3DA229] uppercase block">
-              ABOUT US
-            </span>
-            <h2 className="text-[32px] font-normal leading-[38.73px] tracking-normal mt-4 text-gray-300">
-              At EmergeX, we aim higher and strive harder to make workplace safety
-            </h2>
-          </div>
-
-          <div className="mb-6">
-            <Lottie animationData={animationData} className="h-auto w-auto m-4" />
-          </div>
-
-          <div>
-            <p className="text-gray-300 text-[16px] leading-normal tracking-normal mb-8">
-              EmergeX will assist you to better understand and manage workplace safety by integrating hazards and
-              incident reporting with investigations, actions and metrics reporting.
-            </p>
-
-            <Link href="/about-us">
-              <Button className="buttogGradientBG hover:bg-[#45a049] text-[16px] px-8 py-6 text-white rounded-[10px]">
-                Explore Now
-              </Button>
-            </Link>
+    <section className="px-4 relative overflow-hidden py-12 container">
+      <div className="lg:grid lg:grid-cols-2 gap-6 items-center">
+        {/* Left Container (Lottie for Desktop) */}
+        <div className="hidden lg:flex flex-col gap-6 items-start">
+          <div className="relative">
+            <Lottie animationData={animationData} className="sm:h-[80vh] max-h-[35rem] w-auto h-auto m-4" />
           </div>
         </div>
-
-        {/* Desktop layout */}
-        <div className="hidden lg:grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left Container (Static first, then Animated Lottie) */}
-          <div className="relative">
-            <Lottie animationData={isAnimated ? animationData : staticLott} className="sm:h-[30rem] w-auto h-auto m-4" />
-          </div>
-
-          {/* Right Container (Text Content with Animation) */}
-          <motion.div
-            ref={ref}
-            initial={{ opacity: 0, x: "100%" }}
-            animate={rightControls}
-            transition={{ duration: 1.2, ease: "easeOut" }}
+ 
+        {/* Right Container (Text and Mobile Lottie) */}
+        <motion.div
+          ref={ref}
+          variants={containerVariants}
+          initial="hidden"
+          animate={controls}
+          className="flex flex-col items-start max-lg:items-center"
+        >
+          {/* Tagline */}
+          <motion.span
+            variants={textVariants}
+            className="font-semibold text-[16px] leading-[19.36px] tracking-[4px] text-[#3DA229] uppercase mb-4"
           >
-            <div>
-              <span className="font-semibold text-[16px] leading-[19.36px] tracking-[4px] text-[#3DA229] uppercase mb-12 block mt-2 md:-mt-12">
-                ABOUT US
-              </span>
-              <h2 className="text-[40px] font-normal leading-[38.73px] tracking-normal mb-8 text-gray-300">
-                At EmergeX, we aim higher and strive harder to make workplace safety
-              </h2>
-            </div>
-
-            <p className="text-gray-300 text-[16px] leading-normal tracking-normal mb-8">
-              EmergeX will assist you to better understand and manage workplace safety by integrating hazards and
-              incident reporting with investigations, actions and metrics reporting.
-            </p>
-
+            ABOUT US
+          </motion.span>
+ 
+          {/* Heading */}
+          <motion.h2
+            variants={textVariants}
+            className="text-[32px] md:text-[40px] font-normal leading-[45px] tracking-normal mb-8 text-gray-300 max-w-2xl"
+          >
+            At EmergeX, we aim higher and strive harder to make workplace safety
+          </motion.h2>
+ 
+          {/* Lottie for Mobile (below md) */}
+          <motion.div
+            variants={textVariants}
+            className="lg:hidden w-full mb-8"
+          >
+            <Lottie animationData={animationData} className="w-full h-[20rem] mx-auto" />
+          </motion.div>
+ 
+          {/* Paragraph */}
+          <motion.p
+            variants={textVariants}
+            className="text-gray-300 text-[16px] leading-relaxed tracking-wide mb-8 max-w-xl"
+          >
+            EmergeX will assist you to better understand and manage workplace safety by integrating hazards and incident reporting with investigations, actions and metrics reporting. EmergeX will assist you to better understand and manage workplace safety by integrating hazards and incident reporting with investigations, actions and metrics reporting.
+          </motion.p>
+ 
+          {/* Button */}
+          <motion.div variants={textVariants}>
             <Link href="/about-us">
               <Button className="buttogGradientBG hover:bg-[#45a049] text-[16px] px-8 py-6 text-white rounded-[10px]">
                 Explore Now
               </Button>
             </Link>
           </motion.div>
-        </div>
+        </motion.div>
       </div>
     </section>
-  )
+  );
 }
+ 
