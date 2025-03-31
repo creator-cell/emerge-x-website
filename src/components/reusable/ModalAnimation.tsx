@@ -66,9 +66,9 @@ const ModalAnimation: React.FC<ModalAnimationTypes> = ({
         },
         body: JSON.stringify(data),
       });
-  
+
       const responseData = await response.json(); // Parse the response
-  
+
       if (!response.ok) {
         // Handle errors (Validation or API issues)
         if (responseData?.message) {
@@ -78,7 +78,7 @@ const ModalAnimation: React.FC<ModalAnimationTypes> = ({
             icon: "❌",
           });
         }
-  
+
         if (responseData?.errors?.length) {
           responseData.errors.forEach((error: any) => {
             toast.error(`${error.msg}`, {
@@ -88,14 +88,14 @@ const ModalAnimation: React.FC<ModalAnimationTypes> = ({
             });
           });
         }
-  
+
         return; // Exit on error
       }
-  
+
       // ✅ Handle success (Status 201 - Created)
       if (response.status === 201 && responseData?.demoRequest) {
         const { name, email, note } = responseData.demoRequest;
-  
+
         // Show success toast
         toast.success(
           `🎉 ${responseData.message}`,
@@ -105,7 +105,7 @@ const ModalAnimation: React.FC<ModalAnimationTypes> = ({
             icon: "✅",
           }
         );
-  
+
         // Delay closing to let the toast render
         setTimeout(() => {
           onClose(); // Close modal only after toast appears
@@ -175,12 +175,13 @@ const ModalAnimation: React.FC<ModalAnimationTypes> = ({
                 {...register("name")}
                 className="border-none outline-none bg-[#222720]  text-white"
               />
-              {errors.name && (
-                <span className="text-red-500 text-xs text-left">
+             
+            </div>
+            {errors.name && (
+                <span className="text-red-500 text-xs text-left block">
                   {errors.name.message}
                 </span>
               )}
-            </div>
 
             {/* Email */}
             <div className="w-full flex flex-col gap-1 border-b border-b-white pb-2">
@@ -196,12 +197,13 @@ const ModalAnimation: React.FC<ModalAnimationTypes> = ({
                 {...register("email")}
                 className="border-none outline-none bg-[#222720]  text-white"
               />
-              {errors.email && (
-                <span className="text-red-500 text-xs text-left">
+             
+            </div>
+            {errors.email && (
+                <span className="text-red-500 text-xs text-left block">
                   {errors.email.message}
                 </span>
               )}
-            </div>
 
             {/* mobile No */}
             <div className="w-full flex flex-col gap-1 border-b border-b-white pb-2">
@@ -219,12 +221,13 @@ const ModalAnimation: React.FC<ModalAnimationTypes> = ({
                 onInput={handlemobileChange} // Call the handler to restrict input to numbers only
                 className="border-none outline-none bg-[#222720]  text-white"
               />
-              {errors.mobile && (
-                <span className="text-red-500 text-xs text-left">
+            
+            </div>
+            {errors.mobile && (
+                <span className="text-red-500 text-xs text-left block">
                   {errors.mobile.message}
                 </span>
               )}
-            </div>
 
             {/* Country */}
             <div className="w-full flex flex-col gap-1">
@@ -240,12 +243,13 @@ const ModalAnimation: React.FC<ModalAnimationTypes> = ({
                 {...register("note")}
                 className="border border-white outline-none bg-[#222720]  text-white rounded-md p-2"
               />
-              {errors.note && (
-                <span className="text-red-500 text-xs text-left">
+             
+            </div>
+            {errors.note && (
+                <span className="text-red-500 text-xs text-left block">
                   {errors.note.message}
                 </span>
               )}
-            </div>
 
             {/* Submit Button */}
             <div className="flex items-center justify-center">
