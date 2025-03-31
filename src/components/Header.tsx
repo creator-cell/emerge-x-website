@@ -48,7 +48,7 @@ const Header = () => {
         const handleScroll = () => {
             // Always keep scroll state true on specific pages
             if (
-                pathname === "/contact-us" 
+                pathname === "/contact-us"
                 // pathname.startsWith("/services/") ||
                 // pathname.startsWith("/blogs") ||
                 // pathname.startsWith("/news") 
@@ -163,7 +163,7 @@ const Header = () => {
                     {/* Logo */}
                     <Link href="/" className="flex items-center space-x-2">
                         <Image
-                            src={ hasScrolled ? "/main-logo.png" : "/lsvg.svg"}
+                            src={hasScrolled ? "/main-logo.png" : "/lsvg.svg"}
                             alt="EmergeX Logo"
                             width={150}
                             height={50}
@@ -175,20 +175,23 @@ const Header = () => {
                     <div className="hidden md:flex gap-6">
                         <NavigationMenu>
                             <NavigationMenuList className="flex gap-6">
-                                {navLinks.slice(0, 2).map(({ name, path }) => (
-                                    <NavigationMenuItem key={name}>
-                                        <Link href={path} legacyBehavior passHref>
-                                            <NavigationMenuLink
-                                                className={`text-[16px] font-[400] transition-colors ${hasScrolled
-                                                    ? "text-black hover:text-[#4CAF50]"
-                                                    : "text-white hover:text-[#4CAF50]"
-                                                    }`}
-                                            >
-                                                {name}
-                                            </NavigationMenuLink>
-                                        </Link>
-                                    </NavigationMenuItem>
-                                ))}
+                                {navLinks.slice(0, 2).map(({ name, path }) => {
+                                    const isActive = pathname === path && pathname !== "/";
+                                    return (
+                                        <NavigationMenuItem key={name}>
+                                            <Link href={path} legacyBehavior passHref>
+                                                <NavigationMenuLink
+                                                    className={`text-[16px] font-[400] transition-colors ${hasScrolled
+                                                        ? "text-black hover:text-[#4CAF50]"
+                                                        : "text-white hover:text-[#4CAF50]"
+                                                        } ${isActive ? "font-bold !text-[#4CAF50]" : ""}`}
+                                                >
+                                                    {name}
+                                                </NavigationMenuLink>
+                                            </Link>
+                                        </NavigationMenuItem>
+                                    )
+                                })}
 
                                 {/* Services Dropdown (Desktop) - RIGHT AFTER ABOUT US */}
                                 <NavigationMenuItem >
@@ -199,39 +202,44 @@ const Header = () => {
                                             className={`flex items-center gap-2 text-[16px] font-[400] transition-colors ${hasScrolled
                                                 ? "text-black hover:text-[#4CAF50]"
                                                 : "text-white hover:text-[#4CAF50]"
-                                                }`}
+                                                } ${pathname.startsWith("/services/") ? "font-bold !text-[#4CAF50]" : ""}`}
                                         >
                                             Services <ChevronDown size={18} />
                                         </button>
 
                                         {servicesDropdown && (
                                             <div className="absolute mt-3 w-48 bg-white shadow-lg rounded-lg flex flex-col text-left">
-                                                {serviceOptions.map(({ name, path }) => (
-                                                    <Link key={name} href={path} className="block px-4 py-3 text-black hover:bg-gray-100" onClick={() => setServicesDropdown(false)}>
-
-                                                        {name}
-                                                    </Link>
-                                                ))}
+                                                {serviceOptions.map(({ name, path }) => {
+                                                    const isActive = pathname === path;
+                                                    return (
+                                                        <Link key={name} href={path} className={`block px-4 py-3 text-black hover:bg-gray-100 ${isActive ? "font-bold" : ""}`} onClick={() => setServicesDropdown(false)}>
+                                                            {name}
+                                                        </Link>
+                                                    )
+                                                })}
                                             </div>
                                         )}
                                     </div>
                                 </NavigationMenuItem>
 
                                 {/* Remaining Nav Links */}
-                                {navLinks.slice(2).map(({ name, path }) => (
-                                    <NavigationMenuItem key={name}>
-                                        <Link href={path} legacyBehavior passHref>
-                                            <NavigationMenuLink
-                                                className={`text-[16px] font-[400] transition-colors ${hasScrolled
-                                                    ? "text-black hover:text-[#4CAF50]"
-                                                    : "text-white hover:text-[#4CAF50]"
-                                                    }`}
-                                            >
-                                                {name}
-                                            </NavigationMenuLink>
-                                        </Link>
-                                    </NavigationMenuItem>
-                                ))}
+                                {navLinks.slice(2).map(({ name, path }) => {
+                                    const isActive = pathname === path && pathname !== "/";
+                                    return (
+                                        <NavigationMenuItem key={name}>
+                                            <Link href={path} legacyBehavior passHref>
+                                                <NavigationMenuLink
+                                                    className={`text-[16px] font-[400] transition-colors ${hasScrolled
+                                                        ? "text-black hover:text-[#4CAF50]"
+                                                        : "text-white hover:text-[#4CAF50]"
+                                                        } ${isActive ? "font-bold !text-[#4CAF50]" : ""}`}
+                                                >
+                                                    {name}
+                                                </NavigationMenuLink>
+                                            </Link>
+                                        </NavigationMenuItem>
+                                    )
+                                })}
                             </NavigationMenuList>
                         </NavigationMenu>
 

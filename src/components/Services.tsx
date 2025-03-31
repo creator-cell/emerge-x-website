@@ -83,17 +83,17 @@ export default function Services() {
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeService.id}
-                initial={{ opacity: 0, x: "-100vw" }}
-                animate={isMobile || isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: "-100vw" }} // Always animate on mobile
-                exit={{ opacity: 0, x: "100vw" }}
+                initial={{ opacity: 0, x: "-50vw" }}
+                animate={isMobile || isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: "-50vw" }} // Always animate on mobile
+                exit={{ opacity: 0, x: "50vw" }}
                 transition={{
                   duration: 2,
                   ease: "easeOut",
                   type: "spring",
                   stiffness: 80,
-                  damping: 12,
-                  mass: 1,
-                  delay: hasAnimated ? 0 : 0.4,
+                  damping: 18,
+                  mass: 1.6,
+                  delay: hasAnimated ? 0 : 0.1,
                 }}
                 className="mb-8"
               >
@@ -118,17 +118,17 @@ export default function Services() {
             <AnimatePresence mode="wait" >
               <motion.div
                 key={activeService.id}
-                initial={{ opacity: 0, x: "100vw" }}
-                animate={isMobile || isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: "100vw" }} // Always animate on mobile
-                exit={{ opacity: 0, x: "-100vw" }}
+                initial={{ opacity: 0, x: "70vw" }}
+                animate={isMobile || isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: "70vw" }} // Always animate on mobile
+                exit={{ opacity: 0, x: "-70vw" }}
                 transition={{
                   duration: 2,
                   ease: "easeOut",
                   type: "spring",
                   stiffness: 80,
-                  damping: 12,
-                  mass: 1,
-                  delay: hasAnimated ? 0 : 0.4,
+                  damping: 18,
+                  mass: 1.6,
+                  delay: hasAnimated ? 0 : 0.1,
                 }}
                 className="relative"
               >
@@ -167,7 +167,7 @@ export default function Services() {
                     animate={{
                       width: activeService.id === service.id ? "100%" : "0%",
                     }}
-                    transition={{ duration: 0.5 }}
+                    transition={{ duration: 0.3 }}
                   />
                 </div>
                 <span
