@@ -26,20 +26,20 @@ const services = [
     image2: servicesImages.recovery,
   },
   {
-    id: 3,
-    title: "Recovery Service",
-    description:
-      "Facilitate effective recovery with Emerge-X's comprehensive services, including automated incident reporting, AI-driven root cause analysis, and tailored precautionary measures. Empower your organization to learn, adapt, and strengthen emergency management capabilities post-incident.",
-    image1: servicesImages.recovery,
-    image2: servicesImages.res,
-  },
-  {
     id: 4,
     title: "Response Service",
     description:
       "Enhance emergency response efficiency and effectiveness with Emerge-X's integrated hardware solutions. Our platform ensures complete automation, providing real-time access to critical information, enabling prompt and coordinated emergency management to minimize impact and ensure safety.",
     image1: servicesImages.res,
     image2: MserviceHero,
+  },
+  {
+    id: 3,
+    title: "Recovery Service",
+    description:
+      "Facilitate effective recovery with Emerge-X's comprehensive services, including automated incident reporting, AI-driven root cause analysis, and tailored precautionary measures. Empower your organization to learn, adapt, and strengthen emergency management capabilities post-incident.",
+    image1: servicesImages.recovery,
+    image2: servicesImages.res,
   },
 ];
  

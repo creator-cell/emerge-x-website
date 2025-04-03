@@ -91,7 +91,7 @@ export default function AboutUsSection() {
             variants={textVariants}
             className="text-gray-300 text-[16px] leading-relaxed tracking-wide mb-8 max-w-xl"
           >
-            EmergeX will assist you to better understand and manage workplace safety by integrating hazards and incident reporting with investigations, actions and metrics reporting. EmergeX will assist you to better understand and manage workplace safety by integrating hazards and incident reporting with investigations, actions and metrics reporting.
+            EmergeX will assist you to better understand and manage workplace safety by integrating hazards and incident reporting with investigations, actions and metrics reporting. 
           </motion.p>
  
           {/* Button */}

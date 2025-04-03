@@ -1,5 +1,5 @@
 "use client"
- 
+
 import Image from "next/image"
 import type React from "react"
 import gsap from "gsap"
@@ -15,9 +15,9 @@ import "swiper/css/navigation"
 import { Play } from "lucide-react"
 import { motion, AnimatePresence, useInView } from "framer-motion"
 import { Button } from "@/components/ui/button"
- 
+
 gsap.registerPlugin(useGSAP, ScrollTrigger)
- 
+
 // Slide animation variants
 const slideVariants = {
   enter: (direction: number) => ({
@@ -31,17 +31,17 @@ const slideVariants = {
     opacity: 0,
   }),
 }
- 
+
 interface BlogDataTypes {
   data?: BlogData
 }
- 
+
 const LetestBlogs: React.FC<BlogDataTypes> = ({ data }) => {
- 
+
   const swiperRef = useRef<any>(null)
   const sectionRef = useRef(null)
   const [isMobile, setIsMobile] = useState(false) // State to track mobile devices
- 
+
   // Detect screen size and set isMobile state
   useEffect(() => {
     const handleResize = () => {
@@ -51,26 +51,26 @@ const LetestBlogs: React.FC<BlogDataTypes> = ({ data }) => {
     window.addEventListener("resize", handleResize)
     return () => window.removeEventListener("resize", handleResize)
   }, [])
- 
+
   // Modified to only trigger when 75% of the component is in view (for non-mobile screens)
   const isInView = useInView(sectionRef, {
     once: false,
     amount: isMobile ? 0 : 0.45, // Disable 75% logic for mobile
   })
- 
+
   const [[page, direction], setPage] = useState([0, 0])
   const [animationKey, setAnimationKey] = useState(0) // Change this to re-trigger animations
- 
+
   useEffect(() => {
     if (isInView) {
       setAnimationKey((prev) => prev + 1) // Re-trigger animation when 75% of the section is in view
     }
   }, [isInView])
- 
+
   const paginate = (newDirection: number) => {
     setPage([page + newDirection, newDirection])
   }
- 
+
   return (
     <section ref={sectionRef} className="py-8 md:py-12 px-4 overflow-x-hidden">
       {" "}
@@ -98,7 +98,7 @@ const LetestBlogs: React.FC<BlogDataTypes> = ({ data }) => {
               Latest Blogs
             </h3>
           </motion.div>
- 
+
           <motion.div
             key={`subtext-${animationKey}`}
             initial={{ opacity: 0, x: "100%" }} // Use percentage instead of viewport width
@@ -110,7 +110,7 @@ const LetestBlogs: React.FC<BlogDataTypes> = ({ data }) => {
               Welcome to our blog section, where knowledge meets inspiration. Explore insightful articles, expert tips,
               and the latest trends in our field.
             </p>
- 
+
             <div className="flex justify-center items-center gap-4 mt-8 cursor-pointer relative z-50">
               <div
                 onClick={() => {
@@ -133,7 +133,7 @@ const LetestBlogs: React.FC<BlogDataTypes> = ({ data }) => {
             </div>
           </motion.div>
         </div>
- 
+
         {/* Swiper Carousel */}
         <Swiper
           spaceBetween={20}
@@ -195,7 +195,7 @@ const LetestBlogs: React.FC<BlogDataTypes> = ({ data }) => {
                           : blog.description,
                       }}
                     />
- 
+
                     <Link href={`/blogs/${blog._id}`} passHref>
                       <motion.div whileHover={{ x: 10 }} transition={{ type: "spring", stiffness: 200, duration: 0.5 }}>
                         <Button
@@ -214,10 +214,16 @@ const LetestBlogs: React.FC<BlogDataTypes> = ({ data }) => {
           </AnimatePresence>
         </Swiper>
       </div>
+      <div className="flex justify-center mt-8 sm:mt-12 relative">
+        <Link href="/blogs" className="relative">
+          <Button className="relative cursor-pointer buttogGradientBG hover:bg-[#45a049] text-[14px] sm:text-[16px] px-6 sm:px-8 py-4 sm:py-6 text-white rounded-[10px] z-10">
+            Explore all Blogs
+          </Button>
+        </Link>
+      </div>
     </section>
   )
 }
- 
+
 export default LetestBlogs
- 
- 
+

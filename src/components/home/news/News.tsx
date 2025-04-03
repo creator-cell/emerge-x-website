@@ -246,7 +246,7 @@ const News: React.FC<NewsProps> = ({ newdData }) => {
             transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1], delay: 0.4 }}
           >
             <Button className="relative z-50 cursor-pointer buttogGradientBG hover:bg-[#45a049] text-[14px] sm:text-[16px] px-6 sm:px-8 py-4 sm:py-6 mt-8 sm:mt-12 text-white rounded-[10px]">
-              Explore all news
+              Explore all News
             </Button>
           </motion.div>
         </Link>
