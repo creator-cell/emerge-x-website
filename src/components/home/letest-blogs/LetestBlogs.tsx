@@ -214,13 +214,14 @@ const LetestBlogs: React.FC<BlogDataTypes> = ({ data }) => {
           </AnimatePresence>
         </Swiper>
       </div>
-      <div className="flex justify-center mt-8 sm:mt-12 relative">
+      <div className="flex justify-start sm:justify-center mt-8 sm:mt-12 relative">
         <Link href="/blogs" className="relative">
           <Button className="relative cursor-pointer buttogGradientBG hover:bg-[#45a049] text-[14px] sm:text-[16px] px-6 sm:px-8 py-4 sm:py-6 text-white rounded-[10px] z-10">
             Explore all Blogs
           </Button>
         </Link>
       </div>
+
     </section>
   )
 }
