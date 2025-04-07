@@ -2,10 +2,11 @@ import { Metadata, Viewport } from "next";
 
 import "./globals.css";
 
-import { Inter } from "next/font/google";  
+import { Inter } from "next/font/google";
 import StoreProvider from "./StoreProvider";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { RouteLoader } from '@/components/RouteLoader'
 
 const inter = Inter({
   subsets: ["latin"],
@@ -41,9 +42,10 @@ export default function RootLayout({
       <body className={`${inter.className} antialiased`}>
         <StoreProvider>
           <div className="flex flex-col min-h-screen relative">
-            <Header/>
+            <Header />
             <div className="flex-1">
-              {children} 
+              <RouteLoader />
+              {children}
             </div>
             <Footer />
           </div>
