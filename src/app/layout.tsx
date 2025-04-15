@@ -7,6 +7,7 @@ import StoreProvider from "./StoreProvider";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { RouteLoader } from '@/components/RouteLoader'
+import TopLoaderWrapper from "@/components/top-loader-wrapper";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -41,6 +42,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className} antialiased`}>
         <StoreProvider>
+          <TopLoaderWrapper />
           <div className="flex flex-col min-h-screen relative">
             <Header />
             <div className="flex-1">
