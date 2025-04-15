@@ -70,7 +70,7 @@ export default function Footer() {
               href="https://www.linkedin.com/company/techemerge-x/" className="text-yellow-500 hover:text-[#4CAF50] transition-colors">
               {/* LinkedIn Logo */}
               <Image
-                src="/logo/l.png" // LinkedIn logo
+                src="/x.svg" // LinkedIn logo
                 alt="LinkedIn"
                 width={24} // Size of the icon
                 height={24}
