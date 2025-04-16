@@ -119,7 +119,7 @@ const Header = () => {
                                     <Link
                                         key={name}
                                         href={path}
-                                        className="block px-4 py-3 text-black hover:bg-gray-100"
+                                        className="block px-4 py-3 text-black "
                                         onClick={() => {
                                             setIsMenuOpen(false); // Close menu
                                             setServicesDropdown(false); // Close dropdown
@@ -212,7 +212,7 @@ const Header = () => {
                                                 {serviceOptions.map(({ name, path }) => {
                                                     const isActive = pathname === path;
                                                     return (
-                                                        <Link key={name} href={path} className={`block px-4 py-3 text-black hover:bg-gray-100 ${isActive ? "font-bold" : ""}`} onClick={() => setServicesDropdown(false)}>
+                                                        <Link key={name} href={path} className={`block px-4 py-3 text-black ${isActive ? "font-bold" : ""}`} onClick={() => setServicesDropdown(false)}>
                                                             {name}
                                                         </Link>
                                                     )

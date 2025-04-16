@@ -1,6 +1,9 @@
+"use client"
+
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 interface HeroResusableProps {
   image: string;
@@ -12,6 +15,7 @@ interface HeroResusableProps {
   instagramUrl?: string;
   linkedinUrl?: string;
   className?: string;
+  shareUrl?: string;
 }
 
 const removeInlineStyles = (html: string) =>
@@ -27,8 +31,23 @@ export const HeroResusable: React.FC<HeroResusableProps> = ({
   instagramUrl = "#",
   linkedinUrl = "#",
   textColor,
+  shareUrl,
   className,
 }) => {
+
+  const [currentUrl, setCurrentUrl] = useState("");
+
+  useEffect(() => {
+    if (!shareUrl && typeof window !== "undefined") {
+      setCurrentUrl(window.location.href);
+    }
+  }, [shareUrl]);
+
+  const urlToShare = encodeURIComponent(shareUrl || currentUrl);
+
+  const facebookShare = `https://www.facebook.com/sharer/sharer.php?u=${urlToShare}`;
+  const instagramShare = `https://www.instagram.com/?url=${urlToShare}`;
+  const linkedinShare = `https://www.linkedin.com/sharing/share-offsite/?url=${urlToShare}`;
   return (
     <div className="relative h-[450px] md:h-[500px] lg:h-[100vh] w-full overflow-hidden xs:rounded-b-[20px] sm:rounded-b-[40px] md:rounded-b-[80px] lg:rounded-b-[120px]">
       {/* Hero Image */}
@@ -65,9 +84,10 @@ export const HeroResusable: React.FC<HeroResusableProps> = ({
           />
           ) : (
             <span className="text-xl leading-6">
-              {date} - Share Via <Link href={facebookUrl}>Facebook</Link>,{" "}
-              <Link href={instagramUrl}>Instagram</Link>,{" "}
-              <Link href={linkedinUrl}>LinkedIn</Link>
+              {date} - Share Via
+              <Link href={facebookShare} target="_blank">Facebook</Link>,{" "}
+              <Link href={instagramShare} target="_blank">Instagram</Link>,{" "}
+              <Link href={linkedinShare} target="_blank">LinkedIn</Link>
             </span>
           )}
         </div>

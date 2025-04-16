@@ -1,5 +1,6 @@
 'use client'
 
+import Link from "next/link";
 import React, { useState } from "react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"; // Importing arrow icons
 
@@ -43,9 +44,11 @@ const FrequentlyaskedQuestions = ({faq , title}:{faq:any,title:any}) => {
             <p>
               {title}
             </p>
-            <button className="bg-customGreen text-white text-base rounded-full px-6 py-3">
+            <Link href={'/contact-us'}>  
+                      <button className="bg-customGreen text-white text-base rounded-full px-6 py-3 mt-4">
               Ask a Question
             </button>
+            </Link>
           </div>
         </div>
 

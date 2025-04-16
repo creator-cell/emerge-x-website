@@ -10,7 +10,7 @@ import React, { useEffect, useState } from "react";
 import { blogs } from "@/components/blogs/blogData";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
-import { useGetSingleBlogQuery } from "@/store/blogs";
+import { useGetBlogsQuery, useGetSingleBlogQuery } from "@/store/blogs";
 interface BlogData {
   _id: string;
   title: string;
@@ -23,7 +23,10 @@ const page = () => {
   const pathname = usePathname(); // Get the full pathname of the current URL
   const [slug, setSlug] = useState<string | null>(null);
   const [blogData, setBlogData] = useState<BlogData[]>([]);
-  const blogsAllData = useSelector((state: RootState) => state.blog.blogsData);
+  const { data: blogsAllData, isLoading: loadingAllBlogs } = useGetBlogsQuery({
+    page: 1,
+    limit: 10,
+  });
   useEffect(() => {
     if (!pathname) return;
 
@@ -34,18 +37,28 @@ const page = () => {
     const AllData = blogsAllData?.blog?.filter((e: any) => e._id == IdData);
     setBlogData(AllData);
   }, [pathname]);
-  const navTrain = [
+
+  const [navTrain, setNavTrain] = useState([
     { link: "/", label: "Home", id: "a1" },
     { link: "/", label: "Blogs", id: "a2" },
     { link: "/blogs", label: "View All", id: "a3" },
-    {
-      link: "/blogs/blog1fe24w",
-      label: "Safety Management System",
-      id: "a3",
-    },
-  ];
+    { link: "", label: "", id: "a4" }, 
+  ]);
 
   const { data } = useGetSingleBlogQuery(slug ?? "");
+
+  useEffect(() => {
+    if (slug && data?.blog?.title) {
+      setNavTrain((prev) => [
+        ...prev.slice(0, 3),
+        {
+          link: pathname,
+          label: data.blog.title,
+          id: "a4",
+        },
+      ]);
+    }
+  }, [data?.blog?.title, pathname]);
 
   return (
     <div className=" min-h-screen">
@@ -59,24 +72,30 @@ const page = () => {
 
       <SectionWrapper>
         <BreadCrumb navTrainData={navTrain} />
-        <div className=" flex flex-col md:flex-row md:justify-between gap-5 mt-10 text-greyishblack">
-          <div className=" w-full md:w-[58%] max-w-[611px] ">
-            <p className="text-base md:text-[18px] leading-[32px]">
-              {/* {data?.description} */}
-            </p>
+        <div className="flex flex-col md:flex-row gap-12 mt-10 text-greyishblack">
+          {/* Blog Text Content */}
+          <div className="w-full md:w-[58%] max-w-[611px] order-2 md:order-1">
+            <div
+              className="flex flex-col gap-8 text-base md:text-[18px] leading-[30px] md:leading-[32px]"
+              dangerouslySetInnerHTML={{
+                __html: data?.blog?.htmlBody ?? "",
+              }}
+            ></div>
           </div>
-          <div className="w-full md:w-[45%] max-w-[516px]">
-            <div>
-              <Image
-                src={data?.blog?.futureImages ?? ""}
-                alt="img-blog"
-                width={600}
-                height={600}
-              />
-            </div>
+
+          {/* Blog Image */}
+          <div className="w-full md:w-[45%] max-w-[516px] order-1 md:order-2">
+            <Image
+              src={data?.blog?.futureImages ?? ""}
+              alt="img-blog"
+              width={600}
+              height={600}
+              className="w-full h-auto object-cover rounded-[20px]"
+            />
           </div>
         </div>
       </SectionWrapper>
+
       <SectionWrapper>
         {/* <h2 className=" text-center font-[600]  text-2xl">
                 {data?.description}
@@ -90,8 +109,10 @@ const page = () => {
                   </ul>
                 </div> */}
           <div
-            className="hidden md:flex w-[48%] flex-col gap-8"
-            dangerouslySetInnerHTML={{ __html: data?.blog?.htmlBody ?? "" }}
+            className="  flex-col gap-8"
+            dangerouslySetInnerHTML={{
+              __html: data?.blog?.mainDescription ?? "",
+            }}
           ></div>
         </div>
       </SectionWrapper>
@@ -100,18 +121,21 @@ const page = () => {
         <h2 className=" text-[32px] font-[600] text-center">
           You may also like
         </h2>
-        <div className=" mt-20 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[0] md:gap-x-[20px] lg:gap-x-[34px] gap-y-[100px] ">
-          {blogsAllData?.blog?.slice(0, 4).map((e: any, i: number) => (
-            <CardBlog
-              key={i}
-              data={e}
-              list={false}
-              styleHeading="text-[14px] lg:text-[16px]"
-              styleBox="aspect-square max-w-[270px]"
-              styleCard="items-start max-w-[270px] mx-auto"
-              imageStyle="rounded-[26px]"
-            />
-          ))}
+        <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[0] md:gap-x-[20px] lg:gap-x-[34px] gap-y-[100px]">
+          {blogsAllData?.blog
+            ?.filter((e: any) => e._id !== slug) // Avoid showing the same blog
+            .slice(0, 4)
+            .map((e: any, i: number) => (
+              <CardBlog
+                key={i}
+                data={e}
+                list={false}
+                styleHeading="text-[14px] lg:text-[16px]"
+                styleBox="aspect-square max-w-[270px]"
+                styleCard="items-start max-w-[270px] mx-auto"
+                imageStyle="rounded-[26px]"
+              />
+            ))}
         </div>
       </SectionWrapper>
     </div>

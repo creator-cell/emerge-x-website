@@ -1,36 +1,43 @@
-"use client"
-import CardBlog from "@/components/blogs/CardBlog"
-import BreadCrumb from "@/components/reusable/BreadCrumb"
-import { HeroResusable } from "@/components/reusable/HeroReusable"
-import SectionWrapper from "@/components/reusable/SectionWrapper"
-import Link from "next/link"
-import { useState } from "react"
-import type { ReadonlyURLSearchParams } from "next/navigation"
-import { Button } from "@/components/ui/button"
-import Loader from "@/components/Loader"
-import { useGetBlogsQuery } from "@/store/blogs"
+"use client";
+import CardBlog from "@/components/blogs/CardBlog";
+import BreadCrumb from "@/components/reusable/BreadCrumb";
+import { HeroResusable } from "@/components/reusable/HeroReusable";
+import SectionWrapper from "@/components/reusable/SectionWrapper";
+import Link from "next/link";
+import { useState } from "react";
+import type { ReadonlyURLSearchParams } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import Loader from "@/components/Loader";
+import { useGetBlogsQuery } from "@/store/blogs";
 
 const navTrain = [
   { link: "/", label: "Home", id: "a1" },
-  { link: "/", label: "Blogs", id: "a2" },
+  { link: "/blogs", label: "Blogs", id: "a2" },
   { link: "/blogs", label: "View All", id: "a3" },
-]
+];
+
+function getRandomBlogs(blogs: any[], count: number) {
+  const shuffled = [...blogs].sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, count);
+}
 
 const page = ({ searchParams }: { searchParams: ReadonlyURLSearchParams }) => {
-  const tab = searchParams ? new URLSearchParams(searchParams).toString() : ""
+  const tab = searchParams ? new URLSearchParams(searchParams).toString() : "";
 
-  const [currentPage, setCurrentPage] = useState<number>(1)
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
   // Use RTK Query hook to fetch blogs
   const { data: blogsAllData, isLoading } = useGetBlogsQuery({
     page: currentPage,
     limit: 10,
-  })
+  });
 
   const handlePagination = (page: number) => {
-    setCurrentPage(page)
-  }
+    setCurrentPage(page);
+  };
 
+  const trendingBlogs = getRandomBlogs(blogsAllData?.blog || [], 4);
+  const recommendedBlogs = getRandomBlogs(blogsAllData?.blog || [], 4);
 
   return (
     <div className="min-h-screen">
@@ -71,14 +78,22 @@ const page = ({ searchParams }: { searchParams: ReadonlyURLSearchParams }) => {
                 <Link
                   href={"/blogs/?tab=trending"}
                   scroll={false}
-                  className={`${tab === "tab=trending" || tab === "" ? "text-customGreen" : "text-greyishblack"}`}
+                  className={`${
+                    tab === "tab=trending" || tab === ""
+                      ? "text-customGreen"
+                      : "text-greyishblack"
+                  }`}
                 >
                   Trending
                 </Link>
                 <Link
                   href={"/blogs/?tab=recomended"}
                   scroll={false}
-                  className={`${tab === "tab=recomended" ? "text-customGreen" : "text-greyishblack"}`}
+                  className={`${
+                    tab === "tab=recomended"
+                      ? "text-customGreen"
+                      : "text-greyishblack"
+                  }`}
                 >
                   Recommended
                 </Link>
@@ -86,19 +101,20 @@ const page = ({ searchParams }: { searchParams: ReadonlyURLSearchParams }) => {
 
               {/* Trending Section */}
               <div className="hidden md:flex flex-col gap-4 mt-8">
-                {blogsAllData?.blog?.slice(0, 4).map((e: any, i: number) => (
-                  <CardBlog
-                    data={e}
-                    key={i}
-                    list={true}
-                    styleHeading="text-[14px] font-[400] md:font-semibold lg:text-base"
-                    styleBox="aspect-square max-w-[150px]"
-                    curveIconStyle="w-[60%]"
-                    dateButtonStyle="w-[45%] left-2 h-[15%] text-[8px]"
-                    imageStyle="rounded-[14px]"
-                  />
-                ))}
-                {isLoading && <Loader />}
+                {(tab === "trending" ? trendingBlogs : recommendedBlogs).map(
+                  (e: any, i: number) => (
+                    <CardBlog
+                      data={e}
+                      key={i}
+                      list={true}
+                      styleHeading="text-[14px] font-[400] md:font-semibold lg:text-base"
+                      styleBox="aspect-square max-w-[150px]"
+                      curveIconStyle="w-[60%]"
+                      dateButtonStyle="w-[45%] left-2 h-[15%] text-[8px]"
+                      imageStyle="rounded-[14px]"
+                    />
+                  )
+                )}
               </div>
               <div className="md:hidden flex flex-col gap-4 mt-8">
                 {blogsAllData?.blog?.map((e: any, i: number) => (
@@ -159,8 +175,9 @@ const page = ({ searchParams }: { searchParams: ReadonlyURLSearchParams }) => {
             Previous
           </Button>
           <div>
-            <span className="text-lg font-semibold">{`Page ${currentPage} of ${blogsAllData?.pages?.length || 1
-              }`}</span>
+            <span className="text-lg font-semibold">{`Page ${currentPage} of ${
+              blogsAllData?.pages?.length || 1
+            }`}</span>
           </div>
           <Button
             onClick={() => handlePagination(currentPage + 1)}
@@ -172,8 +189,7 @@ const page = ({ searchParams }: { searchParams: ReadonlyURLSearchParams }) => {
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default page
-
+export default page;

@@ -54,7 +54,7 @@ const page = () => {
 
   const navTrain = [
     { link: "/", label: "Home", id: "a1" },
-    { link: "/", label: "Services", id: "a2" },
+    { link: null, label: "Services", id: "a2" },
 
     {
       link: `/services/${id}`,

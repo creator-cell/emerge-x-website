@@ -17,6 +17,7 @@ export interface BlogsData {
   details2: string;
   details3: string;
   createdAt: string;
+  authorName?: string;
 }
 
 interface CardBlogTypes {
@@ -39,22 +40,22 @@ const CardBlog: React.FC<CardBlogTypes> = ({
   data,
   curveIconStyle,
   dateButtonStyle,
-  imageStyle
+  imageStyle,
 }) => {
-  const [date, setDate] = useState("")
+  const [date, setDate] = useState("");
   useEffect(() => {
     const apiDate = data?.createdAt;
     // Create a Date object
     const dateObj = new Date(apiDate || "");
 
     // Format the date as "Dec 13, 2024"
-    const formattedDate = dateObj.toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
+    const formattedDate = dateObj.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
     });
-    setDate(formattedDate)
-  }, [])
+    setDate(formattedDate);
+  }, []);
   return (
     <Link
       href={`/blogs/${data?._id}`}
@@ -65,8 +66,7 @@ const CardBlog: React.FC<CardBlogTypes> = ({
     >
       <div
         className={cn(
-          ` ${list ? "w-[30%] " : " w-full "
-          }  rounded-[14px] relative`,
+          ` ${list ? "w-[30%] " : " w-full "}  rounded-[14px] relative`,
           styleBox
         )}
       >
@@ -84,7 +84,12 @@ const CardBlog: React.FC<CardBlogTypes> = ({
           fill
           className={cn("w-full object-cover ", imageStyle)}
         />
-        <button className={cn(`absolute z-20  top-[0] left-[7px] w-[80px] h-[25px] bg-green-500 text-white rounded-tl-[12px] rounded-br-[20px] rounded-tr-[8px] rounded-bl-[12px] text-[12px]`, dateButtonStyle)}>
+        <button
+          className={cn(
+            `absolute z-20  top-[0] left-[7px] w-[80px] h-[25px] bg-green-500 text-white rounded-tl-[12px] rounded-br-[20px] rounded-tr-[8px] rounded-bl-[12px] text-[12px]`,
+            dateButtonStyle
+          )}
+        >
           {data && date}
         </button>
       </div>
@@ -93,6 +98,11 @@ const CardBlog: React.FC<CardBlogTypes> = ({
           {/* {data && date} */}
         </p>
         <h2 className={cn(" text-greyishblack  font-[600]", styleHeading)}>
+          {data?.authorName && (
+            <p className="text-green-600 text-xs font-semibold mb-1">
+              {data.authorName}
+            </p>
+          )}
           {data?.title}
         </h2>
       </div>

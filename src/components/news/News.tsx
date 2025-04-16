@@ -25,7 +25,11 @@ interface News {
 }
 
 export const NewsPage = ({ slug }: { slug: string }) => {
-  const { data: newsData, isLoading, error } = useGetNewsQuery({ page: 1, limit: 10 });
+  const {
+    data: newsData,
+    isLoading,
+    error,
+  } = useGetNewsQuery({ page: 1, limit: 10 });
 
   const newsItem = useMemo(() => {
     return newsData?.news?.find((item: News) => item._id === slug);
@@ -36,12 +40,18 @@ export const NewsPage = ({ slug }: { slug: string }) => {
 
     return newsData.news
       .filter((item: News) => item._id !== newsItem._id)
-      .sort((a: News, b: News) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+      .sort(
+        (a: News, b: News) =>
+          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+      )
       .slice(0, 3);
   }, [newsData, newsItem]);
 
   if (isLoading) {
-    return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+      </div>
+    );
   }
 
   if (error || !newsItem) {
@@ -61,6 +71,7 @@ export const NewsPage = ({ slug }: { slug: string }) => {
     featureImage,
     subFeatureImage1,
     subFeatureImage2,
+    finalDescription,
     heroBanner,
   }: News = newsItem;
 
@@ -78,7 +89,11 @@ export const NewsPage = ({ slug }: { slug: string }) => {
   return (
     <div className="min-h-screen w-full bg-white">
       {/* Hero Section */}
-      <HeroResusable image={heroBanner} title={heading} date={formatDate(createdAt)} />
+      <HeroResusable
+        image={heroBanner}
+        title={heading}
+        date={formatDate(createdAt)}
+      />
 
       {/* Breadcrumb */}
       <SectionWrapper>
@@ -94,7 +109,9 @@ export const NewsPage = ({ slug }: { slug: string }) => {
 
       <SectionWrapper>
         <div className="grid gap-2 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
-          <h2 className="text-4xl font-semibold text-gray-400 mb-6 max-w-sm">What Happened</h2>
+          <h2 className="text-4xl font-semibold text-gray-400 mb-6 max-w-sm">
+            What Happened
+          </h2>
           <Image
             src={featureImage || responseImage}
             alt="Feature"
@@ -120,31 +137,48 @@ export const NewsPage = ({ slug }: { slug: string }) => {
       </SectionWrapper>
 
       <SectionWrapper>
-        <div className="grid gap-4 grid-cols-2">
+        <div className="grid gap-4 grid-cols-1 sm:grid-cols-2">
           <Image
             src={subFeatureImage1 || responseImage}
             alt="Sub Feature 1"
             width={600}
             height={400}
-            className="rounded-lg w-full min-h-[385px]"
+            className="rounded-lg w-full min-h-[220px] sm:min-h-[385px]"
           />
           <Image
             src={subFeatureImage2 || responseImage}
             alt="Sub Feature 2"
             width={600}
             height={400}
-            className="rounded-lg w-full min-h-[385px]"
+            className="rounded-lg w-full min-h-[220px] sm:min-h-[385px]"
           />
         </div>
-        <p
+
+        {/* <p
           className="mt-6 text-lg text-gray-600"
           dangerouslySetInnerHTML={{ __html: description2 }}
-        />
+        /> */}
+      </SectionWrapper>
+
+      <SectionWrapper>
+        <div className="grid gap-2 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
+          <h2
+            className="text-xl leading-[44px] font-semibold text-gray-400 mb-6 lg:max-w-sm"
+            dangerouslySetInnerHTML={{ __html: description2 }}
+          />
+
+          <p
+            className="text-lg text-gray-600"
+            dangerouslySetInnerHTML={{ __html: finalDescription }}
+          />
+        </div>
       </SectionWrapper>
 
       {/* Related News */}
       <SectionWrapper>
-        <h2 className="text-4xl font-semibold mb-8 text-center text-gray-900">You may also like</h2>
+        <h2 className="text-4xl font-semibold mb-8 text-center text-gray-900">
+          You may also like
+        </h2>
         <NewsGrid news={latestNews} />
       </SectionWrapper>
     </div>

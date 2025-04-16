@@ -32,6 +32,7 @@ interface BlogPost {
     createdAt: string;
     updatedAt: string;
     __v: number;
+    mainDescription?:any;
 }
 
 // Interface for pagination details

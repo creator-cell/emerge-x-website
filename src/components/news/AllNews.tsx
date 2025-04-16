@@ -37,8 +37,8 @@ export const AllNewsPage = () => {
 
   const navTrain = [
     { link: "/", label: "Home", id: "a1" },
-    { link: "/", label: "News", id: "a2" },
-    { link: "/News", label: "View All", id: "a3" },
+    { link: "/news", label: "News", id: "a2" },
+    { link: "/news", label: "View All", id: "a3" },
   ];
 
   const handlePageChange = (page: number) => {

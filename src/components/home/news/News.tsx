@@ -265,19 +265,13 @@ const News: React.FC<NewsProps> = ({ newdData }) => {
           )}
         </div>
 
-        {/* Explore Button */}
-        <Link href="/news" className="relative z-50 block">
-          <motion.div
-            className="mt-4"
-            initial={{ opacity: 0, y: 100 }}
-            animate={isVisible ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1], delay: 0.4 }}
-          >
-            <Button className="relative z-50 cursor-pointer buttogGradientBG hover:bg-[#45a049] text-[14px] sm:text-[16px] px-6 sm:px-8 py-4 sm:py-6 mt-8 sm:mt-12 text-white rounded-[10px]">
-              Explore all news
-            </Button>
-          </motion.div>
+        <div className="flex justify-start sm:justify-center mt-8 sm:mt-12 relative">
+        <Link href="/news" className="relative">
+          <Button className="relative cursor-pointer buttogGradientBG hover:bg-[#45a049] text-[14px] sm:text-[16px] px-6 sm:px-8 py-4 sm:py-6 text-white rounded-[10px] z-10">
+            Explore all News
+          </Button>
         </Link>
+      </div>
       </div>
     </section>
   );
