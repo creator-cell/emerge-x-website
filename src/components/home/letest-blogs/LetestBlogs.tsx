@@ -171,7 +171,7 @@ const LetestBlogs: React.FC<BlogDataTypes> = ({ data }) => {
                     transition={{ duration: 0.8 }}
                   />
                   <div className="p-4 md:p-6 absolute bottom-8 w-[90%] bg-black h-[32vh] flex flex-col justify-between rounded-[20px] rounded-tl-none">
-                    <h4 className="text-lg md:text-xl font-semibold mb-2 md:mb-4 leading-tight md:leading-[21.6px] tracking-normal text-gray-300">
+                    <h4 className="text-lg md:text-xl font-semibold line-clamp-1 mb-2 md:mb-4 leading-tight md:leading-[21.6px] tracking-normal text-gray-300">
                       {blog?.title?.length > 40 ? `${blog.title.substring(0, 40)}...` : blog.title}
                     </h4>
                     <div className="flex gap-2 text-xs md:text-sm text-gray-400 mb-2 md:mb-4">
@@ -196,7 +196,9 @@ const LetestBlogs: React.FC<BlogDataTypes> = ({ data }) => {
                       }}
                     />
 
-                    <Link href={`/blogs/${blog._id}`} passHref>
+<div>
+
+                    <Link href={`/blogs/${blog._id}`} passHref >
                       <motion.div whileHover={{ x: 10 }} transition={{ type: "spring", stiffness: 200, duration: 0.5 }}>
                         <Button
                           variant="link"
@@ -207,6 +209,7 @@ const LetestBlogs: React.FC<BlogDataTypes> = ({ data }) => {
                         </Button>
                       </motion.div>
                     </Link>
+                    </div>
                   </div>
                 </motion.div>
               </SwiperSlide>
