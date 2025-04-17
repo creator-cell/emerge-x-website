@@ -75,13 +75,13 @@ const Header = () => {
     { name: "News", path: pathname === "/" ? "#news" : "/news" },
   ];
 
-  // Services dropdown items
-  const serviceOptions = [
-    { name: "Mitigation/Prevention", path: "/services/1" },
-    { name: "Preparedness", path: "/services/2" },
-    { name: "Response", path: "/services/4" },
-    { name: "Recovery", path: "/services/3" },
-  ];
+    // Services dropdown items
+    const serviceOptions = [
+        { name: "Mitigation/Prevention", path: "/services/mitigation-prevention" },
+        { name: "Preparedness", path: "/services/preparedness" },
+        { name: "Response", path: "/services/recovery-services" },
+        { name: "Recovery", path: "/services/response-services" },
+    ];
 
   return (
     <>

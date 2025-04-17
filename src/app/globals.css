@@ -27,6 +27,22 @@ body {
 }
 
 @layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+  }
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  .border-gradient {
+    border: 2px solid;
+    border-image-source: linear-gradient(180deg, #1b2a48 0%, #4166ae 100%);
+    border-image-slice: 1;
+    border-radius: 999px;
+  }
   .popup-border {
     padding: 10px;
     width: 90%;

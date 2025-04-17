@@ -19,6 +19,7 @@ export interface footerImagesArra {
 }
 export interface PreparednessData {
   id: number;
+  link:string;
   title: string;
   titledetails: string;
   image: string;
@@ -40,15 +41,12 @@ const page = () => {
 
   useEffect(() => {
     if (!pathname) return;
+    const service = pathname.split("/").pop();
+    console.log(service);
 
-    const IdData = pathname?.split("/").pop();
-    if (!IdData) return;
-
-    const numericId = parseInt(IdData, 10); // Convert to a number
-    setId(numericId);
-    if (isNaN(numericId)) return; // Ensure valid number
-
-    const AllData = servicesData.filter((e) => e.id === numericId); // Compare as numbers
+  // Ensure valid number
+console.log(pathname);
+    const AllData = servicesData.filter((e) => e.link === service); // Compare as numbers
     setAllData(AllData as any);
   }, [pathname]);
 
@@ -101,7 +99,7 @@ const page = () => {
               <SectionWrapper className="w-full">
                 <SingleServiceSliderSection
                   subHeading={data?.subHeading}
-                  numericId={id ?? 0}
+                  link={data?.link}
                 />
               </SectionWrapper>
             </div>

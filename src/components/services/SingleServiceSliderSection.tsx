@@ -17,14 +17,14 @@ import { cn } from "@/lib/utils";
 
 interface Props {
   subHeading?: string;
-  numericId?: number
+  link?: string;
   page?: string
 }
 
 
 const SingleServiceSliderSection: React.FC<Props> = ({
   subHeading,
-  numericId,
+  link,
   page
 }) => {
   const swiperRef = useRef<any>(null);
@@ -64,7 +64,8 @@ const SingleServiceSliderSection: React.FC<Props> = ({
   };
 
 
-  const serviceData = servicesData.find((e) => e.id === numericId)?.subServiceDatas;
+  const serviceData = servicesData.find((e) => e.link === link)?.subServiceDatas;
+  console.log(serviceData);
 
 
   return (
