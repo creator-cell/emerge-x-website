@@ -20,7 +20,7 @@ const Footer = () => {
               />
             </div>
 
-            <p className="font-[400] text-base">
+            <p className="font-[400] text-base font-[#818181]">
               EmergeX will assist you to better understand and manage workplace
               safety by integrating hazards and incident reporting with
               investigations, actions, and metrics reporting.

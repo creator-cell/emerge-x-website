@@ -19,7 +19,7 @@ export default function Footer() {
       <div className="container lg:max-w-5xl  grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left">
         {/* Left Section: About */}
         <div className="flex flex-col items-start md:items-start">
-          <p className="md:max-w-md blueColor text-[14px] md:text-start text-center">
+          <p className="md:max-w-md blueColor text-[14px] md:text-start text-center !text-[#8F949C]">
             EmergeX will assist you to better understand and manage workplace safety by integrating hazards and incident reporting with investigations, actions, and metrics reporting.
           </p>
           <div className="flex gap-6 mt-6 md:w-auto w-full justify-center items-center">
@@ -85,8 +85,8 @@ export default function Footer() {
         </div>
 
         {/* Center Section: Links (Now Properly Centered) */}
-        <div className="flex  flex-col items-center text-[#9D9D9D]">
-          <p className="blueColor font-semibold mb-7 md:ml-[-30px]">Links</p>
+        <div className="flex  flex-col items-center text-[#818181]">
+          <p className="blueColor font-semibold mb-7 md:ml-[-30px] !text-[#818181] ">Links</p>
           <ul className="space-y-5 flex flex-col">
             {navLinks.map((link:any) => (
               // <li key={link.name}>
