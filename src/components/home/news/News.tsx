@@ -213,7 +213,7 @@ const News: React.FC<NewsProps> = ({ newdData }) => {
                         {position === 'active' && (
                           <>
                             <Link href={`/news/${item._id}`} passHref legacyBehavior>
-                              <a className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-black/50 rounded-md">
+                              <a className=" rounded-md">
                                 <h4 className="text-base sm:text-xl font-semibold mb-1 sm:mb-2 text-white ">
                                   {item.heading}
                                 </h4>

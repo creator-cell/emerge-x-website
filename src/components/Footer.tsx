@@ -15,7 +15,7 @@ export default function Footer() {
     { name: "News", path: pathname === "/" ? "#news" : "/news" },
   ];
   return (
-    <footer className={`bg-black text-gray-400 py-16 pt-28 px-4 ${pathname !== "/" ? "mt-8" : ""}`}>
+    <footer className={`bg-black text-gray-400 py-16 px-4 ${pathname !== "/" ? "mt-28" : ""}`}>
       <div className="container lg:max-w-5xl  grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left">
         {/* Left Section: About */}
         <div className="flex flex-col items-start md:items-start">
