@@ -26,8 +26,6 @@ body {
   /* background-color: black; */
 }
 
-
-
 @layer utilities {
   .popup-border {
     padding: 10px;
@@ -223,32 +221,38 @@ body {
   background-color: rgba(0, 0, 0, 0.4);
 }
 
-.buttogGradientBG{
-  background: radial-gradient(50% 50% at 50% 50%, #3DA229 37.14%, #59C245 100%),
-linear-gradient(180deg, #3DA229 0%, rgba(23, 105, 99, 0) 100%);
-
+.buttogGradientBG {
+  background: radial-gradient(50% 50% at 50% 50%, #3da229 37.14%, #59c245 100%),
+    linear-gradient(180deg, #3da229 0%, rgba(23, 105, 99, 0) 100%);
 }
 
-.globalColor{
+.globalColor {
   color: rgba(61, 162, 41, 1);
-
 }
 
-.bGglobalColor{
+.bGglobalColor {
   background-color: rgba(61, 162, 41, 1);
-
 }
 
-.blueColor{
+.blueColor {
   color: rgba(183, 187, 199, 1);
 }
 
-.contactBgButton{
-  background: radial-gradient(50% 50% at 50% 50%, #050E03 37.14%, #284123 100%),
-linear-gradient(180deg, #000000 0%, rgba(23, 105, 99, 0) 100%);
-
+.contactBgButton {
+  background: radial-gradient(50% 50% at 50% 50%, #050e03 37.14%, #284123 100%),
+    linear-gradient(180deg, #000000 0%, rgba(23, 105, 99, 0) 100%);
 }
 
 .bg-custom-gradient {
-  background: radial-gradient(circle at center, #064e3b, #047857, rgba(0, 0, 0, 0.3));
+  background: radial-gradient(
+    circle at center,
+    #064e3b,
+    #047857,
+    rgba(0, 0, 0, 0.3)
+  );
+}
+
+.demoButtonGradient {
+  background: radial-gradient(50% 50% at 50% 50%, #3da229 37.14%, #59c245 100%),
+    linear-gradient(180deg, #3da229 0%, rgba(23, 105, 99, 0) 100%);
 }

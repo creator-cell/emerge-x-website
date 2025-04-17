@@ -147,7 +147,7 @@ const News: React.FC<NewsProps> = ({ newdData }) => {
               transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1], delay: 0.2 }}
             >
               <div
-                className="cursor-pointer absolute sm:left-[-20px] top-[-20px] sm:top-1/2 sm:-translate-y-1/2 left-[calc(10%-30px)] rounded-full z-50 border-none" // z-50 to be above cards
+                className="cursor-pointer absolute sm:left-[-30px] top-[-10px] sm:top-1/2 sm:-translate-y-1/2 left-[calc(10%-30px)] rounded-full z-50 border-none" // z-50 to be above cards
                 onClick={() => setActiveIndex((prev) => (prev - 1 + newdData.length) % newdData.length)}
               >
                 <Image
@@ -163,7 +163,7 @@ const News: React.FC<NewsProps> = ({ newdData }) => {
 
           {/* News Cards */}
           <motion.div
-            className="relative w-full h-[300px] sm:h-[400px] max-w-[700px]" // Container for the stack
+            className="relative w-full h-[300px] sm:h-[500px] max-w-[800px] md:mt-0 mt-12" // Container for the stack
             initial={{ opacity: 0 }}
             animate={isVisible ? { opacity: 1 } : {}}
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
@@ -213,8 +213,8 @@ const News: React.FC<NewsProps> = ({ newdData }) => {
                         {position === 'active' && (
                           <>
                             <Link href={`/news/${item._id}`} passHref legacyBehavior>
-                              <a className="focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black/50 rounded-md">
-                                <h4 className="text-base sm:text-xl font-semibold mb-1 sm:mb-2 text-white line-clamp-2 hover:underline">
+                              <a className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-black/50 rounded-md">
+                                <h4 className="text-base sm:text-xl font-semibold mb-1 sm:mb-2 text-white ">
                                   {item.heading}
                                 </h4>
                               </a>
@@ -250,7 +250,7 @@ const News: React.FC<NewsProps> = ({ newdData }) => {
               transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1], delay: 0.2 }}
             >
               <div
-                className="cursor-pointer absolute sm:right-[-60px] top-[-20px] sm:top-1/2 sm:-translate-y-1/2 right-[calc(75%-20px)] rounded-full border-none z-50" // z-50 to be above cards
+                className="cursor-pointer absolute sm:right-[-60px] top-[-10px] sm:top-1/2 sm:-translate-y-1/2 right-[calc(75%-20px)] rounded-full border-none z-50" // z-50 to be above cards
                 onClick={() => setActiveIndex((prev) => (prev + 1) % newdData.length)}
               >
                 <Image
@@ -267,7 +267,7 @@ const News: React.FC<NewsProps> = ({ newdData }) => {
 
         <div className="flex justify-start sm:justify-center mt-8 sm:mt-12 relative">
         <Link href="/news" className="relative">
-          <Button className="relative cursor-pointer buttogGradientBG hover:bg-[#45a049] text-[14px] sm:text-[16px] px-6 sm:px-8 py-4 sm:py-6 text-white rounded-[10px] z-10">
+          <Button className="relative cursor-pointer buttogGradientBG hover:bg-[#45a049] text-[14px] sm:text-[16px] px-6 sm:px-7 py-4 sm:py-8 text-white rounded-[10px] z-10">
             Explore all News
           </Button>
         </Link>

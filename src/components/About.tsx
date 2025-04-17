@@ -97,7 +97,7 @@ export default function AboutUsSection() {
           {/* Button */}
           <motion.div variants={textVariants}>
             <Link href="/about-us">
-              <Button className="buttogGradientBG hover:bg-[#45a049] text-[16px] px-8 py-6 text-white rounded-[10px]">
+              <Button className="relative cursor-pointer buttogGradientBG hover:bg-[#45a049] text-[14px] sm:text-[16px] px-6 sm:px-7 py-4 sm:py-7 text-white rounded-[10px] z-10">
                 Explore Now
               </Button>
             </Link>

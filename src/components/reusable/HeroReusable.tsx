@@ -77,7 +77,7 @@ export const HeroResusable: React.FC<HeroResusableProps> = ({
         >
           {description ? (
             <p
-            className="mb-4 text-xl sm:text-2xl leading-7 text-gray-200"
+            className="mb-4 text-md sm:text-2xl leading-7 text-gray-200"
             dangerouslySetInnerHTML={{
               __html: removeInlineStyles(description),
             }}

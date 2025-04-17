@@ -104,10 +104,10 @@ export default function Services() {
                     Services
                   </h3>
                 </div>
-                <h4 className="text-3xl md:text-4xl font-bold mb-4 md:mb-6 uppercase text-gray-300">{activeService.title}</h4>
+                <h4 className="text-2xl md:text-4xl font-bold mb-4 md:mb-6 uppercase text-gray-300">{activeService.title}</h4>
                 <p className="text-gray-300 mb-6 md:mb-8">{activeService.description}</p>
                 <Link href={`/services/${activeService.id}`}>
-                  <Button className="buttogGradientBG hover:bg-[#45a049] text-[16px] px-6 md:px-8 py-5 md:py-6 mt-4 md:mt-6 text-white rounded-[10px]">
+                  <Button className="demoButtonGradient hover:bg-[#45a049] text-[16px] px-6 md:px-8 py-5 md:py-7  text-white rounded-[10px]">
                     Explore now
                   </Button>
                 </Link>
@@ -182,7 +182,7 @@ export default function Services() {
           ))}
         </div>
       </div>
-      <div className="absolute bottom-0 left-0 w-full overflow-hidden">
+      <div className="absolute bottom-0 left-0 md:left-12 w-full overflow-hidden">
         <AnimatePresence mode="wait">
           <motion.div
             key={activeService.id}

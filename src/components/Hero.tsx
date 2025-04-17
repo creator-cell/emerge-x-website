@@ -146,7 +146,7 @@ const Hero = () => {
           <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
             <Button
               size="lg"
-              className="w-full rounded-[10px] bg-gradient-to-r from-[#4CAF50] to-[#45a049] py-6 text-white transition-colors hover:bg-[#45a049] sm:w-auto"
+              className="w-full rounded-[10px] demoButtonGradient py-7 text-white transition-colors hover:bg-[#45a049] sm:w-auto"
               onClick={handleModalToggle}
               aria-label="Book a demo"
             >
@@ -157,7 +157,7 @@ const Hero = () => {
               asChild
               size="lg"
               variant="outline"
-              className="w-full rounded-[10px] border-white bg-transparent py-6 text-white transition-colors hover:bg-white/10 sm:w-auto"
+              className="w-full rounded-[10px] border-white bg-transparent py-7 text-white transition-colors hover:bg-white/10 sm:w-auto"
             >
               <Link href="/contact-us" aria-label="Contact us">
                 Contact us
