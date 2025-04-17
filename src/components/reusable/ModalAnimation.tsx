@@ -137,7 +137,7 @@ const ModalAnimation: React.FC<ModalAnimationTypes> = ({
   };
 
   return (
-    <div className="z-[9000] fixed left-0 top-0 w-full h-screen bg-[#010101] flex items-center justify-center">
+    <div className="z-[9000] fixed left-0 top-0 w-full h-screen  bg-[#010101] flex items-center justify-center">
       <Toaster />
       <div className={`popup-border`}>
         <div className="left-shine"></div>
@@ -152,7 +152,7 @@ const ModalAnimation: React.FC<ModalAnimationTypes> = ({
         </button>
 
         {/* Modal Content */}
-        <div className="p-4 flex flex-col gap-6">
+        <div className="p-4 flex flex-col max-h-[90vh] no-scrollbar overflow-y-auto  gap-6">
           <h2 className="text-center text-[24px] sm:text-[28px] font-bold text-white">
             Join the Demo!
           </h2>
@@ -162,7 +162,8 @@ const ModalAnimation: React.FC<ModalAnimationTypes> = ({
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             {/* Name */}
-            <div className="w-full flex flex-col gap-1 border-b border-b-white pb-2">
+            
+            <div className="w-full  flex flex-col relative gap-1 border-b border-b-white ">
               <label
                 htmlFor="name"
                 className="text-sm sm:text-base text-white text-start"
@@ -176,15 +177,16 @@ const ModalAnimation: React.FC<ModalAnimationTypes> = ({
                 className="border-none outline-none bg-[#222720]  text-white"
               />
              
-            </div>
+           
             {errors.name && (
-                <span className="text-red-500 text-xs text-left block">
+                <span className="text-red-500 absolute left-0 -bottom-5 text-xs text-left block">
                   {errors.name.message}
                 </span>
               )}
+               </div>
 
             {/* Email */}
-            <div className="w-full flex flex-col gap-1 border-b border-b-white pb-2">
+            <div className="w-full flex flex-col relative gap-1 border-b border-b-white pb-2">
               <label
                 htmlFor="email"
                 className="text-sm sm:text-base text-white text-start"
@@ -198,15 +200,16 @@ const ModalAnimation: React.FC<ModalAnimationTypes> = ({
                 className="border-none outline-none bg-[#222720]  text-white"
               />
              
-            </div>
+            
             {errors.email && (
-                <span className="text-red-500 text-xs text-left block">
+                <span className="text-red-500 absolute left-0 -bottom-5 text-xs text-left block">
                   {errors.email.message}
                 </span>
               )}
+              </div>
 
             {/* mobile No */}
-            <div className="w-full flex flex-col gap-1 border-b border-b-white pb-2">
+            <div className="w-full flex flex-col border-b border-b-white pb-2 relative">
               <label
                 htmlFor="mobile"
                 className="text-sm sm:text-base text-white text-start"
@@ -222,15 +225,16 @@ const ModalAnimation: React.FC<ModalAnimationTypes> = ({
                 className="border-none outline-none bg-[#222720]  text-white"
               />
             
-            </div>
+           
             {errors.mobile && (
-                <span className="text-red-500 text-xs text-left block">
+                <span className="text-red-500 absolute left-0 -bottom-5 text-xs text-left block">
                   {errors.mobile.message}
                 </span>
               )}
+               </div>
 
             {/* Country */}
-            <div className="w-full flex flex-col gap-1">
+            <div className="w-full flex flex-col relative">
               <label
                 htmlFor="country"
                 className="text-sm sm:text-base text-white text-start"
@@ -244,12 +248,13 @@ const ModalAnimation: React.FC<ModalAnimationTypes> = ({
                 className="border border-white outline-none bg-[#222720]  text-white rounded-md p-2"
               />
              
-            </div>
+           
             {errors.note && (
-                <span className="text-red-500 text-xs text-left block">
+                <span className="text-red-500 text-xs text-left block absolute left-0 -bottom-5">
                   {errors.note.message}
                 </span>
               )}
+               </div>
 
             {/* Submit Button */}
             <div className="flex items-center justify-center">

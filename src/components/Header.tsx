@@ -77,10 +77,10 @@ const Header = () => {
 
     // Services dropdown items
     const serviceOptions = [
-        { name: "Mitigation/Prevention", path: "/services/1" },
-        { name: "Preparedness", path: "/services/2" },
-        { name: "Response", path: "/services/4" },
-        { name: "Recovery", path: "/services/3" },
+        { name: "Mitigation/Prevention", path: "/services/mitigation-prevention" },
+        { name: "Preparedness", path: "/services/preparedness" },
+        { name: "Response", path: "/services/recovery-services" },
+        { name: "Recovery", path: "/services/response-services" },
     ];
 
     return (

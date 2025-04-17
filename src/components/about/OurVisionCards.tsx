@@ -8,10 +8,10 @@ interface VisionCardProps {
 
 const OurVisionCards: React.FC<VisionCardProps> = ({  title, description }) => {
   return (
-    <div className=" mx-auto border max-w-[235px] w-full rounded-[24px]  border-[#222222] max-h-[267px] h-full py-[40px] px-[20px]">
-      <div className=" flex flex-col gap-2 text-[#4B4B4B]">
-        <span className="text-[29px]">
-          <PiShieldCheckFill />
+    <div className=" mx-auto border max-w-[235px] min-h-[267px] w-full rounded-[24px]  border-[#222222] max-h-[267px] h-full py-[40px] px-[20px]">
+      <div className=" flex flex-col gap-5 text-[#4B4B4B]">
+        <span className="text-[29px] ">
+          <PiShieldCheckFill  height={32} width={29}/>
         </span>
 
         <h2 className=" text-xl  ">{title || ""}</h2>

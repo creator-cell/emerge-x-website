@@ -99,7 +99,8 @@ const page = () => {
               heading="Pioneering the future of wearable technology for a safer tomorrow."
             />
 
-            <div className=" grid grid-cols-1 sm:grid-cols-3  gap-x-4 gap-y-10 ">
+            <div className=" grid grid-cols-1 sm:grid-cols-3 place-items-center gap-10 ">
+              
               {visionCardsData?.map((e, i) => (
                 <OurVisionCards
                   title={e.title}
@@ -116,7 +117,7 @@ const page = () => {
               heading="Focused on delivering real-time health monitoring and emergency response solutions."
             />
             <div className="flex items-center justify-center">
-              <div className="  w-full  rounded-3xl overflow-hidden">
+              <div className="   rounded-3xl overflow-hidden flex justify-center items-center  md:max-w-6xl  ">
                 <Image
                   src={"/about-us/about-poster.jpg"}
                   alt="banner"
@@ -133,35 +134,16 @@ const page = () => {
               heading="Together we combine outstanding team"
             />
 
-            <div className=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-12 md:gap-8 ">
+        
+          </div>
+          
+        </div>
+      </SectionWrapper>
+      <div className=" grid grid-cols-1  sm:grid-cols-2 lg:grid-cols-4  w-full place-items-center ">
               {visioncards?.map((e, i) => (
                 <OurteamCard key={e.id} {...e} />
               ))}
             </div>
-          </div>
-          {/* 
-          <div>
-            <h2 className=" text-greyishblack text-xl text-center">
-              Trusted top companies
-            </h2>
-
-            <div className="flex flex-wrap justify-center gap-16 mt-10">
-              {trustedCompanis?.map((e, i) => (
-                <div key={i}>
-                  <div className="w-[120px] sm:w-[140px] ">
-                    <Image
-                      src={"/logo/main-logo.png"}
-                      alt=""
-                      width={150}
-                      height={70}
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div> */}
-        </div>
-      </SectionWrapper>
     </div>
   );
 };

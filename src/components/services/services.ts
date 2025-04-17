@@ -34,10 +34,12 @@ import {
   response7,
   responseHero,
 } from "@/assets/services/Response";
+import { link } from "fs";
 
 export const servicesData = [
   {
     id: 1,
+    link:"mitigation-prevention",
     title: "Mitigation/Prevention",
     subHeading: "Enhanced Workplace Safety Solutions.",
     titledetails:
@@ -125,6 +127,7 @@ export const servicesData = [
   },
   {
     id: 2,
+    link:"preparedness",
     title: "Preparedness",
     subHeading: "Comprehensive Solutions for Organizational Readiness",
     titledetails:
@@ -259,6 +262,7 @@ With our comprehensive services, we aim to establish a strong foundation for eff
   },
   {
     id: 3,
+    link:"recovery-services",
     title: "Recovery Service",
     subHeading: "Comprehensive Solutions for Organizational Readiness",
     titledetails:
@@ -409,6 +413,7 @@ With Emerge-X, post-incident recovery becomes a transformative opportunity—one
   },
   {
     id: 4,
+    link:"response-services",
     title: "Response Service",
     image: servicesImages.res,
     subHeading: "Integrated Solutions for Efficient Emergency Management",

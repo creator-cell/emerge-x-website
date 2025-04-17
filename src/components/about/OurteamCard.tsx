@@ -15,7 +15,7 @@ const OurteamCard: React.FC<OurteamCardProps> = ({
 
 }) => {
   return (
-    <div className="  max-w-[235px] w-[235px] mx-auto space-y-4 ">
+    <div className="  max-w-[235px] w-[267px] mx-auto space-y-4 ">
       <div className=" mx-auto  rounded-[24px]  shadow-md max-h-[267px] h-[267px] overflow-hidden">
         <Image
           src={image}
