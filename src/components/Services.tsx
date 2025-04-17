@@ -10,7 +10,7 @@ import Link from "next/link"
  
 const services = [
   {
-    id: 1,
+    id: 'mitigation-prevention',
     title: "Mitigation/Prevention",
     description:
       "Explore how Emerge-X utilizes AI CCTV Cameras, Wearable Devices, and HSE Management Software to enhance workplace safety, monitor health indicators, and streamline HSE processes. Mitigate risks, ensure compliance, and foster a safer working environment with our innovative solutions.",
@@ -18,7 +18,7 @@ const services = [
     image2: servicesImages.Preparedness,
   },
   {
-    id: 2,
+    id: 'preparedness',
     title: "Preparedness",
     description:
       "Enhance your organization's readiness with Emerge-X's comprehensive preparedness solutions, including online and offline training, emergency drill support, and real-time training tracking. Equip your team with essential skills to respond effectively in emergencies and foster resilience.",
@@ -26,7 +26,7 @@ const services = [
     image2: servicesImages.res,
   },
   {
-    id: 4,
+    id: 'response-services',
     title: "Response Service",
     description:
       "Enhance emergency response efficiency and effectiveness with Emerge-X's integrated hardware solutions. Our platform ensures complete automation, providing real-time access to critical information, enabling prompt and coordinated emergency management to minimize impact and ensure safety.",
@@ -34,7 +34,7 @@ const services = [
     image2: servicesImages.recovery,
   },
   {
-    id: 3,
+    id: 'recovery-services',
     title: "Recovery Service",
     description:
       "Facilitate effective recovery with Emerge-X's comprehensive services, including automated incident reporting, AI-driven root cause analysis, and tailored precautionary measures. Empower your organization to learn, adapt, and strengthen emergency management capabilities post-incident.",

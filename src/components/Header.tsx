@@ -79,8 +79,8 @@ const Header = () => {
     const serviceOptions = [
         { name: "Mitigation/Prevention", path: "/services/mitigation-prevention" },
         { name: "Preparedness", path: "/services/preparedness" },
-        { name: "Response", path: "/services/recovery-services" },
-        { name: "Recovery", path: "/services/response-services" },
+        { name: "Response", path: "/services/response-services" },
+        { name: "Recovery", path: "/services/recovery-services" },
     ];
 
   return (
@@ -209,8 +209,8 @@ const Header = () => {
                     onMouseEnter={() => setServicesDropdown(true)}
                     onMouseLeave={() => setServicesDropdown(false)}
                   >
-                    <Link
-                      href="/services"
+                    <div
+                     
                       className={`flex items-center gap-2 text-[16px] font-[400] transition-colors ${
                         hasScrolled
                           ? "text-black hover:text-[#4CAF50]"
@@ -232,7 +232,7 @@ const Header = () => {
                     >
                       Services{" "}
                       <ChevronDown size={18} className="cursor-pointer" />
-                    </Link>
+                    </div>
 
                     {servicesDropdown && (
                       <div className="absolute mt-1 w-48 bg-white shadow-lg rounded-lg flex flex-col text-left z-50">
