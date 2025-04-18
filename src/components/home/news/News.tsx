@@ -147,7 +147,7 @@ const News: React.FC<NewsProps> = ({ newdData }) => {
               transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1], delay: 0.2 }}
             >
               <div
-                className="cursor-pointer absolute sm:left-[-30px] top-[-10px] sm:top-1/2 sm:-translate-y-1/2 left-[calc(10%-30px)] rounded-full z-50 border-none" // z-50 to be above cards
+                className="cursor-pointer absolute sm:left-[-30px] top-[-10px] sm:top-1/2 sm:-translate-y-1/2 left-[calc(10%-30px)] rounded-full  border-none" // z-50 to be above cards
                 onClick={() => setActiveIndex((prev) => (prev - 1 + newdData.length) % newdData.length)}
               >
                 <Image
@@ -251,7 +251,7 @@ const News: React.FC<NewsProps> = ({ newdData }) => {
               transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1], delay: 0.2 }}
             >
               <div
-                className="cursor-pointer absolute sm:right-[-60px] top-[-10px] sm:top-1/2 sm:-translate-y-1/2 right-[calc(75%-20px)] rounded-full border-none z-50" // z-50 to be above cards
+                className="cursor-pointer absolute sm:right-[-60px] top-[-10px] sm:top-1/2 sm:-translate-y-1/2 right-[calc(75%-20px)] rounded-full border-none" // z-50 to be above cards
                 onClick={() => setActiveIndex((prev) => (prev + 1) % newdData.length)}
               >
                 <Image
