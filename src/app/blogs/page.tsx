@@ -66,8 +66,8 @@ const page = ({ searchParams }: { searchParams: ReadonlyURLSearchParams }) => {
                   list={false}
                   styleBox="rounded-[26px] aspect-video"
                   styleHeading="text-[16px] md:text-[36px]"
-                  curveIconStyle="w-[30%]"
-                  dateButtonStyle="w-[25%] top-2 left-2 h-[11%]"
+                  curveIconStyle="w-[30%] -top-[2px] -left-[2px]"
+                  dateButtonStyle="w-[25%] top-1 left-1 h-[11%]"
                   imageStyle="rounded-[26px]"
                 />
               </div>
@@ -109,7 +109,7 @@ const page = ({ searchParams }: { searchParams: ReadonlyURLSearchParams }) => {
                       list={true}
                       styleHeading="text-[14px] font-[400] md:font-semibold lg:text-base"
                       styleBox="aspect-square max-w-[150px]"
-                      curveIconStyle="w-[60%]"
+                      curveIconStyle="w-[60%] -top-[2px] -left-[2px]"
                       dateButtonStyle="w-[45%] left-2 h-[15%] text-[8px]"
                       imageStyle="rounded-[14px]"
                     />
@@ -122,7 +122,7 @@ const page = ({ searchParams }: { searchParams: ReadonlyURLSearchParams }) => {
                     key={i}
                     data={e}
                     list={false}
-                    curveIconStyle="w-[60%]"
+                    curveIconStyle="w-[60%] -top-[2px] -left-[2px]"
                     dateButtonStyle="w-[45%] left-2 h-[15%] text-[8px]"
                     imageStyle="rounded-[26px]"
                   />
@@ -151,7 +151,7 @@ const page = ({ searchParams }: { searchParams: ReadonlyURLSearchParams }) => {
                 styleHeading="text-[14px] lg:text-[16px]"
                 styleBox="aspect-square max-w-[270px]"
                 styleCard="items-start max-w-[270px] mx-auto"
-                curveIconStyle="w-[40%]"
+                curveIconStyle="w-[40%] -top-[2px] -left-[2px]"
                 dateButtonStyle="w-[32%] left-2 "
                 imageStyle="rounded-[26px]"
               />

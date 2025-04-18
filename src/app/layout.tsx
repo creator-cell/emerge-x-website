@@ -43,9 +43,9 @@ export default function RootLayout({
       <body className={`${inter.className} antialiased`}>
         <StoreProvider>
           <TopLoaderWrapper />
-          <div className="flex flex-col min-h-screen relative">
+          <div className="flex flex-col min-h-screen relative overflow-hidden">
             <Header />
-            <div className="flex-1 overflow-hidden">
+            <div className="flex-1">
               <RouteLoader />
               {children}
             </div>
