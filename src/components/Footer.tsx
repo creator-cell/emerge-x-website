@@ -17,7 +17,7 @@ export default function Footer() {
   const navLinks = [
     // { name: "Home", path: "/" },
     { name: "About", path: pathname === "/" ? "#about" : "/about-us" },
-    { name: "Services", path: pathname === "/" ? "#services" : "/services/1" },
+    { name: "Services", path: pathname === "/" ? "#services" : "/services/mitigation-prevention" },
     { name: "Blogs", path: pathname === "/" ? "#blogs" : "/blogs" },
     { name: "News", path: pathname === "/" ? "#news" : "/news" },
   ];
