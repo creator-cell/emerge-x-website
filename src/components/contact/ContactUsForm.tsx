@@ -45,44 +45,48 @@ const mobileUsForm = () => {
         },
         body: JSON.stringify(data),
       });
-
+  
+      const result = await response.json();
+  
       if (!response.ok) {
-        toast.error(
-          " Something went wrong! Please double-check the form and try again.",
-          {
-            duration: 4000,
-            position: "top-center",
-            icon: "❌", // Custom icon for error
-          }
-        );
+        const errorMessage =
+          result?.errors?.[0]?.msg ||
+          "Something went wrong! Please double-check the form and try again.";
+  
+        toast.error(errorMessage, {
+          duration: 4000,
+          position: "top-center",
+          icon: "❌",
+        });
+  
         return;
       }
-
-      const result = await response.json();
+  
       toast.success(
         "Form submitted successfully! We will get back to you shortly.",
         {
           duration: 4000,
           position: "top-center",
-          icon: "🎉", // Custom icon for success
+          icon: "🎉",
         }
       );
-
+  
       reset();
-      router.push("/")
-      
+      router.push("/");
+  
     } catch (error) {
       console.error("Error:", error);
       toast.error(
-        " Something went wrong! Please double-check the form and try again.",
+        "Something went wrong! Please try again later.",
         {
           duration: 4000,
           position: "top-center",
-          icon: "❌", // Custom icon for error
+          icon: "❌",
         }
       );
     }
   };
+  
 
   return (
     <div>

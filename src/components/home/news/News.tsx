@@ -1,62 +1,61 @@
-"use client";
-import type React from "react";
-import type { NewsItem } from "@/store/news/types/news.types";
-import { motion } from "framer-motion";
-import { useEffect, useState, useRef } from "react";
-import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
+"use client"
+import type React from "react"
+import type { NewsItem } from "@/store/news/types/news.types"
+import { motion } from "framer-motion"
+import { useEffect, useState, useRef } from "react"
+import Image from "next/image"
+import { Button } from "@/components/ui/button"
+import Link from "next/link"
 
 interface NewsProps {
-  newdData: NewsItem[];
+  newdData: NewsItem[]
 }
 
 const News: React.FC<NewsProps> = ({ newdData }) => {
-  const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef(null);
-  const [activeIndex, setActiveIndex] = useState(0);
-  const autoplayIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  const [isVisible, setIsVisible] = useState(false)
+  const sectionRef = useRef(null)
+  const [activeIndex, setActiveIndex] = useState(0)
+  const autoplayIntervalRef = useRef<NodeJS.Timeout | null>(null)
 
   // Intersection Observer for visibility
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => setIsVisible(entry.isIntersecting),
-      { threshold: 0.5 }
-    );
-    const currentRef = sectionRef.current; // Capture ref value
-    if (currentRef) observer.observe(currentRef);
+    const observer = new IntersectionObserver(([entry]) => setIsVisible(entry.isIntersecting), { threshold: 0.5 })
+    const currentRef = sectionRef.current // Capture ref value
+    if (currentRef) observer.observe(currentRef)
     return () => {
-      if (currentRef) observer.unobserve(currentRef); // Use captured value in cleanup
-    };
-  }, []); // Dependency array is empty, runs once on mount
+      if (currentRef) observer.unobserve(currentRef) // Use captured value in cleanup
+    }
+  }, []) // Dependency array is empty, runs once on mount
 
   // Autoplay functionality
   useEffect(() => {
-    if (autoplayIntervalRef.current) clearInterval(autoplayIntervalRef.current);
-    if (newdData.length > 1) { // Only run interval if there's more than one item
+    if (autoplayIntervalRef.current) clearInterval(autoplayIntervalRef.current)
+    if (newdData.length > 1) {
+      // Only run interval if there's more than one item
       autoplayIntervalRef.current = setInterval(() => {
-        setActiveIndex((prevIndex) => (prevIndex + 1) % newdData.length);
-      }, 5000);
+        setActiveIndex((prevIndex) => (prevIndex + 1) % newdData.length)
+      }, 5000)
     }
     return () => {
-      if (autoplayIntervalRef.current) clearInterval(autoplayIntervalRef.current);
-    };
-  }, [newdData.length, activeIndex]); // Re-run if length changes or activeIndex changes (to reset timer on manual nav)
+      if (autoplayIntervalRef.current) clearInterval(autoplayIntervalRef.current)
+    }
+  }, [newdData.length, activeIndex]) // Re-run if length changes or activeIndex changes (to reset timer on manual nav)
 
   // Arrow key navigation
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (newdData.length > 1) { // Only allow navigation if there's more than one item
+      if (newdData.length > 1) {
+        // Only allow navigation if there's more than one item
         if (event.key === "ArrowLeft") {
-          setActiveIndex((prev) => (prev - 1 + newdData.length) % newdData.length);
+          setActiveIndex((prev) => (prev - 1 + newdData.length) % newdData.length)
         } else if (event.key === "ArrowRight") {
-          setActiveIndex((prev) => (prev + 1) % newdData.length);
+          setActiveIndex((prev) => (prev + 1) % newdData.length)
         }
       }
-    };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [newdData.length]);
+    }
+    window.addEventListener("keydown", handleKeyDown)
+    return () => window.removeEventListener("keydown", handleKeyDown)
+  }, [newdData.length])
 
   // Card animation variants - Adjusted for less visibility on the right
   const cardVariants = {
@@ -100,22 +99,21 @@ const News: React.FC<NewsProps> = ({ newdData }) => {
       zIndex: 10, // Lowest z-index
       transition: { duration: 0.6, ease: [0.4, 0, 0.2, 1] },
     },
-  };
+  }
 
   // Determine card position relative to activeIndex
   const getCardPosition = (index: number, activeIndex: number, totalItems: number) => {
-    if (totalItems <= 1) return "active"; // Handle single item case
+    if (totalItems <= 1) return "active" // Handle single item case
 
-    const diff = index - activeIndex;
+    const diff = index - activeIndex
 
-    if (diff === 0) return "active";
-    if (diff === 1 || diff === -(totalItems - 1)) return "next";
-    if (diff === 2 || diff === -(totalItems - 2)) return "nextNext";
+    if (diff === 0) return "active"
+    if (diff === 1 || diff === -(totalItems - 1)) return "next"
+    if (diff === 2 || diff === -(totalItems - 2)) return "nextNext"
 
     // Default to hidden for all other positions (further right or further left)
-    return "hidden";
-  };
-
+    return "hidden"
+  }
 
   return (
     <section ref={sectionRef} id="news-section" className="py-8 sm:py-12 px-4 overflow-hidden relative">
@@ -147,7 +145,7 @@ const News: React.FC<NewsProps> = ({ newdData }) => {
               transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1], delay: 0.2 }}
             >
               <div
-                className="cursor-pointer absolute sm:left-[-30px] top-[-10px] sm:top-1/2 sm:-translate-y-1/2 left-[calc(10%-30px)] rounded-full  border-none" // z-50 to be above cards
+                className="cursor-pointer absolute sm:left-[-30px] top-[-10px] sm:top-1/2 sm:-translate-y-1/2 left-[calc(10%-30px)] rounded-full border-none z-50" // z-50 to be above cards
                 onClick={() => setActiveIndex((prev) => (prev - 1 + newdData.length) % newdData.length)}
               >
                 <Image
@@ -168,10 +166,12 @@ const News: React.FC<NewsProps> = ({ newdData }) => {
             animate={isVisible ? { opacity: 1 } : {}}
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
           >
-            <div className="relative h-full w-full"> {/* Ensure this inner div takes full space */}
+            <div className="relative h-full w-full">
+              {" "}
+              {/* Ensure this inner div takes full space */}
               {newdData?.map((item, index) => {
                 // Calculate position based on index relative to activeIndex
-                const position = getCardPosition(index, activeIndex, newdData.length);
+                const position = getCardPosition(index, activeIndex, newdData.length)
 
                 return (
                   <motion.div
@@ -184,9 +184,9 @@ const News: React.FC<NewsProps> = ({ newdData }) => {
                     onClick={() => {
                       // Allow clicking on 'next' or 'nextNext' to bring them to front
                       if (position === "next") {
-                        setActiveIndex((prev) => (prev + 1) % newdData.length);
+                        setActiveIndex((prev) => (prev + 1) % newdData.length)
                       } else if (position === "nextNext") {
-                        setActiveIndex((prev) => (prev + 2) % newdData.length);
+                        setActiveIndex((prev) => (prev + 2) % newdData.length)
                       }
                       // Optional: If you want any non-active card click to navigate
                       // if (index !== activeIndex) setActiveIndex(index);
@@ -209,9 +209,11 @@ const News: React.FC<NewsProps> = ({ newdData }) => {
                         className="w-full h-full object-cover" // Ensure image covers the div
                       />
                       {/* Overlay and Text */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex flex-col justify-end p-4 sm:p-6 text-left"> {/* Adjusted padding and gradient */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex flex-col justify-end p-4 sm:p-6 text-left">
+                        {" "}
+                        {/* Adjusted padding and gradient */}
                         {/* Content appears only on the active card for clarity */}
-                        {position === 'active' && (
+                        {position === "active" && (
                           <>
                             <Link href={`/news/${item._id}`} passHref legacyBehavior>
                               <a className=" rounded-md">
@@ -220,7 +222,9 @@ const News: React.FC<NewsProps> = ({ newdData }) => {
                                 </h4>
                               </a>
                             </Link>
-                            <div className="flex gap-2 text-xs sm:text-sm text-gray-300"> {/* Adjusted text size */}
+                            <div className="flex gap-2 text-xs sm:text-sm text-gray-300">
+                              {" "}
+                              {/* Adjusted text size */}
                               <span>
                                 {new Date(item.updatedAt).toLocaleDateString("en-GB", {
                                   day: "2-digit",
@@ -232,13 +236,13 @@ const News: React.FC<NewsProps> = ({ newdData }) => {
                           </>
                         )}
                         {/* Optionally add a subtle indicator or different style for non-active cards */}
-                        {position !== 'active' && (
+                        {position !== "active" && (
                           <div className="absolute inset-0 bg-black/30"></div> // Example: darker overlay for non-active
                         )}
                       </div>
                     </div>
                   </motion.div>
-                );
+                )
               })}
             </div>
           </motion.div>
@@ -251,7 +255,7 @@ const News: React.FC<NewsProps> = ({ newdData }) => {
               transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1], delay: 0.2 }}
             >
               <div
-                className="cursor-pointer absolute sm:right-[-60px] top-[-10px] sm:top-1/2 sm:-translate-y-1/2 right-[calc(75%-20px)] rounded-full border-none" // z-50 to be above cards
+                className="cursor-pointer absolute sm:right-[-60px] top-[-10px] sm:top-1/2 sm:-translate-y-1/2 right-[calc(75%-20px)] rounded-full border-none z-50" // z-50 to be above cards
                 onClick={() => setActiveIndex((prev) => (prev + 1) % newdData.length)}
               >
                 <Image
@@ -267,15 +271,15 @@ const News: React.FC<NewsProps> = ({ newdData }) => {
         </div>
 
         <div className="flex justify-start sm:justify-center mt-8 sm:mt-12 relative">
-        <Link href="/news" className="relative">
-          <Button className="relative cursor-pointer buttogGradientBG hover:bg-[#45a049] text-[14px] sm:text-[16px] px-6 sm:px-7 py-4 sm:py-8 text-white rounded-[10px] z-10">
-            Explore all News
-          </Button>
-        </Link>
-      </div>
+          <Link href="/news" className="relative">
+            <Button className="relative cursor-pointer buttogGradientBG hover:bg-[#45a049] text-[14px] sm:text-[16px] px-6 sm:px-7 py-4 sm:py-8 text-white rounded-[10px] z-10">
+              Explore all News
+            </Button>
+          </Link>
+        </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default News;
+export default News
