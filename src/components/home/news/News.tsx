@@ -170,7 +170,6 @@ const News: React.FC<NewsProps> = ({ newdData }) => {
           >
             <div className="relative h-full w-full"> {/* Ensure this inner div takes full space */}
               {newdData?.map((item, index) => {
-                // Calculate position based on index relative to activeIndex
                 const position = getCardPosition(index, activeIndex, newdData.length);
 
                 return (
