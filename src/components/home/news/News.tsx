@@ -199,6 +199,7 @@ const News: React.FC<NewsProps> = ({ newdData }) => {
                       maxWidth: "7000px", // Example: 80% of 700px
                       maxHeight: "350px", // Example: 100% of 400px
                       transformOrigin: "center", // Ensure scaling happens from the center
+                      willChange: "transform, opacity",
                     }}
                   >
                     <div className="relative w-full h-full">

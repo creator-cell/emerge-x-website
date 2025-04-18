@@ -1,22 +1,22 @@
-"use client"
+"use client";
 
-import Image from "next/image"
-import type React from "react"
-import gsap from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
-import { useGSAP } from "@gsap/react"
-import Link from "next/link"
-import type { BlogData } from "@/store/blogs/types/blog.types"
-import { useState, useEffect, useRef } from "react"
-import { Swiper, SwiperSlide } from "swiper/react"
-import { Navigation, Autoplay } from "swiper/modules"
-import "swiper/css"
-import "swiper/css/navigation"
-import { Play } from "lucide-react"
-import { motion, AnimatePresence, useInView } from "framer-motion"
-import { Button } from "@/components/ui/button"
+import Image from "next/image";
+import type React from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+import Link from "next/link";
+import type { BlogData } from "@/store/blogs/types/blog.types";
+import { useState, useEffect, useRef } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Autoplay } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import { Play } from "lucide-react";
+import { motion, AnimatePresence, useInView } from "framer-motion";
+import { Button } from "@/components/ui/button";
 
-gsap.registerPlugin(useGSAP, ScrollTrigger)
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 // Slide animation variants
 const slideVariants = {
@@ -30,46 +30,45 @@ const slideVariants = {
     x: direction < 0 ? "100%" : "-100%", // Use percentage instead of viewport width
     opacity: 0,
   }),
-}
+};
 
 interface BlogDataTypes {
-  data?: BlogData
+  data?: BlogData;
 }
 
 const LetestBlogs: React.FC<BlogDataTypes> = ({ data }) => {
-
-  const swiperRef = useRef<any>(null)
-  const sectionRef = useRef(null)
-  const [isMobile, setIsMobile] = useState(false) // State to track mobile devices
+  const swiperRef = useRef<any>(null);
+  const sectionRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(false); // State to track mobile devices
 
   // Detect screen size and set isMobile state
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 768) // Adjust breakpoint as needed
-    }
-    handleResize() // Initial check
-    window.addEventListener("resize", handleResize)
-    return () => window.removeEventListener("resize", handleResize)
-  }, [])
+      setIsMobile(window.innerWidth < 768); // Adjust breakpoint as needed
+    };
+    handleResize(); // Initial check
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   // Modified to only trigger when 75% of the component is in view (for non-mobile screens)
   const isInView = useInView(sectionRef, {
     once: false,
     amount: isMobile ? 0 : 0.45, // Disable 75% logic for mobile
-  })
+  });
 
-  const [[page, direction], setPage] = useState([0, 0])
-  const [animationKey, setAnimationKey] = useState(0) // Change this to re-trigger animations
+  const [[page, direction], setPage] = useState([0, 0]);
+  const [animationKey, setAnimationKey] = useState(0); // Change this to re-trigger animations
 
   useEffect(() => {
     if (isInView) {
-      setAnimationKey((prev) => prev + 1) // Re-trigger animation when 75% of the section is in view
+      setAnimationKey((prev) => prev + 1); // Re-trigger animation when 75% of the section is in view
     }
-  }, [isInView])
+  }, [isInView]);
 
   const paginate = (newDirection: number) => {
-    setPage([page + newDirection, newDirection])
-  }
+    setPage([page + newDirection, newDirection]);
+  };
 
   return (
     <section ref={sectionRef} className="py-8 md:py-12 px-4 overflow-x-hidden">
@@ -107,28 +106,41 @@ const LetestBlogs: React.FC<BlogDataTypes> = ({ data }) => {
             className="flex flex-col items-start" // Ensure it takes full width
           >
             <p className="max-w-md blueColor text-base font-normal leading-[23.36px] tracking-normal">
-              Welcome to our blog section, where knowledge meets inspiration. Explore insightful articles, expert tips,
-              and the latest trends in our field.
+              Welcome to our blog section, where knowledge meets inspiration.
+              Explore insightful articles, expert tips, and the latest trends in
+              our field.
             </p>
 
-            <div className="flex justify-center items-center gap-4 mt-8 cursor-pointer relative z-50">
+            <div className="flex justify-center items-center gap-4 mt-8 cursor-pointer relative z-20">
               <div
                 onClick={() => {
-                  swiperRef.current?.slidePrev()
-                  paginate(-1)
+                  swiperRef.current?.slidePrev();
+                  paginate(-1);
                 }}
-                className="relative z-50 cursor-pointer"
+                className="relative z-20 cursor-pointer"
               >
-                <Image src="/logo/Frame.svg" alt="Left Arrow" width={34} height={54} className="w-full" />
+                <Image
+                  src="/logo/Frame.svg"
+                  alt="Left Arrow"
+                  width={34}
+                  height={54}
+                  className="w-full"
+                />
               </div>
               <div
                 onClick={() => {
-                  swiperRef.current?.slideNext()
-                  paginate(1)
+                  swiperRef.current?.slideNext();
+                  paginate(1);
                 }}
-                className="relative z-50 cursor-pointer"
+                className="relative z-20 cursor-pointer"
               >
-                <Image src="/logo/arrow.svg" alt="Right Arrow" width={34} height={34} className="w-full" />
+                <Image
+                  src="/logo/arrow.svg"
+                  alt="Right Arrow"
+                  width={34}
+                  height={34}
+                  className="w-full"
+                />
               </div>
             </div>
           </motion.div>
@@ -138,7 +150,10 @@ const LetestBlogs: React.FC<BlogDataTypes> = ({ data }) => {
         <Swiper
           spaceBetween={20}
           slidesPerView={1}
-          breakpoints={{ 768: { slidesPerView: 3 }, 1024: { slidesPerView: 3 } }}
+          breakpoints={{
+            768: { slidesPerView: 3 },
+            1024: { slidesPerView: 3 },
+          }}
           autoplay={{ delay: 6000, disableOnInteraction: false }}
           loop={true}
           navigation={false}
@@ -157,7 +172,12 @@ const LetestBlogs: React.FC<BlogDataTypes> = ({ data }) => {
                   animate={isMobile || isInView ? "center" : "enter"} // Always animate on mobile
                   exit="exit"
                   transition={{
-                    x: { type: "spring", stiffness: 100, damping: 30, duration: 0.8 },
+                    x: {
+                      type: "spring",
+                      stiffness: 100,
+                      damping: 30,
+                      duration: 0.8,
+                    },
                     opacity: { duration: 0.6 },
                   }}
                   className="bg-transparent rounded-3xl overflow-hidden relative h-[55vh] md:h-[55vh] w-full" // Ensure it takes full width
@@ -172,16 +192,21 @@ const LetestBlogs: React.FC<BlogDataTypes> = ({ data }) => {
                   />
                   <div className="p-4 md:p-6 absolute bottom-8 w-[90%] bg-black  flex flex-col justify-between rounded-[20px] rounded-tl-none min-h-[15rem]">
                     <h4 className="text-lg md:text-xl font-semibold line-clamp-1 mb-2 md:mb-4 leading-tight md:leading-[21.6px] tracking-normal text-gray-300">
-                      {blog?.title?.length > 40 ? `${blog.title.substring(0, 40)}...` : blog.title}
+                      {blog?.title?.length > 40
+                        ? `${blog.title.substring(0, 40)}...`
+                        : blog.title}
                     </h4>
                     <div className="flex gap-2 text-xs md:text-sm text-gray-400 mb-2 md:mb-4">
                       <div className="relative">
                         <span>
-                          {new Date(blog.updatedAt).toLocaleDateString("en-GB", {
-                            day: "2-digit",
-                            month: "long",
-                            year: "numeric",
-                          })}
+                          {new Date(blog.updatedAt).toLocaleDateString(
+                            "en-GB",
+                            {
+                              day: "2-digit",
+                              month: "long",
+                              year: "numeric",
+                            }
+                          )}
                         </span>
                       </div>
                       <span className="text-w">•</span>
@@ -190,25 +215,34 @@ const LetestBlogs: React.FC<BlogDataTypes> = ({ data }) => {
                     <p
                       className="blueColor mb-4 md:mb-4 text-sm md:text-base leading-tight md:leading-[23.2px] font-normal tracking-normal line-clamp-3"
                       dangerouslySetInnerHTML={{
-                        __html: blog?.description?.length > 70
-                          ? `${blog?.description.replace(/<[^>]*>/g, "").substring(0, 70)}...`
-                          : blog?.description,
+                        __html:
+                          blog?.description?.length > 70
+                            ? `${blog?.description
+                                .replace(/<[^>]*>/g, "")
+                                .substring(0, 70)}...`
+                            : blog?.description,
                       }}
                     />
 
-<div>
-
-                    <Link href={`/blogs/${blog._id}`} passHref >
-                      <motion.div whileHover={{ x: 10 }} transition={{ type: "spring", stiffness: 200, duration: 0.5 }}>
-                        <Button
-                          variant="link"
-                          className="text-[#4CAF50] hover:text-[#45a049] p-0 flex items-center gap-2 text-sm md:text-base"
+                    <div>
+                      <Link href={`/blogs/${blog._id}`} passHref>
+                        <motion.div
+                          whileHover={{ x: 10 }}
+                          transition={{
+                            type: "spring",
+                            stiffness: 200,
+                            duration: 0.5,
+                          }}
                         >
-                          <Play className="w-3 h-3 fill-[#4CAF50] text-[#4CAF50]" />
-                          READ MORE
-                        </Button>
-                      </motion.div>
-                    </Link>
+                          <Button
+                            variant="link"
+                            className="text-[#4CAF50] hover:text-[#45a049] p-0 flex items-center gap-2 text-sm md:text-base"
+                          >
+                            <Play className="w-3 h-3 fill-[#4CAF50] text-[#4CAF50]" />
+                            READ MORE
+                          </Button>
+                        </motion.div>
+                      </Link>
                     </div>
                   </div>
                 </motion.div>
@@ -224,10 +258,8 @@ const LetestBlogs: React.FC<BlogDataTypes> = ({ data }) => {
           </Button>
         </Link>
       </div>
-
     </section>
-  )
-}
+  );
+};
 
-export default LetestBlogs
-
+export default LetestBlogs;
