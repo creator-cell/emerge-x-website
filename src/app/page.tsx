@@ -24,7 +24,7 @@ const Home = () => {
  
     return (
         <ReactLenis root>
-        <div className="space-y-4 relative bg-black" id="home">
+        <div className="space-y-4 relative  bg-black" id="home">
             <div className="relative">
                 <Hero />
                 <div className="scroll-mt-10 relative" id="about">

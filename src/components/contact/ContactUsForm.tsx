@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import toast, { Toaster } from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 // Validation Schema
 const schema = yup.object({
@@ -25,6 +26,7 @@ const schema = yup.object({
 });
 
 const mobileUsForm = () => {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -67,6 +69,8 @@ const mobileUsForm = () => {
       );
 
       reset();
+      router.push("/")
+      
     } catch (error) {
       console.error("Error:", error);
       toast.error(

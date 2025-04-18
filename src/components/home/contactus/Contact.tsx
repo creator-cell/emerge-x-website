@@ -34,7 +34,7 @@ export default function Contact() {
                 placeholder="Enter your email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="bg-white py-6 rounded-[12px] border-none"
+                className="bg-white !text-black py-6 rounded-[12px] border-none"
               />
               <Link href="/contact-us">
 

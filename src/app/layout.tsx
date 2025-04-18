@@ -45,7 +45,7 @@ export default function RootLayout({
           <TopLoaderWrapper />
           <div className="flex flex-col min-h-screen relative">
             <Header />
-            <div className="flex-1">
+            <div className="flex-1 overflow-hidden">
               <RouteLoader />
               {children}
             </div>
