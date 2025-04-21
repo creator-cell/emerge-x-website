@@ -89,7 +89,7 @@ const LetestBlogs: React.FC<BlogDataTypes> = ({ data }) => {
   return (
     <section
       ref={sectionRef}
-      className="py-8 md:py-12 px-4 overflow-x-hidden h-screen"
+      className="py-8 md:py-12 px-4 overflow-x- overflow-y-visible h-screen"
     >
       {" "}
       {/* Add overflow-x-hidden */}
@@ -133,9 +133,8 @@ const LetestBlogs: React.FC<BlogDataTypes> = ({ data }) => {
             <div className="flex justify-center items-center gap-4 mt-8 relative min-h-[54px]">
               <div
                 onClick={handlePrev}
-                className={`relative cursor-pointer flex items-center justify-center ${
-                  leftImage === "/logo/left.svg" ? "w-[44px]" : "w-[25px]"
-                }`}
+                className={`relative cursor-pointer flex items-center justify-center ${leftImage === "/logo/left.svg" ? "w-[44px]" : "w-[25px]"
+                  }`}
               >
                 <Image
                   src={leftImage}
@@ -147,9 +146,8 @@ const LetestBlogs: React.FC<BlogDataTypes> = ({ data }) => {
               </div>
               <div
                 onClick={handleNext}
-                className={`relative cursor-pointer flex items-center justify-center ${
-                  leftImage === "/logo/left.svg" ? "w-[25px]" : "w-[44px]" // Dynamically set width for right arrow
-                }`}
+                className={`relative cursor-pointer flex items-center justify-center ${leftImage === "/logo/left.svg" ? "w-[25px]" : "w-[44px]" // Dynamically set width for right arrow
+                  }`}
               >
                 <Image
                   src={
@@ -172,6 +170,7 @@ const LetestBlogs: React.FC<BlogDataTypes> = ({ data }) => {
           spaceBetween={20}
           slidesPerView={1}
           breakpoints={{
+            600: { slidesPerView: 2 },
             768: { slidesPerView: 3 },
             1024: { slidesPerView: 3 },
           }}
@@ -211,8 +210,8 @@ const LetestBlogs: React.FC<BlogDataTypes> = ({ data }) => {
                     animate={isMobile || isInView ? { scale: 1 } : {}} // Always animate on mobile
                     transition={{ duration: 0.8 }}
                   />
-                  <div className="p-4 md:p-6 absolute bottom-8 w-[90%] bg-black h-[32vh] flex flex-col justify-between rounded-[20px] rounded-tl-none">
-                    <h4 className="text-lg md:text-xl font-semibold mb-2 md:mb-4 leading-tight md:leading-[21.6px] tracking-normal text-gray-300">
+                  <div className="p-4 md:p-6 absolute bottom-8 w-[90%] bg-black h-[15rem] flex flex-col justify-between rounded-[20px] rounded-tl-none">
+                    <h4 className="text-lg md:text-xl font-semibold mb-2 md:mb-4 leading-tight md:leading-[21.6px] tracking-normal text-gray-300 line-clamp-1">
                       {blog?.title?.length > 40
                         ? `${blog.title.substring(0, 40)}...`
                         : blog.title}
@@ -234,13 +233,13 @@ const LetestBlogs: React.FC<BlogDataTypes> = ({ data }) => {
                       <span className="blueColor">{blog.authorName}</span>
                     </div>
                     <p
-                      className="blueColor mb-4 md:mb-4 text-sm md:text-base leading-tight md:leading-[23.2px] font-normal tracking-normal"
+                      className="blueColor mb-4 md:mb-4 text-sm md:text-base leading-tight md:leading-[23.2px] font-normal tracking-normal line-clamp-4"
                       dangerouslySetInnerHTML={{
                         __html:
                           blog?.description?.length > 70
                             ? `${blog?.description
-                                .replace(/<[^>]*>/g, "")
-                                .substring(0, 70)}...`
+                              .replace(/<[^>]*>/g, "")
+                              .substring(0, 70)}...`
                             : blog?.description,
                       }}
                     />
@@ -272,7 +271,7 @@ const LetestBlogs: React.FC<BlogDataTypes> = ({ data }) => {
       </div>
       <div className="flex justify-start sm:justify-center mt-0 sm:mt-12 relative">
         <Link href="/blogs" className="relative">
-          <Button className="relative cursor-pointer buttogGradientBG hover:bg-[#45a049] text-[14px] sm:text-[16px] px-6 sm:px-7 py-4 sm:py-8 text-white rounded-[10px] z-10">
+          <Button className="relative cursor-pointer buttogGradientBG hover:bg-[#45a049] text-[14px] sm:text-[16px] px-6 sm:px-7 py-4 sm:py-6 md:py-8 text-white rounded-[10px] z-10">
             Explore all Blogs
           </Button>
         </Link>

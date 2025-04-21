@@ -14,7 +14,7 @@ export default function Contact() {
 
   return (
     <>
-      <section className="py-24 px-4">
+      <section className="py-24 md:px-4">
         <div className="max-w-4xl mx-auto">
           <div className="bGglobalColor rounded-3xl p-12 text-center">
             <h2 className="text-3xl font-normal mb-4 leading-[28.8px] tracking-[4%] text-center text-gray-300">
@@ -38,9 +38,9 @@ export default function Contact() {
               />
               <Link href="/contact-us">
 
-              <Button className="contactBgButton hover:bg-[#2a2a2a] text-white py-6 px-6">
-                Let's connect
-              </Button>
+                <Button className="contactBgButton hover:bg-[#2a2a2a] text-white py-6 px-6">
+                  Let's connect
+                </Button>
               </Link>
             </div>
           </div>

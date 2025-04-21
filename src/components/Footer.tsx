@@ -1,139 +1,126 @@
 "use client";
 
 import Link from "next/link";
-import {
-  Facebook,
-  Twitter,
-  Instagram,
-  Linkedin,
-  Phone,
-  Mail,
-} from "lucide-react";
+import { Phone, Mail } from "lucide-react"; // Removed unused social icons from lucide
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 
 export default function Footer() {
   const pathname = usePathname();
   const navLinks = [
-    // { name: "Home", path: "/" },
+    // { name: "Home", path: "/" }, // Keep commented if not needed
     { name: "About", path: pathname === "/" ? "#about" : "/about-us" },
-    { name: "Services", path: pathname === "/" ? "#services" : "/services/mitigation-prevention" },
+    {
+      name: "Services",
+      path: pathname === "/" ? "#services" : "/services/mitigation-prevention",
+    },
     { name: "Blogs", path: pathname === "/" ? "#blogs" : "/blogs" },
     { name: "News", path: pathname === "/" ? "#news" : "/news" },
   ];
+
+  // Social Links Data (optional: makes it easier to manage)
+  const socialLinks = [
+    {
+      name: "Facebook",
+      href: "https://www.facebook.com/people/Emerge-X/61570986143648/",
+      iconSrc: "/logo/f.png",
+    },
+    {
+      name: "Twitter",
+      href: "https://x.com/EmergeXTech",
+      iconSrc: "/x.svg", // Assuming this is your Twitter/X icon
+    },
+    {
+      name: "Instagram",
+      href: "https://www.instagram.com/emergextech?igsh=YjZkYXY0Ym9kZjds",
+      iconSrc: "/logo/i.png",
+    },
+    {
+      name: "LinkedIn",
+      href: "https://www.linkedin.com/company/techemerge-x/",
+      iconSrc: "/logo/l.png",
+    },
+  ];
+
   return (
     <footer
-      className={`bg-black text-gray-400 py-16 px-4 ${
-        pathname !== "/" ? "mt-28" : ""
-      }`}
+      className={`bg-black text-gray-400 pt-12 pb-8 px-4 sm:px-6 lg:px-8 ${pathname !== "/" ? "mt-16 md:mt-28" : ""
+        }  `}
     >
-      <div className="container lg:max-w-5xl  grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left">
-        {/* Left Section: About */}
-        <div className="flex flex-col items-start md:items-start">
-          <p className="md:max-w-md blueColor text-[14px] md:text-start text-center !text-[#8F949C]">
-            EmergeX will assist you to better understand and manage workplace
-            safety by integrating hazards and incident reporting with
-            investigations, actions, and metrics reporting.
-          </p>
-          <div className="flex gap-6 mt-6 md:w-auto w-full justify-center items-center">
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://www.facebook.com/people/Emerge-X/61570986143648/"
-              className="text-yellow-500 hover:text-[#4CAF50] transition-colors"
-            >
-              {/* Facebook Logo */}
-              <Image src="/logo/f.png" alt="Facebook" width={24} height={24} />
-            </a>
+      <div className="container ">
+        <div className="flex flex-col-reverse sm:flex-row gap-10 md:gap-4 lg:gap-4 text-center md:text-left">
 
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://x.com/EmergeXTech"
-              className="text-yellow-500 hover:text-[#4CAF50] transition-colors"
-            >
-              {/* Instagram Logo */}
-              <Image
-                src="/x.svg" // Instagram logo
-                alt="twitter"
-                width={24} // Size of the icon
-                height={24}
-              />
-            </a>
-
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://www.instagram.com/emergextech?igsh=YjZkYXY0Ym9kZjds"
-              className="text-yellow-500 hover:text-[#4CAF50] transition-colors"
-            >
-              {/* Instagram Logo */}
-              <Image
-                src="/logo/i.png" // Instagram logo
-                alt="Instagram"
-                width={24} // Size of the icon
-                height={24}
-              />
-            </a>
-
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://www.linkedin.com/company/techemerge-x/"
-              className="text-yellow-500 hover:text-[#4CAF50] transition-colors"
-            >
-              {/* LinkedIn Logo */}
-              <Image
-                src="/logo/l.png" // LinkedIn logo
-                alt="LinkedIn"
-                width={24} // Size of the icon
-                height={24}
-              />
-            </a>
-          </div>
-          <div className="mt-6 md:block hidden text-[14px]">
-            <p>Copyright © 2025 EmergeX</p>
-          </div>
-        </div>
-
-        {/* Center Section: Links (Now Properly Centered) */}
-        <div className="flex  flex-col items-center text-[#818181]">
-          <p className="blueColor font-semibold mb-7 md:ml-[-30px] !text-[#818181] ">
-            Links
-          </p>
-          <ul className="space-y-5 flex flex-col">
-            {navLinks.map((link: any) => (
-              // <li key={link.name}>
-              <Link
-                href={link.path}
-                className="hover:text-[#4CAF50]  transition-colors  font-light"
-              >
-                {link.name}
-              </Link>
-              // </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Right Section: Contact (Properly Aligned) */}
-        <div className="flex flex-col items-center md:items-start text-[#9D9D9D]">
-          <div className="space-y-4">
-            <h3 className="tblueColor text-[16px] font-semibold mb-4">
-              Contact us
-            </h3>
-
-            <p className="flex items-center gap-2 text-[14px] ">
-              <Phone className="h-5 w-5" />
-              +971 55 544 0210
+          <div className="flex flex-col items-center md:items-start md:w-1/4 lg:w-2/6">
+            {/* Removed explicit max-width, let flex handle it */}
+            <p className="text-sm text-[#8F949C] mb-6 max-w-[284px] mx-auto md:mx-0"> {/* Use text-sm */}
+              EmergeX will assist you to better understand and manage workplace
+              safety by integrating hazards and incident reporting with
+              investigations, actions, and metrics reporting.
             </p>
-            <p className="flex items-center gap-2 text-[14px]">
-              <Mail className="h-5 w-5" />
-              info@emerge-x.com
-            </p>
+            {/* Social links centered on mobile due to parent's items-center, align left on md+ */}
+            <div className="flex gap-5 items-center justify-center md:justify-start">
+              {socialLinks.map((social) => (
+                <a
+                  key={social.name}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={social.href}
+                  className="text-gray-400 hover:text-[#4CAF50] transition-colors"
+                  aria-label={social.name} // Added aria-label for accessibility
+                >
+                  <Image
+                    src={social.iconSrc}
+                    alt={social.name}
+                    width={24}
+                    height={24}
+                    className="w-6 h-6" // Explicit size
+                  />
+                </a>
+              ))}
+            </div>
+            <div className="mt-4 max-sm::hidden  text-center text-sm text-gray-500">
+              <p>Copyright © {new Date().getFullYear()} EmergeX</p> {/* Dynamic Year & added text */}
+            </div>
           </div>
-        </div>
-        <div className="mt-6 md:hidden block text-[14px]">
-          <p>Copyright © 2025 EmergeX</p>
+
+          <div className="flex  items-start md:items-center justify-between  gap-6  md:gap-4 lg:gap-4 w-full">
+            {/* Center Section: Links */}
+            <div className="flex flex-col items-center md:items-start text-[#818181] md:w-1/4 lg:w-1/6">
+              <h3 className="text-base font-semibold mb-4 text-[#9D9D9D]">
+                Links
+              </h3>
+              <ul className="gap-3 flex flex-col text-left">
+                {navLinks.map((link) => (
+                  <li key={link.name}>
+                    <Link
+                      href={link.path}
+                      className="hover:text-[#4CAF50] transition-colors text-sm font-light"
+                    >
+                      {link.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Right Section: Contact */}
+            <div className="flex flex-col  items-start justify-start md:items-start text-[#9D9D9D] md:w-1/4 lg:w-2/6">
+              <h3 className="flex items-center justify-start  text-base font-semibold mb-4 w-full ">
+                Contact us
+              </h3>
+              <div className="space-y-3">
+                <p className="flex items-center justify-start  gap-2 text-sm">
+                  <Phone className="h-4 w-4" />
+                  +971 55 544 0210
+                </p>
+                <p className="flex items-center justify-start  gap-2 text-sm">
+                  <Mail className="h-4 w-4" />
+                  info@emerge-x.com
+                </p>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </footer>

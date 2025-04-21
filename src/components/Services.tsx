@@ -1,5 +1,5 @@
 "use client"
- 
+
 import { useState, useRef, useEffect } from "react"
 import { Button } from "./ui/button"
 import { motion, AnimatePresence, useInView } from "framer-motion"
@@ -7,7 +7,7 @@ import Image from "next/image"
 import { MserviceHero } from "@/assets/services/Metegation"
 import { servicesImages } from "@/assets/services"
 import Link from "next/link"
- 
+
 const services = [
   {
     id: 'mitigation-prevention',
@@ -43,13 +43,13 @@ const services = [
 
   },
 ];
- 
- 
+
+
 export default function Services() {
   const [activeService, setActiveService] = useState(services[0])
   const ref = useRef(null)
   const [isMobile, setIsMobile] = useState(false)
- 
+
   // Check if the screen is mobile
   useEffect(() => {
     const handleResize = () => {
@@ -59,27 +59,27 @@ export default function Services() {
     window.addEventListener("resize", handleResize)
     return () => window.removeEventListener("resize", handleResize)
   }, [])
- 
+
   // Modified to only trigger when 75% of the component is in view (for non-mobile screens)
   const isInView = useInView(ref, {
     once: false,
     amount: isMobile ? 0 : 0.3, // Disable 75% logic for mobile
   })
- 
+
   // Initial state for animations - start with everything hidden
   const [hasAnimated, setHasAnimated] = useState(false)
- 
+
   // Update hasAnimated when the component comes into view
   useEffect(() => {
     if (isInView && !hasAnimated) {
       setHasAnimated(true)
     }
   }, [isInView, hasAnimated])
- 
+
   return (
     <section ref={ref} className="py-12 px-4 relative overflow-hidden">
       <div className="relative z-10 max-w-[1336px] mx-auto">
-        <div className="flex flex-col md:flex-row md:gap-12 md:ml-40 gap-8 mx-auto">
+        <div className="flex flex-col md:flex-row md:gap-12 md:ml-20 lg:ml-40 gap-8 mx-auto">
           <div>
             <AnimatePresence mode="wait">
               <motion.div
@@ -114,7 +114,7 @@ export default function Services() {
               </motion.div>
             </AnimatePresence>
           </div>
- 
+
           <div className="relative">
             <AnimatePresence mode="wait" >
               <motion.div
@@ -142,7 +142,7 @@ export default function Services() {
                     width={375}
                     className="object-cover rounded-3xl absolute top-0 left-0 z-20"
                   />
- 
+
                   {/* Bottom Image */}
                   <Image
                     src={activeService.image2 || "/placeholder.svg"}
@@ -156,7 +156,7 @@ export default function Services() {
             </AnimatePresence>
           </div>
         </div>
- 
+
         <div className="mt-16 md:mt-24 grid grid-cols-2 sm:grid-cols-4 gap-4 mx-4 md:ml-40 md:mx-0">
           {services.map((service) => (
             <button key={service.id} className="text-left" onMouseEnter={() => setActiveService(service)}>
