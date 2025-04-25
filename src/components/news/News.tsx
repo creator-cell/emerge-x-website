@@ -143,14 +143,14 @@ export const NewsPage = ({ slug }: { slug: string }) => {
             alt="Sub Feature 1"
             width={600}
             height={400}
-            className="rounded-lg w-full min-h-[220px] sm:min-h-[385px]"
+            className="rounded-lg w-full h-[220px] sm:h-[385px] "
           />
           <Image
             src={subFeatureImage2 || responseImage}
             alt="Sub Feature 2"
             width={600}
             height={400}
-            className="rounded-lg w-full min-h-[220px] sm:min-h-[385px]"
+            className="rounded-lg w-full h-[220px] sm:h-[385px]"
           />
         </div>
 

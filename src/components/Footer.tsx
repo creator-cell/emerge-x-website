@@ -44,11 +44,11 @@ export default function Footer() {
 
   return (
     <footer
-      className={`bg-black text-gray-400 pt-12 pb-8 px-4 sm:px-6 lg:px-8 ${pathname !== "/" ? "mt-16 md:mt-28" : ""
+      className={`bg-black text-gray-400 pt-16 pb-8 px-4 sm:px-6 lg:px-8 ${pathname !== "/" ? "mt-16 md:mt-28" : ""
         }  `}
     >
       <div className="container ">
-        <div className="flex flex-col-reverse sm:flex-row gap-10 md:gap-4 lg:gap-4 text-center md:text-left">
+        <div className="flex flex-col-reverse sm:flex-row gap-10 md:gap-4 lg:gap-6 text-center md:text-left">
 
           <div className="flex flex-col items-center md:items-start md:w-1/4 lg:w-2/6">
             {/* Removed explicit max-width, let flex handle it */}
@@ -83,7 +83,7 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="flex  items-start md:items-center justify-between  gap-6  md:gap-4 lg:gap-4 w-full">
+          <div className="flex  items-start md:items-center justify-start  gap-6  md:gap-4 lg:gap-4 w-full">
             {/* Center Section: Links */}
             <div className="flex flex-col items-center md:items-start text-[#818181] md:w-1/4 lg:w-1/6">
               <h3 className="text-base font-semibold mb-4 text-[#9D9D9D]">

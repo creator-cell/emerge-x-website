@@ -120,9 +120,8 @@ const Header = () => {
             </button>
 
             <div
-              className={`mt-2 w-48 overflow-hidden transition-all duration-300 ease-in-out ${
-                servicesDropdown ? "max-h-[200px] opacity-100" : "max-h-0 opacity-0"
-              }`}
+              className={`mt-2 w-48 overflow-hidden transition-all duration-300 ease-in-out ${servicesDropdown ? "max-h-[200px] opacity-100" : "max-h-0 opacity-0"
+                }`}
             >
               <div className="bg-transparent backdrop-blur-sm shadow-lg rounded-lg flex flex-col text-center">
                 {serviceOptions.map(({ name, path }) => (
@@ -165,9 +164,8 @@ const Header = () => {
 
       {/* Header */}
       <header
-        className={`fixed top-0 pt-2 left-0 w-full z-50 transition-all duration-300 ${
-          hasScrolled ? "bg-white shadow-md" : "bg-gradient-to-b from-black/80 to-transparent backdrop-blur-sm"
-        }`}
+        className={`fixed top-0 pt-2 left-0 w-full z-50 transition-all duration-300 ${hasScrolled ? "bg-white shadow-md" : "bg-gradient-to-b from-black/80 to-transparent backdrop-blur-sm"
+          }`}
       >
         <nav className="container flex items-center justify-between h-16 px-4 max-w-7xl mx-auto">
           {/* Logo */}
@@ -191,9 +189,8 @@ const Header = () => {
                     <NavigationMenuItem key={name}>
                       <Link href={path} legacyBehavior passHref>
                         <NavigationMenuLink
-                          className={`text-[16px] font-[400] transition-colors duration-200 ${
-                            hasScrolled ? "text-black hover:text-[#4CAF50]" : "text-white hover:text-[#4CAF50]"
-                          } ${isActive ? "font-bold !text-[#4CAF50]" : ""}`}
+                          className={`text-[16px] font-[400] transition-colors duration-200 ${hasScrolled ? "text-black hover:text-[#4CAF50]" : "text-white hover:text-[#4CAF50]"
+                            } ${isActive ? "font-bold !text-[#4CAF50]" : ""}`}
                         >
                           {name}
                         </NavigationMenuLink>
@@ -211,11 +208,9 @@ const Header = () => {
                     onMouseLeave={() => setServicesDropdown(false)}
                   >
                     <div
-                      className={`flex items-center gap-2 text-[16px] font-[400] transition-colors duration-200 ${
-                        hasScrolled ? "text-black hover:text-[#4CAF50]" : "text-white hover:text-[#4CAF50]"
-                      } ${
-                        pathname.startsWith("/services/") || pathname === "/services" ? "font-bold !text-[#4CAF50]" : ""
-                      }`}
+                      className={`flex items-center gap-2 text-[16px] font-[400] transition-colors duration-200 ${hasScrolled ? "text-black hover:text-[#4CAF50]" : "text-white hover:text-[#4CAF50]"
+                        } ${pathname.startsWith("/services/") || pathname === "/services" ? "font-bold !text-[#4CAF50]" : ""
+                        }`}
                       onClick={(e) => {
                         // If user clicks the dropdown icon, prevent navigation and toggle dropdown
                         if ((e.target as HTMLElement).closest("svg")) {
@@ -233,16 +228,15 @@ const Header = () => {
                     </div>
 
                     {servicesDropdown && (
-                      <div className="absolute mt-1 w-48 bg-white/95 backdrop-blur-sm shadow-lg rounded-lg flex flex-col text-left z-50 animate-fadeIn">
+                      <div className="absolute  w-48 bg-white/95 rounded-xl backdrop-blur-sm shadow-lg flex flex-col text-left z-50 animate-fadeIn">
                         {serviceOptions.map(({ name, path }) => {
                           const isActive = pathname === path
                           return (
                             <Link
                               key={name}
                               href={path}
-                              className={`block px-4 py-3 text-black hover:bg-gray-50 transition-colors duration-200 ${
-                                isActive ? "font-bold" : ""
-                              }`}
+                              className={`block px-4 py-3 text-black hover:bg-gray-50 rounded-xl transition-colors duration-200 ${isActive ? "font-bold" : ""
+                                }`}
                               onClick={() => setServicesDropdown(false)}
                             >
                               {name}
@@ -256,14 +250,13 @@ const Header = () => {
 
                 {/* Remaining Nav Links */}
                 {navLinks.slice(2).map(({ name, path }) => {
-                  const isActive = pathname === path && pathname !== "/"
+                  const isActive = (pathname === path || pathname.startsWith(path)) && pathname !== "/"
                   return (
                     <NavigationMenuItem key={name}>
                       <Link href={path} legacyBehavior passHref>
                         <NavigationMenuLink
-                          className={`text-[16px] font-[400] transition-colors duration-200 ${
-                            hasScrolled ? "text-black hover:text-[#4CAF50]" : "text-white hover:text-[#4CAF50]"
-                          } ${isActive ? "font-bold !text-[#4CAF50]" : ""}`}
+                          className={`text-[16px] font-[400] transition-colors duration-200 ${hasScrolled ? "text-black hover:text-[#4CAF50]" : "text-white hover:text-[#4CAF50]"
+                            } ${isActive ? "font-bold !text-[#4CAF50]" : ""}`}
                         >
                           {name}
                         </NavigationMenuLink>
@@ -285,9 +278,8 @@ const Header = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className={`md:hidden focus:outline-none transition-colors duration-200 ${
-              hasScrolled ? "text-black" : "text-white"
-            }`}
+            className={`md:hidden focus:outline-none transition-colors duration-200 ${hasScrolled ? "text-black" : "text-white"
+              }`}
           >
             {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
